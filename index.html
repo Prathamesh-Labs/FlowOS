@@ -1,0 +1,943 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zenith AI — AI Day & Goal Operating System</title>
+  <meta name="description" content="An AI-powered personal day and goal operating system that organizes responsibilities, builds habits, manages focused work, and adapts when reality changes.">
+
+  <!-- Google Fonts: Outfit & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/components.css">
+  <link rel="stylesheet" href="css/accessibility.css">
+</head>
+<body>
+  <!-- Ambient Atmospheric Glows -->
+  <div class="bg-glow-orb bg-orb-1"></div>
+  <div class="bg-glow-orb bg-orb-2"></div>
+  <div class="bg-glow-orb bg-orb-3"></div>
+
+  <div class="app-container">
+    <!-- ==========================================
+         SIDEBAR NAVIGATION
+         ========================================== -->
+    <aside class="sidebar">
+      <div class="brand-header">
+        <div class="brand-icon">
+          <i data-lucide="sparkles"></i>
+        </div>
+        <div class="brand-text">
+          <h1>Zenith AI</h1>
+          <span>Day & Goal OS</span>
+        </div>
+      </div>
+
+      <!-- User XP Level Widget -->
+      <div style="margin-top: 1.2rem; padding: 0.85rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+          <span id="user-rank-level" class="rank-badge-pill">Lvl 2</span>
+          <span id="user-rank-title" style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Circadian Knight</span>
+        </div>
+        <div class="progress-bar-bg" style="height: 5px;">
+          <div id="user-xp-bar" class="progress-bar-fill" style="width: 40%;"></div>
+        </div>
+      </div>
+
+      <nav class="nav-menu">
+        <a href="#today" class="nav-item active" data-tab="today">
+          <i data-lucide="compass"></i>
+          <span>Command Center</span>
+          <span class="nav-badge">Live</span>
+        </a>
+        <a href="#goals" class="nav-item" data-tab="goals">
+          <i data-lucide="target"></i>
+          <span>Goal Intelligence</span>
+        </a>
+        <a href="#tasks-habits" class="nav-item" data-tab="tasks-habits">
+          <i data-lucide="check-check"></i>
+          <span>Tasks & Habits</span>
+        </a>
+        <a href="#study" class="nav-item" data-tab="study">
+          <i data-lucide="brain-circuit"></i>
+          <span>Focus & Deep Work</span>
+        </a>
+        <a href="#diet" class="nav-item" data-tab="diet">
+          <i data-lucide="utensils"></i>
+          <span>Nutrition & Fuel</span>
+        </a>
+        <a href="#screen" class="nav-item" data-tab="screen">
+          <i data-lucide="eye-off"></i>
+          <span>Screen & Eye Comfort</span>
+        </a>
+        <a href="#elderly" class="nav-item" data-tab="elderly">
+          <i data-lucide="heart-pulse"></i>
+          <span>Older-Adult Mode</span>
+        </a>
+        <a href="#analytics" class="nav-item" data-tab="analytics">
+          <i data-lucide="bar-chart-3"></i>
+          <span>Intelligence & Insights</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button id="btn-open-debrief" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.8rem; font-size: 0.82rem;">
+          <i data-lucide="moon"></i> Evening Debrief
+        </button>
+
+        <div class="vitality-widget">
+          <div class="vitality-header">
+            <span>Zenith Vitality Score</span>
+            <span class="vitality-score vitality-score-val">82%</span>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill vitality-progress-bar" style="width: 82%;"></div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- ==========================================
+         MAIN CONTENT SHELL
+         ========================================== -->
+    <main class="main-content">
+      <!-- Top App Header -->
+      <header class="top-header">
+        <div class="header-time-block">
+          <button id="mobile-menu-toggle" class="btn-icon" style="display: none;" title="Toggle Menu">
+            <i data-lucide="menu"></i>
+          </button>
+          <div>
+            <div id="header-live-clock" class="live-clock">12:00:00 PM</div>
+            <div id="header-live-date" class="live-date">Monday, Aug 10</div>
+          </div>
+        </div>
+
+        <div class="header-actions">
+          <button onclick="openScenarioSimulator('spend-extra-hours-coding')" class="btn btn-secondary" title="Simulate What-If Schedule">
+            <i data-lucide="git-branch"></i>
+            <span>What-If Simulator</span>
+          </button>
+          <button id="toggle-accessibility-mode" class="btn btn-secondary" title="Switch Accessible / Senior View">
+            <i data-lucide="accessibility"></i>
+            <span>Accessible Mode</span>
+          </button>
+          <button id="btn-open-generator" class="btn btn-primary">
+            <i data-lucide="sparkles"></i>
+            <span>AI Forge Routine</span>
+          </button>
+          <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">
+            <i data-lucide="sun"></i>
+          </button>
+        </div>
+      </header>
+
+      <!-- ==========================================
+           TAB 1: COMMAND CENTER (HOME)
+           Hierarchy: NOW -> CURRENT MISSION -> WHAT CHANGED -> NEXT ACTION -> TIMELINE
+           ========================================== -->
+      <section id="tab-today" class="tab-panel active">
+        <!-- 1. NOW ACTIVE BLOCK -->
+        <div class="command-now-card">
+          <div style="display: flex; align-items: center; gap: 1.2rem;">
+            <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--grad-zenith); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.3rem;">
+              <i data-lucide="play-circle"></i>
+            </div>
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.6rem;">
+                <span class="pulse-badge"><span class="pulse-dot"></span> NOW EXECUTING</span>
+                <span id="command-now-time" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); font-weight: 700;">08:30 - 10:15</span>
+              </div>
+              <h3 id="command-now-title" style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-top: 0.2rem;">
+                Deep Focus Block 1: Master Python & Tree Problems
+              </h3>
+              <p id="command-now-desc" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.15rem;">
+                Core Mission execution: Debug User Auth Flow in Web App.
+              </p>
+            </div>
+          </div>
+          <button onclick="document.querySelector('[data-tab=study]').click();" class="btn btn-primary" style="padding: 0.75rem 1.4rem;">
+            <i data-lucide="play"></i> Open Focus Room
+          </button>
+        </div>
+
+        <!-- 2. CURRENT MISSION -->
+        <div class="command-mission-card">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <div>
+              <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--accent-study-light);">
+                🔥 PRIMARY MISSION OF THE DAY
+              </span>
+              <h4 id="command-mission-title" style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-top: 0.2rem;">
+                Ship Modern Python Async API & Complete Tree Problems
+              </h4>
+            </div>
+            <span id="command-mission-target" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-diet-light); font-weight: 700;">
+              🎯 Target: Today at 08:30 PM
+            </span>
+          </div>
+        </div>
+
+        <!-- 3. WHAT CHANGED (ACTIVE REALITY DIVERGENCE ALERT) -->
+        <div id="command-reality-alert-card" class="reality-alert-card">
+          <!-- Dynamically populated with structured What-Changed -> Impact -> Options -> Recommendation -->
+        </div>
+
+        <!-- 4. NEXT ACTION & ASK ZENITH DECISION ENGINE -->
+        <div class="grid-2-col" style="margin-bottom: 1.5rem;">
+          <!-- Next Action Card -->
+          <div class="card" style="border-left: 4px solid var(--accent-diet);">
+            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--accent-diet-light);">
+              ⚡ IMMEDIATE NEXT BEST ACTION
+            </span>
+            <div id="command-next-action-text" style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-top: 0.4rem;">
+              Debug User Auth Flow in Web App (Est. 60m • Priority: HIGH)
+            </div>
+            <div style="display: flex; gap: 0.6rem; margin-top: 0.8rem;">
+              <button onclick="document.querySelector('[data-tab=study]').click();" class="btn btn-emerald" style="padding: 0.4rem 0.9rem; font-size: 0.82rem;">
+                <i data-lucide="play"></i> Start 60m Sprint
+              </button>
+              <button onclick="openObstacleSolver('Debug User Auth Flow');" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">
+                <i data-lucide="help-circle"></i> Deconstruct Blocker
+              </button>
+            </div>
+          </div>
+
+          <!-- Ask Zenith Contextual Assistant -->
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+              <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 0.4rem;">
+                <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i> Ask Zenith Contextual Engine
+              </h4>
+              <span style="font-size: 0.7rem; color: var(--text-muted);">Inspects flexible time & mission</span>
+            </div>
+
+            <form id="ask-zenith-form" style="display: flex; gap: 0.5rem;">
+              <input id="ask-zenith-input" type="text" class="form-input" placeholder="e.g. 'I want to finish my project tonight' or 'Can I take a 1h break?'" required>
+              <button type="submit" class="btn btn-primary" style="padding: 0.65rem 1rem;">
+                <i data-lucide="arrow-right"></i>
+              </button>
+            </form>
+
+            <div style="display: flex; gap: 0.4rem; margin-top: 0.6rem; flex-wrap: wrap;">
+              <button class="btn-ask-quick-chip" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.72rem; color: var(--text-secondary); cursor: pointer;">
+                Finish project tonight
+              </button>
+              <button class="btn-ask-quick-chip" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.72rem; color: var(--text-secondary); cursor: pointer;">
+                Can I take a break now?
+              </button>
+              <button class="btn-ask-quick-chip" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.72rem; color: var(--text-secondary); cursor: pointer;">
+                How am I doing on time?
+              </button>
+            </div>
+
+            <div id="ask-zenith-result-box"></div>
+          </div>
+        </div>
+
+        <!-- Reality Quick Trigger Bar -->
+        <div class="card" style="margin-bottom: 1.5rem; padding: 1.1rem 1.4rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
+            <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">
+              ⚡ REALITY EVENTS (Tell Zenith What Changed)
+            </span>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button class="btn btn-secondary btn-reality-trigger" data-event="woke-late" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+              ⏰ I woke up late
+            </button>
+            <button class="btn btn-secondary btn-reality-trigger" data-event="task-overrun" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+              ⏱️ Task took longer
+            </button>
+            <button class="btn btn-secondary btn-reality-trigger" data-event="unexpected-meeting" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+              📞 Unexpected meeting
+            </button>
+            <button class="btn btn-secondary btn-reality-trigger" data-event="low-energy" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+              🔋 Low energy / Slump
+            </button>
+            <button class="btn btn-secondary btn-reality-trigger" data-event="finish-project-today" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+              🚀 Finish project today
+            </button>
+          </div>
+        </div>
+
+        <!-- 5. TODAY'S STRUCTURED SCHEDULE & TIMELINE -->
+        <div class="page-hero" style="margin-bottom: 1rem;">
+          <div>
+            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary);">Today's Structured Schedule</h3>
+            <p>24-hour balance of focus, clean fuel, movement & sleep.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button id="btn-export-ics" class="btn btn-secondary" style="font-size: 0.8rem;">
+              <i data-lucide="calendar"></i> Sync to iCal
+            </button>
+            <button id="btn-export-txt" class="btn btn-secondary" style="font-size: 0.8rem;">
+              <i data-lucide="download"></i> Daily Blueprint
+            </button>
+            <button id="btn-export-json" class="btn btn-secondary" style="font-size: 0.8rem;">
+              <i data-lucide="database"></i> JSON Backup
+            </button>
+            <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.8rem;">
+              <i data-lucide="upload"></i> Restore
+              <input type="file" id="input-import-json" accept=".json" style="display: none;">
+            </label>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div>
+            <div class="card">
+              <div id="timeline-items-wrapper" class="timeline-container">
+                <!-- Dynamic Items -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Learned Reality & Hydration -->
+          <div style="display: flex; flex-direction: column; gap: 1.2rem;">
+            <!-- Learned Reality Card -->
+            <div class="card">
+              <h4 class="card-title" style="margin-bottom: 0.4rem;">
+                <i data-lucide="brain"></i> Personal Reality Learning
+              </h4>
+              <p style="font-size: 0.8rem; color: var(--text-secondary);">
+                Empirical planned vs. actual execution tracking over time:
+              </p>
+              <div id="learned-reality-summary">
+                <!-- Dynamically populated with validated insights -->
+              </div>
+            </div>
+
+            <!-- Hydration Card -->
+            <div class="card">
+              <div class="card-header" style="margin-bottom: 0.6rem;">
+                <h4 class="card-title">
+                  <i data-lucide="droplets" style="color: var(--accent-movement-light);"></i> Hydration Fuel Station
+                </h4>
+              </div>
+              <div id="water-glasses-container" style="display: flex; flex-wrap: wrap; gap: 0.45rem;">
+                <!-- Filled dynamically -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 2: GOAL INTELLIGENCE
+           ========================================== -->
+      <section id="tab-goals" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Goal Intelligence & Decomposition</h2>
+            <p>Transform ambitious long-term goals into actionable milestones, daily tasks, and scheduled focus slots.</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom: 0.6rem;">
+              <i data-lucide="sparkles"></i>
+              <span>Decompose a New Goal</span>
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
+              Type a goal (e.g. <em>"Learn Python & Data Science"</em> or <em>"Prepare for Bar Exam"</em>) and Zenith will break it into milestones.
+            </p>
+
+            <form id="new-goal-form">
+              <div class="form-group">
+                <label class="form-label">What is your core goal?</label>
+                <input type="text" name="goalPrompt" class="form-input" placeholder="e.g. Master Full-Stack Web Development" required>
+              </div>
+              <div class="form-group">
+                <label class="form-label">Category</label>
+                <select name="goalCategory" class="form-select">
+                  <option value="study">Academic / Career Skill</option>
+                  <option value="wellness">Health & Physical Habit</option>
+                  <option value="screen">Digital Balance</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary" style="width: 100%;">
+                <i data-lucide="wand-2"></i> Synthesize Milestones & Tasks
+              </button>
+            </form>
+          </div>
+
+          <div>
+            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+              🎯 Active Goal Roadmaps
+            </h3>
+            <div id="goals-tree-wrapper">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 3: TASKS & HABITS BIFURCATED
+           ========================================== -->
+      <section id="tab-tasks-habits" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Tasks & Recurring Habits</h2>
+            <p>Strict distinction between one-off deliverables and daily momentum habit loops with 7-day consistency heatmaps.</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div>
+            <div class="card" style="margin-bottom: 1.2rem;">
+              <h3 class="card-title" style="margin-bottom: 0.8rem;">
+                <i data-lucide="check-square"></i>
+                <span>Add One-Off Task</span>
+              </h3>
+              <form id="tasks-create-form" style="display: flex; flex-direction: column; gap: 0.8rem;">
+                <input type="text" name="taskTitle" class="form-input" placeholder="e.g. Finish Chapter 4 Python Assignment" required>
+                <div style="display: flex; gap: 0.5rem;">
+                  <select name="taskPriority" class="form-select" style="flex: 1;">
+                    <option value="high">🔥 High Priority</option>
+                    <option value="medium" selected>⚡ Medium Priority</option>
+                    <option value="low">🌱 Low Priority</option>
+                  </select>
+                  <input type="number" name="taskEstimate" class="form-input" placeholder="Est. Mins" value="45" style="width: 110px;" required>
+                </div>
+                <button type="submit" class="btn btn-primary">
+                  <i data-lucide="plus"></i> Add Actionable Task
+                </button>
+              </form>
+            </div>
+
+            <h4 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
+              📋 Priority Tasks Queue
+            </h4>
+            <div id="task-list-view">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+
+          <div>
+            <div class="card" style="margin-bottom: 1.2rem;">
+              <h3 class="card-title" style="margin-bottom: 0.8rem;">
+                <i data-lucide="repeat"></i>
+                <span>Start Recurring Habit</span>
+              </h3>
+              <form id="habits-create-form" style="display: flex; flex-direction: column; gap: 0.8rem;">
+                <input type="text" name="habitTitle" class="form-input" placeholder="e.g. Study Python every single day (60m)" required>
+                <select name="habitCategory" class="form-select">
+                  <option value="study">Deep Study</option>
+                  <option value="wellness" selected>Wellness & Hydration</option>
+                  <option value="screen">Screen Detox</option>
+                </select>
+                <button type="submit" class="btn btn-emerald">
+                  <i data-lucide="plus"></i> Create Habit Loop
+                </button>
+              </form>
+            </div>
+
+            <h4 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
+              🔥 Habit Momentum & Consistency Heatmaps
+            </h4>
+            <div id="habits-grid-view" style="display: flex; flex-direction: column; gap: 0.85rem;">
+              <!-- Dynamically rendered -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 4: FOCUS & DEEP WORK
+           ========================================== -->
+      <section id="tab-study" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Focus & Deep Work Command</h2>
+            <p>Task-linked focus sessions with dual Pomodoro and Stopwatch modes, live tracking, and schedule overrun detection.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i data-lucide="timer"></i>
+                <span>Deep Flow Engine</span>
+              </h3>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <select id="focus-timer-type-selector" class="form-select" style="font-size: 0.8rem; padding: 0.35rem 0.6rem;">
+                  <option value="pomodoro" selected>Pomodoro Countdown</option>
+                  <option value="stopwatch">Stopwatch Count-Up</option>
+                </select>
+                <select id="focus-task-select" class="form-select" style="font-size: 0.8rem; padding: 0.35rem 0.6rem; min-width: 170px;">
+                  <!-- Filled dynamically -->
+                </select>
+              </div>
+            </div>
+
+            <div class="timer-wrapper">
+              <div class="timer-circle-container">
+                <svg class="timer-svg" viewBox="0 0 260 260">
+                  <defs>
+                    <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#6366f1" />
+                      <stop offset="100%" stop-color="#a855f7" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="timer-circle-bg" cx="130" cy="130" r="120" />
+                  <circle id="timer-progress-ring" class="timer-circle-progress" cx="130" cy="130" r="120" />
+                </svg>
+                <div class="timer-display">
+                  <span id="timer-time-display" class="timer-time">60:00</span>
+                  <span id="timer-phase-display" class="timer-phase">Flowing on Task</span>
+                </div>
+              </div>
+
+              <div class="timer-controls">
+                <button id="timer-start-btn" class="btn btn-primary" style="padding: 0.75rem 1.8rem; font-size: 1rem;">
+                  <i data-lucide="play"></i> Start Deep Flow
+                </button>
+                <button id="timer-reset-btn" class="btn btn-secondary">
+                  <i data-lucide="rotate-ccw"></i> Reset
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="headphones" style="color: var(--accent-study-light);"></i>
+                  <span>Ambient Audio Synth</span>
+                </h3>
+              </div>
+              <div class="soundscape-grid">
+                <div class="sound-card" data-sound="rain">
+                  <i data-lucide="cloud-rain" class="sound-icon"></i>
+                  <span class="sound-label">Rain Shower</span>
+                </div>
+                <div class="sound-card" data-sound="binaural">
+                  <i data-lucide="waves" class="sound-icon"></i>
+                  <span class="sound-label">10Hz Alpha Beats</span>
+                </div>
+                <div class="sound-card" data-sound="ocean">
+                  <i data-lucide="wind" class="sound-icon"></i>
+                  <span class="sound-label">Ocean Tide</span>
+                </div>
+                <div class="sound-card" data-sound="drone">
+                  <i data-lucide="radio" class="sound-icon"></i>
+                  <span class="sound-label">Zen Harmonics</span>
+                </div>
+              </div>
+              <div style="margin-top: 1rem; display: flex; align-items: center; gap: 0.8rem;">
+                <i data-lucide="volume-2" style="color: var(--text-muted); width: 16px;"></i>
+                <input id="sound-volume-slider" type="range" min="0" max="1" step="0.05" value="0.5" style="flex: 1; accent-color: var(--accent-study);">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 5: NUTRITION & FUEL
+           ========================================== -->
+      <section id="tab-diet" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Diet & Nutritional Brain Fuel</h2>
+            <p>Clean, whole-food nutrition tailored to fuel cognitive clarity, steady stamina, and restorative sleep.</p>
+          </div>
+        </div>
+
+        <div id="diet-meal-cards-wrapper" class="meal-grid" style="margin-bottom: 1.8rem;">
+          <!-- Dynamically populated -->
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i data-lucide="apple" style="color: var(--accent-diet-light);"></i>
+              <span>Instant Clean Snack Generator</span>
+            </h3>
+            <button id="btn-random-snack" class="btn btn-emerald">
+              <i data-lucide="sparkles"></i> Generate 2-Min Brain Snack
+            </button>
+          </div>
+          <div id="quick-snack-result"></div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 6: SCREEN & EYE COMFORT
+           ========================================== -->
+      <section id="tab-screen" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Screen & Eye Comfort Guardian</h2>
+            <p>20-20-20 eye strain alarms, posture reminders, and digital sunset wind-down.</p>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="card screen-meter-card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i data-lucide="eye" style="color: var(--accent-screen-light);"></i>
+                <span>20-20-20 Eye Relief</span>
+              </h3>
+            </div>
+            <div style="text-align: center; padding: 1.5rem 0;">
+              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Next Eye Rest In</span>
+              <div id="eye-timer-display" style="font-family: var(--font-mono); font-size: 3rem; font-weight: 800; color: var(--accent-screen-light);">
+                20:00
+              </div>
+              <button id="take-screen-break-btn" class="btn btn-amber" style="margin-top: 1rem;">
+                <i data-lucide="check"></i> Log Screen Break Taken
+              </button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom: 0.5rem;">
+              <i data-lucide="accessibility" style="color: var(--accent-movement-light);"></i>
+              <span>Posture Check</span>
+            </h3>
+            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Shoulders back, feet flat, neck relaxed.
+            </p>
+            <button id="posture-check-btn" class="btn btn-secondary">
+              <i data-lucide="bell"></i> Trigger Posture Reminder
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 7: OLDER-ADULT MODE (ACCESSIBILITY HUB)
+           ========================================== -->
+      <section id="tab-elderly" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Older-Adult Care & Daily Routine Hub</h2>
+            <p>Simplified, large-format interface for prescribed medicine schedules and appointment reminders (non-medical scheduling).</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-bottom: 1.8rem;">
+          <div class="card">
+            <h3 class="card-title">
+              <i data-lucide="pill"></i>
+              <span>Add Prescribed Medicine Schedule</span>
+            </h3>
+            <form id="elderly-med-form" style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem;">
+              <input type="text" name="medName" class="form-input" placeholder="e.g. Blood Pressure Pill (as prescribed by doctor)" required>
+              <input type="text" name="medTime" class="form-input" placeholder="e.g. 08:00 AM (After Breakfast)" required>
+              <input type="text" name="medInstructions" class="form-input" placeholder="e.g. Take with 1 glass warm water" required>
+              <button type="submit" class="btn btn-primary">
+                <i data-lucide="plus"></i> Add Routine Reminder
+              </button>
+            </form>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title">
+              <i data-lucide="heart"></i>
+              <span>Daily Wellness Care Checklist</span>
+            </h3>
+            <ul class="meal-items-list" style="margin-top: 1rem; gap: 0.8rem;">
+              <li>☀️ 15-min gentle morning balcony sunlight</li>
+              <li>💧 Drink 6-8 glasses of room-temperature water</li>
+              <li>🚶 20-min gentle mobility walk in the evening</li>
+              <li>📞 Keep emergency contacts easily accessible</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-primary);">
+          ⏰ Scheduled Medicine Routines (Today)
+        </h3>
+        <div id="elderly-med-list" class="medicine-grid">
+          <!-- Dynamically populated -->
+        </div>
+
+        <h3 style="font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--text-primary);">
+          📅 Upcoming Health Appointments
+        </h3>
+        <div id="elderly-apt-list">
+          <!-- Dynamically populated -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 8: INTELLIGENCE & ANALYTICS
+           ========================================== -->
+      <section id="tab-analytics" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Intelligence & Self-Understanding Matrix</h2>
+            <p>Diagnose time leaks, habit resilience, goal velocity, and planned vs. actual execution patterns.</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col" style="margin-bottom: 1.8rem;">
+          <div class="card">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Planning Realism Score</span>
+            <div id="analytics-realism-score" style="font-family: var(--font-mono); font-size: 3rem; font-weight: 800; color: var(--accent-diet-light); margin: 0.4rem 0;">
+              85%
+            </div>
+            <p id="analytics-realism-text" style="font-size: 0.85rem; color: var(--text-secondary);">
+              Analyzing task and schedule fidelity...
+            </p>
+          </div>
+
+          <div class="card">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Goal Velocity</span>
+            <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-study-light); margin: 0.4rem 0;">
+              Milestone Throughput
+            </div>
+            <p id="analytics-velocity-text" style="font-size: 0.85rem; color: var(--text-secondary);">
+              Calculating milestone completion rates...
+            </p>
+          </div>
+
+          <div class="card">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Where Am I Losing Time?</span>
+            <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-screen-light); margin: 0.4rem 0;">
+              Focus Overrun Audit
+            </div>
+            <p id="analytics-time-leak-text" style="font-size: 0.85rem; color: var(--text-secondary);">
+              Loading focus variance history...
+            </p>
+          </div>
+
+          <div class="card">
+            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Strongest Anchor Habit</span>
+            <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-study-light); margin: 0.4rem 0;">
+              Consistency Engine
+            </div>
+            <p id="analytics-habit-text" style="font-size: 0.85rem; color: var(--text-secondary);">
+              Calculating habit streak momentum...
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- ==========================================
+       WHAT-IF SCENARIO SIMULATOR MODAL
+       ========================================== -->
+  <div id="simulator-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+        <h3 style="font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="git-branch" style="color: var(--accent-study-light);"></i>
+          <span>What-If Scenario Simulator</span>
+        </h3>
+        <button id="btn-close-simulator" class="btn-icon" title="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
+        Simulate hypothetical schedule allocations in a sandbox without altering your live day until approved.
+      </p>
+
+      <form id="simulator-form">
+        <div class="form-group">
+          <label class="form-label">Select Scenario Hypothesis</label>
+          <select name="scenarioType" class="form-select">
+            <option value="spend-extra-hours-coding" selected>What if I spend 2 extra hours coding on my project tonight?</option>
+            <option value="take-afternoon-off">What if I take the entire afternoon off (Recovery Mode)?</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Duration (Minutes)</label>
+          <input type="number" name="scenarioDuration" class="form-input" value="120" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <i data-lucide="play"></i> Run Sandbox Simulation
+        </button>
+      </form>
+
+      <div id="simulation-comparison-box"></div>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       EVENING DEBRIEF & REFLECTION MODAL
+       ========================================== -->
+  <div id="evening-debrief-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+        <h3 style="font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="moon" style="color: var(--accent-rest-light);"></i>
+          <span>Zenith Evening Reflection Ritual</span>
+        </h3>
+        <button id="btn-close-debrief" class="btn-icon" title="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="evening-debrief-form">
+        <div class="form-group">
+          <label class="form-label">🏆 What was your biggest win today?</label>
+          <input type="text" name="debriefWin" class="form-input" placeholder="e.g. Mastered binary search and stayed hydrated" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">⏳ What stole your time or caused friction?</label>
+          <input type="text" name="debriefLeak" class="form-input" placeholder="e.g. Got distracted on YouTube for 30m after lunch" required>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">🔥 What is your #1 priority for tomorrow morning?</label>
+          <input type="text" name="tomorrowPriority" class="form-input" placeholder="e.g. Build FastAPI authentication endpoint" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; margin-top: 0.5rem;">
+          <i data-lucide="sparkles"></i> Lock In Reflection & Earn +50 XP
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       AI SCHEDULE SYNTHESIZER MODAL WIZARD
+       ========================================== -->
+  <div id="generator-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+        <h3 style="font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i>
+          <span>AI Schedule Synthesizer</span>
+        </h3>
+        <button id="btn-close-generator" class="btn-icon" title="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="routine-generator-form">
+        <div class="form-group">
+          <label class="form-label">Select Your Lifestyle Archetype</label>
+          <div class="radio-pill-group">
+            <div class="radio-pill-item">
+              <input type="radio" name="archetype" id="arch-student" value="student" checked>
+              <label for="arch-student" class="radio-pill-label">🎓 Academic Student</label>
+            </div>
+            <div class="radio-pill-item">
+              <input type="radio" name="archetype" id="arch-desk" value="professional">
+              <label for="arch-desk" class="radio-pill-label">💼 Employee / Professional</label>
+            </div>
+            <div class="radio-pill-item">
+              <input type="radio" name="archetype" id="arch-dev" value="developer">
+              <label for="arch-dev" class="radio-pill-label">💻 Developer / Desk Worker</label>
+            </div>
+            <div class="radio-pill-item">
+              <input type="radio" name="archetype" id="arch-exam" value="examprep">
+              <label for="arch-exam" class="radio-pill-label">⚡ Intense Exam Sprint</label>
+            </div>
+            <div class="radio-pill-item">
+              <input type="radio" name="archetype" id="arch-elderly" value="elderly">
+              <label for="arch-elderly" class="radio-pill-label">👵 Older Adult & Gentle Routine</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="form-group">
+            <label class="form-label">Wake Up Time</label>
+            <input type="time" name="wakeTime" class="form-input" value="07:00" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Target Bedtime</label>
+            <input type="time" name="bedTime" class="form-input" value="23:00" required>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Daily Deep Focus Target (Hours)</label>
+          <select name="studyHours" class="form-select">
+            <option value="2">2 Hours (Gentle / Elderly)</option>
+            <option value="4">4 Hours (Light & Steady)</option>
+            <option value="6" selected>6 Hours (Balanced High-Performance)</option>
+            <option value="8">8 Hours (Intensive Mastery)</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label">Nutritional Strategy</label>
+          <select name="dietGoal" class="form-select">
+            <option value="clean-energy" selected>Sustained Cognitive Energy (Omega-3 & Low-GI)</option>
+            <option value="high-protein">High-Protein & Active Strength</option>
+            <option value="plant-powered">100% Plant-Powered Vitality</option>
+          </select>
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; margin-top: 1rem; font-size: 1rem;">
+          <i data-lucide="wand-2"></i> Synthesize & Apply Custom Day Plan
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- ==========================================
+       AI OBSTACLE SOLVER MODAL
+       ========================================== -->
+  <div id="obstacle-modal" class="modal-overlay">
+    <div class="modal-box">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
+        <h3 style="font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="help-circle" style="color: var(--accent-study-light);"></i>
+          <span>AI Obstacle Deconstructor</span>
+        </h3>
+        <button id="btn-close-obstacle" class="btn-icon" title="Close">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        Explain what is blocking you (e.g. <em>"I keep getting a 401 error and feeling overwhelmed"</em> or <em>"I don't know where to start reading chapter 5"</em>).
+      </p>
+
+      <form id="obstacle-form">
+        <textarea id="obstacle-desc-input" name="obstacleDesc" class="form-textarea" rows="3" placeholder="Describe the obstacle in plain words..." required></textarea>
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.8rem;">
+          <i data-lucide="sparkles"></i> Deconstruct Into Immediate 10-Min Action
+        </button>
+      </form>
+
+      <div id="obstacle-result-box"></div>
+    </div>
+  </div>
+
+  <!-- Application Logic Scripts -->
+  <script src="js/state.js"></script>
+  <script src="js/ai-engine.js"></script>
+  <script src="js/reality-events.js"></script>
+  <script src="js/ask-zenith.js"></script>
+  <script src="js/scenario-simulator.js"></script>
+  <script src="js/personal-learning.js"></script>
+  <script src="js/goal-intelligence.js"></script>
+  <script src="js/tasks-habits.js"></script>
+  <script src="js/focus-engine.js"></script>
+  <script src="js/elderly-mode.js"></script>
+  <script src="js/analytics-engine.js"></script>
+  <script src="js/diet-planner.js"></script>
+  <script src="js/screen-guardian.js"></script>
+  <script src="js/audio-synth.js"></script>
+  <script src="js/calendar-export.js"></script>
+  <script src="js/experience-engine.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
