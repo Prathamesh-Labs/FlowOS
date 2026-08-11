@@ -504,6 +504,129 @@ const INITIAL_STATE = {
         basis: 'Historical Observation (12 Tab Blur Events)'
       }
     }
+  },
+
+  // 14. MEMORY REPLAY TIMELINE STORE (Living Chronological Journey)
+  dailyMemories: {
+    activeDayKey: 'today',
+    days: {
+      today: {
+        dateTitle: 'Today — Monday, Aug 10, 2026',
+        isLive: true,
+        aiSummary: {
+          narrative: 'A high-impact execution day anchored by early sunlight and a powerful morning coding sprint. When the Python auth module overran by +45m, Zenith autonomously compressed evening review to safeguard your 10:30 PM bedtime while maintaining 100% habit streak integrity.',
+          primaryWin: 'Unbroken habit streak maintained & 150m deep focus logged.',
+          frictionPoint: 'Debugging session variance exceeded initial budget by +45m.',
+          adaptationTaken: 'Compressed evening review buffer from 60m to 15m to protect workout & circadian sleep window.',
+          tomorrowFocus: 'Tackle the FastAPI project build during morning peak (08:30 AM – 11:30 AM).'
+        },
+        moments: [
+          {
+            id: 'mem_1',
+            time: '07:00 AM',
+            title: 'Circadian Day Genesis & Anchor Set',
+            type: 'genesis',
+            icon: 'sun',
+            description: 'Woke up at 7:00 AM. Drank 500ml water and stepped onto the balcony for 12 minutes of direct natural photons.',
+            metrics: 'Energy: 8/10 • Vitality: 82%',
+            badge: 'Circadian Rhythm Synced'
+          },
+          {
+            id: 'mem_2',
+            time: '08:30 AM',
+            title: 'Deep Focus Sprint: Master Python & Algorithms',
+            type: 'focus',
+            icon: 'brain',
+            description: 'Initiated 60-minute deep work block with 10Hz Alpha procedural soundscape. Implemented Binary Tree traversal logic.',
+            metrics: 'Planned: 60m • Actual: 85m (+25m)',
+            badge: 'Flow State Achieved'
+          },
+          {
+            id: 'mem_3',
+            time: '09:55 AM',
+            title: 'Reality Overrun: Auth Debugging Divergence',
+            type: 'overrun',
+            icon: 'alert-triangle',
+            description: 'Encountered unexpected JWT token expiration edge case. Coding sprint extended by +45 minutes past planned timebox.',
+            metrics: 'Variance: +45m • Overrun Flagged',
+            badge: 'Reality Disruption'
+          },
+          {
+            id: 'mem_4',
+            time: '10:45 AM',
+            title: 'AI Decision: Autonomous Schedule Rebalance',
+            type: 'ai-decision',
+            icon: 'sparkles',
+            description: 'Zenith detected the 45m schedule compression. Recommended Option 1: Compressed low-priority evening review to protect 6:00 PM gym session.',
+            metrics: 'Flexible Buffer Consumed: 45m',
+            badge: 'Bedtime Protected'
+          },
+          {
+            id: 'mem_5',
+            time: '01:30 PM',
+            title: 'Brain Fuel Lunch & Screen Comfort Break',
+            type: 'habit',
+            icon: 'utensils',
+            description: 'Logged Mediterranean Quinoa Bowl & 2 glasses of water. Screen Guardian triggered 20-20-20 eye strain relief.',
+            metrics: 'Hydration: 6/10 • Eye Rest: Logged',
+            badge: 'Recovery Respected'
+          },
+          {
+            id: 'mem_6',
+            time: '04:15 PM',
+            title: 'RPG Boss Strike: Procrastination Golem',
+            type: 'focus',
+            icon: 'swords',
+            description: 'Completed afternoon focus session on System Design, dealing -150 DMG to the weekly boss.',
+            metrics: 'Boss HP: 1,350 / 2,000 HP • +50 XP',
+            badge: 'Momentum Multiplier'
+          }
+        ]
+      },
+      yesterday: {
+        dateTitle: 'Yesterday — Sunday, Aug 9, 2026',
+        isLive: false,
+        aiSummary: {
+          narrative: 'A steady restorative weekend cadence. Maintained unbroken habit consistency with 8 glasses of water and an evening mobility routine.',
+          primaryWin: 'Defended weekend habit consistency without burnout.',
+          frictionPoint: 'Afternoon fatigue dip at 2:30 PM.',
+          adaptationTaken: 'Substituted heavy study block with a 25m gentle recovery walk.',
+          tomorrowFocus: 'Prepare for Monday high-output coding sprints.'
+        },
+        moments: [
+          {
+            id: 'mem_y1',
+            time: '08:00 AM',
+            title: 'Restorative Weekend Morning',
+            type: 'genesis',
+            icon: 'sun',
+            description: 'Gentle wake-up. 15 minutes of outdoor mobility and herbal green tea.',
+            metrics: 'Sleep: 8.5 hrs • Quality: 5/5',
+            badge: 'Full Recovery'
+          },
+          {
+            id: 'mem_y2',
+            time: '11:00 AM',
+            title: 'Light Reading & Architectural Research',
+            type: 'focus',
+            icon: 'book-open',
+            description: 'Read 20 pages of System Design concepts with Campfire ambient audio.',
+            metrics: 'Duration: 45m • No Overrun',
+            badge: 'Relaxed Focus'
+          },
+          {
+            id: 'mem_y3',
+            time: '06:00 PM',
+            title: 'Evening Mobility & Posture Routine',
+            type: 'habit',
+            icon: 'heart',
+            description: 'Completed 30-minute full body stretching and resistance band exercise.',
+            metrics: 'Streak: 6 Days • Score: 90%',
+            badge: 'Habit Milestone'
+          }
+        ]
+      }
+    }
   }
 };
 

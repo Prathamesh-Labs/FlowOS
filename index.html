@@ -87,6 +87,11 @@
           <span>Behavioral Twin</span>
           <span class="nav-badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light);">AI Model</span>
         </a>
+        <a href="#memory-replay" class="nav-item" data-tab="memory-replay">
+          <i data-lucide="film"></i>
+          <span>Memory Replay</span>
+          <span class="nav-badge" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Timeline</span>
+        </a>
         <a href="#analytics" class="nav-item" data-tab="analytics">
           <i data-lucide="bar-chart-3"></i>
           <span>Intelligence & Insights</span>
@@ -1055,7 +1060,102 @@
       </section>
 
       <!-- ==========================================
-           TAB 9: INTELLIGENCE & ANALYTICS
+           TAB 9: ZENITH MEMORY REPLAY ENGINE
+           ========================================== -->
+      <section id="tab-memory-replay" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Zenith Memory Replay Engine</h2>
+            <p>Replay previous days as a living experiential story of deep focus, reality divergence, AI trade-offs, and restorative habits.</p>
+          </div>
+        </div>
+
+        <!-- Replay Playback & Controller Card -->
+        <div class="replay-controller-card">
+          <div class="replay-tabs-bar">
+            <button class="replay-day-tab active" data-day="today">
+              <i data-lucide="clock"></i> Today (Live)
+            </button>
+            <button class="replay-day-tab" data-day="yesterday">
+              <i data-lucide="calendar"></i> Yesterday
+            </button>
+          </div>
+
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.8rem;">
+              <button id="btn-replay-play" class="btn btn-primary" style="padding: 0.65rem 1.4rem; font-size: 0.95rem;">
+                <i data-lucide="play"></i> Replay My Day
+              </button>
+              <div style="display: flex; gap: 0.3rem;">
+                <button class="replay-speed-pill active" data-speed="1">1x</button>
+                <button class="replay-speed-pill" data-speed="2">2x</button>
+                <button class="replay-speed-pill" data-speed="4">4x</button>
+              </div>
+            </div>
+
+            <div id="replay-day-title" style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--accent-study-light); font-weight: 700;">
+              Today — Monday, Aug 10, 2026
+            </div>
+          </div>
+
+          <!-- Chronological Scrub Bar -->
+          <div style="display: flex; align-items: center; gap: 0.8rem;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">07:00 AM</span>
+            <input id="replay-scrub-slider" type="range" min="0" max="5" value="0" style="flex: 1; accent-color: var(--accent-study-light); cursor: pointer;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">11:00 PM</span>
+          </div>
+        </div>
+
+        <!-- AI Daily Narrative Synthesis Card -->
+        <div class="card" style="margin-bottom: 1.8rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(52, 211, 153, 0.05)); border-color: var(--border-highlight);">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i>
+              <span>AI Daily Synthesis & Narrative Summary</span>
+            </h3>
+            <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Holistic Day Recap</span>
+          </div>
+
+          <p id="replay-ai-narrative" style="font-size: 0.92rem; color: var(--text-primary); line-height: 1.6; margin-bottom: 1.25rem;">
+            Loading day memory synthesis...
+          </p>
+
+          <div class="grid-2-col" style="gap: 0.9rem;">
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
+              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #34d399;">🏆 Primary Victory</span>
+              <p id="replay-ai-win" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
+              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #fbbf24;">⏱️ Friction / Overrun</span>
+              <p id="replay-ai-friction" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
+              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #c084fc;">🧠 AI Adaptation Taken</span>
+              <p id="replay-ai-adaptation" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
+            </div>
+            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
+              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #38bdf8;">🎯 Trajectory for Tomorrow</span>
+              <p id="replay-ai-tomorrow" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Chronological Living Memory Moments Header -->
+        <div class="card-header" style="margin-bottom: 1rem;">
+          <h3 class="card-title">
+            <i data-lucide="film" style="color: #f472b6;"></i>
+            <span>Living Chronological Memory Moments</span>
+          </h3>
+          <span class="badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">Interactive Scrub</span>
+        </div>
+
+        <div id="replay-timeline-list" class="memory-timeline-container">
+          <!-- Dynamically populated memory moment cards -->
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 10: INTELLIGENCE & ANALYTICS
            ========================================== -->
       <section id="tab-analytics" class="tab-panel">
         <div class="page-hero">
@@ -1422,6 +1522,7 @@
   <script src="js/quests-engine.js"></script>
   <script src="js/qr-sync.js"></script>
   <script src="js/digital-twin.js"></script>
+  <script src="js/memory-replay.js"></script>
   <script src="js/calendar-export.js"></script>
   <script src="js/experience-engine.js"></script>
   <script src="js/app.js"></script>

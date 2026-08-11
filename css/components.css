@@ -1131,6 +1131,170 @@
   border-color: var(--border-highlight);
 }
 
+/* ==========================================================================
+   ZENITH MEMORY REPLAY & EXPERIENTIAL TIMELINE (V1)
+   ========================================================================== */
+.replay-controller-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.05));
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.8rem;
+  backdrop-filter: blur(16px);
+}
+
+.replay-tabs-bar {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1.2rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.8rem;
+}
+
+.replay-day-tab {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  padding: 0.45rem 1rem;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.replay-day-tab:hover, .replay-day-tab.active {
+  background: var(--grad-zenith);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.35);
+}
+
+.replay-speed-pill {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.replay-speed-pill.active {
+  background: rgba(99, 102, 241, 0.25);
+  color: var(--accent-study-light);
+  border-color: var(--accent-study-light);
+}
+
+.memory-timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  position: relative;
+  margin-left: 1rem;
+  border-left: 2px dashed rgba(255, 255, 255, 0.12);
+  padding-left: 1.75rem;
+}
+
+.memory-moment-card {
+  position: relative;
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.memory-moment-card:hover {
+  border-color: var(--border-highlight);
+  transform: translateX(4px);
+}
+
+.memory-moment-card.active-replay-step {
+  border-color: var(--accent-study-light);
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.14), rgba(56, 189, 248, 0.08));
+  box-shadow: 0 0 25px rgba(99, 102, 241, 0.35);
+  transform: translateX(6px) scale(1.01);
+}
+
+.memory-time-marker {
+  position: absolute;
+  left: -2.35rem;
+  top: 1.25rem;
+  display: flex;
+  align-items: center;
+}
+
+.memory-timeline-dot {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--bg-surface);
+  border: 2px solid var(--accent-study-light);
+  transition: all 0.3s ease;
+}
+
+.memory-moment-card.active-replay-step .memory-timeline-dot {
+  background: #38bdf8;
+  box-shadow: 0 0 12px #38bdf8;
+  transform: scale(1.3);
+}
+
+.memory-time-str {
+  position: absolute;
+  right: 1.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+.memory-moment-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.memory-icon-box {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-study-light);
+}
+
+.badge-blue {
+  background: rgba(56, 189, 248, 0.15);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.35);
+}
+
+.badge-amber {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.35);
+}
+
+.badge-purple {
+  background: rgba(168, 85, 247, 0.15);
+  color: #c084fc;
+  border: 1px solid rgba(168, 85, 247, 0.35);
+}
+
+.badge-emerald {
+  background: rgba(52, 211, 153, 0.15);
+  color: #34d399;
+  border: 1px solid rgba(52, 211, 153, 0.35);
+}
+
+
 
 
 
