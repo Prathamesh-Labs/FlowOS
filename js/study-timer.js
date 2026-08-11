@@ -123,15 +123,15 @@ class StudyTimerController {
 
   onComplete() {
     this.pause();
-    if (window.audioZenith) {
-      window.audioZenith.playChime();
+    if (window.notificationEngine) {
+      window.notificationEngine.notifyTimerComplete(this.currentMode);
+    } else if (window.audioZenith) {
+      window.audioZenith.playGong();
     }
     
     if (this.currentMode === 'focus') {
-      window.showToast?.('🎯 Focus block completed! Time for a refreshing break.');
       this.setMode('break');
     } else {
-      window.showToast?.('⚡ Break finished! Ready to dive back into deep flow.');
       this.setMode('focus');
     }
   }

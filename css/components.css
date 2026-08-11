@@ -541,3 +541,132 @@
   color: #fff;
   display: inline-block;
 }
+
+/* ==========================================================================
+   SOUNDSCAPE & AUDIO CONTROLS (V2)
+   ========================================================================== */
+.soundscape-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.75rem;
+}
+
+.sound-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem 0.75rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.sound-card:hover {
+  background: rgba(99, 102, 241, 0.1);
+  border-color: var(--accent-study-light);
+  transform: translateY(-2px);
+}
+
+.sound-card.playing {
+  background: rgba(99, 102, 241, 0.22);
+  border-color: var(--accent-study-light);
+  box-shadow: 0 0 16px rgba(99, 102, 241, 0.35);
+}
+
+.sound-card.playing::after {
+  content: '';
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #34d399;
+  box-shadow: 0 0 8px #34d399;
+  animation: pulseDot 1.5s infinite;
+}
+
+@keyframes pulseDot {
+  0% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; }
+  100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.sound-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--accent-study-light);
+  transition: transform var(--transition-fast);
+}
+
+.sound-card:hover .sound-icon {
+  transform: scale(1.1);
+}
+
+.sound-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+/* Sleep Timer Pills */
+.sleep-timer-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.sleep-pill {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sleep-pill:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+}
+
+.sleep-pill.active {
+  background: var(--accent-study);
+  border-color: var(--accent-study-light);
+  color: #fff;
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.4);
+}
+
+/* Notification Preferences List */
+.notif-pref-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.notif-pref-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 0.85rem;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.85rem;
+}
+
+.notif-pref-item:hover {
+  background: rgba(255, 255, 255, 0.04);
+}
+

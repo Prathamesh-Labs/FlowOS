@@ -63,17 +63,21 @@ class ScreenGuardianController {
   }
 
   triggerEyeAlert() {
-    if (window.audioZenith) {
-      window.audioZenith.playChime();
+    if (window.notificationEngine) {
+      window.notificationEngine.notifyEyeBreak();
+    } else {
+      if (window.audioZenith) window.audioZenith.playAlert();
+      window.showToast?.('👀 20-20-20 Eye Rule: Look at an object 20 feet away for 20 seconds!');
     }
-    window.showToast?.('👀 20-20-20 Eye Rule: Look at an object 20 feet away for 20 seconds!');
   }
 
   triggerPostureCheck() {
-    if (window.audioZenith) {
-      window.audioZenith.playChime();
+    if (window.notificationEngine) {
+      window.notificationEngine.notifyPostureCheck();
+    } else {
+      if (window.audioZenith) window.audioZenith.playAlert();
+      window.showToast?.('🧘 Posture Check: Roll shoulders back, chin parallel, feet flat on floor.');
     }
-    window.showToast?.('🧘 Posture Check: Roll shoulders back, chin parallel, feet flat on floor.');
   }
 
   logScreenBreak() {

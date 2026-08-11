@@ -118,8 +118,11 @@ class TasksHabitsManager {
             if (!newHistory.includes(todayStr)) {
               newHistory.push(todayStr);
             }
-            newStreak += 1;
-            if (window.audioZenith) window.audioZenith.playChime();
+            if (newStreak === 7 || newStreak === 14 || newStreak === 21) {
+              if (window.audioZenith) window.audioZenith.playFanfare();
+            } else {
+              if (window.audioZenith) window.audioZenith.playChime();
+            }
           } else {
             newHistory = newHistory.filter(d => d !== todayStr);
             newStreak = Math.max(0, newStreak - 1);

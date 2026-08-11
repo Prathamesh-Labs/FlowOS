@@ -12,6 +12,7 @@ function initMasterApp() {
   // 1. Initialize Sub-modules
   window.focusEngine?.init();
   window.screenGuardian?.init();
+  window.notificationEngine?.init();
 
   // 2. Live Clock & Browser Awareness
   startLiveClock();
@@ -884,7 +885,7 @@ function setupDietInteractions() {
           ...s,
           waterGlasses: glassIndex + 1
         }));
-        if (window.audioZenith) window.audioZenith.playChime();
+        if (window.audioZenith) window.audioZenith.playWaterDrop();
       }
     });
   }
@@ -965,11 +966,41 @@ function setupSoundscapeInteractions() {
   });
 
   const volSlider = document.getElementById('sound-volume-slider');
+  const volLabel = document.getElementById('ambient-vol-label');
   if (volSlider) {
     volSlider.addEventListener('input', (e) => {
-      window.audioZenith.setVolume(parseFloat(e.target.value));
+      const val = parseFloat(e.target.value);
+      window.audioZenith.setVolume(val);
+      if (volLabel) volLabel.textContent = `${Math.round(val * 100)}%`;
     });
   }
+
+  const sfxBtn = document.getElementById('btn-toggle-sfx');
+  if (sfxBtn) {
+    sfxBtn.addEventListener('click', () => {
+      const isMuted = window.audioZenith.toggleSfxMute();
+      sfxBtn.innerHTML = isMuted 
+        ? '<i data-lucide="volume-x" style="width: 13px;"></i> SFX Muted'
+        : '<i data-lucide="volume-2" style="width: 13px;"></i> SFX On';
+      if (window.lucide) lucide.createIcons();
+      showToast(isMuted ? '🔇 Sound effects muted' : '🔊 Sound effects active');
+    });
+  }
+
+  const sleepPills = document.querySelectorAll('.sleep-pill');
+  sleepPills.forEach(pill => {
+    pill.addEventListener('click', () => {
+      sleepPills.forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
+      const mins = parseInt(pill.dataset.mins, 10);
+      window.audioZenith.setSleepTimer(mins);
+      if (mins > 0) {
+        showToast(`🌙 Sleep timer set: Ambient sound will fade and stop in ${mins} mins`);
+      } else {
+        showToast(`🌙 Sleep timer disabled`);
+      }
+    });
+  });
 }
 
 /* ==========================================================================
