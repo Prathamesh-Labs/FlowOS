@@ -13,6 +13,7 @@ function initMasterApp() {
   window.focusEngine?.init();
   window.screenGuardian?.init();
   window.notificationEngine?.init();
+  window.customMediaController?.init();
 
   // 2. Live Clock & Browser Awareness
   startLiveClock();

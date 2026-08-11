@@ -670,3 +670,157 @@
   background: rgba(255, 255, 255, 0.04);
 }
 
+/* ==========================================================================
+   CUSTOM AUDIO & STREAM PLAYER (V2)
+   ========================================================================== */
+.audio-subtabs {
+  display: flex;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.35rem;
+  border-radius: var(--radius-md);
+  margin-bottom: 1.25rem;
+  border: 1px solid var(--border-subtle);
+}
+
+.audio-subtab-btn {
+  flex: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.audio-subtab-btn:hover {
+  color: #fff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.audio-subtab-btn.active {
+  background: var(--grad-zenith);
+  color: #fff;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.3);
+}
+
+.audio-subpanel {
+  display: none;
+  animation: fadeIn 0.25s ease-out;
+}
+
+.audio-subpanel.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Drop Zone */
+.custom-audio-dropzone {
+  border: 2px dashed var(--border-highlight);
+  border-radius: var(--radius-md);
+  padding: 2rem 1.25rem;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.custom-audio-dropzone:hover, .custom-audio-dropzone.dragover {
+  border-color: var(--accent-study-light);
+  background: rgba(99, 102, 241, 0.1);
+  transform: translateY(-1px);
+}
+
+.custom-audio-dropzone i {
+  color: var(--accent-study-light);
+  width: 32px;
+  height: 32px;
+}
+
+/* Custom Audio Player Container */
+.custom-audio-player {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-highlight);
+  border-radius: var(--radius-md);
+}
+
+.custom-player-track-info {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.custom-player-track-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-md);
+  background: var(--grad-zenith);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.4);
+  flex-shrink: 0;
+}
+
+.custom-player-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.custom-audio-seek-slider {
+  flex: 1;
+  accent-color: var(--accent-study);
+  cursor: pointer;
+}
+
+/* Embed Preset Chips */
+.embed-preset-chips {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+  margin-top: 0.75rem;
+}
+
+.embed-preset-btn {
+  font-size: 0.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.embed-preset-btn:hover {
+  background: rgba(99, 102, 241, 0.18);
+  border-color: var(--accent-study-light);
+  color: #fff;
+}
+
+
