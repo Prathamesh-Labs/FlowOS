@@ -421,6 +421,89 @@ const INITIAL_STATE = {
       { id: 'q2', title: 'Maintain unbroken 7-day habit streak', progress: 5, target: 7, xp: 250, completed: false },
       { id: 'q3', title: 'Drink 8+ glasses of water today', progress: 4, target: 8, xp: 100, completed: false }
     ]
+  },
+
+  // 13. ZENITH BEHAVIORAL DIGITAL TWIN (Empirical Cognitive Model)
+  digitalTwin: {
+    maturityLevel: 3,
+    maturityTitle: 'Calibrated Behavioral Twin',
+    totalObservations: 46,
+    calibrationPercent: 74,
+    archetype: 'Deep Sprint Architect',
+    dimensions: {
+      workHours: {
+        id: 'workHours',
+        title: 'Preferred Work Hours',
+        confidence: 85,
+        sampleSize: 28,
+        observation: 'Peak cognitive output occurs between 08:30 AM – 11:45 AM. Late evening sessions (>9:30 PM) show a 3.2x higher rate of task abandonment.',
+        tag: 'High Confidence',
+        basis: 'Historical Observation (28 Focus Sessions)'
+      },
+      focusPatterns: {
+        id: 'focusPatterns',
+        title: 'Focus Patterns & Stamina',
+        confidence: 90,
+        sampleSize: 34,
+        observation: 'Optimal focus sprint duration is 48 ± 6 minutes. After 55 minutes without a pause, attention density drops by 42%.',
+        tag: 'High Confidence',
+        basis: 'Historical Observation (34 Timer Logs)'
+      },
+      planningAccuracy: {
+        id: 'planningAccuracy',
+        title: 'Planning Accuracy & Bias',
+        confidence: 80,
+        sampleSize: 22,
+        observation: 'Exhibits an average +45% optimism bias on coding tasks (estimates 60m, takes 85m). Writing & review tasks are accurately calibrated (±8%).',
+        tag: 'High Confidence',
+        basis: 'Historical Observation (22 Planned vs Actual Tasks)'
+      },
+      habitConsistency: {
+        id: 'habitConsistency',
+        title: 'Habit Momentum & Compliance',
+        confidence: 75,
+        sampleSize: 42,
+        observation: 'Morning sunlight & hydration have a 92% adherence rate. Weekend habit completion drops by 24% without an early anchor.',
+        tag: 'Calibrated',
+        basis: 'Historical Observation (42 Habit Check-ins)'
+      },
+      recoveryBehavior: {
+        id: 'recoveryBehavior',
+        title: 'Recovery & Fatigue Response',
+        confidence: 68,
+        sampleSize: 18,
+        observation: 'When eye/posture breaks are taken on schedule, afternoon energy scores remain above 78%. Skipped breaks correlate with 4:00 PM cognitive slump.',
+        tag: 'Calibrated',
+        basis: 'Historical Observation (18 Screen Breaks)'
+      },
+      breakDuration: {
+        id: 'breakDuration',
+        title: 'Preferred Break Duration',
+        confidence: 70,
+        sampleSize: 19,
+        observation: '7-10 minute active walk/stretch breaks yield a 94% full cognitive recovery. Passive screen scrolling breaks fail to restore focus stamina.',
+        tag: 'Calibrated',
+        basis: 'Historical Observation (19 Rest Periods)'
+      },
+      productivityRhythms: {
+        id: 'productivityRhythms',
+        title: 'Ultradian & Circadian Rhythms',
+        confidence: 65,
+        sampleSize: 15,
+        observation: 'Strong 90-minute ultradian rhythm peaks in the morning, followed by a natural circadian slump between 2:15 PM – 3:00 PM.',
+        tag: 'Emerging Pattern',
+        basis: 'Historical Observation (15 Daily Logs)'
+      },
+      commonDistractions: {
+        id: 'commonDistractions',
+        title: 'Distraction Triggers & Friction',
+        confidence: 60,
+        sampleSize: 12,
+        observation: 'Context-switching during code debugging is the #1 cause of schedule overruns. Multi-tab browsing increases focus recovery time by 8 minutes.',
+        tag: 'Emerging Pattern',
+        basis: 'Historical Observation (12 Tab Blur Events)'
+      }
+    }
   }
 };
 

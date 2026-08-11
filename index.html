@@ -82,6 +82,11 @@
           <i data-lucide="heart-pulse"></i>
           <span>Older-Adult Mode</span>
         </a>
+        <a href="#digital-twin" class="nav-item" data-tab="digital-twin">
+          <i data-lucide="cpu"></i>
+          <span>Behavioral Twin</span>
+          <span class="nav-badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light);">AI Model</span>
+        </a>
         <a href="#analytics" class="nav-item" data-tab="analytics">
           <i data-lucide="bar-chart-3"></i>
           <span>Intelligence & Insights</span>
@@ -970,10 +975,87 @@
         <div id="elderly-apt-list">
           <!-- Dynamically populated -->
         </div>
+      <!-- ==========================================
+           TAB 8: ZENITH BEHAVIORAL DIGITAL TWIN
+           ========================================== -->
+      <section id="tab-digital-twin" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Zenith Behavioral Digital Twin</h2>
+            <p>An empirical psychological and operational model of your rhythms, focus stamina, habit resilience, and recovery behavior. Never fabricated.</p>
+          </div>
+        </div>
+
+        <!-- Twin Maturity & Status Hero Card -->
+        <div class="card" style="margin-bottom: 1.8rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05)); border-color: var(--border-highlight);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
+            <div>
+              <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
+                <span id="twin-maturity-level" class="rank-badge-pill">Maturity Lvl 3</span>
+                <span id="twin-maturity-title" style="font-weight: 700; color: #fff; font-size: 1.1rem;">Calibrated Behavioral Twin</span>
+              </div>
+              <div style="font-size: 0.85rem; color: var(--text-secondary);">
+                Active Cognitive Archetype: <strong id="twin-archetype-display" style="color: var(--accent-study-light);">Deep Sprint Architect</strong>
+              </div>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <button id="btn-twin-sim-observation" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.45rem 0.85rem;">
+                <i data-lucide="brain"></i> Ingest Observation
+              </button>
+              <button id="btn-twin-reset" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.45rem 0.75rem; color: #f87171;" title="Reset Digital Twin Memory">
+                <i data-lucide="rotate-ccw"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Calibration Progress -->
+          <div style="margin-top: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.4rem;">
+              <span id="twin-total-observations" style="color: var(--text-secondary);">46 Observations Logged</span>
+              <span id="twin-calibration-pct" style="font-weight: 700; color: var(--accent-diet-light);">74% Calibrated</span>
+            </div>
+            <div class="progress-bar-bg" style="height: 7px;">
+              <div id="twin-calibration-bar" class="progress-bar-fill" style="width: 74%; background: var(--grad-zenith);"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 Dimensional Behavioral Matrix Header -->
+        <div class="card-header" style="margin-bottom: 1rem;">
+          <h3 class="card-title">
+            <i data-lucide="network" style="color: var(--accent-study-light);"></i>
+            <span>8-Dimensional Learned Behavioral Matrix</span>
+          </h3>
+          <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Confidence Calibration</span>
+        </div>
+
+        <div id="twin-dimensions-matrix" class="twin-dimensions-grid" style="margin-bottom: 2rem;">
+          <!-- Dynamically populated 8 behavioral dimension cards -->
+        </div>
+
+        <!-- Recommendation Transparency Inspector Card -->
+        <div class="card">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i data-lucide="shield-check" style="color: var(--accent-diet-light);"></i>
+              <span>Recommendation Attribution & Reasoning Inspector</span>
+            </h3>
+            <span class="badge" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">100% Explainable AI</span>
+          </div>
+
+          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
+            Zenith never makes black-box assumptions. Every schedule adjustment, timer prompt, and habit recommendation is attributed to explicit user preference, historical observation, current schedule context, or first-principles circadian science.
+          </p>
+
+          <div id="twin-recommendations-inspector">
+            <!-- Dynamically populated recommendation inspection items -->
+          </div>
+        </div>
       </section>
 
       <!-- ==========================================
-           TAB 8: INTELLIGENCE & ANALYTICS
+           TAB 9: INTELLIGENCE & ANALYTICS
            ========================================== -->
       <section id="tab-analytics" class="tab-panel">
         <div class="page-hero">
@@ -1339,6 +1421,7 @@
   <script src="js/readiness-engine.js"></script>
   <script src="js/quests-engine.js"></script>
   <script src="js/qr-sync.js"></script>
+  <script src="js/digital-twin.js"></script>
   <script src="js/calendar-export.js"></script>
   <script src="js/experience-engine.js"></script>
   <script src="js/app.js"></script>

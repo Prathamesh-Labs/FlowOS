@@ -20,6 +20,7 @@ function initMasterApp() {
   window.readinessEngine?.init();
   window.questsEngine?.init();
   window.qrSyncEngine?.init();
+  window.digitalTwinEngine?.init();
 
   // 2. Live Clock & Browser Awareness
   startLiveClock();
@@ -217,7 +218,10 @@ function renderCommandCenter(state) {
             return `
               <div class="reality-option-box ${isRec ? 'recommended' : ''}">
                 <div>
-                  ${isRec ? '<span style="font-size: 0.68rem; font-weight: 800; color: var(--accent-diet-light); text-transform: uppercase; letter-spacing: 0.05em;">★ Recommended by Zenith</span>' : ''}
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                    ${isRec ? '<span style="font-size: 0.68rem; font-weight: 800; color: var(--accent-diet-light); text-transform: uppercase; letter-spacing: 0.05em;">★ Recommended</span>' : '<span></span>'}
+                    ${window.ZenithDigitalTwinEngine ? ZenithDigitalTwinEngine.renderBasisBadge(isRec ? 'current-schedule' : 'ai-reasoning', 'Adaptation') : ''}
+                  </div>
                   <h4 style="font-size: 0.98rem; font-weight: 700; color: var(--text-primary); margin-top: 0.2rem;">${opt.title}</h4>
                   <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.3rem;">${opt.desc}</p>
                 </div>
@@ -240,7 +244,11 @@ function renderCommandCenter(state) {
   const nextActionEl = document.getElementById('command-next-action-text');
   if (nextActionEl) {
     if (nextTask) {
-      nextActionEl.innerHTML = `<strong>${nextTask.title}</strong> (Est. ${nextTask.estimatedMinutes}m • Priority: ${nextTask.priority.toUpperCase()})`;
+      const badge = window.ZenithDigitalTwinEngine ? ZenithDigitalTwinEngine.renderBasisBadge('historical-observation', 'Priority & Energy Calibration') : '';
+      nextActionEl.innerHTML = `
+        <div style="margin-bottom: 0.35rem;">${badge}</div>
+        <strong>${nextTask.title}</strong> (Est. ${nextTask.estimatedMinutes}m • Priority: ${nextTask.priority.toUpperCase()})
+      `;
     } else {
       nextActionEl.textContent = 'All priority tasks completed for today!';
     }
@@ -1118,6 +1126,7 @@ function renderAllState(state) {
   renderOlderAdultMode(state);
   renderAnalytics(state);
   renderDietPlans(state.profile.dietGoal || 'clean-energy');
+  window.digitalTwinEngine?.render();
 
   if (window.lucide) lucide.createIcons();
 }
