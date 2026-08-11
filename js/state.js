@@ -392,7 +392,36 @@ const INITIAL_STATE = {
       time: '10:30 AM',
       location: 'City Wellness Clinic, Room 302'
     }
-  ]
+  ],
+
+  // 11. DAILY READINESS & ENERGY CHECK-IN
+  readiness: {
+    sleepHours: 7.5,
+    sleepQuality: 4,      // 1 to 5
+    physicalSoreness: 2,  // 1 (fresh) to 5 (sore)
+    mentalEnergy: 8,      // 1 to 10
+    score: 85,
+    status: 'Optimal Flow',
+    recommendedBlockMins: 50,
+    recommendation: 'Cognitive readiness is peak. Ideal for deep complex problem solving and 50m study blocks.'
+  },
+
+  // 12. RPG QUESTS & WEEKLY BOSS BATTLE
+  activeBossQuest: {
+    bossId: 'boss_procrastination_golem',
+    bossName: 'The Procrastination Golem',
+    title: 'Slumbering Overlord of Delay',
+    maxHp: 2000,
+    currentHp: 1350,
+    level: 12,
+    rewardXp: 500,
+    rewardBadge: '🛡️ Golem Slayer',
+    quests: [
+      { id: 'q1', title: 'Complete 3 Deep Focus Blocks today', progress: 2, target: 3, xp: 150, completed: false },
+      { id: 'q2', title: 'Maintain unbroken 7-day habit streak', progress: 5, target: 7, xp: 250, completed: false },
+      { id: 'q3', title: 'Drink 8+ glasses of water today', progress: 4, target: 8, xp: 100, completed: false }
+    ]
+  }
 };
 
 class StateManager {

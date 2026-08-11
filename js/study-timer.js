@@ -130,6 +130,7 @@ class StudyTimerController {
     }
     
     if (this.currentMode === 'focus') {
+      window.questsEngine?.dealDamage(150, 'Focus Sprint');
       this.setMode('break');
     } else {
       this.setMode('focus');

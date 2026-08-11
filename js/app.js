@@ -14,6 +14,12 @@ function initMasterApp() {
   window.screenGuardian?.init();
   window.notificationEngine?.init();
   window.customMediaController?.init();
+  window.voiceEngine?.init();
+  window.pipTimerController?.init();
+  window.heatmapEngine?.init();
+  window.readinessEngine?.init();
+  window.questsEngine?.init();
+  window.qrSyncEngine?.init();
 
   // 2. Live Clock & Browser Awareness
   startLiveClock();
@@ -887,6 +893,7 @@ function setupDietInteractions() {
           waterGlasses: glassIndex + 1
         }));
         if (window.audioZenith) window.audioZenith.playWaterDrop();
+        window.questsEngine?.dealDamage(20, 'Hydration');
       }
     });
   }

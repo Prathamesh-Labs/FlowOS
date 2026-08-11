@@ -123,6 +123,7 @@ class TasksHabitsManager {
             } else {
               if (window.audioZenith) window.audioZenith.playChime();
             }
+            window.questsEngine?.dealDamage(50, 'Habit Strike');
           } else {
             newHistory = newHistory.filter(d => d !== todayStr);
             newStreak = Math.max(0, newStreak - 1);
