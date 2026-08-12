@@ -52,7 +52,7 @@
       <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
           <span id="user-rank-level" class="rank-badge-pill">Lvl 2</span>
-          <span id="user-rank-title" style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Circadian Operator</span>
+          <span id="user-rank-title" style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">FlowOS Operator</span>
         </div>
         <div class="progress-bar-bg" style="height: 5px;">
           <div id="user-xp-bar" class="progress-bar-fill" style="width: 40%;"></div>
@@ -149,33 +149,25 @@
             <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i>
             <span id="label-demo-mode">Demo Mode</span>
           </button>
-          <button id="btn-header-voice-mic" class="btn btn-secondary" title="Voice Assistant & Command Prompt (Alt+V)">
-            <i data-lucide="mic" style="color: var(--accent-study-light);"></i>
-            <span>Voice / Command</span>
-          </button>
-          <button id="btn-open-qr-sync" class="btn btn-secondary" title="Sync to Mobile Phone">
-            <i data-lucide="qr-code"></i>
-            <span>Sync</span>
-          </button>
-          <button onclick="openScenarioSimulator('spend-extra-hours-coding')" class="btn btn-secondary" title="Simulate What-If Schedule">
-            <i data-lucide="git-branch"></i>
-            <span>What-If Simulator</span>
-          </button>
-          <button id="toggle-accessibility-mode" class="btn btn-secondary" title="Switch Accessible / Care Mode">
-            <i data-lucide="accessibility"></i>
-            <span>Care Mode</span>
-          </button>
-          <button id="btn-open-generator" class="btn btn-primary">
-            <i data-lucide="calendar-plus"></i>
-            <span>Forge Routine</span>
-          </button>
-          <button id="btn-header-pwa-install" class="btn btn-emerald btn-pwa-install" style="display: none; padding: 0.45rem 0.85rem; font-size: 0.8rem;" title="Install Native App on Desktop/Mobile">
-            <i data-lucide="download"></i>
-            <span>Install App</span>
+          <button onclick="openScenarioSimulator('spend-extra-hours-coding')" class="btn btn-primary" title="Simulate What-If Schedule">
+            <i data-lucide="shuffle"></i>
+            <span>Reality Simulator</span>
           </button>
           <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">
             <i data-lucide="sun"></i>
           </button>
+          <div class="header-dropdown-wrap">
+            <button id="btn-header-more-tools" class="btn-icon" title="More Tools & Settings" onclick="document.getElementById('header-tools-menu').classList.toggle('open')">
+              <i data-lucide="more-vertical"></i>
+            </button>
+            <div id="header-tools-menu" class="header-dropdown-menu">
+              <button class="dropdown-item" id="btn-header-voice-mic" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="mic"></i> Voice Assistant (Alt+V)</button>
+              <button class="dropdown-item" id="btn-open-qr-sync" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="qr-code"></i> Mobile QR Sync</button>
+              <button class="dropdown-item" id="toggle-accessibility-mode" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="accessibility"></i> Care & Large Font Mode</button>
+              <button class="dropdown-item" id="btn-open-generator" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="calendar-plus"></i> Forge Routine</button>
+              <button class="dropdown-item btn-pwa-install" id="btn-header-pwa-install" style="display: none;" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="download"></i> Install Native App</button>
+            </div>
+          </div>
         </div>
       </header>
 
@@ -184,6 +176,55 @@
            Answers: "What should I be doing right now?"
            ========================================== -->
       <section id="tab-today" class="tab-panel active">
+        <!-- FlowOS Core Thesis & 1-Click Reality Transformation Demo Banner -->
+        <div class="card" style="margin-bottom: 1.5rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.12), rgba(168, 85, 247, 0.08)); border: 1px solid var(--border-highlight); padding: 1.25rem 1.5rem;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+            <div style="max-width: 680px;">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.3rem;">
+                <span class="badge badge-emerald" style="font-size: 0.75rem;">THE FLOWOS PROMISE</span>
+                <span style="font-size: 0.8rem; color: var(--text-muted);">Plan ➔ Execute ➔ Reality Changes ➔ FlowOS Adapts</span>
+              </div>
+              <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; line-height: 1.3;">
+                FlowOS plans your day and adapts when reality changes.
+              </h3>
+              <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.3rem; line-height: 1.45;">
+                When tasks overrun, energy shifts, or urgent meetings appear, FlowOS recalculates your remaining hours in 1 click to safeguard your evening workout and bedtime.
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 0.6rem; align-items: center;">
+              <button onclick="window.triggerLiveRealityRecalibrationDemo()" class="btn btn-emerald" style="box-shadow: 0 0 20px rgba(16, 185, 129, 0.3); font-weight: 700;">
+                <i data-lucide="zap"></i> See 1-Click Recalibration
+              </button>
+            </div>
+          </div>
+
+          <!-- Interactive Before / After Schedule Demonstration Box -->
+          <div id="reality-before-after-demo" style="display: none; margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(255,255,255,0.08);">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div style="padding: 0.9rem; background: rgba(239, 68, 68, 0.08); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: var(--radius-md);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                  <strong style="color: #f87171; font-size: 0.85rem;">❌ Without FlowOS (Static Schedule)</strong>
+                  <span class="badge" style="background: rgba(239,68,68,0.2); color: #f87171; font-size: 0.7rem;">+45m Overrun</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">
+                  Coding ran 45m overtime. Static schedule cascades out of control, pushes dinner to 10:00 PM, and skips workout.
+                </p>
+              </div>
+
+              <div style="padding: 0.9rem; background: rgba(16, 185, 129, 0.08); border: 1px solid rgba(16, 185, 129, 0.3); border-radius: var(--radius-md);">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                  <strong style="color: #34d399; font-size: 0.85rem;">✓ With FlowOS (Adaptive Rebalance)</strong>
+                  <span class="badge" style="background: rgba(16,185,129,0.2); color: #34d399; font-size: 0.7rem;">Bedtime Protected</span>
+                </div>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.4;">
+                  FlowOS compressed non-critical evening buffers and deferred 1 low-priority task. Workout is saved, 10:30 PM bedtime is 100% intact!
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <!-- Morning Briefing Banner (Dismissible) -->
         <div id="morning-cockpit-briefing" class="morning-briefing-banner">
           <div style="display: flex; align-items: center; gap: 1rem;">
@@ -1041,14 +1082,14 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i data-lucide="eye" style="color: var(--accent-screen-light);"></i>
-                  <span>20-20-20 Eye Strain Guardian</span>
+                  <span>20-20-20 Screen & Eye Comfort</span>
                 </h3>
                 <span id="eye-timer-display" class="badge" style="font-family: var(--font-mono); font-size: 1rem; background: rgba(245,158,11,0.2); color: #fbbf24;">
                   20:00
                 </span>
               </div>
               <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.4;">
-                Every 20 minutes, look at an object 20 feet away for 20 seconds. Reduces ciliary muscle fatigue and dry eyes.
+                Every 20 minutes, look at an object 20 feet away for 20 seconds. Helps relieve eye fatigue and reset posture.
               </p>
               <div style="display: flex; gap: 0.6rem;">
                 <button id="take-screen-break-btn" class="btn btn-primary" style="flex: 1; font-size: 0.82rem;">
@@ -1064,18 +1105,18 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i data-lucide="sun-medium"></i>
-                  <span>Circadian Lighting & Sunset</span>
+                  <span>Daylight & Evening Wind-Down</span>
                 </h3>
               </div>
               <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1rem;">
-                Protect melatonin production with structured morning photons and evening wind-down.
+                Support healthy daily rhythms with morning sunlight and structured evening screen breaks.
               </p>
               <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem; color: var(--text-primary);">
                 <div style="padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
                   ☀️ <strong>Morning Daylight:</strong> 10-15 mins outdoor sunlight before 08:30 AM
                 </div>
                 <div style="padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
-                  🌙 <strong>Digital Sunset:</strong> Shift screens to warm amber / zero phone at 09:45 PM
+                  🌙 <strong>Digital Sunset:</strong> Shift screens to warm amber / low stimulation by 09:45 PM
                 </div>
               </div>
             </div>
@@ -1090,7 +1131,7 @@
         <div class="page-hero">
           <div>
             <h2>Focus Room & Deep Work Studio</h2>
-            <p>Task-linked planned vs actual duration, Picture-in-Picture floating timer, and procedural soundscapes.</p>
+            <p>Task-linked planned vs actual duration, Picture-in-Picture floating timer, and procedural focus soundscapes.</p>
           </div>
           <div style="display: flex; gap: 0.5rem;">
             <button id="btn-open-pip-timer" class="btn btn-primary" title="Launch Floating Picture-in-Picture Timer">
@@ -1167,24 +1208,24 @@
               <div class="card-header">
                 <h3 class="card-title">
                   <i data-lucide="music"></i>
-                  <span>Focus Sound & Soundscapes</span>
+                  <span>Focus Soundscapes</span>
                 </h3>
                 <span class="badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light);">Web Audio API</span>
               </div>
 
               <div class="soundscape-grid" style="margin-bottom: 1.2rem;">
                 <button class="sound-card" data-sound="alpha">
-                  <div class="sound-icon">🧠</div>
+                  <div class="sound-icon">🎧</div>
                   <div class="sound-info">
-                    <h4>Alpha Waves (10Hz)</h4>
-                    <p>Binaural focus synthesis</p>
+                    <h4>Alpha Focus (10Hz)</h4>
+                    <p>Calm steady focus ambience</p>
                   </div>
                 </button>
                 <button class="sound-card" data-sound="gamma">
                   <div class="sound-icon">⚡</div>
                   <div class="sound-info">
-                    <h4>Gamma Waves (40Hz)</h4>
-                    <p>High cognitive flow</p>
+                    <h4>Gamma Focus (40Hz)</h4>
+                    <p>Deep immersion tone</p>
                   </div>
                 </button>
                 <button class="sound-card" data-sound="rain">

@@ -1169,3 +1169,19 @@ window.toggleDemoCleanMode = function() {
   }
   if (window.lucide) lucide.createIcons();
 };
+
+window.triggerLiveRealityRecalibrationDemo = function() {
+  const box = document.getElementById('reality-before-after-demo');
+  if (box) {
+    box.style.display = box.style.display === 'none' || box.style.display === '' ? 'block' : 'none';
+  }
+
+  if (window.audioFlowOS) window.audioFlowOS.playChime();
+  if (window.flowosExperience?.triggerConfetti) window.flowosExperience.triggerConfetti();
+
+  if (window.RealityEventsEngine) {
+    window.RealityEventsEngine.triggerEvent('task-overrun');
+  }
+
+  showToast('⚡ Live Demonstration: Task overrun detected & evening schedule automatically rebalanced!');
+};
