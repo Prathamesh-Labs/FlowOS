@@ -291,28 +291,52 @@
   display: flex !important;
 }
 
-.header-dropdown-menu .dropdown-item {
+.header-dropdown-menu .dropdown-item,
+#btn-header-voice-mic,
+#btn-open-qr-sync,
+#toggle-accessibility-mode,
+#btn-open-generator,
+#btn-header-pwa-install {
   display: flex !important;
   align-items: center !important;
   gap: 0.75rem !important;
   padding: 0.65rem 0.95rem !important;
-  border-radius: var(--radius-sm) !important;
-  background: rgba(255, 255, 255, 0.04) !important;
-  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  border-radius: var(--radius-md) !important;
+  background: rgba(22, 28, 50, 0.92) !important;
+  border: 1px solid rgba(255, 255, 255, 0.08) !important;
   color: var(--text-primary) !important;
   font-size: 0.85rem !important;
   font-weight: 500 !important;
   text-align: left !important;
   cursor: pointer !important;
   width: 100% !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
   transition: all var(--transition-fast) !important;
 }
 
-.header-dropdown-menu .dropdown-item:hover {
-  background: rgba(99, 102, 241, 0.25) !important;
+.header-dropdown-menu .dropdown-item:hover,
+#btn-header-voice-mic:hover,
+#btn-open-qr-sync:hover,
+#toggle-accessibility-mode:hover,
+#btn-open-generator:hover,
+#btn-header-pwa-install:hover {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.28), rgba(168, 85, 247, 0.18)) !important;
   border-color: var(--accent-study-light) !important;
-  color: #fff !important;
-  transform: translateX(2px);
+  color: #ffffff !important;
+  transform: translateX(3px) !important;
+  box-shadow: 0 4px 14px rgba(99, 102, 241, 0.3) !important;
+}
+
+.header-dropdown-menu .dropdown-item i,
+.header-dropdown-menu .dropdown-item svg,
+#btn-header-voice-mic i,
+#btn-open-qr-sync i,
+#toggle-accessibility-mode i,
+#btn-open-generator i {
+  color: var(--accent-study-light) !important;
+  width: 16px !important;
+  height: 16px !important;
+  flex-shrink: 0 !important;
 }
 
 /* Tab Panels */
