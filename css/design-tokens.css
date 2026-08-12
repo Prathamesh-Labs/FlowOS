@@ -4,6 +4,8 @@
    ========================================================================== */
 
 :root {
+  color-scheme: dark;
+
   /* Color Palette - Dark Futuristic Base */
   --bg-primary: #0a0d14;
   --bg-secondary: #111625;
@@ -156,4 +158,28 @@ body {
   left: 45%;
   background: radial-gradient(circle, var(--accent-screen) 0%, transparent 70%);
   opacity: 0.2;
+}
+
+/* Custom Selection & Scrollbar Styling */
+::selection {
+  background: rgba(99, 102, 241, 0.45);
+  color: #ffffff;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(10, 13, 20, 0.6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(99, 102, 241, 0.5);
 }

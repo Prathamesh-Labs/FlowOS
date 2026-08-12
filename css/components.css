@@ -109,12 +109,95 @@ input[type="range"]::-webkit-slider-thumb:hover {
   transform: scale(1.2);
 }
 
-/* Default Button Reset */
-button {
-  background: transparent;
+/* Default Browser Button & Control Theme Matching */
+button,
+input[type="button"],
+input[type="submit"],
+input[type="reset"] {
+  background: rgba(255, 255, 255, 0.06);
   color: var(--text-primary);
-  border: 1px solid transparent;
+  border: 1px solid var(--border-subtle);
   font-family: inherit;
+  font-size: 0.88rem;
+  font-weight: 600;
+  border-radius: var(--radius-md);
+  padding: 0.55rem 1.1rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover,
+input[type="reset"]:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: var(--border-highlight);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active,
+input[type="reset"]:active {
+  transform: scale(0.98);
+}
+
+/* File Input Picker Buttons */
+input[type="file"] {
+  padding: 0.45rem 0.6rem;
+  font-size: 0.82rem;
+}
+
+input[type="file"]::file-selector-button,
+input[type="file"]::-webkit-file-upload-button {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.25), rgba(168, 85, 247, 0.2));
+  border: 1px solid var(--border-glow);
+  color: var(--accent-study-light);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 0.9rem;
+  font-family: inherit;
+  font-weight: 600;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  margin-right: 0.8rem;
+}
+
+input[type="file"]::file-selector-button:hover,
+input[type="file"]::-webkit-file-upload-button:hover {
+  background: var(--accent-study);
+  color: #ffffff;
+  box-shadow: 0 0 14px rgba(99, 102, 241, 0.45);
+}
+
+/* Date / Time calendar picker icon */
+input[type="date"]::-webkit-calendar-picker-indicator,
+input[type="time"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.9) sepia(0.2) hue-rotate(180deg);
+  cursor: pointer;
+  opacity: 0.85;
+  transition: opacity var(--transition-fast);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator:hover,
+input[type="time"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+/* Checkbox & Radio inputs */
+input[type="checkbox"],
+input[type="radio"] {
+  accent-color: var(--accent-study);
+  cursor: pointer;
 }
 
 /* ==========================================================================
