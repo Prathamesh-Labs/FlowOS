@@ -272,45 +272,47 @@
   position: absolute;
   top: 100%;
   right: 0;
-  margin-top: 0.5rem;
-  background: var(--bg-surface-elevated, #131728);
-  border: 1px solid var(--border-highlight);
+  margin-top: 0.6rem;
+  background: rgba(15, 20, 36, 0.98) !important;
+  border: 1px solid var(--border-highlight) !important;
   border-radius: var(--radius-lg);
-  padding: 0.5rem;
-  min-width: 220px;
-  box-shadow: var(--shadow-lg);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  padding: 0.6rem;
+  min-width: 230px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8), 0 0 20px rgba(99, 102, 241, 0.2);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
   display: none;
   flex-direction: column;
   gap: 0.35rem;
-  z-index: 100;
+  z-index: 200;
 }
 
 .header-dropdown-menu.open {
-  display: flex;
+  display: flex !important;
 }
 
 .header-dropdown-menu .dropdown-item {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  padding: 0.6rem 0.85rem;
-  border-radius: var(--radius-sm);
-  background: transparent;
-  border: none;
-  color: var(--text-secondary);
-  font-size: 0.85rem;
-  font-weight: 500;
-  text-align: left;
-  cursor: pointer;
-  width: 100%;
-  transition: all var(--transition-fast);
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  padding: 0.65rem 0.95rem !important;
+  border-radius: var(--radius-sm) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  border: 1px solid rgba(255, 255, 255, 0.06) !important;
+  color: var(--text-primary) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  text-align: left !important;
+  cursor: pointer !important;
+  width: 100% !important;
+  transition: all var(--transition-fast) !important;
 }
 
 .header-dropdown-menu .dropdown-item:hover {
-  background: rgba(255, 255, 255, 0.08);
-  color: #fff;
+  background: rgba(99, 102, 241, 0.25) !important;
+  border-color: var(--accent-study-light) !important;
+  color: #fff !important;
+  transform: translateX(2px);
 }
 
 /* Tab Panels */

@@ -1185,3 +1185,11 @@ window.triggerLiveRealityRecalibrationDemo = function() {
 
   showToast('⚡ Live Demonstration: Task overrun detected & evening schedule automatically rebalanced!');
 };
+
+document.addEventListener('click', (e) => {
+  const menu = document.getElementById('header-tools-menu');
+  const btn = document.getElementById('btn-header-more-tools');
+  if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
+    menu.classList.remove('open');
+  }
+});
