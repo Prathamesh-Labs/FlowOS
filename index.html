@@ -1498,6 +1498,63 @@
     </div>
   </div>
 
+  <!-- Floating AI Copilot HUD Widget & Expandable Drawer -->
+  <div id="copilot-hud-pill" class="copilot-floating-pill" title="Toggle Zenith AI Copilot">
+    <span class="copilot-status-dot"></span>
+    <span style="font-size: 0.82rem; font-weight: 700; color: #fff;">Zenith Copilot</span>
+    <span id="copilot-hud-status" style="font-size: 0.72rem; color: var(--text-muted);">Observing Flow</span>
+    <span id="copilot-hud-badge" class="badge" style="background: #fbbf24; color: #000; font-size: 0.65rem; font-weight: 800; padding: 0.1rem 0.35rem; display: none;">1</span>
+  </div>
+
+  <!-- Expandable Copilot Glass Drawer -->
+  <div id="copilot-drawer" class="copilot-drawer-panel">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.8rem;">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--grad-zenith); display: flex; align-items: center; justify-content: center; color: #fff;">
+          <i data-lucide="bot" style="width: 16px; height: 16px;"></i>
+        </div>
+        <div>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #fff;">Autonomous AI Copilot</h4>
+          <span style="font-size: 0.7rem; color: var(--accent-study-light);">Context-Aware Executive Assistant</span>
+        </div>
+      </div>
+      <button id="btn-close-copilot-drawer" class="btn-icon" title="Close Drawer">
+        <i data-lucide="x"></i>
+      </button>
+    </div>
+
+    <!-- Active Intervention or Quiet Observational Status -->
+    <div id="copilot-intervention-body">
+      <!-- Dynamically populated -->
+    </div>
+
+    <!-- Copilot Diagnostic Simulator & Stats Bar -->
+    <div style="margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.9rem;">
+      <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.75rem;">
+        <span id="copilot-stat-interventions">11 Decisions Applied</span>
+        <span id="copilot-stat-saved" style="color: #34d399;">4.5h Bedtime Protected</span>
+      </div>
+
+      <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">
+        Test Diagnostic Triggers:
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;">
+        <button id="btn-sim-copilot-overrun" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
+          ⏱️ Overrun (+30m)
+        </button>
+        <button id="btn-sim-copilot-impossible" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
+          ⚠️ Impossible Day
+        </button>
+        <button id="btn-sim-copilot-inactivity" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
+          💤 Idle Block
+        </button>
+        <button id="btn-sim-copilot-failure" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
+          🔄 Task Friction
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Application Logic Scripts -->
   <script src="js/state.js"></script>
   <script src="js/ai-engine.js"></script>
@@ -1523,6 +1580,7 @@
   <script src="js/qr-sync.js"></script>
   <script src="js/digital-twin.js"></script>
   <script src="js/memory-replay.js"></script>
+  <script src="js/copilot-engine.js"></script>
   <script src="js/calendar-export.js"></script>
   <script src="js/experience-engine.js"></script>
   <script src="js/app.js"></script>

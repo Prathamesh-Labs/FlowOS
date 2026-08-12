@@ -627,6 +627,32 @@ const INITIAL_STATE = {
         ]
       }
     }
+  },
+
+  // 15. AI COPILOT AUTONOMOUS MONITORING STATE
+  copilotState: {
+    enabled: true,
+    silenceUntil: null,
+    cooldownMinutes: 15,
+    lastInterventionTime: null,
+    activeIntervention: {
+      id: 'nudge_sample_overrun',
+      type: 'overrun',
+      severity: 'moderate',
+      title: 'Schedule Divergence Detected',
+      message: 'Your current coding block has exceeded its planned 60m budget by +25m. Bedtime is at risk of sliding past 10:30 PM if not rebalanced.',
+      question: 'Would you like to compress tonight\'s optional 45m evening review to keep your workout and sleep on track?',
+      options: [
+        { id: 'compress_review', label: '⚡ Yes, Compress Review (-30m)', action: 'compress_evening', style: 'btn-emerald' },
+        { id: 'add_15m', label: '⏳ Extend Timer by 15m', action: 'extend_timer', style: 'btn-secondary' },
+        { id: 'dismiss', label: 'Dismiss for 15m', action: 'dismiss', style: 'btn-secondary' }
+      ]
+    },
+    stats: {
+      interventionsTriggered: 14,
+      actionsAccepted: 11,
+      hoursProtected: 4.5
+    }
   }
 };
 

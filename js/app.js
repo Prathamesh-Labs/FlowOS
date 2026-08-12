@@ -22,6 +22,7 @@ function initMasterApp() {
   window.qrSyncEngine?.init();
   window.digitalTwinEngine?.init();
   window.memoryReplayEngine?.init();
+  window.copilotEngine?.init();
 
   // 2. Live Clock & Browser Awareness
   startLiveClock();
@@ -1129,6 +1130,7 @@ function renderAllState(state) {
   renderDietPlans(state.profile.dietGoal || 'clean-energy');
   window.digitalTwinEngine?.render();
   window.memoryReplayEngine?.render();
+  window.copilotEngine?.render();
 
   if (window.lucide) lucide.createIcons();
 }
