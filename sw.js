@@ -1,12 +1,14 @@
 /**
- * ZENITH AI - SERVICE WORKER (OFFLINE CACHING & FAST PWA LOADS)
+ * FLOWOS - SERVICE WORKER (OFFLINE CACHING & FAST PWA LOADS)
  */
 
-const CACHE_NAME = 'zenith-ai-v4.2';
+const CACHE_NAME = 'flowos-v1.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
+  './assets/flowos-logo.png',
+  './assets/favicon.png',
   './css/design-tokens.css',
   './css/layout.css',
   './css/components.css',
@@ -73,7 +75,6 @@ self.addEventListener('fetch', (e) => {
       return fetch(e.request).then((networkResponse) => {
         return networkResponse;
       }).catch(() => {
-        // Offline fallback
         return caches.match('./index.html');
       });
     })
