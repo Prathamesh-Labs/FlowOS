@@ -16,7 +16,7 @@ const ASSETS_TO_CACHE = [
   './js/state.js',
   './js/ai-engine.js',
   './js/reality-events.js',
-  './js/ask-zenith.js',
+  './js/ask-flowos.js',
   './js/scenario-simulator.js',
   './js/personal-learning.js',
   './js/goal-intelligence.js',

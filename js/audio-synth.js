@@ -1,10 +1,10 @@
 /**
- * ZENITH AI - PROCEDURAL WEB AUDIO SYNTHESIZER (V2.0)
- * Synthesizes 8 procedural soundscapes and crystal-clear UI sound effects
- * using the native browser Web Audio API with zero external audio assets.
+ * FLOWOS - PROCEDURAL WEB AUDIO SYNTHESIZER (V3.0)
+ * Synthesizes procedural focus soundscapes (Alpha, Gamma, Rain, Ocean Waves, Ambient)
+ * and crystal-clear UI audio effects using the native browser Web Audio API.
  */
 
-class AudioZenithSynth {
+class FlowOSAudioSynth {
   constructor() {
     this.ctx = null;
     this.currentMode = null;
@@ -566,4 +566,7 @@ class AudioZenithSynth {
   }
 }
 
-window.audioZenith = new AudioZenithSynth();
+window.FlowOSAudioSynth = FlowOSAudioSynth;
+window.AudioZenithSynth = FlowOSAudioSynth;
+window.audioFlowOS = new FlowOSAudioSynth();
+window.audioZenith = window.audioFlowOS; // Backward compatibility alias

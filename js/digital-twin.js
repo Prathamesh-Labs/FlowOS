@@ -1,10 +1,11 @@
 /**
- * ZENITH AI - BEHAVIORAL DIGITAL TWIN ENGINE (V1.0)
- * Models user cognitive habits, stamina curves, and execution biases over time.
- * Grounded in empirical observations with zero fabrication and full transparency.
+ * FLOWOS - PERSONAL FLOW PROFILE ENGINE (V2.0)
+ * Learns empirical focus durations, task estimation patterns, and schedule preferences
+ * from actual application data without psychological diagnosis or medical claims.
+ * Tags all signals clearly: OBSERVED, INFERRED, or USER-PROVIDED.
  */
 
-class ZenithDigitalTwinEngine {
+class PersonalFlowProfileEngine {
   constructor() {
     this.dimensionIcons = {
       workHours: 'clock',
@@ -34,7 +35,7 @@ class ZenithDigitalTwinEngine {
     const resetTwinBtn = document.getElementById('btn-twin-reset');
     if (resetTwinBtn) {
       resetTwinBtn.addEventListener('click', () => {
-        if (confirm('Reset Digital Twin behavioral memory to initial baseline?')) {
+        if (confirm('Reset Personal Flow Profile observations to baseline?')) {
           this.resetToBaseline();
         }
       });
@@ -42,12 +43,12 @@ class ZenithDigitalTwinEngine {
   }
 
   /**
-   * Ingest an observation into a specific behavioral dimension
+   * Ingest an empirical observation into a specific behavioral dimension
    */
   recordObservation(dimensionKey, observationDetails) {
     window.appState.update(s => {
-      const twin = s.digitalTwin || {};
-      const dimensions = twin.dimensions || {};
+      const profile = s.personalFlowProfile || s.digitalTwin || {};
+      const dimensions = profile.dimensions || {};
       const dim = dimensions[dimensionKey];
 
       if (!dim) return s;
@@ -55,12 +56,13 @@ class ZenithDigitalTwinEngine {
       const nextSample = (dim.sampleSize || 0) + 1;
       const nextConfidence = Math.min(95, Math.round(15 + Math.log2(nextSample + 1) * 16));
       
-      let nextTag = 'Observing Baseline';
-      if (nextConfidence >= 80) nextTag = 'High Confidence';
-      else if (nextConfidence >= 65) nextTag = 'Calibrated';
-      else if (nextConfidence >= 45) nextTag = 'Emerging Pattern';
+      let nextTag = 'OBSERVED';
+      let confidenceLabel = 'Calibrated';
+      if (nextConfidence >= 80) confidenceLabel = 'High Confidence';
+      else if (nextConfidence >= 65) confidenceLabel = 'Calibrated';
+      else confidenceLabel = 'Emerging Pattern';
 
-      const nextTotalObs = (twin.totalObservations || 0) + 1;
+      const nextTotalObs = (profile.totalObservations || 0) + 1;
       const avgConfidence = Math.round(
         Object.values({ ...dimensions, [dimensionKey]: { ...dim, confidence: nextConfidence } })
           .reduce((acc, d) => acc + (d.confidence || 0), 0) / 8
@@ -68,13 +70,13 @@ class ZenithDigitalTwinEngine {
 
       let maturityLevel = 1;
       let maturityTitle = 'Observing Baseline';
-      if (nextTotalObs >= 80) { maturityLevel = 5; maturityTitle = 'Symbiotic Flow Predictor'; }
-      else if (nextTotalObs >= 50) { maturityLevel = 4; maturityTitle = 'Adaptive Behavioral Model'; }
-      else if (nextTotalObs >= 30) { maturityLevel = 3; maturityTitle = 'Calibrated Behavioral Twin'; }
-      else if (nextTotalObs >= 12) { maturityLevel = 2; maturityTitle = 'Emerging Pattern Twin'; }
+      if (nextTotalObs >= 80) { maturityLevel = 5; maturityTitle = 'Calibrated Flow Profile'; }
+      else if (nextTotalObs >= 50) { maturityLevel = 4; maturityTitle = 'Adaptive Planning Profile'; }
+      else if (nextTotalObs >= 30) { maturityLevel = 3; maturityTitle = 'Calibrated Flow Profile'; }
+      else if (nextTotalObs >= 12) { maturityLevel = 2; maturityTitle = 'Emerging Flow Profile'; }
 
-      const updatedTwin = {
-        ...twin,
+      const updatedProfile = {
+        ...profile,
         totalObservations: nextTotalObs,
         calibrationPercent: avgConfidence,
         maturityLevel,
@@ -86,15 +88,17 @@ class ZenithDigitalTwinEngine {
             sampleSize: nextSample,
             confidence: nextConfidence,
             tag: nextTag,
+            confidenceLabel,
             observation: observationDetails || dim.observation,
-            basis: `Historical Observation (${nextSample} data points)`
+            basis: `Empirical Planning Data (${nextSample} logs)`
           }
         }
       };
 
       return {
         ...s,
-        digitalTwin: updatedTwin
+        personalFlowProfile: updatedProfile,
+        digitalTwin: updatedProfile
       };
     });
 
@@ -106,70 +110,81 @@ class ZenithDigitalTwinEngine {
     const randomKey = keys[Math.floor(Math.random() * keys.length)];
     
     this.recordObservation(randomKey);
-    if (window.audioZenith) window.audioZenith.playChime();
-    window.showToast?.(`🧠 Digital Twin ingested new observation for: ${this.getDimensionTitle(randomKey)}`);
+    if (window.audioFlowOS) window.audioFlowOS.playChime();
+    window.showToast?.(`📊 Personal Flow Profile recorded pattern for: ${this.getDimensionTitle(randomKey)}`);
   }
 
   resetToBaseline() {
-    window.appState.update(s => ({
-      ...s,
-      digitalTwin: {
+    window.appState.update(s => {
+      const current = s.personalFlowProfile || s.digitalTwin || {};
+      const resetDims = Object.keys(current.dimensions || {}).reduce((acc, k) => {
+        acc[k] = {
+          ...current.dimensions[k],
+          sampleSize: 1,
+          confidence: 20,
+          tag: 'OBSERVED',
+          confidenceLabel: 'Baseline',
+          basis: 'Baseline (1 session)'
+        };
+        return acc;
+      }, {});
+
+      const freshProfile = {
         maturityLevel: 1,
         maturityTitle: 'Observing Baseline',
         totalObservations: 4,
-        calibrationPercent: 22,
+        calibrationPercent: 20,
         archetype: 'Calibrating...',
-        dimensions: Object.keys(s.digitalTwin.dimensions).reduce((acc, k) => {
-          acc[k] = {
-            ...s.digitalTwin.dimensions[k],
-            sampleSize: 1,
-            confidence: 18,
-            tag: 'Observing Baseline',
-            basis: 'Baseline (1 observation)'
-          };
-          return acc;
-        }, {})
-      }
-    }));
+        dimensions: resetDims
+      };
+
+      return {
+        ...s,
+        personalFlowProfile: freshProfile,
+        digitalTwin: freshProfile
+      };
+    });
     this.render();
-    window.showToast?.('Digital Twin memory reset to baseline.');
+    window.showToast?.('Personal Flow Profile reset to baseline.');
   }
 
   getDimensionTitle(key) {
     const titles = {
-      workHours: 'Preferred Work Hours',
-      focusPatterns: 'Focus Patterns',
-      planningAccuracy: 'Planning Accuracy',
+      workHours: 'Preferred Working Hours',
+      focusPatterns: 'Focus Block Durations',
+      planningAccuracy: 'Task Estimation Accuracy',
       habitConsistency: 'Habit Consistency',
-      recoveryBehavior: 'Recovery Behavior',
+      recoveryBehavior: 'Recovery Adherence',
       breakDuration: 'Preferred Break Duration',
-      productivityRhythms: 'Productivity Rhythms',
-      commonDistractions: 'Common Distractions'
+      productivityRhythms: 'Daily Execution Rhythms',
+      commonDistractions: 'Friction & Overrun Causes'
     };
     return titles[key] || key;
   }
 
   /**
-   * Generates a standardized HTML badge for recommendation basis
+   * Generates a standardized HTML badge for recommendation basis: OBSERVED, INFERRED, USER-PROVIDED
    */
   static renderBasisBadge(type, details = '') {
     switch (type) {
       case 'user-preference':
-        return `<span class="basis-badge basis-preference" title="Explicitly configured in your settings"><i data-lucide="user-check"></i> User Preference ${details ? `(${details})` : ''}</span>`;
+      case 'user-provided':
+        return `<span class="basis-badge basis-preference" title="Explicitly configured by user"><i data-lucide="user-check"></i> USER-PROVIDED ${details ? `(${details})` : ''}</span>`;
       case 'historical-observation':
-        return `<span class="basis-badge basis-observation" title="Learned from your past focus & habit history"><i data-lucide="brain"></i> Historical Observation ${details ? `(${details})` : ''}</span>`;
+      case 'observed':
+        return `<span class="basis-badge basis-observation" title="Observed from actual timer & task completion data"><i data-lucide="eye"></i> OBSERVED ${details ? `(${details})` : ''}</span>`;
       case 'current-schedule':
-        return `<span class="basis-badge basis-schedule" title="Calculated from today's timeline and flexible time"><i data-lucide="calendar"></i> Current Schedule ${details ? `(${details})` : ''}</span>`;
+      case 'inferred':
       case 'ai-reasoning':
       default:
-        return `<span class="basis-badge basis-reasoning" title="Inferred from circadian science & productivity heuristics"><i data-lucide="sparkles"></i> AI Reasoning ${details ? `(${details})` : ''}</span>`;
+        return `<span class="basis-badge basis-reasoning" title="Inferred planning recommendation based on schedule constraints"><i data-lucide="sparkles"></i> INFERRED ${details ? `(${details})` : ''}</span>`;
     }
   }
 
   render() {
     const state = window.appState.getState();
-    const twin = state.digitalTwin;
-    if (!twin || !twin.dimensions) return;
+    const profile = state.personalFlowProfile || state.digitalTwin;
+    if (!profile || !profile.dimensions) return;
 
     // 1. Header & Maturity Index
     const levelEl = document.getElementById('twin-maturity-level');
@@ -179,22 +194,20 @@ class ZenithDigitalTwinEngine {
     const calibBarEl = document.getElementById('twin-calibration-bar');
     const archEl = document.getElementById('twin-archetype-display');
 
-    if (levelEl) levelEl.textContent = `Maturity Lvl ${twin.maturityLevel}`;
-    if (titleEl) titleEl.textContent = twin.maturityTitle;
-    if (obsEl) obsEl.textContent = `${twin.totalObservations} Observations`;
-    if (calibEl) calibEl.textContent = `${twin.calibrationPercent}% Calibrated`;
-    if (calibBarEl) calibBarEl.style.width = `${twin.calibrationPercent}%`;
-    if (archEl) archEl.textContent = twin.archetype;
+    if (levelEl) levelEl.textContent = `Profile Lvl ${profile.maturityLevel}`;
+    if (titleEl) titleEl.textContent = profile.maturityTitle;
+    if (obsEl) obsEl.textContent = `${profile.totalObservations} Observations`;
+    if (calibEl) calibEl.textContent = `${profile.calibrationPercent}% Calibrated`;
+    if (calibBarEl) calibBarEl.style.width = `${profile.calibrationPercent}%`;
+    if (archEl) archEl.textContent = profile.archetype;
 
-    // 2. Render 8 Behavioral Dimension Cards
+    // 2. Render Behavioral Dimension Cards with OBSERVED / INFERRED tags
     const matrixContainer = document.getElementById('twin-dimensions-matrix');
     if (matrixContainer) {
-      matrixContainer.innerHTML = Object.values(twin.dimensions).map(dim => {
+      matrixContainer.innerHTML = Object.values(profile.dimensions).map(dim => {
         const icon = this.dimensionIcons[dim.id] || 'activity';
-        let badgeClass = 'tag-baseline';
-        if (dim.confidence >= 80) badgeClass = 'tag-high';
-        else if (dim.confidence >= 65) badgeClass = 'tag-calibrated';
-        else if (dim.confidence >= 45) badgeClass = 'tag-emerging';
+        let badgeStyle = 'background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3);';
+        const tagText = dim.tag || (dim.confidence >= 70 ? 'OBSERVED' : 'INFERRED');
 
         return `
           <div class="twin-dim-card">
@@ -205,8 +218,8 @@ class ZenithDigitalTwinEngine {
                 </div>
                 <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">${dim.title}</h4>
               </div>
-              <span class="twin-confidence-pill ${badgeClass}">
-                ${dim.tag} (${dim.confidence}%)
+              <span class="twin-confidence-pill" style="${badgeStyle}">
+                ${tagText} • ${dim.confidence}%
               </span>
             </div>
 
@@ -220,7 +233,7 @@ class ZenithDigitalTwinEngine {
             </p>
 
             <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.73rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.5rem;">
-              <span>Sample: <strong>${dim.sampleSize} events</strong></span>
+              <span>Sample: <strong>${dim.sampleSize} sessions</strong></span>
               <span>${dim.basis}</span>
             </div>
           </div>
@@ -234,38 +247,38 @@ class ZenithDigitalTwinEngine {
       inspectorContainer.innerHTML = `
         <div class="twin-inspector-item">
           <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <strong style="font-size: 0.88rem; color: #fff;">Focus Block Length: 50 Mins</strong>
-            ${ZenithDigitalTwinEngine.renderBasisBadge('historical-observation', 'Dim #2: Stamina Threshold')}
+            <strong style="font-size: 0.88rem; color: #fff;">Optimal Focus Block: 50 Mins</strong>
+            ${PersonalFlowProfileEngine.renderBasisBadge('observed', 'Focus Stamina Pattern')}
           </div>
           <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">
-            Twin observed attention density drop-offs beyond 55 minutes, recommending 48-50m as your peak flow window.
+            Observed that focus sustainability remains highest in 45-50m sessions with 10m recovery.
           </p>
         </div>
 
         <div class="twin-inspector-item">
           <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <strong style="font-size: 0.88rem; color: #fff;">Morning Sunlight & 500ml Water Anchor</strong>
-            ${ZenithDigitalTwinEngine.renderBasisBadge('ai-reasoning', 'Circadian Photobiology')}
+            ${PersonalFlowProfileEngine.renderBasisBadge('inferred', 'Routine Best Practice')}
           </div>
           <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">
-            Derived from circadian zeitgeber science: morning optic nerve photon absorption sets cortisol and melatonin timers.
+            Inferred planning recommendation: early daylight and hydration anchor focus stamina for the day.
           </p>
         </div>
 
         <div class="twin-inspector-item">
           <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <strong style="font-size: 0.88rem; color: #fff;">Bedtime Target: 11:00 PM</strong>
-            ${ZenithDigitalTwinEngine.renderBasisBadge('user-preference', 'Profile Setting')}
+            <strong style="font-size: 0.88rem; color: #fff;">Bedtime Boundary: 11:00 PM</strong>
+            ${PersonalFlowProfileEngine.renderBasisBadge('user-provided', 'Profile Setting')}
           </div>
           <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">
-            Explicit boundary configured by you in profile preferences. Schedule rebalancing protects this boundary.
+            Explicitly set in user preferences. FlowOS adaptation logic protects this boundary during schedule overruns.
           </p>
         </div>
 
         <div class="twin-inspector-item">
           <div style="display: flex; justify-content: space-between; align-items: flex-start;">
             <strong style="font-size: 0.88rem; color: #fff;">Compress Evening Review on Overrun</strong>
-            ${ZenithDigitalTwinEngine.renderBasisBadge('current-schedule', 'Reality Divergence Option 1')}
+            ${PersonalFlowProfileEngine.renderBasisBadge('inferred', 'Reality Adaptation')}
           </div>
           <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.25rem;">
             Calculated from today's available flexible buffer (160m) to preserve your 6:00 PM workout.
@@ -278,4 +291,7 @@ class ZenithDigitalTwinEngine {
   }
 }
 
-window.digitalTwinEngine = new ZenithDigitalTwinEngine();
+window.PersonalFlowProfileEngine = PersonalFlowProfileEngine;
+window.ZenithDigitalTwinEngine = PersonalFlowProfileEngine; // backward compatibility
+window.personalFlowProfileEngine = new PersonalFlowProfileEngine();
+window.digitalTwinEngine = window.personalFlowProfileEngine; // backward compatibility

@@ -1,9 +1,9 @@
 /**
- * ZENITH AI - 365-DAY GITHUB-STYLE CONSISTENCY HEATMAP
- * Renders an interactive 52-week activity and vitality matrix with tooltips.
+ * FLOWOS - 365-DAY CONSISTENCY HEATMAP & DAY REPLAY LINK
+ * Renders an interactive 52-week activity matrix with tooltips and 1-click Day Replay inspection.
  */
 
-class ZenithHeatmapEngine {
+class FlowOSHeatmapEngine {
   constructor() {
     this.containerId = 'year-heatmap-container';
     this.statsContainerId = 'heatmap-stats-summary';
@@ -48,7 +48,7 @@ class ZenithHeatmapEngine {
       if (i === 0) {
         const state = window.appState?.getState();
         if (state) {
-          score = state.vitalityScore || 82;
+          score = state.dayBalanceScore || state.vitalityScore || 82;
           focusMins = state.studyMinutesCompleted || 150;
           habitsCompleted = state.habits?.filter(h => h.completedToday).length || 3;
           water = state.waterGlasses || 4;
@@ -120,18 +120,20 @@ class ZenithHeatmapEngine {
              data-score="${day.score}"
              data-focus="${day.focusMins}"
              data-habits="${day.habitsCompleted}"
-             data-water="${day.water}">
+             data-water="${day.water}"
+             style="cursor: pointer;"
+             title="Click to view Day Replay">
         </div>
       `;
     });
     html += '</div></div>';
 
     container.innerHTML = html;
-    this.bindCellHover();
+    this.bindCellInteractions();
     this.renderStatsSummary();
   }
 
-  bindCellHover() {
+  bindCellInteractions() {
     const cells = document.querySelectorAll('.heatmap-cell');
     cells.forEach(cell => {
       cell.addEventListener('mouseenter', (e) => {
@@ -140,20 +142,44 @@ class ZenithHeatmapEngine {
         
         this.tooltipEl.innerHTML = `
           <div style="font-weight: 700; color: #fff; margin-bottom: 0.2rem;">${formattedDate}</div>
-          <div style="color: var(--accent-diet-light); font-weight: 600;">⚡ Vitality Score: ${d.score}%</div>
+          <div style="color: var(--accent-diet-light); font-weight: 600;">Day Balance: ${d.score}%</div>
           <div style="color: var(--text-secondary); font-size: 0.76rem; margin-top: 0.2rem;">
             ⏱️ ${d.focus} mins focus • 🎯 ${d.habits} habits • 💧 ${d.water} glasses
+          </div>
+          <div style="color: var(--accent-study-light); font-size: 0.7rem; margin-top: 0.25rem;">
+            👉 Click to open Day Replay
           </div>
         `;
         this.tooltipEl.style.display = 'block';
 
         const rect = cell.getBoundingClientRect();
         this.tooltipEl.style.left = `${rect.left + window.scrollX - 70}px`;
-        this.tooltipEl.style.top = `${rect.top + window.scrollY - 75}px`;
+        this.tooltipEl.style.top = `${rect.top + window.scrollY - 85}px`;
       });
 
       cell.addEventListener('mouseleave', () => {
         if (this.tooltipEl) this.tooltipEl.style.display = 'none';
+      });
+
+      cell.addEventListener('click', () => {
+        const d = cell.dataset;
+        const isToday = d.date === new Date().toISOString().split('T')[0];
+        
+        // Switch to understand tab
+        const understandTab = document.querySelector('[data-tab="understand"]');
+        if (understandTab) understandTab.click();
+
+        // Switch day in memory replay
+        if (window.memoryReplayEngine) {
+          window.memoryReplayEngine.switchDay(isToday ? 'today' : 'yesterday');
+        }
+
+        const replaySection = document.getElementById('memory-replay-panel') || document.getElementById('tab-memory-replay');
+        if (replaySection) {
+          replaySection.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        window.showToast?.(`📅 Opened Day Replay for ${d.date}`);
       });
     });
   }
@@ -194,4 +220,6 @@ class ZenithHeatmapEngine {
   }
 }
 
-window.heatmapEngine = new ZenithHeatmapEngine();
+window.FlowOSHeatmapEngine = FlowOSHeatmapEngine;
+window.ZenithHeatmapEngine = FlowOSHeatmapEngine; // Backward compatibility
+window.heatmapEngine = new FlowOSHeatmapEngine();

@@ -1,5 +1,5 @@
 /**
- * ZENITH AI - PERSONAL REALITY LEARNING ENGINE
+ * FLOWOS - PERSONAL REALITY LEARNING ENGINE (V2.0)
  * Records category-level planned vs actual duration over time
  * and computes empirical estimation biases with strict data thresholds (no fabricated insights).
  */
@@ -32,8 +32,8 @@ class PersonalRealityLearningEngine {
               sessionCount: nextCount,
               variancePercentage: variance,
               insight: variance > 15
-                ? `You consistently take ~${variance}% longer on ${h.name} than estimated.`
-                : `Your estimation accuracy on ${h.name} is well-calibrated (within ±15%).`
+                ? `Observed pattern: ${h.name} sessions run ~${variance}% over initial estimates.`
+                : `Estimation accuracy on ${h.name} is well-calibrated (within ±15%).`
             };
           }
           return h;
@@ -49,7 +49,7 @@ class PersonalRealityLearningEngine {
           actualTotalMinutes: actualMinutes,
           sessionCount: 1,
           variancePercentage: variance,
-          insight: 'Collecting baseline data (requires 2+ sessions for high confidence).'
+          insight: 'Collecting baseline data (2+ sessions needed for pattern calibration).'
         };
 
         return { ...s, learnedReality: [...history, newRecord] };
@@ -70,7 +70,7 @@ class PersonalRealityLearningEngine {
     if (validated.length === 0) {
       return {
         hasData: false,
-        message: 'Personal Reality Engine is observing your focus sessions. Insights appear after 2 completed sessions.'
+        message: 'Not enough history yet. FlowOS will learn your estimation patterns after 2 completed focus sessions.'
       };
     }
 

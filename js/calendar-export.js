@@ -1,5 +1,5 @@
 /**
- * ZENITH AI - CALENDAR & DATA PORTABILITY (V2)
+ * FLOWOS - CALENDAR & DATA PORTABILITY (V2.0)
  * Full iCalendar (.ics) export/import, JSON backup/restore, and formatted Blueprint generator.
  */
 
@@ -17,26 +17,26 @@ class CalendarExporter {
     let icsContent = [
       'BEGIN:VCALENDAR',
       'VERSION:2.0',
-      'PRODID:-//Zenith AI//Day and Goal OS//EN',
+      'PRODID:-//FlowOS//Day and Goal OS//EN',
       'CALSCALE:GREGORIAN',
       'METHOD:PUBLISH'
     ];
 
-    schedule.forEach((item, idx) => {
-      const [sh, sm] = item.timeStart.split(':');
-      const [eh, em] = item.timeEnd.split(':');
+    (schedule || []).forEach((item, idx) => {
+      const [sh, sm] = (item.timeStart || '00:00').split(':');
+      const [eh, em] = (item.timeEnd || '00:00').split(':');
       const dtStart = `${datePrefix}T${sh}${sm}00`;
       const dtEnd = `${datePrefix}T${eh}${em}00`;
 
       icsContent.push(
         'BEGIN:VEVENT',
-        `UID:zenith_${Date.now()}_${idx}@zenith.ai`,
+        `UID:flowos_${Date.now()}_${idx}@flowos.local`,
         `DTSTAMP:${datePrefix}T000000Z`,
         `DTSTART:${dtStart}`,
         `DTEND:${dtEnd}`,
-        `SUMMARY:[Zenith] ${item.title}`,
-        `DESCRIPTION:${item.desc.replace(/\n/g, '\\n')}`,
-        `CATEGORIES:${item.category.toUpperCase()}`,
+        `SUMMARY:[FlowOS] ${item.title || 'Schedule Block'}`,
+        `DESCRIPTION:${(item.desc || '').replace(/\n/g, '\\n')}`,
+        `CATEGORIES:${(item.category || 'GENERAL').toUpperCase()}`,
         'END:VEVENT'
       );
     });
@@ -47,7 +47,7 @@ class CalendarExporter {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Zenith_DayPlan_${datePrefix}.ics`;
+    link.download = `FlowOS_DayPlan_${datePrefix}.ics`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -63,7 +63,7 @@ class CalendarExporter {
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Zenith_AI_Backup_${new Date().toISOString().split('T')[0]}.json`;
+    link.download = `FlowOS_Backup_${new Date().toISOString().split('T')[0]}.json`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -78,7 +78,7 @@ class CalendarExporter {
     reader.onload = (e) => {
       try {
         const parsed = JSON.parse(e.target.result);
-        if (parsed && parsed.todaySchedule) {
+        if (parsed && (parsed.todaySchedule || parsed.tasks || parsed.habits)) {
           window.appState.update(() => parsed);
           if (onSuccess) onSuccess();
         } else {
@@ -95,19 +95,19 @@ class CalendarExporter {
    * Export Text Blueprint
    */
   static exportTextSummary(schedule) {
-    let text = `======================================================\nZENITH AI — COMPREHENSIVE DAILY BLUEPRINT\n======================================================\nGenerated: ${new Date().toLocaleString()}\n\n`;
-    schedule.forEach(item => {
+    let text = `======================================================\nFLOWOS — DAILY BLUEPRINT & EXECUTION PLAN\n======================================================\nGenerated: ${new Date().toLocaleString()}\n\n`;
+    (schedule || []).forEach(item => {
       const check = item.completed ? '[COMPLETED]' : '[PENDING]  ';
-      text += `${check} ${item.timeStart} - ${item.timeEnd} | [${item.category.toUpperCase()}]\n`;
+      text += `${check} ${item.timeStart} - ${item.timeEnd} | [${(item.category || 'GENERAL').toUpperCase()}]\n`;
       text += `           Title: ${item.title}\n`;
-      text += `           Details: ${item.desc}\n\n`;
+      text += `           Details: ${item.desc || ''}\n\n`;
     });
 
     const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.download = `Zenith_Daily_Blueprint.txt`;
+    link.download = `FlowOS_Daily_Blueprint.txt`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);

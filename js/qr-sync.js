@@ -1,9 +1,9 @@
 /**
- * ZENITH AI - ZERO-SERVER QR CODE & CROSS-DEVICE INSTANT SYNC
- * Generates an on-screen QR code and portable sync links without accounts or backend servers.
+ * FLOWOS - DEVICE PAIRING & DATA TRANSFER ENGINE (V2.0)
+ * Generates an on-screen pairing QR code and portable sync links without accounts or external databases.
  */
 
-class ZenithQrSyncEngine {
+class FlowOSQrSyncEngine {
   constructor() {
     this.modalEl = null;
   }
@@ -33,7 +33,7 @@ class ZenithQrSyncEngine {
         const linkInput = document.getElementById('qr-sync-url-input');
         if (linkInput) {
           navigator.clipboard.writeText(linkInput.value);
-          window.showToast?.('📋 Instant Sync link copied to clipboard!');
+          window.showToast?.('📋 Instant Device Transfer link copied to clipboard!');
         }
       });
     }
@@ -62,14 +62,14 @@ class ZenithQrSyncEngine {
   generateCompactPayload() {
     const s = window.appState.getState();
     const payload = {
-      v: 1,
+      v: 2,
       ts: Date.now(),
       profile: s.profile,
       waterGlasses: s.waterGlasses,
-      habits: s.habits.map(h => ({ id: h.id, title: h.title, streak: h.streak, completedToday: h.completedToday })),
-      goals: s.goals.map(g => ({ id: g.id, title: g.title, progress: g.progress })),
+      habits: (s.habits || []).map(h => ({ id: h.id, title: h.title, streak: h.streak, completedToday: h.completedToday })),
+      goals: (s.goals || []).map(g => ({ id: g.id, title: g.title, progress: g.progress })),
       vitalityXP: s.vitalityXP,
-      vitalityScore: s.vitalityScore
+      dayBalanceScore: s.dayBalanceScore || s.vitalityScore
     };
     return btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
   }
@@ -83,11 +83,10 @@ class ZenithQrSyncEngine {
 
     const qrContainer = document.getElementById('qr-canvas-container');
     if (qrContainer) {
-      // Use clean SVG QR Matrix generator
       qrContainer.innerHTML = `
         <div style="background: #fff; padding: 12px; border-radius: 12px; display: inline-block; box-shadow: 0 0 20px rgba(99, 102, 241, 0.4);">
           <img src="https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(syncUrl)}&color=090d16" 
-               alt="Zenith Sync QR" 
+               alt="FlowOS Device Sync QR" 
                style="display: block; width: 170px; height: 170px; border-radius: 6px;">
         </div>
       `;
@@ -104,16 +103,16 @@ class ZenithQrSyncEngine {
       const jsonStr = decodeURIComponent(escape(atob(b64)));
       const data = JSON.parse(jsonStr);
 
-      if (data && data.habits) {
+      if (data && (data.habits || data.profile)) {
         window.appState.update(s => ({
           ...s,
           profile: data.profile || s.profile,
           waterGlasses: data.waterGlasses || s.waterGlasses,
           vitalityXP: data.vitalityXP || s.vitalityXP,
-          vitalityScore: data.vitalityScore || s.vitalityScore
+          dayBalanceScore: data.dayBalanceScore || s.dayBalanceScore
         }));
 
-        if (window.audioZenith) window.audioZenith.playFanfare();
+        if (window.audioFlowOS) window.audioFlowOS.playFanfare();
         window.showToast?.('🎉 Device state successfully imported & synchronized!');
         this.closeSyncModal();
       }
@@ -136,4 +135,6 @@ class ZenithQrSyncEngine {
   }
 }
 
-window.qrSyncEngine = new ZenithQrSyncEngine();
+window.FlowOSQrSyncEngine = FlowOSQrSyncEngine;
+window.ZenithQrSyncEngine = FlowOSQrSyncEngine;
+window.qrSyncEngine = new FlowOSQrSyncEngine();

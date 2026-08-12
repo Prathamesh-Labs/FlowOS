@@ -1,10 +1,10 @@
 /**
- * ZENITH AI - CUSTOM MEDIA & MUSIC PLAYER
- * Supports local audio file upload (MP3/WAV/FLAC/AAC/OGG) with dual soundscape mixing,
- * and live Spotify & YouTube Focus Embeds.
+ * FLOWOS - CUSTOM MEDIA & SOUND CONTROLLER (V2.0)
+ * Supports local audio file playback with soundscape mixing,
+ * and optional Spotify / YouTube Focus Embeds.
  */
 
-class ZenithCustomMediaController {
+class FlowOSCustomMediaController {
   constructor() {
     this.audio = new Audio();
     this.currentFile = null;
@@ -13,7 +13,7 @@ class ZenithCustomMediaController {
     this.audio.loop = true;
     this.volume = 0.7;
     this.audio.volume = 0.7;
-    this.embedStorageKey = 'zenith_focus_embed_url';
+    this.embedStorageKey = 'flowos_focus_embed_url';
   }
 
   init() {
@@ -369,4 +369,6 @@ class ZenithCustomMediaController {
   }
 }
 
-window.customMediaController = new ZenithCustomMediaController();
+window.FlowOSCustomMediaController = FlowOSCustomMediaController;
+window.ZenithCustomMediaController = FlowOSCustomMediaController;
+window.customMediaController = new FlowOSCustomMediaController();

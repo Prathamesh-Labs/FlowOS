@@ -1,12 +1,12 @@
 /**
- * ZENITH AI - DESKTOP & BROWSER NOTIFICATION ENGINE
+ * FLOWOS - DESKTOP & BROWSER NOTIFICATION ENGINE (V2.0)
  * Handles native Web Notifications API, background alerts, hydration nudges,
  * and seamless audio-visual sync across all device states.
  */
 
-class ZenithNotificationEngine {
+class FlowOSNotificationEngine {
   constructor() {
-    this.storageKey = 'zenith_notif_prefs';
+    this.storageKey = 'flowos_notif_prefs';
     this.prefs = this.loadPrefs();
     this.timers = {
       water: null,
@@ -16,7 +16,7 @@ class ZenithNotificationEngine {
 
   loadPrefs() {
     try {
-      const saved = localStorage.getItem(this.storageKey);
+      const saved = localStorage.getItem(this.storageKey) || localStorage.getItem('zenith_notif_prefs');
       if (saved) return JSON.parse(saved);
     } catch (e) {}
 
@@ -58,8 +58,8 @@ class ZenithNotificationEngine {
       this.updateUI();
       if (permission === 'granted') {
         this.sendNotification('🌟 Notifications Activated!', {
-          body: 'Zenith AI will now notify you for timers, focus breaks, and health goals even when running in the background.',
-          tag: 'zenith-welcome'
+          body: 'FlowOS will notify you for timers, focus breaks, and routine anchors even when running in the background.',
+          tag: 'flowos-welcome'
         }, 'fanfare');
         this.initBackgroundIntervals();
       } else if (permission === 'denied') {
@@ -76,12 +76,12 @@ class ZenithNotificationEngine {
     if (!this.prefs.enabled) return false;
 
     // Trigger procedural audio sound
-    if (this.prefs.soundEnabled && window.audioZenith) {
-      if (soundType === 'gong') window.audioZenith.playGong();
-      else if (soundType === 'fanfare') window.audioZenith.playFanfare();
-      else if (soundType === 'water') window.audioZenith.playWaterDrop();
-      else if (soundType === 'chime') window.audioZenith.playChime();
-      else window.audioZenith.playAlert();
+    if (this.prefs.soundEnabled && window.audioFlowOS) {
+      if (soundType === 'gong') window.audioFlowOS.playGong();
+      else if (soundType === 'fanfare') window.audioFlowOS.playFanfare();
+      else if (soundType === 'water') window.audioFlowOS.playWaterDrop();
+      else if (soundType === 'chime') window.audioFlowOS.playChime();
+      else window.audioFlowOS.playAlert();
     }
 
     // In-page fallback toast
@@ -91,9 +91,9 @@ class ZenithNotificationEngine {
     if (this.isSupported() && Notification.permission === 'granted') {
       try {
         const notif = new Notification(title, {
-          icon: 'https://cdn-icons-png.flaticon.com/512/3208/3208726.png',
-          badge: 'https://cdn-icons-png.flaticon.com/512/3208/3208726.png',
-          silent: true, // We handle audio cleanly via Web Audio API
+          icon: './assets/flowos-logo.png',
+          badge: './assets/favicon.png',
+          silent: true,
           ...options
         });
 
@@ -114,13 +114,13 @@ class ZenithNotificationEngine {
 
     if (mode === 'focus') {
       this.sendNotification('🎯 Focus Block Complete!', {
-        body: 'Fantastic work! Step away, stretch, and let your brain integrate what you learned.',
-        tag: 'zenith-timer'
+        body: 'Great work! Step away, stretch, and let your brain integrate what you worked on.',
+        tag: 'flowos-timer'
       }, 'gong');
     } else {
       this.sendNotification('⚡ Break Finished!', {
         body: 'Refueled and ready? Dive back into your next flow session.',
-        tag: 'zenith-timer'
+        tag: 'flowos-timer'
       }, 'fanfare');
     }
   }
@@ -129,25 +129,25 @@ class ZenithNotificationEngine {
     if (!this.prefs.eyeBreaks) return;
     this.sendNotification('👀 20-20-20 Eye Strain Relief', {
       body: 'Look at something 20 feet away for 20 seconds to protect your vision and focus!',
-      tag: 'zenith-eye'
+      tag: 'flowos-eye'
     }, 'alert');
   }
 
   notifyPostureCheck() {
     if (!this.prefs.postureChecks) return;
     this.sendNotification('🧘 Posture Alignment Check', {
-      body: 'Roll your shoulders back, align your spine, and take a deep diaphragmatic breath.',
-      tag: 'zenith-posture'
+      body: 'Roll your shoulders back, align your spine, and take a deep breath.',
+      tag: 'flowos-posture'
     }, 'alert');
   }
 
   notifyHydration() {
     if (!this.prefs.waterReminders) return;
     const glasses = window.appState?.state?.waterGlasses || 0;
-    const goal = window.appState?.state?.waterGoal || 10;
+    const goal = window.appState?.state?.waterGoal || 8;
     this.sendNotification('💧 Hydration Check-In', {
-      body: `You've logged ${glasses}/${goal} glasses today. Drink a glass of water to keep mental stamina peak!`,
-      tag: 'zenith-water'
+      body: `You've logged ${glasses}/${goal} glasses today. Drink water to stay refreshed!`,
+      tag: 'flowos-water'
     }, 'water');
   }
 
@@ -156,15 +156,15 @@ class ZenithNotificationEngine {
     const habits = window.appState?.state?.habits || [];
     const pending = habits.filter(h => !h.completedToday).length;
     if (pending > 0) {
-      this.sendNotification('🔥 Daily Habit Streak at Risk!', {
-        body: `You have ${pending} habit${pending > 1 ? 's' : ''} left today. Don't break your momentum!`,
-        tag: 'zenith-habits'
+      this.sendNotification('🔥 Daily Habits Reminder', {
+        body: `You have ${pending} habit${pending > 1 ? 's' : ''} left today. Protect your consistency!`,
+        tag: 'flowos-habits'
       }, 'alert');
     }
   }
 
   initBackgroundIntervals() {
-    // 1. Water reminder interval (every X minutes)
+    // 1. Water reminder interval
     if (this.timers.water) clearInterval(this.timers.water);
     if (this.prefs.waterReminders && this.prefs.waterIntervalMinutes > 0) {
       const ms = this.prefs.waterIntervalMinutes * 60 * 1000;
@@ -173,7 +173,7 @@ class ZenithNotificationEngine {
       }, ms);
     }
 
-    // 2. Evening habit reminder (runs every 30 minutes to check if it's 8:00 PM+)
+    // 2. Evening habit reminder
     if (this.timers.habits) clearInterval(this.timers.habits);
     if (this.prefs.dailyHabitReminder) {
       let notifiedToday = false;
@@ -193,24 +193,21 @@ class ZenithNotificationEngine {
     this.updateUI();
     this.initBackgroundIntervals();
 
-    // Bind permissions button if exists
     const enableBtn = document.getElementById('btn-enable-notifications');
     if (enableBtn) {
       enableBtn.addEventListener('click', () => this.requestPermission());
     }
 
-    // Bind test notification button
     const testBtn = document.getElementById('btn-test-notification');
     if (testBtn) {
       testBtn.addEventListener('click', () => {
-        this.sendNotification('🧪 Zenith Notification Test', {
-          body: 'Audio and system desktop notifications are functioning seamlessly!',
-          tag: 'zenith-test'
+        this.sendNotification('🧪 FlowOS Notification Test', {
+          body: 'System desktop notifications and focus audio are functioning smoothly!',
+          tag: 'flowos-test'
         }, 'fanfare');
       });
     }
 
-    // Bind preference checkboxes
     this.bindPrefCheckbox('notif-pref-timer', 'timerComplete');
     this.bindPrefCheckbox('notif-pref-eye', 'eyeBreaks');
     this.bindPrefCheckbox('notif-pref-posture', 'postureChecks');
@@ -251,4 +248,6 @@ class ZenithNotificationEngine {
   }
 }
 
-window.notificationEngine = new ZenithNotificationEngine();
+window.FlowOSNotificationEngine = FlowOSNotificationEngine;
+window.ZenithNotificationEngine = FlowOSNotificationEngine;
+window.notificationEngine = new FlowOSNotificationEngine();

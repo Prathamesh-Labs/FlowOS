@@ -1,7 +1,7 @@
 /**
- * ZENITH AI - MASTER COMMAND CENTER CONTROLLER (V4)
+ * FLOWOS - MASTER OPERATING SYSTEM CONTROLLER (V4.0)
  * Coordinates the Unified Operational Loop:
- * GOAL -> PLAN -> EXECUTE -> REALITY -> UNDERSTAND -> SIMULATE -> ADAPT -> RECOVER -> LEARN
+ * GOAL -> PLAN -> EXECUTE -> OBSERVE REALITY -> DETECT DEVIATION -> REASON -> ADAPT -> LEARN
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -20,21 +20,22 @@ function initMasterApp() {
   window.readinessEngine?.init();
   window.questsEngine?.init();
   window.qrSyncEngine?.init();
-  window.digitalTwinEngine?.init();
+  window.personalFlowProfileEngine?.init();
   window.memoryReplayEngine?.init();
   window.copilotEngine?.init();
   window.onboardingEngine?.init();
+  window.flowosExperience?.init();
 
-  // 2. Live Clock & Browser Awareness
+  // 2. Live Clock & Activity Awareness
   startLiveClock();
   setupBrowserActivityAwareness();
 
-  // 3. Navigation
+  // 3. Navigation & Subnav Switchers
   setupNavigation();
 
   // 4. Setup Interactive Handlers
   setupCommandCenterInteractions();
-  setupAskZenithInteractions();
+  setupAskFlowOSInteractions();
   setupScenarioSimulatorInteractions();
   setupScheduleInteractions();
   setupGoalInteractions();
@@ -47,7 +48,7 @@ function initMasterApp() {
   setupGeneratorModal();
   setupThemeToggle();
 
-  // 5. Subscribe to State Store
+  // 5. Subscribe to Reactive State Store
   window.appState.subscribe(renderAllState);
 
   // Initial Full Render
@@ -70,7 +71,7 @@ function setupBrowserActivityAwareness() {
     if (tabBlurTime) {
       const awayMinutes = Math.floor((Date.now() - tabBlurTime) / 60000);
       if (awayMinutes >= 5) {
-        showToast(`🌿 Welcome back! You were away from Zenith for ${awayMinutes} mins. Focus state preserved.`);
+        showToast(`🌿 Welcome back! You were away from FlowOS for ${awayMinutes} mins. Focus state preserved.`);
       }
       tabBlurTime = null;
     }
@@ -99,28 +100,103 @@ function startLiveClock() {
 }
 
 /* ==========================================================================
-   NAVIGATION
+   NAVIGATION & SUBNAV PILLS ROUTING
    ========================================================================== */
-function setupNavigation() {
-  const navItems = document.querySelectorAll('.nav-item');
+const TAB_ROUTING_MAP = {
+  'today': { layer: 'today', subnav: null },
+  'now': { layer: 'today', subnav: null },
+  'plan': { layer: 'plan', subnav: 'plan-goals' },
+  'goals': { layer: 'plan', subnav: 'plan-goals' },
+  'tasks-habits': { layer: 'plan', subnav: 'plan-tasks' },
+  'tasks': { layer: 'plan', subnav: 'plan-tasks' },
+  'habits': { layer: 'plan', subnav: 'plan-tasks' },
+  'timeline': { layer: 'plan', subnav: 'plan-timeline' },
+  'schedule': { layer: 'plan', subnav: 'plan-timeline' },
+  'adapt': { layer: 'adapt', subnav: null },
+  'reality': { layer: 'adapt', subnav: null },
+  'understand': { layer: 'understand', subnav: 'understand-analytics' },
+  'analytics': { layer: 'understand', subnav: 'understand-analytics' },
+  'heatmap': { layer: 'understand', subnav: 'understand-heatmap' },
+  'memory-replay': { layer: 'understand', subnav: 'understand-replay' },
+  'replay': { layer: 'understand', subnav: 'understand-replay' },
+  'digital-twin': { layer: 'understand', subnav: 'understand-profile' },
+  'profile': { layer: 'understand', subnav: 'understand-profile' },
+  'debrief': { layer: 'understand', subnav: 'understand-debrief' },
+  'wellness': { layer: 'wellness', subnav: 'wellness-hydration' },
+  'hydration': { layer: 'wellness', subnav: 'wellness-hydration' },
+  'diet': { layer: 'wellness', subnav: 'wellness-nutrition' },
+  'nutrition': { layer: 'wellness', subnav: 'wellness-nutrition' },
+  'screen': { layer: 'wellness', subnav: 'wellness-screen' },
+  'study': { layer: 'study', subnav: null },
+  'focus': { layer: 'study', subnav: null },
+  'motivation': { layer: 'motivation', subnav: null },
+  'quests': { layer: 'motivation', subnav: null },
+  'elderly': { layer: 'elderly', subnav: null },
+  'accessibility': { layer: 'elderly', subnav: null },
+  'sync': { layer: 'sync', subnav: null },
+  'welcome': { layer: 'welcome', subnav: null }
+};
+
+function navigateToTab(targetKey) {
+  const route = TAB_ROUTING_MAP[targetKey] || { layer: targetKey, subnav: null };
+  const targetTab = route.layer;
+
+  const navItems = document.querySelectorAll('.nav-item, .sidebar-sub-item');
   const tabPanels = document.querySelectorAll('.tab-panel');
 
+  navItems.forEach(n => {
+    n.classList.toggle('active', n.dataset.tab === targetTab);
+  });
+
+  tabPanels.forEach(panel => {
+    panel.classList.toggle('active', panel.id === `tab-${targetTab}`);
+  });
+
+  if (route.subnav) {
+    const targetPill = document.querySelector(`.subnav-pill[data-subnav="${route.subnav}"]`);
+    if (targetPill) targetPill.click();
+  }
+
+  // Close mobile sidebar if open
+  const sidebar = document.querySelector('.sidebar');
+  if (sidebar && sidebar.classList.contains('open')) {
+    sidebar.classList.remove('open');
+  }
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (window.lucide) lucide.createIcons();
+}
+
+window.navigateToTab = navigateToTab;
+
+function setupNavigation() {
+  const navItems = document.querySelectorAll('.nav-item, .sidebar-sub-item');
   navItems.forEach(item => {
     item.addEventListener('click', (e) => {
       e.preventDefault();
       const targetTab = item.dataset.tab;
+      navigateToTab(targetTab);
+    });
+  });
 
-      navItems.forEach(n => n.classList.remove('active'));
-      item.classList.add('active');
+  // Setup Subnav Pills Switchers across panels
+  document.querySelectorAll('.subnav-pill').forEach(pill => {
+    pill.addEventListener('click', (e) => {
+      const subnavKey = pill.dataset.subnav;
+      const panelContainer = pill.closest('.tab-panel') || document;
+      panelContainer.querySelectorAll('.subnav-pill').forEach(p => p.classList.remove('active'));
+      panelContainer.querySelectorAll('.subnav-panel').forEach(p => p.classList.remove('active'));
+      pill.classList.add('active');
 
-      tabPanels.forEach(panel => {
-        panel.classList.toggle('active', panel.id === `tab-${targetTab}`);
-      });
-
+      const targetPanel = document.getElementById(`panel-${subnavKey}`);
+      if (targetPanel) {
+        targetPanel.classList.add('active');
+      }
       if (window.lucide) lucide.createIcons();
     });
   });
 
+  // Mobile menu toggle
   const menuToggleBtn = document.getElementById('mobile-menu-toggle');
   const sidebar = document.querySelector('.sidebar');
   if (menuToggleBtn && sidebar) {
@@ -129,6 +205,7 @@ function setupNavigation() {
     });
   }
 
+  // Care mode toggle
   const accessibilityToggle = document.getElementById('toggle-accessibility-mode');
   if (accessibilityToggle) {
     accessibilityToggle.addEventListener('click', () => {
@@ -155,11 +232,11 @@ function renderCommandCenter(state) {
   const currentMins = now.getHours() * 60 + now.getMinutes();
 
   // 1. Render NOW Active Block
-  const activeBlock = state.todaySchedule.find(b => {
-    const [sh, sm] = b.timeStart.split(':').map(Number);
-    const [eh, em] = b.timeEnd.split(':').map(Number);
+  const activeBlock = (state.todaySchedule || []).find(b => {
+    const [sh, sm] = (b.timeStart || '00:00').split(':').map(Number);
+    const [eh, em] = (b.timeEnd || '00:00').split(':').map(Number);
     return currentMins >= (sh * 60 + sm) && currentMins < (eh * 60 + em);
-  }) || state.todaySchedule[0];
+  }) || (state.todaySchedule && state.todaySchedule[0]);
 
   const nowTitleEl = document.getElementById('command-now-title');
   const nowTimeEl = document.getElementById('command-now-time');
@@ -192,17 +269,17 @@ function renderCommandCenter(state) {
         <div style="display: flex; justify-content: space-between; align-items: flex-start;">
           <div>
             <div style="display: flex; align-items: center; gap: 0.6rem;">
-              <span class="pulse-badge" style="background: rgba(245,158,11,0.2); color: var(--accent-screen-light);">
-                <span class="pulse-dot"></span> REALITY DIVERGENCE DETECTED
+              <span class="badge" style="background: rgba(245,158,11,0.2); color: var(--accent-screen-light); border: 1px solid rgba(245,158,11,0.4);">
+                ⚡ WHAT CHANGED • REALITY EVENT
               </span>
             </div>
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: #fff; margin-top: 0.5rem;">
-              ⚡ ${alert.title}
+            <h3 style="font-size: 1.25rem; font-weight: 700; color: #fff; margin-top: 0.4rem;">
+              ${alert.title}
             </h3>
-            <p style="font-size: 0.9rem; color: var(--text-primary); margin-top: 0.2rem;">
-              <strong>What Happened:</strong> ${alert.whatChanged}
+            <p style="font-size: 0.88rem; color: var(--text-primary); margin-top: 0.2rem;">
+              <strong>Observation:</strong> ${alert.whatChanged}
             </p>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">
+            <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.2rem;">
               <strong>Schedule Impact:</strong> ${alert.impactSummary}
             </p>
           </div>
@@ -211,26 +288,29 @@ function renderCommandCenter(state) {
           </button>
         </div>
 
-        <div style="margin-top: 1rem; font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">
-          Calculated Concrete Adaptation Options:
+        <div style="margin-top: 1rem; font-size: 0.78rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700;">
+          Concrete Adaptation Options:
         </div>
 
-        <div class="reality-options-grid">
-          ${alert.options.map(opt => {
+        <div class="reality-options-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 0.8rem; margin-top: 0.6rem;">
+          ${(alert.options || []).map(opt => {
             const isRec = opt.id === alert.recommendedOptionId;
             return `
-              <div class="reality-option-box ${isRec ? 'recommended' : ''}">
-                <div>
-                  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
-                    ${isRec ? '<span style="font-size: 0.68rem; font-weight: 800; color: var(--accent-diet-light); text-transform: uppercase; letter-spacing: 0.05em;">★ Recommended</span>' : '<span></span>'}
-                    ${window.ZenithDigitalTwinEngine ? ZenithDigitalTwinEngine.renderBasisBadge(isRec ? 'current-schedule' : 'ai-reasoning', 'Adaptation') : ''}
-                  </div>
-                  <h4 style="font-size: 0.98rem; font-weight: 700; color: var(--text-primary); margin-top: 0.2rem;">${opt.title}</h4>
-                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.3rem;">${opt.desc}</p>
+              <div class="card" style="padding: 0.9rem; background: ${isRec ? 'rgba(16, 185, 129, 0.08)' : 'rgba(0,0,0,0.25)'}; border: 1px solid ${isRec ? 'var(--accent-diet)' : 'var(--border-subtle)'};">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.3rem;">
+                  ${isRec ? '<span style="font-size: 0.68rem; font-weight: 800; color: var(--accent-diet-light); text-transform: uppercase;">★ Recommended</span>' : '<span></span>'}
+                  <span class="badge" style="font-size: 0.65rem; background: rgba(99,102,241,0.15); color: var(--accent-study-light);">Adaptation</span>
                 </div>
-                <button class="btn ${isRec ? 'btn-emerald' : 'btn-secondary'}" onclick="window.RealityEventEngine.applyOption('${opt.id}')" style="width: 100%; font-size: 0.82rem; margin-top: 0.6rem;">
-                  Apply Option
-                </button>
+                <h4 style="font-size: 0.92rem; font-weight: 700; color: var(--text-primary); margin-top: 0.2rem;">${opt.title}</h4>
+                <p style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.3rem; line-height: 1.35;">${opt.desc}</p>
+                <div style="display: flex; gap: 0.4rem; margin-top: 0.6rem;">
+                  <button class="btn ${isRec ? 'btn-emerald' : 'btn-secondary'}" onclick="window.RealityEventEngine.applyOption('${opt.id}')" style="flex: 1; font-size: 0.78rem; padding: 0.35rem 0.6rem;">
+                    Apply
+                  </button>
+                  <button class="btn btn-secondary" onclick="openScenarioSimulator('spend-extra-hours-coding')" style="font-size: 0.78rem; padding: 0.35rem 0.6rem;" title="Simulate in What-If">
+                    Simulate
+                  </button>
+                </div>
               </div>
             `;
           }).join('')}
@@ -242,15 +322,16 @@ function renderCommandCenter(state) {
   }
 
   // 4. Render NEXT ACTION
-  const pendingTasks = state.tasks.filter(t => !t.completed);
+  const pendingTasks = (state.tasks || []).filter(t => !t.completed);
   const nextTask = pendingTasks[0];
   const nextActionEl = document.getElementById('command-next-action-text');
   if (nextActionEl) {
     if (nextTask) {
-      const badge = window.ZenithDigitalTwinEngine ? ZenithDigitalTwinEngine.renderBasisBadge('historical-observation', 'Priority & Energy Calibration') : '';
       nextActionEl.innerHTML = `
-        <div style="margin-bottom: 0.35rem;">${badge}</div>
-        <strong>${nextTask.title}</strong> (Est. ${nextTask.estimatedMinutes}m • Priority: ${nextTask.priority.toUpperCase()})
+        <strong>${nextTask.title}</strong>
+        <div style="font-size: 0.78rem; color: var(--text-secondary); margin-top: 0.2rem;">
+          Est. ${nextTask.estimatedMinutes}m • Priority: ${nextTask.priority.toUpperCase()}
+        </div>
       `;
     } else {
       nextActionEl.textContent = 'All priority tasks completed for today!';
@@ -263,12 +344,12 @@ function renderCommandCenter(state) {
     const validated = window.PersonalRealityLearningEngine.getValidatedInsights();
     if (validated.hasData) {
       learnedContainer.innerHTML = validated.insights.map(ins => `
-        <div style="padding: 0.75rem 1rem; background: rgba(99,102,241,0.1); border-left: 3px solid var(--accent-study); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--text-primary); margin-top: 0.5rem;">
-          🧠 <strong>Learned Pattern:</strong> ${ins.insight}
+        <div style="padding: 0.65rem 0.85rem; background: rgba(99,102,241,0.1); border-left: 3px solid var(--accent-study); border-radius: var(--radius-sm); font-size: 0.82rem; color: var(--text-primary); margin-top: 0.4rem;">
+          🧠 <strong>Observed Pattern:</strong> ${ins.insight}
         </div>
       `).join('');
     } else {
-      learnedContainer.innerHTML = `<p style="font-size: 0.8rem; color: var(--text-muted);">${validated.message}</p>`;
+      learnedContainer.innerHTML = `<p style="font-size: 0.8rem; color: var(--text-muted); padding: 0.5rem 0;">${validated.message}</p>`;
     }
   }
 
@@ -276,9 +357,9 @@ function renderCommandCenter(state) {
 }
 
 /* ==========================================================================
-   ASK ZENITH CONTEXTUAL ASSISTANT
+   ASK FLOWOS CONTEXTUAL ASSISTANT
    ========================================================================== */
-function setupAskZenithInteractions() {
+function setupAskFlowOSInteractions() {
   const form = document.getElementById('ask-zenith-form');
   const input = document.getElementById('ask-zenith-input');
   const resultBox = document.getElementById('ask-zenith-result-box');
@@ -289,19 +370,20 @@ function setupAskZenithInteractions() {
       const q = input.value.trim();
       if (!q) return;
 
-      const res = window.AskZenithEngine.ask(q);
+      const engine = window.AskFlowOSEngine || window.AskZenithEngine;
+      const res = engine ? engine.ask(q) : { title: 'Analysis', analysisHtml: '<p>Processing...</p>', recommendation: 'Review schedule.', options: [] };
 
       if (resultBox) {
         resultBox.innerHTML = `
-          <div style="margin-top: 1.2rem; padding: 1.4rem; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--accent-study-light); border-radius: var(--radius-lg);">
-            <h4 style="font-size: 1.1rem; font-weight: 700; color: #fff;">🤖 ${res.title}</h4>
+          <div style="margin-top: 1rem; padding: 1.2rem; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--accent-study-light); border-radius: var(--radius-md);">
+            <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">🤖 ${res.title}</h4>
             ${res.analysisHtml}
-            <div style="margin-top: 0.8rem; padding: 0.75rem 1rem; background: rgba(16,185,129,0.1); border-left: 3px solid var(--accent-diet); border-radius: var(--radius-sm); font-size: 0.88rem; color: var(--accent-diet-light);">
+            <div style="margin-top: 0.8rem; padding: 0.65rem 0.9rem; background: rgba(16,185,129,0.1); border-left: 3px solid var(--accent-diet); border-radius: var(--radius-sm); font-size: 0.85rem; color: var(--accent-diet-light);">
               💡 <strong>Recommendation:</strong> ${res.recommendation}
             </div>
-            <div style="display: flex; gap: 0.6rem; margin-top: 1rem;">
-              ${res.options.map(opt => `
-                <button class="btn btn-emerald" onclick="applyAskZenithOption('${opt.action}')" style="font-size: 0.82rem;">
+            <div style="display: flex; gap: 0.6rem; margin-top: 0.8rem; flex-wrap: wrap;">
+              ${(res.options || []).map(opt => `
+                <button class="btn btn-emerald" onclick="applyAskZenithOption('${opt.action}')" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
                   <i data-lucide="check"></i> ${opt.title}
                 </button>
               `).join('')}
@@ -338,12 +420,13 @@ window.applyAskZenithOption = function(action) {
       return b;
     });
   } else if (action === 'take-20m-walk') {
-    window.showToast?.('🌿 20-Min restorative walk scheduled! Hydrate and step away.');
+    showToast('🌿 20-Min restorative walk scheduled! Hydrate and step away.');
   }
 
   window.appState.update(s => ({ ...s, todaySchedule: updatedSchedule }));
-  document.getElementById('ask-zenith-result-box').innerHTML = '';
-  window.showToast?.('✨ Decision applied! Schedule updated.');
+  const box = document.getElementById('ask-zenith-result-box');
+  if (box) box.innerHTML = '';
+  showToast('✨ Decision applied! Schedule recalibrated.');
 };
 
 /* ==========================================================================
@@ -384,50 +467,44 @@ function renderSimulationResult(sim) {
   if (!box) return;
 
   box.innerHTML = `
-    <div style="margin-top: 1.2rem;">
-      <h4 style="font-size: 1.15rem; font-weight: 700; color: var(--accent-study-light);">🔮 ${sim.title}</h4>
-      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">${sim.description}</p>
+    <div style="margin-top: 1rem;">
+      <h4 style="font-size: 1.1rem; font-weight: 700; color: var(--accent-study-light);">🔮 ${sim.title}</h4>
+      <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">${sim.description}</p>
 
-      <div class="whatif-comparison-grid">
-        <div class="whatif-column">
-          <h5 style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.6rem;">CURRENT LIVE SCHEDULE</h5>
-          <div style="font-size: 0.82rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.4rem;">
-            <div>• Morning Coding: 1h 00m</div>
+      <div class="whatif-comparison-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.8rem; margin: 0.8rem 0;">
+        <div style="padding: 0.8rem; background: rgba(0,0,0,0.3); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+          <h5 style="font-size: 0.78rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">LIVE SCHEDULE</h5>
+          <div style="font-size: 0.8rem; color: var(--text-secondary); display: flex; flex-direction: column; gap: 0.3rem;">
+            <div>• Focus Block: 1h 00m</div>
             <div>• Evening Review: 60m (07:00 PM)</div>
             <div>• Bedtime: 10:30 PM</div>
           </div>
         </div>
 
-        <div class="whatif-column simulated">
-          <h5 style="font-size: 0.85rem; color: var(--accent-study-light); text-transform: uppercase; margin-bottom: 0.6rem;">SIMULATED SCENARIO SCHEDULE</h5>
-          <div style="font-size: 0.82rem; color: var(--text-primary); display: flex; flex-direction: column; gap: 0.4rem;">
-            <div>• Extended Coding: 3h 00m (+2h Sprint)</div>
+        <div style="padding: 0.8rem; background: rgba(99,102,241,0.1); border-radius: var(--radius-sm); border: 1px solid var(--accent-study);">
+          <h5 style="font-size: 0.78rem; color: var(--accent-study-light); text-transform: uppercase; margin-bottom: 0.4rem;">SIMULATED SCENARIO</h5>
+          <div style="font-size: 0.8rem; color: var(--text-primary); display: flex; flex-direction: column; gap: 0.3rem;">
+            <div>• Extended Focus: 3h 00m (+2h)</div>
             <div>• Evening Review: Condensed to 15m</div>
             <div>• Bedtime: 11:00 PM (+30m drift)</div>
           </div>
         </div>
       </div>
 
-      <div style="padding: 0.9rem; background: rgba(0,0,0,0.3); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 1rem;">
-        <div style="font-size: 0.85rem; color: var(--text-primary);">
-          <strong>Affected Tasks:</strong>
-          <ul style="margin-left: 1.2rem; margin-top: 0.3rem;">
-            ${sim.affectedTasks.map(t => `<li>${t}</li>`).join('')}
-          </ul>
-        </div>
-        <div style="font-size: 0.85rem; color: var(--accent-screen-light); margin-top: 0.6rem;">
+      <div style="padding: 0.8rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-md); border: 1px solid var(--border-subtle); margin-bottom: 0.9rem;">
+        <div style="font-size: 0.8rem; color: var(--accent-screen-light);">
           ${sim.conflicts.join('<br>')}
         </div>
-        <div style="font-size: 0.85rem; color: var(--accent-diet-light); margin-top: 0.6rem;">
+        <div style="font-size: 0.8rem; color: var(--accent-diet-light); margin-top: 0.4rem;">
           ${sim.goalImpact}
         </div>
       </div>
 
-      <div style="display: flex; gap: 0.8rem;">
-        <button class="btn btn-emerald" onclick="window.ScenarioSimulator.applySimulation(); document.getElementById('simulator-modal').classList.remove('open');" style="flex: 1;">
+      <div style="display: flex; gap: 0.6rem;">
+        <button class="btn btn-emerald" onclick="window.ScenarioSimulator.applySimulation(); document.getElementById('simulator-modal').classList.remove('open');" style="flex: 1; font-size: 0.82rem;">
           <i data-lucide="check"></i> Apply Simulated Schedule to Live Day
         </button>
-        <button class="btn btn-secondary" onclick="window.ScenarioSimulator.discardSimulation(); document.getElementById('simulator-modal').classList.remove('open');">
+        <button class="btn btn-secondary" onclick="window.ScenarioSimulator.discardSimulation(); document.getElementById('simulator-modal').classList.remove('open');" style="font-size: 0.82rem;">
           Discard Simulation
         </button>
       </div>
@@ -441,21 +518,6 @@ function renderSimulationResult(sim) {
    SCHEDULE TIMELINE & ADAPTATION HANDLERS
    ========================================================================== */
 function setupScheduleInteractions() {
-  document.querySelectorAll('.btn-adapt-schedule').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const reason = e.currentTarget.dataset.reason;
-      const state = window.appState.getState();
-      const adapted = window.AIScheduleEngine.adaptSchedule(state.todaySchedule, reason);
-      
-      window.appState.update(s => ({
-        ...s,
-        todaySchedule: adapted
-      }));
-
-      showToast(`⚡ Schedule adapted for ${btn.textContent.trim()}!`);
-    });
-  });
-
   const exportICSBtn = document.getElementById('btn-export-ics');
   if (exportICSBtn) {
     exportICSBtn.addEventListener('click', () => {
@@ -482,9 +544,9 @@ function renderTimeline(schedule) {
   const now = new Date();
   const currentMins = now.getHours() * 60 + now.getMinutes();
 
-  container.innerHTML = schedule.map((item) => {
-    const [sh, sm] = item.timeStart.split(':').map(Number);
-    const [eh, em] = item.timeEnd.split(':').map(Number);
+  container.innerHTML = (schedule || []).map((item) => {
+    const [sh, sm] = (item.timeStart || '00:00').split(':').map(Number);
+    const [eh, em] = (item.timeEnd || '00:00').split(':').map(Number);
     const startM = sh * 60 + sm;
     const endM = eh * 60 + em;
 
@@ -519,10 +581,10 @@ function renderTimeline(schedule) {
 
 window.toggleScheduleItem = function(id) {
   window.appState.update(s => {
-    const updated = s.todaySchedule.map(item => {
+    const updated = (s.todaySchedule || []).map(item => {
       if (item.id === id) {
         const nextState = !item.completed;
-        if (nextState && window.audioZenith) window.audioZenith.playChime();
+        if (nextState && window.audioFlowOS) window.audioFlowOS.playChime();
         return { ...item, completed: nextState };
       }
       return item;
@@ -540,7 +602,7 @@ function setupPortabilityInteractions() {
     jsonExportBtn.addEventListener('click', () => {
       const state = window.appState.getState();
       window.CalendarExporter.exportJSONBackup(state);
-      showToast('📦 Full Zenith JSON backup downloaded!');
+      showToast('📦 Full FlowOS JSON backup downloaded!');
     });
   }
 
@@ -551,7 +613,7 @@ function setupPortabilityInteractions() {
       if (file) {
         window.CalendarExporter.importJSONBackup(
           file,
-          () => showToast('✨ Backup successfully restored!'),
+          () => showToast('✨ State backup successfully restored!'),
           (err) => showToast(`❌ Error: ${err}`)
         );
       }
@@ -575,8 +637,8 @@ function setupGoalInteractions() {
 
       window.appState.update(s => ({
         ...s,
-        goals: [goal, ...s.goals],
-        tasks: [...tasks, ...s.tasks]
+        goals: [goal, ...(s.goals || [])],
+        tasks: [...tasks, ...(s.tasks || [])]
       }));
 
       form.reset();
@@ -586,37 +648,48 @@ function setupGoalInteractions() {
 }
 
 function renderGoals(goals) {
-  const container = document.getElementById('goals-tree-wrapper');
+  const container = document.getElementById('goals-list-container');
   if (!container) return;
 
+  if (!goals || goals.length === 0) {
+    container.innerHTML = `
+      <div class="empty-state-box">
+        <div class="empty-state-icon"><i data-lucide="target"></i></div>
+        <p>No active goals yet. Use the synthesizer on the left to set your first goal.</p>
+      </div>
+    `;
+    if (window.lucide) lucide.createIcons();
+    return;
+  }
+
   container.innerHTML = goals.map(goal => `
-    <div class="card" style="margin-bottom: 1.25rem;">
-      <div class="card-header">
+    <div class="card" style="padding: 1.25rem;">
+      <div class="card-header" style="margin-bottom: 0.6rem;">
         <div>
           <span class="category-tag cat-${goal.category}">${goal.category}</span>
-          <h4 style="font-size: 1.2rem; color: var(--text-primary); margin-top: 0.4rem;">${goal.title}</h4>
-          <span style="font-size: 0.78rem; color: var(--text-muted);">Target: ${goal.targetDate}</span>
+          <h4 style="font-size: 1.15rem; color: var(--text-primary); margin-top: 0.3rem;">${goal.title}</h4>
+          <span style="font-size: 0.76rem; color: var(--text-muted);">Target: ${goal.targetDate}</span>
         </div>
         <div style="text-align: right;">
-          <span style="font-family: var(--font-mono); font-weight: 800; color: var(--accent-study-light); font-size: 1.2rem;">${goal.progress}%</span>
+          <span style="font-family: var(--font-mono); font-weight: 800; color: var(--accent-study-light); font-size: 1.15rem;">${goal.progress || 0}%</span>
         </div>
       </div>
 
-      <div class="progress-bar-bg" style="height: 6px; margin-bottom: 1rem;">
-        <div class="progress-bar-fill" style="width: ${goal.progress}%;"></div>
+      <div class="progress-bar-bg" style="height: 5px; margin-bottom: 0.8rem;">
+        <div class="progress-bar-fill" style="width: ${goal.progress || 0}%;"></div>
       </div>
 
-      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
-        <span style="font-size: 0.8rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Milestones</span>
+      <div style="display: flex; flex-direction: column; gap: 0.45rem;">
+        <span style="font-size: 0.75rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase;">Milestones</span>
         ${(goal.milestones || []).map(m => `
-          <label style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.88rem; color: ${m.completed ? 'var(--text-muted)' : 'var(--text-primary)'}; text-decoration: ${m.completed ? 'line-through' : 'none'}; cursor: pointer;">
+          <label style="display: flex; align-items: center; gap: 0.6rem; font-size: 0.85rem; color: ${m.completed ? 'var(--text-muted)' : 'var(--text-primary)'}; text-decoration: ${m.completed ? 'line-through' : 'none'}; cursor: pointer;">
             <input type="checkbox" ${m.completed ? 'checked' : ''} onchange="toggleMilestone('${goal.id}', '${m.id}')" style="accent-color: var(--accent-study);">
             ${m.title}
           </label>
         `).join('')}
       </div>
 
-      <button class="btn btn-secondary" onclick="openObstacleSolver('${goal.title}')" style="margin-top: 1rem; width: 100%; font-size: 0.85rem;">
+      <button class="btn btn-secondary" onclick="openObstacleSolver('${goal.title}')" style="margin-top: 0.8rem; width: 100%; font-size: 0.8rem; padding: 0.4rem;">
         <i data-lucide="help-circle"></i> Stuck on this goal? Deconstruct Obstacle
       </button>
     </div>
@@ -627,7 +700,7 @@ function renderGoals(goals) {
 
 window.toggleMilestone = function(goalId, milestoneId) {
   window.appState.update(s => {
-    const updatedGoals = s.goals.map(g => {
+    const updatedGoals = (s.goals || []).map(g => {
       if (g.id === goalId) {
         const updatedM = g.milestones.map(m => m.id === milestoneId ? { ...m, completed: !m.completed } : m);
         const nextProgress = window.GoalIntelligenceEngine.recalculateGoalProgress({ ...g, milestones: updatedM });
@@ -644,8 +717,8 @@ window.toggleMilestone = function(goalId, milestoneId) {
    ========================================================================== */
 function setupObstacleModal() {
   const modal = document.getElementById('obstacle-modal');
-  const closeBtn = document.getElementById('btn-close-obstacle');
-  const form = document.getElementById('obstacle-form');
+  const closeBtn = document.getElementById('btn-close-obstacle-modal');
+  const form = document.getElementById('obstacle-deconstruct-form');
 
   if (closeBtn && modal) {
     closeBtn.addEventListener('click', () => modal.classList.remove('open'));
@@ -654,20 +727,22 @@ function setupObstacleModal() {
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const desc = form.obstacleDesc.value;
+      const desc = form.obstacleText.value;
       const res = window.GoalIntelligenceEngine.deconstructObstacle(desc);
 
-      const resultBox = document.getElementById('obstacle-result-box');
-      resultBox.innerHTML = `
-        <div style="margin-top: 1.2rem; padding: 1.2rem; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--accent-study); border-radius: var(--radius-md);">
-          <h4 style="color: var(--accent-study-light); font-size: 1rem; margin-bottom: 0.4rem;">🎯 Immediate 10-Min Micro-Step:</h4>
-          <p style="font-size: 0.92rem; color: var(--text-primary); margin-bottom: 0.6rem;">${res.immediateMicroStep}</p>
-          <p style="font-size: 0.8rem; color: var(--text-secondary);">💡 <em>Psychological Strategy: ${res.recoveryStrategy}</em></p>
-          <button class="btn btn-emerald" onclick="applyObstacleMicroTask()" style="margin-top: 0.8rem;">
-            <i data-lucide="plus"></i> Add Micro-Step Directly to Today's Tasks
-          </button>
-        </div>
-      `;
+      const resultBox = document.getElementById('obstacle-solution-box');
+      if (resultBox) {
+        resultBox.innerHTML = `
+          <div style="margin-top: 1rem; padding: 1.1rem; background: rgba(99, 102, 241, 0.12); border: 1px solid var(--accent-study); border-radius: var(--radius-md);">
+            <h4 style="color: var(--accent-study-light); font-size: 0.95rem; margin-bottom: 0.3rem;">🎯 Immediate 10-Min Micro-Step:</h4>
+            <p style="font-size: 0.88rem; color: var(--text-primary); margin-bottom: 0.5rem;">${res.immediateMicroStep}</p>
+            <p style="font-size: 0.78rem; color: var(--text-secondary);">💡 <em>Strategy: ${res.recoveryStrategy}</em></p>
+            <button class="btn btn-emerald" onclick="applyObstacleMicroTask()" style="margin-top: 0.8rem; width: 100%; font-size: 0.82rem;">
+              <i data-lucide="plus"></i> Add Micro-Step Directly to Today's Tasks
+            </button>
+          </div>
+        `;
+      }
 
       window.currentObstacleMicroTask = res.suggestedTask;
       if (window.lucide) lucide.createIcons();
@@ -679,18 +754,18 @@ window.openObstacleSolver = function(goalTitle) {
   const modal = document.getElementById('obstacle-modal');
   if (modal) {
     modal.classList.add('open');
-    const input = document.getElementById('obstacle-desc-input');
-    if (input) input.placeholder = `Describe what's blocking you on "${goalTitle}"...`;
   }
 };
+
+window.openObstacleModal = window.openObstacleSolver;
 
 window.applyObstacleMicroTask = function() {
   if (window.currentObstacleMicroTask) {
     window.appState.update(s => ({
       ...s,
-      tasks: [window.currentObstacleMicroTask, ...s.tasks]
+      tasks: [window.currentObstacleMicroTask, ...(s.tasks || [])]
     }));
-    document.getElementById('obstacle-modal').classList.remove('open');
+    document.getElementById('obstacle-modal')?.classList.remove('open');
     showToast('✨ Micro-step added to your tasks! Momentum restored.');
   }
 };
@@ -699,152 +774,135 @@ window.applyObstacleMicroTask = function() {
    TASKS & HABITS
    ========================================================================== */
 function setupTasksAndHabitsInteractions() {
-  const taskForm = document.getElementById('tasks-create-form');
+  const taskForm = document.getElementById('add-task-form');
   if (taskForm) {
     taskForm.addEventListener('submit', (e) => {
       e.preventDefault();
       const title = taskForm.taskTitle.value;
       const priority = taskForm.taskPriority.value;
-      const estimatedMinutes = taskForm.taskEstimate.value;
+      const estimatedMinutes = parseInt(taskForm.estimatedMins.value, 10);
 
       window.TasksHabitsManager.addTask({ title, priority, estimatedMinutes });
       taskForm.reset();
       showToast('✅ Task added successfully.');
     });
   }
-
-  const habitForm = document.getElementById('habits-create-form');
-  if (habitForm) {
-    habitForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const title = habitForm.habitTitle.value;
-      const category = habitForm.habitCategory.value;
-
-      window.TasksHabitsManager.addHabit({ title, category });
-      habitForm.reset();
-      showToast('🌱 New habit streak started!');
-    });
-  }
 }
 
 function renderTasksAndHabits(state) {
-  const tasksContainer = document.getElementById('task-list-view');
+  const tasksContainer = document.getElementById('tasks-list-container');
   if (tasksContainer) {
-    tasksContainer.innerHTML = state.tasks.map(task => `
-      <div class="card" style="padding: 1rem 1.25rem; margin-bottom: 0.75rem; border-left: 4px solid ${task.priority === 'high' ? 'var(--accent-screen)' : 'var(--accent-study)'};">
-        <div style="display: flex; justify-content: space-between; align-items: center;">
-          <label style="display: flex; align-items: center; gap: 0.8rem; cursor: pointer; flex: 1; text-decoration: ${task.completed ? 'line-through' : 'none'}; color: ${task.completed ? 'var(--text-muted)' : 'var(--text-primary)'}; font-size: 0.95rem;">
-            <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="window.TasksHabitsManager.toggleTask('${task.id}')" style="accent-color: var(--accent-study); width: 18px; height: 18px;">
-            <div>
-              <strong>${task.title}</strong>
-              <div style="font-size: 0.75rem; color: var(--text-secondary); margin-top: 0.15rem;">
-                ⏱️ Planned: ${task.estimatedMinutes}m • Actual: ${task.actualMinutes || 0}m • Priority: ${task.priority.toUpperCase()}
+    if (!state.tasks || state.tasks.length === 0) {
+      tasksContainer.innerHTML = `<div class="empty-state-box"><p>No active tasks. Add a task above to start planning.</p></div>`;
+    } else {
+      tasksContainer.innerHTML = state.tasks.map(task => `
+        <div class="card" style="padding: 0.9rem 1.1rem; border-left: 4px solid ${task.priority === 'high' ? 'var(--accent-screen)' : 'var(--accent-study)'};">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label style="display: flex; align-items: center; gap: 0.8rem; cursor: pointer; flex: 1; text-decoration: ${task.completed ? 'line-through' : 'none'}; color: ${task.completed ? 'var(--text-muted)' : 'var(--text-primary)'}; font-size: 0.92rem;">
+              <input type="checkbox" ${task.completed ? 'checked' : ''} onchange="window.TasksHabitsManager.toggleTask('${task.id}')" style="accent-color: var(--accent-study); width: 17px; height: 17px;">
+              <div>
+                <strong>${task.title}</strong>
+                <div style="font-size: 0.74rem; color: var(--text-secondary); margin-top: 0.1rem;">
+                  ⏱️ Planned: ${task.estimatedMinutes}m • Actual: ${task.actualMinutes || 0}m • Priority: ${(task.priority || 'medium').toUpperCase()}
+                </div>
               </div>
+            </label>
+            <div style="display: flex; gap: 0.35rem;">
+              <button class="btn btn-secondary" onclick="window.focusEngine.selectTask('${task.id}'); navigateToTab('study');" style="padding: 0.3rem 0.65rem; font-size: 0.75rem;">
+                <i data-lucide="play"></i> Focus
+              </button>
+              <button class="btn-icon" onclick="window.TasksHabitsManager.deleteTask('${task.id}')" style="border: none; background: transparent;">
+                <i data-lucide="trash-2"></i>
+              </button>
             </div>
-          </label>
-          <div style="display: flex; gap: 0.4rem;">
-            <button class="btn btn-secondary" onclick="window.focusEngine.selectTask('${task.id}'); document.querySelector('[data-tab=study]').click();" style="padding: 0.35rem 0.7rem; font-size: 0.78rem;">
-              <i data-lucide="play"></i> Focus
-            </button>
-            <button class="btn-icon" onclick="window.TasksHabitsManager.deleteTask('${task.id}')" style="border: none; background: transparent;">
-              <i data-lucide="trash-2"></i>
-            </button>
           </div>
         </div>
-      </div>
-    `).join('');
+      `).join('');
+    }
   }
 
   const focusTaskSelect = document.getElementById('focus-task-select');
   if (focusTaskSelect) {
-    focusTaskSelect.innerHTML = state.tasks.filter(t => !t.completed).map(t => `
-      <option value="${t.id}" ${t.id === state.activeFocus.taskId ? 'selected' : ''}>${t.title} (${t.estimatedMinutes}m)</option>
+    focusTaskSelect.innerHTML = (state.tasks || []).filter(t => !t.completed).map(t => `
+      <option value="${t.id}" ${t.id === state.activeFocus?.taskId ? 'selected' : ''}>${t.title} (${t.estimatedMinutes}m)</option>
     `).join('');
   }
 
   const past7Days = window.TasksHabitsManager.getPast7Days();
-  const habitsContainer = document.getElementById('habits-grid-view');
+  const habitsContainer = document.getElementById('habits-list-container');
   if (habitsContainer) {
-    habitsContainer.innerHTML = state.habits.map(habit => {
-      const historySet = new Set(habit.history || []);
-      const heatmapCells = past7Days.map(dateStr => {
-        const isDone = historySet.has(dateStr);
-        return `<div title="${dateStr}: ${isDone ? 'Completed' : 'Missed'}" style="flex: 1; height: 16px; border-radius: 3px; background: ${isDone ? 'var(--accent-diet)' : 'rgba(255,255,255,0.08)'};"></div>`;
+    if (!state.habits || state.habits.length === 0) {
+      habitsContainer.innerHTML = `<div class="empty-state-box"><p>No habits tracked yet.</p></div>`;
+    } else {
+      habitsContainer.innerHTML = state.habits.map(habit => {
+        const historySet = new Set(habit.history || []);
+        const heatmapCells = past7Days.map(dateStr => {
+          const isDone = historySet.has(dateStr);
+          return `<div title="${dateStr}: ${isDone ? 'Completed' : 'Missed'}" style="flex: 1; height: 14px; border-radius: 2px; background: ${isDone ? 'var(--accent-diet)' : 'rgba(255,255,255,0.08)'};"></div>`;
+        }).join('');
+
+        return `
+          <div class="card" style="padding: 1rem;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span class="category-tag cat-${habit.category}">${habit.badge || 'Routine'}</span>
+                <h4 style="font-size: 1rem; color: var(--text-primary); margin-top: 0.3rem;">${habit.title}</h4>
+              </div>
+              <div style="text-align: right;">
+                <span style="font-family: var(--font-mono); font-weight: 800; font-size: 1.15rem; color: var(--accent-diet-light);">🔥 ${habit.streak || 0}</span>
+                <div style="font-size: 0.68rem; color: var(--text-muted);">Best: ${habit.bestStreak || 0}d</div>
+              </div>
+            </div>
+
+            <div style="margin-top: 0.6rem;">
+              <div style="font-size: 0.68rem; color: var(--text-muted); margin-bottom: 0.2rem;">7-Day Consistency</div>
+              <div style="display: flex; gap: 3px; width: 100%;">
+                ${heatmapCells}
+              </div>
+            </div>
+
+            <div style="margin-top: 0.8rem; display: flex; align-items: center; justify-content: space-between;">
+              <button class="btn ${habit.completedToday ? 'btn-emerald' : 'btn-secondary'}" onclick="window.TasksHabitsManager.toggleHabitToday('${habit.id}')" style="font-size: 0.8rem; width: 100%; padding: 0.4rem;">
+                <i data-lucide="${habit.completedToday ? 'check-circle' : 'circle'}"></i>
+                ${habit.completedToday ? 'Completed Today!' : 'Check In Today'}
+              </button>
+            </div>
+
+            ${!habit.completedToday && (habit.graceDaysLeft > 0) ? `
+              <button class="btn" onclick="window.TasksHabitsManager.applyGraceRecovery('${habit.id}')" style="margin-top: 0.4rem; width: 100%; font-size: 0.72rem; padding: 0.3rem; background: rgba(245, 158, 11, 0.15); color: var(--accent-screen-light); border: 1px solid var(--accent-screen);">
+                🛡️ Recover Streak (${habit.graceDaysLeft} Grace Left)
+              </button>
+            ` : ''}
+          </div>
+        `;
       }).join('');
-
-      return `
-        <div class="card" style="padding: 1.25rem;">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-            <div>
-              <span class="category-tag cat-${habit.category}">${habit.badge}</span>
-              <h4 style="font-size: 1.1rem; color: var(--text-primary); margin-top: 0.4rem;">${habit.title}</h4>
-            </div>
-            <div style="text-align: right;">
-              <span style="font-family: var(--font-mono); font-weight: 800; font-size: 1.3rem; color: var(--accent-diet-light);">🔥 ${habit.streak}</span>
-              <div style="font-size: 0.7rem; color: var(--text-muted);">Best: ${habit.bestStreak}d</div>
-            </div>
-          </div>
-
-          <div style="margin-top: 0.8rem;">
-            <div style="font-size: 0.7rem; color: var(--text-muted); margin-bottom: 0.25rem;">7-Day Consistency Heatmap</div>
-            <div style="display: flex; gap: 4px; width: 100%;">
-              ${heatmapCells}
-            </div>
-          </div>
-
-          <div style="margin-top: 1rem; display: flex; align-items: center; justify-content: space-between;">
-            <button class="btn ${habit.completedToday ? 'btn-emerald' : 'btn-secondary'}" onclick="window.TasksHabitsManager.toggleHabitToday('${habit.id}')" style="font-size: 0.85rem; width: 100%;">
-              <i data-lucide="${habit.completedToday ? 'check-circle' : 'circle'}"></i>
-              ${habit.completedToday ? 'Completed Today!' : 'Check In Today'}
-            </button>
-          </div>
-
-          ${!habit.completedToday && habit.graceDaysLeft > 0 ? `
-            <button class="btn" onclick="window.TasksHabitsManager.applyGraceRecovery('${habit.id}')" style="margin-top: 0.5rem; width: 100%; font-size: 0.75rem; background: rgba(245, 158, 11, 0.15); color: var(--accent-screen-light); border: 1px solid var(--accent-screen);">
-              🛡️ Recover Streak (${habit.graceDaysLeft} Grace Days Left)
-            </button>
-          ` : ''}
-        </div>
-      `;
-    }).join('');
+    }
   }
 
   if (window.lucide) lucide.createIcons();
 }
 
 /* ==========================================================================
-   OLDER-ADULT HUB & ACCESSIBILITY
+   OLDER-ADULT & ACCESSIBILITY
    ========================================================================== */
-function setupOlderAdultInteractions() {
-  const medForm = document.getElementById('elderly-med-form');
-  if (medForm) {
-    medForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      const name = medForm.medName.value;
-      const time = medForm.medTime.value;
-      const instructions = medForm.medInstructions.value;
-
-      window.ElderlyModeController.addMedicineReminder({ name, time, instructions });
-      medForm.reset();
-      showToast('💊 Medicine reminder added.');
-    });
-  }
-}
+function setupOlderAdultInteractions() {}
 
 function renderOlderAdultMode(state) {
   const medContainer = document.getElementById('elderly-med-list');
   if (medContainer) {
     medContainer.innerHTML = (state.medicineReminders || []).map(med => `
-      <div class="medicine-card ${med.takenToday ? 'taken' : ''}">
-        <div>
-          <span class="med-time-tag">⏰ ${med.time}</span>
-          <h4 class="med-name">${med.name}</h4>
-          <p class="med-instructions">${med.instructions}</p>
+      <div class="card" style="padding: 1rem; margin-bottom: 0.6rem; border-left: 4px solid var(--accent-diet);">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <span style="font-family: var(--font-mono); font-size: 0.82rem; color: var(--accent-study-light); font-weight: 700;">⏰ ${med.time}</span>
+            <h4 style="font-size: 1.05rem; color: var(--text-primary); margin-top: 0.2rem;">${med.name}</h4>
+            <p style="font-size: 0.82rem; color: var(--text-secondary);">${med.instructions}</p>
+          </div>
+          <button class="btn ${med.takenToday ? 'btn-emerald' : 'btn-primary'}" onclick="window.ElderlyModeController.toggleMedicineTaken('${med.id}')" style="font-size: 0.8rem; padding: 0.4rem 0.8rem;">
+            <i data-lucide="${med.takenToday ? 'check-circle' : 'circle'}"></i>
+            ${med.takenToday ? 'Taken' : 'Mark Taken'}
+          </button>
         </div>
-        <button class="btn ${med.takenToday ? 'btn-emerald' : 'btn-primary'} med-btn-taken" onclick="window.ElderlyModeController.toggleMedicineTaken('${med.id}')">
-          <i data-lucide="${med.takenToday ? 'check-circle' : 'circle'}"></i>
-          ${med.takenToday ? 'Taken Today' : 'Mark as Taken'}
-        </button>
       </div>
     `).join('');
   }
@@ -852,9 +910,9 @@ function renderOlderAdultMode(state) {
   const aptContainer = document.getElementById('elderly-apt-list');
   if (aptContainer) {
     aptContainer.innerHTML = (state.appointments || []).map(apt => `
-      <div class="card" style="padding: 1.25rem; margin-bottom: 0.8rem;">
-        <h4 style="font-size: 1.15rem; color: var(--text-primary);">${apt.title}</h4>
-        <p style="font-size: 0.9rem; color: var(--text-secondary); margin-top: 0.2rem;">
+      <div class="card" style="padding: 1rem; margin-bottom: 0.6rem;">
+        <h4 style="font-size: 1.05rem; color: var(--text-primary);">${apt.title}</h4>
+        <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
           📅 ${apt.date} at ${apt.time} • 📍 ${apt.location}
         </p>
       </div>
@@ -873,20 +931,50 @@ function renderAnalytics(state) {
   const realismData = window.AnalyticsEngine.analyzePlanExecutionRealism(state);
   const goalVelocityData = window.AnalyticsEngine.analyzeGoalVelocity(state);
 
-  const leakEl = document.getElementById('analytics-time-leak-text');
-  if (leakEl) leakEl.textContent = timeLeakData.insight;
+  const leakEl = document.getElementById('analytics-time-leak-body');
+  if (leakEl) {
+    leakEl.innerHTML = `
+      <div style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.4;">
+        ${timeLeakData.insight}
+      </div>
+      <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem;">
+        Total Overrun Logged: <strong>${timeLeakData.totalOverrunMinutes} mins</strong>
+      </div>
+    `;
+  }
 
-  const habitEl = document.getElementById('analytics-habit-text');
-  if (habitEl) habitEl.textContent = habitData.insight;
+  const habitEl = document.getElementById('analytics-habit-body');
+  if (habitEl) {
+    habitEl.innerHTML = `
+      <div style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.4;">
+        ${habitData.insight}
+      </div>
+      <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem;">
+        Consistency: <strong>${habitData.consistencyScore || 0}%</strong>
+      </div>
+    `;
+  }
 
-  const realismEl = document.getElementById('analytics-realism-text');
-  if (realismEl) realismEl.textContent = realismData.verdict;
+  const realismEl = document.getElementById('analytics-realism-body');
+  if (realismEl) {
+    realismEl.innerHTML = `
+      <div style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.4;">
+        ${realismData.verdict}
+      </div>
+      <div style="font-size: 0.78rem; color: var(--text-muted); margin-top: 0.4rem;">
+        Planning Realism: <strong>${realismData.combinedScore}%</strong>
+      </div>
+    `;
+  }
 
-  const realismScoreEl = document.getElementById('analytics-realism-score');
-  if (realismScoreEl) realismScoreEl.textContent = `${realismData.combinedScore}%`;
-
-  const velocityEl = document.getElementById('analytics-velocity-text');
-  if (velocityEl) velocityEl.textContent = goalVelocityData.insight;
+  const velocityEl = document.getElementById('analytics-velocity-body');
+  if (velocityEl) {
+    velocityEl.innerHTML = `
+      <div style="font-size: 0.88rem; color: var(--text-primary); line-height: 1.4;">
+        ${goalVelocityData.insight}
+      </div>
+    `;
+  }
 }
 
 /* ==========================================================================
@@ -903,68 +991,11 @@ function setupDietInteractions() {
           ...s,
           waterGlasses: glassIndex + 1
         }));
-        if (window.audioZenith) window.audioZenith.playWaterDrop();
+        if (window.audioFlowOS) window.audioFlowOS.playWaterDrop();
         window.questsEngine?.dealDamage(20, 'Hydration');
       }
     });
   }
-
-  const genSnackBtn = document.getElementById('btn-random-snack');
-  if (genSnackBtn) {
-    genSnackBtn.addEventListener('click', () => {
-      const snack = window.DietPlanner.getRandomSnack();
-      const resultBox = document.getElementById('quick-snack-result');
-      if (resultBox) {
-        resultBox.innerHTML = `
-          <div style="margin-top: 0.8rem; padding: 0.9rem; background: rgba(16, 185, 129, 0.12); border: 1px solid var(--accent-diet); border-radius: var(--radius-md);">
-            <strong style="color: var(--accent-diet-light); font-size: 0.95rem;">💡 ${snack.name}</strong>
-            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">⏱️ Prep: ${snack.prep} • ⚡ ${snack.benefit}</p>
-          </div>
-        `;
-      }
-    });
-  }
-}
-
-function renderDietPlans(goalKey) {
-  const plan = window.DietPlanner.getPlan(goalKey);
-  const container = document.getElementById('diet-meal-cards-wrapper');
-  if (!container) return;
-
-  container.innerHTML = `
-    <div class="meal-card">
-      <div>
-        <span class="meal-badge">🌅 Morning Brain Fuel</span>
-        <h4 style="margin-top: 0.6rem; color: var(--text-primary); font-size: 1.05rem;">${plan.breakfast.name}</h4>
-        <ul class="meal-items-list">
-          ${plan.breakfast.ingredients.map(i => `<li>${i}</li>`).join('')}
-        </ul>
-      </div>
-      <p style="font-size: 0.78rem; color: var(--accent-diet-light); font-style: italic;">${plan.breakfast.benefits}</p>
-    </div>
-
-    <div class="meal-card">
-      <div>
-        <span class="meal-badge">☀️ Sustained Focus Lunch</span>
-        <h4 style="margin-top: 0.6rem; color: var(--text-primary); font-size: 1.05rem;">${plan.lunch.name}</h4>
-        <ul class="meal-items-list">
-          ${plan.lunch.ingredients.map(i => `<li>${i}</li>`).join('')}
-        </ul>
-      </div>
-      <p style="font-size: 0.78rem; color: var(--accent-diet-light); font-style: italic;">${plan.lunch.benefits}</p>
-    </div>
-
-    <div class="meal-card">
-      <div>
-        <span class="meal-badge">🌙 Restorative Sleep Dinner</span>
-        <h4 style="margin-top: 0.6rem; color: var(--text-primary); font-size: 1.05rem;">${plan.dinner.name}</h4>
-        <ul class="meal-items-list">
-          ${plan.dinner.ingredients.map(i => `<li>${i}</li>`).join('')}
-        </ul>
-      </div>
-      <p style="font-size: 0.78rem; color: var(--accent-diet-light); font-style: italic;">${plan.dinner.benefits}</p>
-    </div>
-  `;
 }
 
 /* ==========================================================================
@@ -974,62 +1005,33 @@ function setupSoundscapeInteractions() {
   document.querySelectorAll('.sound-card').forEach(card => {
     card.addEventListener('click', (e) => {
       const mode = e.currentTarget.dataset.sound;
-      const isPlaying = window.audioZenith.playSound(mode);
+      const isPlaying = window.audioFlowOS ? window.audioFlowOS.playSound(mode) : false;
 
       document.querySelectorAll('.sound-card').forEach(c => c.classList.remove('playing'));
       if (isPlaying) {
         card.classList.add('playing');
-        showToast(`🎧 Playing soundscape: ${card.querySelector('.sound-label').textContent}`);
+        showToast(`🎧 Playing soundscape: ${mode.toUpperCase()}`);
       }
     });
   });
 
-  const volSlider = document.getElementById('sound-volume-slider');
-  const volLabel = document.getElementById('ambient-vol-label');
+  const volSlider = document.getElementById('soundscape-vol-slider');
   if (volSlider) {
     volSlider.addEventListener('input', (e) => {
-      const val = parseFloat(e.target.value);
-      window.audioZenith.setVolume(val);
-      if (volLabel) volLabel.textContent = `${Math.round(val * 100)}%`;
+      const val = parseFloat(e.target.value) / 100;
+      if (window.audioFlowOS) window.audioFlowOS.setVolume(val);
     });
   }
-
-  const sfxBtn = document.getElementById('btn-toggle-sfx');
-  if (sfxBtn) {
-    sfxBtn.addEventListener('click', () => {
-      const isMuted = window.audioZenith.toggleSfxMute();
-      sfxBtn.innerHTML = isMuted 
-        ? '<i data-lucide="volume-x" style="width: 13px;"></i> SFX Muted'
-        : '<i data-lucide="volume-2" style="width: 13px;"></i> SFX On';
-      if (window.lucide) lucide.createIcons();
-      showToast(isMuted ? '🔇 Sound effects muted' : '🔊 Sound effects active');
-    });
-  }
-
-  const sleepPills = document.querySelectorAll('.sleep-pill');
-  sleepPills.forEach(pill => {
-    pill.addEventListener('click', () => {
-      sleepPills.forEach(p => p.classList.remove('active'));
-      pill.classList.add('active');
-      const mins = parseInt(pill.dataset.mins, 10);
-      window.audioZenith.setSleepTimer(mins);
-      if (mins > 0) {
-        showToast(`🌙 Sleep timer set: Ambient sound will fade and stop in ${mins} mins`);
-      } else {
-        showToast(`🌙 Sleep timer disabled`);
-      }
-    });
-  });
 }
 
 /* ==========================================================================
    AI GENERATOR WIZARD MODAL
    ========================================================================== */
 function setupGeneratorModal() {
-  const modal = document.getElementById('generator-modal');
+  const modal = document.getElementById('ai-generator-modal');
   const openBtn = document.getElementById('btn-open-generator');
   const closeBtn = document.getElementById('btn-close-generator');
-  const form = document.getElementById('routine-generator-form');
+  const form = document.getElementById('schedule-generator-form');
 
   if (openBtn && modal) {
     openBtn.addEventListener('click', () => modal.classList.add('open'));
@@ -1058,12 +1060,12 @@ function setupGeneratorModal() {
       window.appState.update(s => ({
         ...s,
         activeArchetype: archetype,
-        profile: { archetype, wakeTime, bedTime, targetStudyHours: studyHours, dietGoal },
+        profile: { ...(s.profile || {}), archetype, wakeTime, bedTime, targetStudyHours: studyHours, dietGoal },
         todaySchedule: newSchedule
       }));
 
       modal.classList.remove('open');
-      showToast('✨ Custom AI Routine generated connecting active Goals, Tasks & Habits!');
+      showToast('✨ Custom AI Routine synthesized connecting active Goals, Tasks & Habits!');
     });
   }
 }
@@ -1088,31 +1090,20 @@ function setupThemeToggle() {
    GLOBAL REACTIVE RENDERER
    ========================================================================== */
 function renderAllState(state) {
-  const vitalityScoreEls = document.querySelectorAll('.vitality-score-val');
-  vitalityScoreEls.forEach(el => el.textContent = `${state.vitalityScore}%`);
+  const score = state.dayBalanceScore || state.vitalityScore || 85;
+
+  const vitalityScoreEls = document.querySelectorAll('.vitality-score-val, .day-balance-score-val');
+  vitalityScoreEls.forEach(el => el.textContent = `${score}%`);
 
   const vitalityBars = document.querySelectorAll('.vitality-progress-bar');
-  vitalityBars.forEach(el => el.style.width = `${state.vitalityScore}%`);
-
-  const screenTimeEl = document.getElementById('stat-screen-time');
-  if (screenTimeEl) {
-    const hours = Math.floor(state.screenTimeMinutes / 60);
-    const mins = state.screenTimeMinutes % 60;
-    screenTimeEl.textContent = `${hours}h ${mins}m`;
-  }
-
-  const studyTimeEl = document.getElementById('stat-study-time');
-  if (studyTimeEl) {
-    const hours = Math.floor(state.studyMinutesCompleted / 60);
-    const mins = state.studyMinutesCompleted % 60;
-    studyTimeEl.textContent = `${hours}h ${mins}m`;
-  }
+  vitalityBars.forEach(el => el.style.width = `${score}%`);
 
   const waterContainer = document.getElementById('water-glasses-container');
   if (waterContainer) {
     let glassesHtml = '';
-    for (let i = 0; i < state.waterGoal; i++) {
-      const isFilled = i < state.waterGlasses;
+    const goal = state.waterGoal || 8;
+    for (let i = 0; i < goal; i++) {
+      const isFilled = i < (state.waterGlasses || 0);
       glassesHtml += `
         <button class="water-glass-btn btn-icon ${isFilled ? 'filled' : ''}" data-index="${i}" title="${isFilled ? 'Hydrated' : 'Click to log'}">
           <i data-lucide="droplet" style="color: ${isFilled ? 'var(--accent-movement-light)' : 'var(--text-muted)'}; fill: ${isFilled ? 'var(--accent-movement-light)' : 'none'}; width: 18px; height: 18px;"></i>
@@ -1128,10 +1119,10 @@ function renderAllState(state) {
   renderTasksAndHabits(state);
   renderOlderAdultMode(state);
   renderAnalytics(state);
-  renderDietPlans(state.profile.dietGoal || 'clean-energy');
-  window.digitalTwinEngine?.render();
+  window.personalFlowProfileEngine?.render();
   window.memoryReplayEngine?.render();
   window.copilotEngine?.render();
+  window.questsEngine?.render();
 
   if (window.lucide) lucide.createIcons();
 }

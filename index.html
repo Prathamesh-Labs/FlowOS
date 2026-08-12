@@ -49,79 +49,80 @@
       </div>
 
       <!-- User XP Level Widget -->
-      <div style="margin-top: 1.2rem; padding: 0.85rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+      <div style="margin-top: 1rem; padding: 0.75rem; background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle); border-radius: var(--radius-md);">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.35rem;">
           <span id="user-rank-level" class="rank-badge-pill">Lvl 2</span>
-          <span id="user-rank-title" style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Circadian Knight</span>
+          <span id="user-rank-title" style="font-size: 0.75rem; color: var(--text-secondary); font-weight: 600;">Circadian Operator</span>
         </div>
         <div class="progress-bar-bg" style="height: 5px;">
           <div id="user-xp-bar" class="progress-bar-fill" style="width: 40%;"></div>
         </div>
       </div>
 
+      <!-- 5 Primary Core Navigation Layers -->
       <nav class="nav-menu">
-        <a href="#welcome" class="nav-item" data-tab="welcome">
-          <i data-lucide="sparkles"></i>
-          <span>Home & Showcase</span>
-          <span class="nav-badge" style="background: var(--grad-zenith);">Showcase</span>
-        </a>
         <a href="#today" class="nav-item active" data-tab="today">
           <i data-lucide="compass"></i>
-          <span>Command Center</span>
+          <span>NOW</span>
           <span class="nav-badge">Live</span>
         </a>
-        <a href="#goals" class="nav-item" data-tab="goals">
-          <i data-lucide="target"></i>
-          <span>Goal Intelligence</span>
+        <a href="#plan" class="nav-item" data-tab="plan">
+          <i data-lucide="calendar-range"></i>
+          <span>PLAN</span>
         </a>
-        <a href="#tasks-habits" class="nav-item" data-tab="tasks-habits">
-          <i data-lucide="check-check"></i>
-          <span>Tasks & Habits</span>
+        <a href="#adapt" class="nav-item" data-tab="adapt">
+          <i data-lucide="shuffle"></i>
+          <span>ADAPT</span>
+          <span class="nav-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4);">Reality</span>
         </a>
-        <a href="#study" class="nav-item" data-tab="study">
-          <i data-lucide="brain-circuit"></i>
-          <span>Focus & Deep Work</span>
+        <a href="#understand" class="nav-item" data-tab="understand">
+          <i data-lucide="line-chart"></i>
+          <span>UNDERSTAND</span>
         </a>
-        <a href="#diet" class="nav-item" data-tab="diet">
-          <i data-lucide="utensils"></i>
-          <span>Nutrition & Fuel</span>
-        </a>
-        <a href="#screen" class="nav-item" data-tab="screen">
-          <i data-lucide="eye-off"></i>
-          <span>Screen & Eye Comfort</span>
-        </a>
-        <a href="#elderly" class="nav-item" data-tab="elderly">
+        <a href="#wellness" class="nav-item" data-tab="wellness">
           <i data-lucide="heart-pulse"></i>
-          <span>Older-Adult Mode</span>
-        </a>
-        <a href="#digital-twin" class="nav-item" data-tab="digital-twin">
-          <i data-lucide="cpu"></i>
-          <span>Behavioral Twin</span>
-          <span class="nav-badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light);">AI Model</span>
-        </a>
-        <a href="#memory-replay" class="nav-item" data-tab="memory-replay">
-          <i data-lucide="film"></i>
-          <span>Memory Replay</span>
-          <span class="nav-badge" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">Timeline</span>
-        </a>
-        <a href="#analytics" class="nav-item" data-tab="analytics">
-          <i data-lucide="bar-chart-3"></i>
-          <span>Intelligence & Insights</span>
+          <span>WELLNESS</span>
         </a>
       </nav>
 
+      <!-- Secondary Tools & Modular Workspaces -->
+      <div class="sidebar-secondary-menu">
+        <div class="sidebar-section-label">Workspaces & Tools</div>
+        <a href="#study" class="sidebar-sub-item" data-tab="study">
+          <i data-lucide="brain-circuit" style="width: 15px; height: 15px;"></i>
+          <span>Focus Room</span>
+        </a>
+        <a href="#motivation" class="sidebar-sub-item" data-tab="motivation">
+          <i data-lucide="swords" style="width: 15px; height: 15px;"></i>
+          <span>Motivation & Quests</span>
+        </a>
+        <a href="#elderly" class="sidebar-sub-item" data-tab="elderly">
+          <i data-lucide="accessibility" style="width: 15px; height: 15px;"></i>
+          <span>Care & Accessibility</span>
+        </a>
+        <a href="#sync" class="sidebar-sub-item" data-tab="sync">
+          <i data-lucide="qr-code" style="width: 15px; height: 15px;"></i>
+          <span>Device Sync & Data</span>
+        </a>
+        <a href="#welcome" class="sidebar-sub-item" data-tab="welcome">
+          <i data-lucide="sparkles" style="width: 15px; height: 15px;"></i>
+          <span>Showcase & Archetypes</span>
+        </a>
+      </div>
+
+      <!-- Sidebar Footer / Single Primary Metric: DAY BALANCE -->
       <div class="sidebar-footer">
-        <button id="btn-open-debrief" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.8rem; font-size: 0.82rem;">
-          <i data-lucide="moon"></i> Evening Debrief
+        <button id="btn-open-debrief" class="btn btn-secondary" style="width: 100%; margin-bottom: 0.4rem; font-size: 0.8rem; padding: 0.45rem;">
+          <i data-lucide="moon"></i> Evening Reflection
         </button>
 
-        <div class="vitality-widget">
-          <div class="vitality-header">
-            <span>Zenith Vitality Score</span>
-            <span class="vitality-score vitality-score-val">82%</span>
+        <div class="day-balance-widget">
+          <div class="day-balance-header">
+            <span>Day Balance</span>
+            <span class="day-balance-score-val vitality-score-val">85%</span>
           </div>
           <div class="progress-bar-bg">
-            <div class="progress-bar-fill vitality-progress-bar" style="width: 82%;"></div>
+            <div class="progress-bar-fill vitality-progress-bar" style="width: 85%;"></div>
           </div>
         </div>
       </div>
@@ -144,27 +145,27 @@
         </div>
 
         <div class="header-actions">
-          <button id="btn-header-voice-mic" class="btn btn-secondary" title="Voice Assistant (Alt+V)">
+          <button id="btn-header-voice-mic" class="btn btn-secondary" title="Voice Assistant & Command Prompt (Alt+V)">
             <i data-lucide="mic" style="color: var(--accent-study-light);"></i>
-            <span>Voice AI</span>
+            <span>Voice / Command</span>
           </button>
           <button id="btn-open-qr-sync" class="btn btn-secondary" title="Sync to Mobile Phone">
             <i data-lucide="qr-code"></i>
-            <span>Sync Phone</span>
+            <span>Sync</span>
           </button>
           <button onclick="openScenarioSimulator('spend-extra-hours-coding')" class="btn btn-secondary" title="Simulate What-If Schedule">
             <i data-lucide="git-branch"></i>
             <span>What-If Simulator</span>
           </button>
-          <button id="toggle-accessibility-mode" class="btn btn-secondary" title="Switch Accessible / Senior View">
+          <button id="toggle-accessibility-mode" class="btn btn-secondary" title="Switch Accessible / Care Mode">
             <i data-lucide="accessibility"></i>
-            <span>Accessible Mode</span>
+            <span>Care Mode</span>
           </button>
           <button id="btn-open-generator" class="btn btn-primary">
             <i data-lucide="sparkles"></i>
             <span>AI Forge Routine</span>
           </button>
-          <button id="btn-header-pwa-install" class="btn btn-emerald btn-pwa-install" style="display: none; padding: 0.5rem 0.9rem; font-size: 0.82rem;" title="Install Native App on Desktop/Mobile">
+          <button id="btn-header-pwa-install" class="btn btn-emerald btn-pwa-install" style="display: none; padding: 0.45rem 0.85rem; font-size: 0.8rem;" title="Install Native App on Desktop/Mobile">
             <i data-lucide="download"></i>
             <span>Install App</span>
           </button>
@@ -175,391 +176,1051 @@
       </header>
 
       <!-- ==========================================
-           TAB 0: LANDING & SHOWCASE HOMEPAGE
-           ========================================== -->
-      <section id="tab-welcome" class="tab-panel">
-        <!-- Hero Section -->
-        <div class="landing-hero-container">
-          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.35); padding: 0.35rem 0.9rem; border-radius: var(--radius-full); margin-bottom: 1.5rem;">
-            <span class="pulse-dot"></span>
-            <span style="font-size: 0.78rem; font-weight: 700; color: var(--accent-study-light); letter-spacing: 0.05em; text-transform: uppercase;">
-              ✨ The World's First Adaptive Day & Goal Operating System
-            </span>
-          </div>
-
-          <h1 class="landing-hero-title">
-            Execute with Total Clarity.<br>Adapt When Reality Changes.
-          </h1>
-
-          <p class="landing-hero-subtitle">
-            FlowOS orchestrates your daily focus blocks, protects your circadian bedtime, learns your behavioral cognitive stamina, and rebalances your timeline autonomously when plans go off-track.
-          </p>
-
-          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
-            <button id="btn-welcome-launch" class="btn btn-primary" style="padding: 0.85rem 2.2rem; font-size: 1.05rem;">
-              <i data-lucide="rocket"></i> Enter Command Center
-            </button>
-            <button class="btn btn-secondary btn-pwa-install" style="display: none; padding: 0.85rem 1.8rem; font-size: 1.05rem;">
-              <i data-lucide="download"></i> Install Native App
-            </button>
-          </div>
-        </div>
-
-        <!-- 1-Click Fast-Track Archetype Selector -->
-        <div style="margin-bottom: 1rem;">
-          <div class="card-header" style="margin-bottom: 0.8rem;">
-            <h3 class="card-title">
-              <i data-lucide="zap" style="color: var(--accent-study-light);"></i>
-              <span>Choose Your Execution Archetype (1-Click Calibration)</span>
-            </h3>
-            <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Instant Personalization</span>
-          </div>
-          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.4rem;">
-            Select your primary profile to pre-calibrate your daily mission, optimal study block durations, focus tasks, and procedural soundscapes.
-          </p>
-        </div>
-
-        <div class="archetypes-grid">
-          <!-- Student -->
-          <div class="archetype-select-card" data-archetype="student">
-            <div>
-              <div class="archetype-icon-wrapper" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">
-                🎓
-              </div>
-              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Academic & Exam Sprint</h4>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
-                Optimized for students and learners. 50-minute intense study blocks, 10Hz Alpha waves, and algorithmic problem tracking.
-              </p>
-            </div>
-            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
-              <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">50m Blocks • Alpha Audio</span>
-              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
-            </div>
-          </div>
-
-          <!-- Software Engineer -->
-          <div class="archetype-select-card" data-archetype="engineer">
-            <div>
-              <div class="archetype-icon-wrapper" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
-                💻
-              </div>
-              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Software Engineer & Flow</h4>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
-                Engineered for developers. 60-minute deep architecture blocks, debugging overrun protection, and 40Hz Gamma flow state audio.
-              </p>
-            </div>
-            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
-              <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">60m Blocks • Gamma Audio</span>
-              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
-            </div>
-          </div>
-
-          <!-- Executive / Founder -->
-          <div class="archetype-select-card" data-archetype="executive">
-            <div>
-              <div class="archetype-icon-wrapper" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
-                ⚡
-              </div>
-              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Founder & Executive</h4>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
-                High-leverage milestone throughput, AI obstacle deconstruction, and autonomous bedtime defense for peak cognitive recovery.
-              </p>
-            </div>
-            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
-              <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">45m Blocks • Zen Harmonics</span>
-              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
-            </div>
-          </div>
-
-          <!-- Wellness & Longevity -->
-          <div class="archetype-select-card" data-archetype="wellness">
-            <div>
-              <div class="archetype-icon-wrapper" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">
-                🧘
-              </div>
-              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Longevity & Habit Master</h4>
-              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
-                8-glass hydration pacing, 20-20-20 screen guardian, posture checks, and unbreakable 365-day habit streaks.
-              </p>
-            </div>
-            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
-              <span class="badge" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">25m Pomodoro • Rain Audio</span>
-              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
-            </div>
-          </div>
-        </div>
-
-        <!-- 6 Core Innovations Bento Grid -->
-        <div class="card-header" style="margin-bottom: 1rem;">
-          <h3 class="card-title">
-            <i data-lucide="layers" style="color: var(--accent-study-light);"></i>
-            <span>6 Revolutionary Operating Systems Inside FlowOS</span>
-          </h3>
-          <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">All-In-One Architecture</span>
-        </div>
-
-        <div class="bento-showcase-grid">
-          <div class="bento-card">
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(99, 102, 241, 0.15); display: flex; align-items: center; justify-content: center; color: var(--accent-study-light);">
-                <i data-lucide="cpu"></i>
-              </div>
-              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Behavioral Digital Twin</h4>
-            </div>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
-              Models your empirical work hours, cognitive stamina curves, and task estimation bias with honest confidence ratings.
-            </p>
-          </div>
-
-          <div class="bento-card">
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(236, 72, 153, 0.15); display: flex; align-items: center; justify-content: center; color: #f472b6;">
-                <i data-lucide="film"></i>
-              </div>
-              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Living Memory Replay</h4>
-            </div>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
-              Replay previous days as a living experiential story from morning sunlight to night debrief with an interactive scrubber.
-            </p>
-          </div>
-
-          <div class="bento-card">
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; color: #fbbf24;">
-                <i data-lucide="bot"></i>
-              </div>
-              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Autonomous AI Copilot</h4>
-            </div>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
-              Executive assistant monitoring impossible schedules and overruns with calm, 1-click solutions.
-            </p>
-          </div>
-
-          <div class="bento-card">
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: #38bdf8;">
-                <i data-lucide="external-link"></i>
-              </div>
-              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Floating Picture-in-Picture</h4>
-            </div>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
-              Always-on-top mini-timer widget that stays above VS Code, PDFs, or browser tabs with live controls.
-            </p>
-          </div>
-
-          <div class="bento-card">
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(239, 68, 68, 0.15); display: flex; align-items: center; justify-content: center; color: #f87171;">
-                <i data-lucide="swords"></i>
-              </div>
-              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Weekly RPG Boss Quests</h4>
-            </div>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
-              Every completed focus block deals -150 DMG to the Procrastination Golem with animated damage floaters.
-            </p>
-          </div>
-
-          <div class="bento-card">
-            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
-              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(52, 211, 153, 0.15); display: flex; align-items: center; justify-content: center; color: #34d399;">
-                <i data-lucide="qr-code"></i>
-              </div>
-              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Zero-Server Instant QR Sync</h4>
-            </div>
-            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
-              Scan on-screen QR code with your phone to instantly sync all streaks, habits, and tasks with zero accounts.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================
-           TAB 1: COMMAND CENTER (HOME)
-           Hierarchy: NOW -> CURRENT MISSION -> WHAT CHANGED -> NEXT ACTION -> TIMELINE
+           TAB 1: NOW (COMMAND CENTER)
+           Answers: "What should I be doing right now?"
            ========================================== -->
       <section id="tab-today" class="tab-panel active">
-        <!-- 1. NOW ACTIVE BLOCK -->
-        <div class="command-now-card">
-          <div style="display: flex; align-items: center; gap: 1.2rem;">
-            <div style="width: 48px; height: 48px; border-radius: var(--radius-md); background: var(--grad-zenith); display: flex; align-items: center; justify-content: center; color: #fff; font-size: 1.3rem;">
-              <i data-lucide="play-circle"></i>
+        <!-- Morning Briefing Banner (Dismissible) -->
+        <div id="morning-cockpit-briefing" class="morning-briefing-banner">
+          <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="width: 44px; height: 44px; border-radius: var(--radius-md); background: var(--grad-zenith); display: flex; align-items: center; justify-content: center; color: #fff; flex-shrink: 0; box-shadow: var(--shadow-glow);">
+              <i data-lucide="sunrise"></i>
             </div>
             <div>
               <div style="display: flex; align-items: center; gap: 0.6rem;">
-                <span class="pulse-badge"><span class="pulse-dot"></span> NOW EXECUTING</span>
-                <span id="command-now-time" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary); font-weight: 700;">08:30 - 10:15</span>
+                <span class="badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light); border: 1px solid var(--accent-study);">
+                  ☀️ FlowOS Daily Briefing
+                </span>
+                <span style="font-size: 0.76rem; color: var(--text-muted);">Calibrated with Current Goals & Sleep</span>
               </div>
-              <h3 id="command-now-title" style="font-size: 1.25rem; font-weight: 800; color: #fff; margin-top: 0.2rem;">
-                Deep Focus Block 1: Master Python & Tree Problems
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-top: 0.2rem;">
+                Welcome to your FlowOS Day. Peak Focus Window is Open.
               </h3>
-              <p id="command-now-desc" style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.15rem;">
-                Core Mission execution: Debug User Auth Flow in Web App.
+              <p style="font-size: 0.84rem; color: var(--text-secondary); margin-top: 0.15rem;">
+                Target study: 6 hours • 3 high-priority tasks queued • Bedtime target: 10:30 PM.
               </p>
             </div>
           </div>
-          <button onclick="document.querySelector('[data-tab=study]').click();" class="btn btn-primary" style="padding: 0.75rem 1.4rem;">
-            <i data-lucide="play"></i> Open Focus Room
-          </button>
+          <div style="display: flex; align-items: center; gap: 0.6rem;">
+            <button id="btn-audio-briefing" class="btn btn-secondary" style="font-size: 0.82rem;" title="Listen to AI Voice Briefing">
+              <i data-lucide="volume-2" style="color: var(--accent-study-light);"></i> Listen
+            </button>
+            <button id="btn-dismiss-briefing" class="btn-icon" title="Dismiss Briefing">
+              <i data-lucide="x"></i>
+            </button>
+          </div>
         </div>
 
-        <!-- 2. CURRENT MISSION -->
-        <div class="command-mission-card">
-          <div style="display: flex; justify-content: space-between; align-items: center;">
-            <div>
-              <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--accent-study-light);">
-                🔥 PRIMARY MISSION OF THE DAY
+        <!-- 1. NOW COMMAND HEADER & ACTIVE MISSION -->
+        <div class="page-hero">
+          <div>
+            <div style="display: flex; align-items: center; gap: 0.6rem;">
+              <span class="pulse-dot"></span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: var(--accent-diet-light); text-transform: uppercase; letter-spacing: 0.08em;">
+                NOW ACTIVE FOCUS
               </span>
-              <h4 id="command-mission-title" style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-top: 0.2rem;">
-                Ship Modern Python Async API & Complete Tree Problems
-              </h4>
             </div>
-            <span id="command-mission-target" style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--accent-diet-light); font-weight: 700;">
-              🎯 Target: Today at 08:30 PM
-            </span>
+            <h2 id="command-mission-title" style="margin-top: 0.2rem;">Master Python & Binary Tree Data Structures</h2>
+            <p id="command-mission-target" style="color: var(--text-secondary); font-size: 0.9rem;">
+              🎯 Target Completion: Today at 08:30 PM • 3 Core Milestones in Flight
+            </p>
+          </div>
+          <div style="display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap;">
+            <button onclick="document.querySelector('.nav-item[data-tab=\'study\']').click()" class="btn btn-primary">
+              <i data-lucide="maximize-2"></i> Open Focus Room
+            </button>
+            <button onclick="document.querySelector('.nav-item[data-tab=\'plan\']').click()" class="btn btn-secondary">
+              <i data-lucide="calendar-range"></i> View Full Plan
+            </button>
           </div>
         </div>
 
-        <!-- 3. WHAT CHANGED (ACTIVE REALITY DIVERGENCE ALERT) -->
-        <div id="command-reality-alert-card" class="reality-alert-card">
-          <!-- Dynamically populated with structured What-Changed -> Impact -> Options -> Recommendation -->
+        <!-- 2. PRIMARY THREE TILES: NOW TIMER | DAY BALANCE | NEXT EVENT -->
+        <div class="grid-3-col" style="margin-bottom: 1.5rem;">
+          <!-- Tile 1: Current Focus Timer Card -->
+          <div class="card" style="border-top: 3px solid var(--accent-study);">
+            <div class="card-header" style="margin-bottom: 0.8rem;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em;">
+                Current Block
+              </span>
+              <span id="command-now-time" class="badge" style="font-family: var(--font-mono); background: rgba(99,102,241,0.15); color: var(--accent-study-light);">
+                09:00 - 10:30
+              </span>
+            </div>
+            <h3 id="command-now-title" style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 0.3rem;">
+              Deep Study Session 1
+            </h3>
+            <p id="command-now-desc" style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.4;">
+              Solve 3 Tree Traversal LeetCode Problems with full focus.
+            </p>
+            <div style="display: flex; gap: 0.45rem; flex-wrap: wrap;">
+              <button onclick="window.focusEngine?.toggle()" class="btn btn-emerald" style="flex: 1; font-size: 0.8rem; padding: 0.45rem;">
+                <i data-lucide="play"></i> Start/Pause Flow
+              </button>
+              <button onclick="window.focusEngine?.addMinutes(10)" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.45rem;" title="Add 10 minutes">
+                +10m
+              </button>
+              <button onclick="window.focusEngine?.completeFocusTask()" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.45rem;" title="Mark Task Complete">
+                <i data-lucide="check"></i> Done
+              </button>
+            </div>
+          </div>
+
+          <!-- Tile 2: Single Primary Metric: DAY BALANCE -->
+          <div class="card" style="border-top: 3px solid var(--accent-diet);">
+            <div class="card-header" style="margin-bottom: 0.6rem;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em;">
+                Primary Metric
+              </span>
+              <span class="badge" style="background: rgba(16, 185, 129, 0.15); color: var(--accent-diet-light);">
+                Day Balance
+              </span>
+            </div>
+            <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 0.6rem;">
+              <div class="day-balance-score-val vitality-score-val" style="font-size: 2.5rem; font-weight: 800; color: var(--accent-diet-light); font-family: var(--font-mono);">
+                85%
+              </div>
+              <div style="text-align: right; font-size: 0.75rem; color: var(--text-secondary);">
+                <div>Execution: <strong>88%</strong></div>
+                <div>Habits: <strong>100%</strong></div>
+              </div>
+            </div>
+            <div class="progress-bar-bg" style="height: 6px; margin-bottom: 0.8rem;">
+              <div class="progress-bar-fill vitality-progress-bar" style="width: 85%;"></div>
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-secondary); line-height: 1.35;">
+              Balanced progression across focus, habit consistency, and circadian recovery buffers.
+            </p>
+          </div>
+
+          <!-- Tile 3: Next Important Event & Next Best Action -->
+          <div class="card" style="border-top: 3px solid var(--accent-screen);">
+            <div class="card-header" style="margin-bottom: 0.6rem;">
+              <span style="font-size: 0.75rem; text-transform: uppercase; color: var(--text-muted); font-weight: 700; letter-spacing: 0.05em;">
+                Next Best Action
+              </span>
+              <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: var(--accent-screen-light);">
+                Recommended
+              </span>
+            </div>
+            <div id="command-next-action-text" style="font-size: 0.88rem; color: var(--text-primary); margin-bottom: 1rem; line-height: 1.4;">
+              <strong>Solve 3 Tree Traversal Problems</strong> (Est. 60m • Priority: HIGH)
+            </div>
+            <div style="display: flex; gap: 0.45rem;">
+              <button onclick="document.querySelector('.nav-item[data-tab=\'plan\']').click()" class="btn btn-secondary" style="flex: 1; font-size: 0.8rem; padding: 0.45rem;">
+                <i data-lucide="list-todo"></i> Manage Tasks
+              </button>
+              <button onclick="window.openObstacleModal?.('I am feeling stuck on my next step')" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.45rem;" title="Deconstruct Obstacle">
+                ⚡ Unstick
+              </button>
+            </div>
+          </div>
         </div>
 
-        <!-- 4. NEXT ACTION & ASK ZENITH DECISION ENGINE -->
-        <div class="grid-2-col" style="margin-bottom: 1.5rem;">
-          <!-- Next Action Card -->
-          <div class="card" style="border-left: 4px solid var(--accent-diet);">
-            <span style="font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 800; color: var(--accent-diet-light);">
-              ⚡ IMMEDIATE NEXT BEST ACTION
-            </span>
-            <div id="command-next-action-text" style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-top: 0.4rem;">
-              Debug User Auth Flow in Web App (Est. 60m • Priority: HIGH)
-            </div>
-            <div style="display: flex; gap: 0.6rem; margin-top: 0.8rem; flex-wrap: wrap;">
-              <button onclick="document.querySelector('[data-tab=study]').click();" class="btn btn-emerald" style="padding: 0.4rem 0.9rem; font-size: 0.82rem;">
-                <i data-lucide="play"></i> Start 60m Sprint
-              </button>
-              <button onclick="document.querySelector('[data-tab=tasks-habits]').click();" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">
-                <i data-lucide="plus"></i> Add New Task
-              </button>
-              <button onclick="openObstacleSolver('Debug User Auth Flow');" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">
-                <i data-lucide="help-circle"></i> Deconstruct Blocker
-              </button>
-            </div>
-          </div>
-
-          <!-- Ask Zenith Contextual Assistant -->
-          <div class="card">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-              <h4 style="font-size: 1rem; font-weight: 700; color: var(--text-primary); display: flex; align-items: center; gap: 0.4rem;">
-                <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i> Ask Zenith Contextual Engine
-              </h4>
-              <span style="font-size: 0.7rem; color: var(--text-muted);">Inspects flexible time & mission</span>
-            </div>
-
-            <form id="ask-zenith-form" style="display: flex; gap: 0.5rem;">
-              <input id="ask-zenith-input" type="text" class="form-input" placeholder="e.g. 'I want to finish my project tonight' or 'Can I take a 1h break?'" required>
-              <button type="submit" class="btn btn-primary" style="padding: 0.65rem 1rem;">
-                <i data-lucide="arrow-right"></i>
-              </button>
-            </form>
-
-            <div style="display: flex; gap: 0.4rem; margin-top: 0.6rem; flex-wrap: wrap;">
-              <button class="btn-ask-quick-chip" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.72rem; color: var(--text-secondary); cursor: pointer;">
-                Finish project tonight
-              </button>
-              <button class="btn-ask-quick-chip" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.72rem; color: var(--text-secondary); cursor: pointer;">
-                Can I take a break now?
-              </button>
-              <button class="btn-ask-quick-chip" style="background: rgba(255,255,255,0.05); border: 1px solid var(--border-subtle); padding: 0.2rem 0.6rem; border-radius: var(--radius-full); font-size: 0.72rem; color: var(--text-secondary); cursor: pointer;">
-                How am I doing on time?
-              </button>
-            </div>
-
-            <div id="ask-zenith-result-box"></div>
-          </div>
+        <!-- 3. WHAT CHANGED (ACTIVE REALITY ALERT BANNER) -->
+        <div id="command-reality-alert-card" class="card" style="display: none; border: 1px solid var(--accent-screen); background: rgba(245, 158, 11, 0.08); margin-bottom: 1.5rem;">
+          <!-- Dynamically populated when reality deviates -->
         </div>
 
-        <!-- Reality Quick Trigger Bar -->
-        <div class="card" style="margin-bottom: 1.5rem; padding: 1.1rem 1.4rem;">
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem;">
-            <span style="font-size: 0.78rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase;">
-              ⚡ REALITY EVENTS (Tell Zenith What Changed)
-            </span>
+        <!-- 4. QUICK REALITY TRIGGERS BAR -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header" style="margin-bottom: 0.8rem;">
+            <h3 class="card-title">
+              <i data-lucide="zap"></i>
+              <span>Reality Triggers — What Just Changed?</span>
+            </h3>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">1-Click Adaptive Schedule Recalibration</span>
           </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button class="btn btn-secondary btn-reality-trigger" data-event="woke-late" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+
+          <div class="reality-triggers-grid">
+            <button class="btn-reality-trigger" data-event="woke-late">
               ⏰ I woke up late
             </button>
-            <button class="btn btn-secondary btn-reality-trigger" data-event="task-overrun" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+            <button class="btn-reality-trigger" data-event="task-overrun">
               ⏱️ Task took longer
             </button>
-            <button class="btn btn-secondary btn-reality-trigger" data-event="unexpected-meeting" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+            <button class="btn-reality-trigger" data-event="unexpected-meeting">
               📞 Unexpected meeting
             </button>
-            <button class="btn btn-secondary btn-reality-trigger" data-event="finish-project-today" style="font-size: 0.8rem; padding: 0.45rem 0.85rem;">
+            <button class="btn-reality-trigger" data-event="lost-focus">
+              🧠 Lost focus
+            </button>
+            <button class="btn-reality-trigger" data-event="need-break">
+              ☕ Need a break
+            </button>
+            <button class="btn-reality-trigger" data-event="urgent-task">
+              🚨 New urgent task
+            </button>
+            <button class="btn-reality-trigger" data-event="completed-early">
+              ⚡ Completed early
+            </button>
+            <button class="btn-reality-trigger" data-event="energy-shift">
+              🔋 Energy shift
+            </button>
+            <button class="btn-reality-trigger" data-event="finish-project-today">
               🚀 Finish project today
             </button>
           </div>
         </div>
 
-        <!-- 5. DAILY READINESS & RPG BOSS BATTLE ENCOUNTER -->
-        <div class="grid-2-col" style="margin-bottom: 1.5rem;">
-          <!-- Cognitive Readiness Card -->
+        <!-- 5. ASK FLOWOS CONTEXTUAL DECISION ASSISTANT -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header" style="margin-bottom: 0.8rem;">
+            <h3 class="card-title">
+              <i data-lucide="message-square-code"></i>
+              <span>Ask FlowOS Contextual Assistant</span>
+            </h3>
+            <span style="font-size: 0.78rem; color: var(--accent-study-light);">Real-Time Schedule Arithmetic</span>
+          </div>
+
+          <form id="ask-zenith-form" style="display: flex; gap: 0.8rem;">
+            <input type="text" id="ask-zenith-input" class="form-input" placeholder="e.g. Can I code for 2 more hours without missing bedtime? Or: I have an urgent meeting at 3pm." style="flex: 1;" required>
+            <button type="submit" class="btn btn-primary">
+              <i data-lucide="sparkles"></i> Ask FlowOS
+            </button>
+          </form>
+
+          <div style="display: flex; gap: 0.5rem; margin-top: 0.8rem; flex-wrap: wrap;">
+            <span style="font-size: 0.75rem; color: var(--text-muted); align-self: center;">Quick Prompts:</span>
+            <button class="btn-ask-quick-chip">Can I work 2 extra hours?</button>
+            <button class="btn-ask-quick-chip">What should I drop if I'm behind?</button>
+            <button class="btn-ask-quick-chip">I feel exhausted right now</button>
+            <button class="btn-ask-quick-chip">Unexpected 45m meeting</button>
+          </div>
+
+          <div id="ask-zenith-result-box">
+            <!-- Dynamic AI Answer Card -->
+          </div>
+        </div>
+
+        <!-- 6. DAILY READINESS CHECK-IN (Self-Reported Planning Signal) -->
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i data-lucide="activity" style="color: var(--accent-diet-light);"></i>
+              <span>Daily Readiness & Energy Index</span>
+            </h3>
+            <span id="readiness-status-display" class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Peak Flow State</span>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-bottom: 1rem;">
+            <div style="padding: 0.9rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Cognitive Capacity Index</div>
+              <div id="readiness-score-display" style="font-family: var(--font-mono); font-size: 2rem; font-weight: 800; color: var(--accent-diet-light);">85%</div>
+              <p id="readiness-rec-display" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.3rem;">
+                Cognitive readiness is peak. Ideal for deep complex problem solving and 50m study blocks.
+              </p>
+            </div>
+            <div style="padding: 0.9rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Optimal Focus Block Size</div>
+              <div id="readiness-block-mins" style="font-family: var(--font-mono); font-size: 1.8rem; font-weight: 700; color: var(--accent-study-light); margin-top: 0.2rem;">50 mins</div>
+              <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.5rem;">
+                Self-reported planning signal (non-medical).
+              </div>
+            </div>
+          </div>
+
+          <form id="readiness-checkin-form" style="display: flex; flex-direction: column; gap: 0.6rem;">
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem; font-size: 0.78rem;">
+              <div>
+                <label style="color: var(--text-muted);">😴 Sleep (Hours)</label>
+                <input id="readiness-sleep-hrs" type="number" step="0.5" min="3" max="12" value="7.5" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
+              </div>
+              <div>
+                <label style="color: var(--text-muted);">🌙 Sleep Quality (1-5)</label>
+                <input id="readiness-sleep-qual" type="number" min="1" max="5" value="4" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
+              </div>
+              <div>
+                <label style="color: var(--text-muted);">🧘 Physical Fatigue (1-5)</label>
+                <input id="readiness-soreness" type="number" min="1" max="5" value="2" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
+              </div>
+              <div>
+                <label style="color: var(--text-muted);">⚡ Mental Energy (1-10)</label>
+                <input id="readiness-energy" type="number" min="1" max="10" value="8" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
+              </div>
+            </div>
+            <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem;">
+              <button type="submit" class="btn btn-primary" style="flex: 1; font-size: 0.8rem; padding: 0.45rem;">
+                Save Readiness Check-in
+              </button>
+              <button type="button" id="btn-readiness-adapt-schedule" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.45rem;">
+                <i data-lucide="sparkles"></i> Adapt Schedule to Readiness
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 2: PLAN (GOALS, TASKS & TIMELINE)
+           ========================================== -->
+      <section id="tab-plan" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Plan & Schedule Hub</h2>
+            <p>Unified pipeline: Ambitious Goals ➔ Actionable Tasks & Habits ➔ 24-Hour Timeline.</p>
+          </div>
+        </div>
+
+        <!-- Subnav Pill Switcher -->
+        <div class="subnav-pills-container">
+          <button class="subnav-pill active" data-subnav="plan-goals">
+            <i data-lucide="target" style="width: 15px; height: 15px;"></i> Goals & Milestones
+          </button>
+          <button class="subnav-pill" data-subnav="plan-tasks">
+            <i data-lucide="check-square" style="width: 15px; height: 15px;"></i> Tasks & Habits
+          </button>
+          <button class="subnav-pill" data-subnav="plan-timeline">
+            <i data-lucide="calendar" style="width: 15px; height: 15px;"></i> 24-Hour Schedule Timeline
+          </button>
+        </div>
+
+        <!-- PANEL 2A: GOALS & MILESTONES -->
+        <div id="panel-plan-goals" class="subnav-panel active">
+          <div class="grid-2-col" style="margin-bottom: 1.5rem;">
+            <div class="card">
+              <h3 class="card-title" style="margin-bottom: 0.6rem;">
+                <i data-lucide="sparkles"></i>
+                <span>Decompose a New Goal</span>
+              </h3>
+              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
+                Type a goal (e.g. <em>"Learn Python & Data Science"</em> or <em>"Prepare for Bar Exam"</em>) and FlowOS will synthesize milestones and tasks.
+              </p>
+
+              <form id="new-goal-form">
+                <div class="form-group">
+                  <label class="form-label">What is your core goal?</label>
+                  <input type="text" name="goalPrompt" class="form-input" placeholder="e.g. Master Full-Stack Web Development" required>
+                </div>
+                <div class="form-group">
+                  <label class="form-label">Category</label>
+                  <select name="goalCategory" class="form-select">
+                    <option value="study">Academic / Career Skill</option>
+                    <option value="wellness">Health & Physical Habit</option>
+                    <option value="screen">Digital Balance</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">
+                  <i data-lucide="wand-2"></i> Synthesize Milestones & Tasks
+                </button>
+              </form>
+            </div>
+
+            <div>
+              <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
+                Active Goal Pipelines
+              </h3>
+              <div id="goals-list-container" style="display: flex; flex-direction: column; gap: 1rem;">
+                <!-- Dynamic Goals Cards -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2B: TASKS & HABITS -->
+        <div id="panel-plan-tasks" class="subnav-panel">
+          <div class="dashboard-grid">
+            <div>
+              <div class="card" style="margin-bottom: 1.5rem;">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i data-lucide="list-todo"></i>
+                    <span>Actionable One-Off Tasks</span>
+                  </h3>
+                  <span style="font-size: 0.78rem; color: var(--text-muted);">Estimated vs. Actual Tracked</span>
+                </div>
+
+                <form id="add-task-form" style="display: flex; gap: 0.6rem; margin-bottom: 1.2rem; flex-wrap: wrap;">
+                  <input type="text" name="taskTitle" class="form-input" placeholder="Add a new high-priority task..." style="flex: 2; min-width: 200px;" required>
+                  <input type="number" name="estimatedMins" class="form-input" placeholder="Est. Mins" style="flex: 1; min-width: 90px;" value="45" min="5" max="360" required>
+                  <select name="taskPriority" class="form-select" style="flex: 1; min-width: 100px;">
+                    <option value="high">High Priority</option>
+                    <option value="medium">Medium</option>
+                    <option value="low">Low</option>
+                  </select>
+                  <button type="submit" class="btn btn-primary" style="padding: 0.65rem 1rem;">
+                    <i data-lucide="plus"></i> Add
+                  </button>
+                </form>
+
+                <div id="tasks-list-container" style="display: flex; flex-direction: column; gap: 0.6rem;">
+                  <!-- Dynamic Tasks -->
+                </div>
+              </div>
+            </div>
+
+            <!-- Habits & Grace Recovery -->
+            <div>
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">
+                    <i data-lucide="repeat"></i>
+                    <span>Daily Habit Loops</span>
+                  </h3>
+                  <span style="font-size: 0.78rem; color: var(--accent-diet-light);">Grace Shield Active</span>
+                </div>
+
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                  One-off tasks change daily; recurring habits track consistency over 7-day windows.
+                </p>
+
+                <div id="habits-list-container" style="display: flex; flex-direction: column; gap: 0.8rem;">
+                  <!-- Dynamic Habits with Grace Recovery Indicators -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 2C: 24-HOUR DAY-FORGE SCHEDULE -->
+        <div id="panel-plan-timeline" class="subnav-panel">
+          <div class="page-hero" style="margin-bottom: 1rem;">
+            <div>
+              <h3 style="font-size: 1.25rem; font-weight: 700; color: var(--text-primary);">24-Hour Structured Day-Forge</h3>
+              <p>Circadian balance of focus blocks, nutrition, movement & recovery.</p>
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <button id="btn-export-ics" class="btn btn-secondary" style="font-size: 0.8rem;">
+                <i data-lucide="calendar"></i> Export iCal (.ics)
+              </button>
+              <button id="btn-export-txt" class="btn btn-secondary" style="font-size: 0.8rem;">
+                <i data-lucide="download"></i> Daily Blueprint
+              </button>
+              <button id="btn-export-json" class="btn btn-secondary" style="font-size: 0.8rem;">
+                <i data-lucide="database"></i> JSON Backup
+              </button>
+              <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.8rem;">
+                <i data-lucide="upload"></i> Restore Backup
+                <input type="file" id="input-import-json" accept=".json" style="display: none;">
+              </label>
+            </div>
+          </div>
+
+          <div class="card">
+            <div id="timeline-items-wrapper" class="timeline-container">
+              <!-- Dynamic Schedule Blocks -->
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 3: ADAPT (REALITY & ADAPTATION SUITE)
+           ========================================== -->
+      <section id="tab-adapt" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Reality & Adaptation Engine</h2>
+            <p>What Changed ➔ Schedule Impact Calculation ➔ Concrete Adaptation Recommendations.</p>
+          </div>
+          <button onclick="openScenarioSimulator('spend-extra-hours-coding')" class="btn btn-primary">
+            <i data-lucide="git-branch"></i> Launch What-If Simulator
+          </button>
+        </div>
+
+        <div class="card" style="margin-bottom: 1.5rem;">
+          <div class="card-header">
+            <h3 class="card-title">
+              <i data-lucide="alert-circle" style="color: var(--accent-screen-light);"></i>
+              <span>Reality Divergence Triggers</span>
+            </h3>
+            <span style="font-size: 0.78rem; color: var(--text-muted);">Select reality change to recalculate remaining day</span>
+          </div>
+
+          <div class="reality-triggers-grid">
+            <button class="btn-reality-trigger" data-event="woke-late">
+              ⏰ I woke up late
+            </button>
+            <button class="btn-reality-trigger" data-event="task-overrun">
+              ⏱️ Task took longer
+            </button>
+            <button class="btn-reality-trigger" data-event="unexpected-meeting">
+              📞 Unexpected meeting
+            </button>
+            <button class="btn-reality-trigger" data-event="lost-focus">
+              🧠 Lost focus
+            </button>
+            <button class="btn-reality-trigger" data-event="need-break">
+              ☕ Need a break
+            </button>
+            <button class="btn-reality-trigger" data-event="urgent-task">
+              🚨 New urgent task
+            </button>
+            <button class="btn-reality-trigger" data-event="completed-early">
+              ⚡ Completed early
+            </button>
+            <button class="btn-reality-trigger" data-event="energy-shift">
+              🔋 Energy shift
+            </button>
+            <button class="btn-reality-trigger" data-event="finish-project-today">
+              🚀 Finish project today
+            </button>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom: 0.6rem;">
+              <i data-lucide="sliders"></i>
+              <span>Live Schedule Impact Inspector</span>
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Evaluates available flexible buffers before compromising sleep or meal windows:
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+              <div style="padding: 0.8rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+                  <span>Flexible Buffer Margin:</span>
+                  <strong style="color: var(--accent-diet-light);">45 mins available</strong>
+                </div>
+              </div>
+              <div style="padding: 0.8rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+                  <span>Bedtime Boundary:</span>
+                  <strong style="color: #fff;">10:30 PM (Protected)</strong>
+                </div>
+              </div>
+              <div style="padding: 0.8rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.82rem;">
+                  <span>Overrun Recovery Protocol:</span>
+                  <strong style="color: var(--accent-study-light);">Automatic Compression</strong>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom: 0.6rem;">
+              <i data-lucide="git-merge"></i>
+              <span>What-If Scenario Sandbox</span>
+            </h3>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Test complex schedule changes in a safe sandbox before applying to your live day.
+            </p>
+
+            <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+              <button onclick="openScenarioSimulator('spend-extra-hours-coding')" class="btn btn-secondary" style="justify-content: flex-start;">
+                🔮 What if I code for 2 extra hours tonight?
+              </button>
+              <button onclick="openScenarioSimulator('unexpected-meeting')" class="btn btn-secondary" style="justify-content: flex-start;">
+                🔮 What if an unexpected 1-hour meeting is added?
+              </button>
+              <button onclick="openScenarioSimulator('take-evening-off')" class="btn btn-secondary" style="justify-content: flex-start;">
+                🔮 What if I take the evening off to recharge?
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 4: UNDERSTAND (ANALYTICS, HEATMAP & PROFILE)
+           ========================================== -->
+      <section id="tab-understand" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Understand & Reflect</h2>
+            <p>Objective diagnostics, 365-day activity trends, Day Replay, and Personal Flow Profile.</p>
+          </div>
+        </div>
+
+        <!-- Subnav Pill Switcher -->
+        <div class="subnav-pills-container">
+          <button class="subnav-pill active" data-subnav="understand-analytics">
+            <i data-lucide="bar-chart-3" style="width: 15px; height: 15px;"></i> Analytics & Diagnostics
+          </button>
+          <button class="subnav-pill" data-subnav="understand-heatmap">
+            <i data-lucide="grid" style="width: 15px; height: 15px;"></i> 365-Day Activity Heatmap
+          </button>
+          <button class="subnav-pill" data-subnav="understand-replay">
+            <i data-lucide="film" style="width: 15px; height: 15px;"></i> Day Replay Timeline
+          </button>
+          <button class="subnav-pill" data-subnav="understand-profile">
+            <i data-lucide="user-check" style="width: 15px; height: 15px;"></i> Personal Flow Profile
+          </button>
+          <button class="subnav-pill" data-subnav="understand-debrief">
+            <i data-lucide="moon" style="width: 15px; height: 15px;"></i> Evening Reflection
+          </button>
+        </div>
+
+        <!-- PANEL 4A: ANALYTICS -->
+        <div id="panel-understand-analytics" class="subnav-panel active">
+          <div class="grid-2-col" style="margin-bottom: 1.5rem;">
+            <!-- Diagnostic 1: Time Leakage -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="clock"></i>
+                  <span>1. Where Am I Losing Time?</span>
+                </h3>
+              </div>
+              <div id="analytics-time-leak-body">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Diagnostic 2: Habit Consistency -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="flame" style="color: #f59e0b;"></i>
+                  <span>2. Habit Consistency & Streaks</span>
+                </h3>
+              </div>
+              <div id="analytics-habit-body">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Diagnostic 3: Goal Velocity -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="gauge"></i>
+                  <span>3. Goal Velocity & Milestones</span>
+                </h3>
+              </div>
+              <div id="analytics-velocity-body">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <!-- Diagnostic 4: Planning Realism -->
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="scale"></i>
+                  <span>4. Planning Realism Score</span>
+                </h3>
+              </div>
+              <div id="analytics-realism-body">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4B: 365-DAY HEATMAP -->
+        <div id="panel-understand-heatmap" class="subnav-panel">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">
+                  <i data-lucide="calendar"></i>
+                  <span>365-Day Activity & Focus Matrix</span>
+                </h3>
+                <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                  Click on any day cell to immediately inspect its Day Replay timeline.
+                </p>
+              </div>
+              <div id="heatmap-stats-summary" style="display: flex; gap: 1rem; font-size: 0.78rem; color: var(--text-secondary); font-family: var(--font-mono);">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+
+            <div id="year-heatmap-container" style="overflow-x: auto; padding: 0.5rem 0;">
+              <!-- Dynamically generated 52-week SVG grid -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4C: DAY REPLAY TIMELINE -->
+        <div id="panel-understand-replay" class="subnav-panel">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">
+                  <i data-lucide="film" style="color: #ec4899;"></i>
+                  <span>Day Replay — Experiential Timeline</span>
+                </h3>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                  Chronological replay of planned blocks, focus sprints, reality deviations, and adaptive rebalancing.
+                </p>
+              </div>
+              <div style="display: flex; gap: 0.5rem; align-items: center;">
+                <button id="btn-replay-play" class="btn btn-emerald" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;">
+                  <i data-lucide="play"></i> Play Replay
+                </button>
+                <button id="btn-replay-pause" class="btn btn-secondary" style="padding: 0.4rem 0.85rem; font-size: 0.8rem;">
+                  <i data-lucide="pause"></i> Pause
+                </button>
+              </div>
+            </div>
+
+            <!-- Scrubber & Speed Controls -->
+            <div style="margin: 1rem 0; padding: 0.8rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+              <div style="display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--text-muted); margin-bottom: 0.4rem;">
+                <span id="replay-current-time-label">Time: 07:00 AM</span>
+                <div style="display: flex; gap: 0.3rem;">
+                  <button class="btn-replay-speed active" data-speed="1">1x</button>
+                  <button class="btn-replay-speed" data-speed="2">2x</button>
+                  <button class="btn-replay-speed" data-speed="4">4x</button>
+                </div>
+              </div>
+              <input type="range" id="replay-scrub-slider" min="0" max="1440" value="420" class="form-range" style="width: 100%;">
+            </div>
+
+            <div id="memory-replay-moments-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <!-- Chronological moments -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4D: PERSONAL FLOW PROFILE -->
+        <div id="panel-understand-profile" class="subnav-panel">
+          <div class="card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">
+                  <i data-lucide="user-check" style="color: var(--accent-study-light);"></i>
+                  <span>Personal Flow Profile</span>
+                </h3>
+                <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                  Empirical behavioral dimensions tagged with <span class="badge" style="font-size: 0.68rem; background: rgba(16,185,129,0.2); color: #34d399;">OBSERVED</span>, <span class="badge" style="font-size: 0.68rem; background: rgba(99,102,241,0.2); color: #818cf8;">INFERRED</span>, or <span class="badge" style="font-size: 0.68rem; background: rgba(245,158,11,0.2); color: #fbbf24;">USER-PROVIDED</span>.
+                </p>
+              </div>
+              <div style="text-align: right;">
+                <div style="font-size: 0.72rem; color: var(--text-muted); text-transform: uppercase;">Confidence Index</div>
+                <div id="twin-maturity-pct" style="font-size: 1.2rem; font-weight: 800; color: var(--accent-study-light); font-family: var(--font-mono);">88%</div>
+              </div>
+            </div>
+
+            <div id="twin-dimensions-matrix" class="grid-2-col" style="margin-top: 1rem;">
+              <!-- 8 behavioral dimension cards populated dynamically -->
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 4E: EVENING REFLECTION -->
+        <div id="panel-understand-debrief" class="subnav-panel">
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <i data-lucide="zap" style="color: var(--accent-study-light);"></i>
-                <span>Daily Readiness & Energy Index</span>
+                <i data-lucide="moon" style="color: var(--accent-rest-light);"></i>
+                <span>Evening Debrief & Tomorrow's Anchor</span>
               </h3>
-              <span id="readiness-status-display" class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Peak Flow State</span>
             </div>
 
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1rem;">
+            <form id="evening-reflection-form" style="display: flex; flex-direction: column; gap: 1rem;">
               <div>
-                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Cognitive Capacity</div>
-                <div id="readiness-score-display" style="font-family: var(--font-mono); font-size: 2.2rem; font-weight: 800; color: var(--accent-diet-light);">85%</div>
+                <label class="form-label">What went exceptionally well today?</label>
+                <textarea class="form-input" rows="3" placeholder="Completed 3 tree problems and protected afternoon focus buffer..."></textarea>
               </div>
-              <div style="text-align: right;">
-                <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Optimal Block Size</div>
-                <div id="readiness-block-mins" style="font-family: var(--font-mono); font-size: 1.3rem; font-weight: 700; color: var(--accent-study-light);">50 mins</div>
+              <div>
+                <label class="form-label">What was the single biggest source of friction or overrun?</label>
+                <textarea class="form-input" rows="3" placeholder="Async bug took 45m longer than expected due to unhandled promise rejection..."></textarea>
               </div>
-            </div>
-
-            <p id="readiness-rec-display" style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.4;">
-              Cognitive readiness is peak. Ideal for deep complex problem solving and 50m study blocks.
-            </p>
-
-            <form id="readiness-checkin-form" style="display: flex; flex-direction: column; gap: 0.6rem;">
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; font-size: 0.78rem;">
-                <div>
-                  <label style="color: var(--text-muted);">😴 Sleep (Hours)</label>
-                  <input id="readiness-sleep-hrs" type="number" step="0.5" min="3" max="12" value="7.5" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
-                </div>
-                <div>
-                  <label style="color: var(--text-muted);">🌙 Sleep Quality (1-5)</label>
-                  <input id="readiness-sleep-qual" type="number" min="1" max="5" value="4" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
-                </div>
-                <div>
-                  <label style="color: var(--text-muted);">🧘 Soreness (1 Fresh - 5 Sore)</label>
-                  <input id="readiness-soreness" type="number" min="1" max="5" value="2" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
-                </div>
-                <div>
-                  <label style="color: var(--text-muted);">⚡ Mental Energy (1-10)</label>
-                  <input id="readiness-energy" type="number" min="1" max="10" value="8" class="form-input" style="padding: 0.35rem 0.6rem; font-size: 0.82rem; margin-top: 0.2rem;">
-                </div>
+              <div>
+                <label class="form-label">Tomorrow's #1 Anchor Task:</label>
+                <input type="text" class="form-input" placeholder="e.g. Implement FastAPI JWT Token Cache" value="Implement FastAPI Redis Session Cache">
               </div>
-              <div style="display: flex; gap: 0.5rem; margin-top: 0.4rem;">
-                <button type="submit" class="btn btn-primary" style="flex: 1; font-size: 0.8rem; padding: 0.45rem;">
-                  Save Check-in
-                </button>
-                <button type="button" id="btn-readiness-adapt-schedule" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.45rem;">
-                  <i data-lucide="sparkles"></i> Adapt Schedule
-                </button>
-              </div>
+              <button type="submit" class="btn btn-primary">
+                <i data-lucide="check"></i> Save Daily Reflection & Lock In Tomorrow
+              </button>
             </form>
           </div>
+        </div>
+      </section>
 
-          <!-- Weekly RPG Boss Battle Card -->
+      <!-- ==========================================
+           TAB 5: WELLNESS (HYDRATION, NUTRITION & SCREEN GUARDIAN)
+           ========================================== -->
+      <section id="tab-wellness" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Wellness & Biological Rhythm</h2>
+            <p>Integrated hydration tracking, nutrition presets, and screen comfort.</p>
+          </div>
+        </div>
+
+        <!-- Subnav Pill Switcher -->
+        <div class="subnav-pills-container">
+          <button class="subnav-pill active" data-subnav="wellness-hydration">
+            <i data-lucide="droplets" style="width: 15px; height: 15px;"></i> Hydration Station
+          </button>
+          <button class="subnav-pill" data-subnav="wellness-nutrition">
+            <i data-lucide="utensils" style="width: 15px; height: 15px;"></i> Nutrition & Fuel
+          </button>
+          <button class="subnav-pill" data-subnav="wellness-screen">
+            <i data-lucide="eye" style="width: 15px; height: 15px;"></i> Screen & Eye Guardian
+          </button>
+        </div>
+
+        <!-- PANEL 5A: HYDRATION -->
+        <div id="panel-wellness-hydration" class="subnav-panel active">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">
+                <i data-lucide="droplets" style="color: var(--accent-movement-light);"></i>
+                <span>Hydration Fuel Station</span>
+              </h3>
+              <span style="font-size: 0.8rem; color: var(--text-muted);">8-10 Glasses Daily Target</span>
+            </div>
+
+            <div id="water-glasses-container" style="display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1rem 0;">
+              <!-- Dynamic Water Cups -->
+            </div>
+
+            <div style="display: flex; gap: 0.6rem;">
+              <button onclick="window.appState.update(s => ({ ...s, waterGlasses: Math.min((s.waterGoal || 8), (s.waterGlasses || 0) + 1) })); window.audioFlowOS?.playWaterDrop(); window.showToast?.('💧 Glass logged!');" class="btn btn-primary" style="font-size: 0.82rem;">
+                + Log 1 Glass
+              </button>
+              <button onclick="window.appState.update(s => ({ ...s, waterGlasses: Math.max(0, (s.waterGlasses || 0) - 1) }))" class="btn btn-secondary" style="font-size: 0.82rem;">
+                - Undo
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 5B: NUTRITION & FUEL -->
+        <div id="panel-wellness-nutrition" class="subnav-panel">
+          <div class="grid-2-col">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="utensils" style="color: var(--accent-diet-light);"></i>
+                  <span>Clean Energy Brain Fuel</span>
+                </h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 1rem;">
+                <div>
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">🌅 Breakfast: Rolled Oats & Chia Power Bowl</h4>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                    Rolled oats, chia seeds, fresh blueberries, crushed walnuts, drizzle of honey. Sustained fiber energy without mid-morning glucose crashes.
+                  </p>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">☀️ Lunch: Rainbow Quinoa Bowl with Lean Protein</h4>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                    Tri-color quinoa, steamed greens, grilled tofu/paneer/chicken, avocado tahini dressing. High amino acid density for afternoon stamina.
+                  </p>
+                </div>
+                <div>
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: var(--text-primary);">🌙 Dinner: Warm Lentil & Roasted Vegetable Medley</h4>
+                  <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
+                    Warm lentils soup, sweet potatoes, bell peppers, zucchini with rosemary and olive oil. Gentle digestion promoting restorative sleep.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="apple"></i>
+                  <span>Smart Focus Snacks</span>
+                </h3>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+                <div style="padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  <strong style="font-size: 0.88rem; color: #fff;">Walnut & 85% Dark Chocolate Nibbles</strong>
+                  <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">Flavonoids and magnesium for clean mental focus.</p>
+                </div>
+                <div style="padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  <strong style="font-size: 0.88rem; color: #fff;">Sliced Apple with Pure Almond Butter</strong>
+                  <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">Natural fructose and healthy fats for quick recharge.</p>
+                </div>
+                <div style="padding: 0.8rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  <strong style="font-size: 0.88rem; color: #fff;">Chilled Coconut Water with Chia</strong>
+                  <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">Natural electrolytes for cellular hydration.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- PANEL 5C: SCREEN & EYE GUARDIAN -->
+        <div id="panel-wellness-screen" class="subnav-panel">
+          <div class="grid-2-col">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="eye" style="color: var(--accent-screen-light);"></i>
+                  <span>20-20-20 Eye Strain Guardian</span>
+                </h3>
+                <span id="eye-timer-display" class="badge" style="font-family: var(--font-mono); font-size: 1rem; background: rgba(245,158,11,0.2); color: #fbbf24;">
+                  20:00
+                </span>
+              </div>
+              <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1.2rem; line-height: 1.4;">
+                Every 20 minutes, look at an object 20 feet away for 20 seconds. Reduces ciliary muscle fatigue and dry eyes.
+              </p>
+              <div style="display: flex; gap: 0.6rem;">
+                <button id="take-screen-break-btn" class="btn btn-primary" style="flex: 1; font-size: 0.82rem;">
+                  <i data-lucide="coffee"></i> Log Screen Break
+                </button>
+                <button id="posture-check-btn" class="btn btn-secondary" style="font-size: 0.82rem;">
+                  <i data-lucide="activity"></i> Posture Check
+                </button>
+              </div>
+            </div>
+
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="sun-medium"></i>
+                  <span>Circadian Lighting & Sunset</span>
+                </h3>
+              </div>
+              <p style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1rem;">
+                Protect melatonin production with structured morning photons and evening wind-down.
+              </p>
+              <div style="display: flex; flex-direction: column; gap: 0.5rem; font-size: 0.82rem; color: var(--text-primary);">
+                <div style="padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  ☀️ <strong>Morning Daylight:</strong> 10-15 mins outdoor sunlight before 08:30 AM
+                </div>
+                <div style="padding: 0.6rem 0.8rem; background: rgba(0,0,0,0.2); border-radius: var(--radius-sm); border: 1px solid var(--border-subtle);">
+                  🌙 <strong>Digital Sunset:</strong> Shift screens to warm amber / zero phone at 09:45 PM
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 6: FOCUS ROOM (DEEP WORK STUDIO)
+           ========================================== -->
+      <section id="tab-study" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Focus Room & Deep Work Studio</h2>
+            <p>Task-linked planned vs actual duration, Picture-in-Picture floating timer, and procedural soundscapes.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem;">
+            <button id="btn-open-pip-timer" class="btn btn-primary" title="Launch Floating Picture-in-Picture Timer">
+              <i data-lucide="external-link"></i> Floating PiP Timer
+            </button>
+            <button id="btn-open-focus-room" class="btn btn-secondary">
+              <i data-lucide="maximize"></i> Fullscreen Zen
+            </button>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div>
+            <div class="card" style="text-align: center; padding: 2.5rem 1.5rem;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+                <select id="focus-timer-type-selector" class="form-select" style="width: auto; font-size: 0.85rem;">
+                  <option value="pomodoro">Pomodoro Countdown</option>
+                  <option value="stopwatch">Continuous Stopwatch</option>
+                </select>
+                <select id="focus-task-select" class="form-select" style="max-width: 250px; font-size: 0.85rem;">
+                  <option value="">-- Link to Focus Task --</option>
+                </select>
+              </div>
+
+              <!-- Circular Progress SVG Ring -->
+              <div style="position: relative; width: 280px; height: 280px; margin: 0 auto 1.5rem;">
+                <svg width="280" height="280" style="transform: rotate(-90deg);">
+                  <circle cx="140" cy="140" r="120" stroke="rgba(255,255,255,0.08)" stroke-width="12" fill="none" />
+                  <circle id="timer-progress-ring" cx="140" cy="140" r="120" stroke="var(--accent-study)" stroke-width="12" fill="none" stroke-linecap="round" />
+                </svg>
+                <div style="position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                  <div id="timer-time-display" style="font-family: var(--font-mono); font-size: 3.5rem; font-weight: 800; color: var(--text-primary); letter-spacing: -0.04em;">
+                    25:00
+                  </div>
+                  <div id="timer-phase-display" style="font-size: 0.85rem; color: var(--accent-study-light); font-weight: 600; margin-top: 0.2rem;">
+                    Pomodoro Focus Block
+                  </div>
+                </div>
+              </div>
+
+              <!-- Overrun Divergence Notice -->
+              <div id="overrun-divergence-banner" style="display: none; padding: 0.8rem; background: rgba(245, 158, 11, 0.15); border: 1px solid var(--accent-screen); border-radius: var(--radius-md); margin-bottom: 1.2rem; font-size: 0.85rem; text-align: left; align-items: center; justify-content: space-between;">
+                <span id="overrun-banner-text">Overrun detected (+15m).</span>
+                <div style="display: flex; gap: 0.4rem;">
+                  <button id="btn-overrun-rebalance-accept" class="btn btn-emerald" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;">
+                    Rebalance Schedule
+                  </button>
+                  <button id="btn-overrun-rebalance-dismiss" class="btn-icon" style="width: 28px; height: 28px;">
+                    <i data-lucide="x"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div style="display: flex; justify-content: center; gap: 0.8rem;">
+                <button id="timer-start-btn" class="btn btn-primary" style="padding: 0.75rem 2rem; font-size: 1rem;">
+                  <i data-lucide="play"></i> Start Flow
+                </button>
+                <button id="timer-reset-btn" class="btn btn-secondary">
+                  <i data-lucide="rotate-ccw"></i> Reset
+                </button>
+                <button id="btn-focus-add-10m" class="btn btn-secondary" title="Add 10 minutes">
+                  +10m
+                </button>
+                <button id="btn-focus-complete-task" class="btn btn-secondary" title="Mark Linked Task Complete">
+                  <i data-lucide="check"></i> Done
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Focus Sound & Audio Player -->
+          <div>
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">
+                  <i data-lucide="music"></i>
+                  <span>Focus Sound & Soundscapes</span>
+                </h3>
+                <span class="badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light);">Web Audio API</span>
+              </div>
+
+              <div class="soundscape-grid" style="margin-bottom: 1.2rem;">
+                <button class="sound-card" data-sound="alpha">
+                  <div class="sound-icon">🧠</div>
+                  <div class="sound-info">
+                    <h4>Alpha Waves (10Hz)</h4>
+                    <p>Binaural focus synthesis</p>
+                  </div>
+                </button>
+                <button class="sound-card" data-sound="gamma">
+                  <div class="sound-icon">⚡</div>
+                  <div class="sound-info">
+                    <h4>Gamma Waves (40Hz)</h4>
+                    <p>High cognitive flow</p>
+                  </div>
+                </button>
+                <button class="sound-card" data-sound="rain">
+                  <div class="sound-icon">🌧️</div>
+                  <div class="sound-info">
+                    <h4>Rain & Thunder</h4>
+                    <p>Procedural rainfall</p>
+                  </div>
+                </button>
+                <button class="sound-card" data-sound="waves">
+                  <div class="sound-icon">🌊</div>
+                  <div class="sound-info">
+                    <h4>Ocean Waves</h4>
+                    <p>Calm coastal surf</p>
+                  </div>
+                </button>
+              </div>
+
+              <div style="display: flex; align-items: center; justify-content: space-between; padding-top: 0.8rem; border-top: 1px solid var(--border-subtle);">
+                <span style="font-size: 0.82rem; color: var(--text-secondary);">Master Volume</span>
+                <input type="range" id="soundscape-vol-slider" min="0" max="100" value="60" class="form-range" style="width: 140px;">
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ==========================================
+           TAB 7: MOTIVATION & QUESTS
+           ========================================== -->
+      <section id="tab-motivation" class="tab-panel">
+        <div class="page-hero">
+          <div>
+            <h2>Motivation & Quests Suite</h2>
+            <p>Weekly Boss Battle, Daily Combat Quests, XP Levels, and Streak Badges.</p>
+          </div>
+        </div>
+
+        <div class="grid-2-col">
+          <!-- Boss Battle Card -->
           <div class="boss-card">
             <div id="boss-damage-container"></div>
             <div style="display: flex; justify-content: space-between; align-items: flex-start;">
@@ -567,523 +1228,67 @@
                 <span class="badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.4); margin-bottom: 0.3rem;">
                   ⚔️ ACTIVE WEEKLY BOSS
                 </span>
-                <h3 id="boss-name-display" style="font-size: 1.15rem; font-weight: 800; color: #fff; margin-top: 0.2rem;">The Procrastination Golem</h3>
-                <div id="boss-title-display" style="font-size: 0.76rem; color: var(--text-muted);">Lvl 12 • Slumbering Overlord of Delay</div>
+                <h3 id="boss-name-display" style="font-size: 1.3rem; font-weight: 800; color: #fff; margin-top: 0.2rem;">The Procrastination Golem</h3>
+                <div id="boss-title-display" style="font-size: 0.8rem; color: var(--text-muted);">Lvl 12 • Slumbering Overlord of Delay</div>
               </div>
-              <button id="btn-test-boss-attack" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.25rem 0.55rem;" title="Test Attack Strike">
+              <button id="btn-test-boss-attack" class="btn btn-secondary" style="font-size: 0.75rem; padding: 0.35rem 0.7rem;" title="Test Attack Strike">
                 ⚔️ Strike (-150)
               </button>
             </div>
 
             <!-- Boss HP Bar -->
-            <div class="boss-hp-bar-bg">
+            <div class="boss-hp-bar-bg" style="margin: 1.2rem 0 0.5rem;">
               <div id="boss-hp-bar-fill" class="boss-hp-bar-fill" style="width: 67%;"></div>
             </div>
-            <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-secondary); font-family: var(--font-mono); margin-bottom: 0.9rem;">
+            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; color: var(--text-secondary); font-family: var(--font-mono); margin-bottom: 1.2rem;">
               <span id="boss-hp-text">1,350 / 2,000 HP (67%)</span>
               <span style="color: #fbbf24;">Reward: +500 XP</span>
             </div>
 
             <!-- RPG Quests for damage -->
-            <div style="font-size: 0.76rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">
+            <div style="font-size: 0.8rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.6rem;">
               Daily Combat Quests:
             </div>
             <div id="rpg-quest-items-list">
               <!-- Dynamically rendered quest items -->
             </div>
           </div>
-        </div>
 
-        <!-- 5. TODAY'S STRUCTURED SCHEDULE & TIMELINE -->
-        <div class="page-hero" style="margin-bottom: 1rem;">
-          <div>
-            <h3 style="font-size: 1.3rem; font-weight: 700; color: var(--text-primary);">Today's Structured Schedule</h3>
-            <p>24-hour balance of focus, clean fuel, movement & sleep.</p>
-          </div>
-          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            <button id="btn-export-ics" class="btn btn-secondary" style="font-size: 0.8rem;">
-              <i data-lucide="calendar"></i> Sync to iCal
-            </button>
-            <button id="btn-export-txt" class="btn btn-secondary" style="font-size: 0.8rem;">
-              <i data-lucide="download"></i> Daily Blueprint
-            </button>
-            <button id="btn-export-json" class="btn btn-secondary" style="font-size: 0.8rem;">
-              <i data-lucide="database"></i> JSON Backup
-            </button>
-            <label class="btn btn-secondary" style="cursor: pointer; font-size: 0.8rem;">
-              <i data-lucide="upload"></i> Restore
-              <input type="file" id="input-import-json" accept=".json" style="display: none;">
-            </label>
-          </div>
-        </div>
-
-        <div class="dashboard-grid">
-          <div>
-            <div class="card">
-              <div id="timeline-items-wrapper" class="timeline-container">
-                <!-- Dynamic Items -->
-              </div>
-            </div>
-          </div>
-
-          <!-- Learned Reality & Hydration -->
-          <div style="display: flex; flex-direction: column; gap: 1.2rem;">
-            <!-- Learned Reality Card -->
-            <div class="card">
-              <h4 class="card-title" style="margin-bottom: 0.4rem;">
-                <i data-lucide="brain"></i> Personal Reality Learning
-              </h4>
-              <p style="font-size: 0.8rem; color: var(--text-secondary);">
-                Empirical planned vs. actual execution tracking over time:
-              </p>
-              <div id="learned-reality-summary">
-                <!-- Dynamically populated with validated insights -->
-              </div>
-            </div>
-
-            <!-- Hydration Card -->
-            <div class="card">
-              <div class="card-header" style="margin-bottom: 0.6rem;">
-                <h4 class="card-title">
-                  <i data-lucide="droplets" style="color: var(--accent-movement-light);"></i> Hydration Fuel Station
-                </h4>
-              </div>
-              <div id="water-glasses-container" style="display: flex; flex-wrap: wrap; gap: 0.45rem;">
-                <!-- Filled dynamically -->
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================
-           TAB 2: GOAL INTELLIGENCE
-           ========================================== -->
-      <section id="tab-goals" class="tab-panel">
-        <div class="page-hero">
-          <div>
-            <h2>Goal Intelligence & Decomposition</h2>
-            <p>Transform ambitious long-term goals into actionable milestones, daily tasks, and scheduled focus slots.</p>
-          </div>
-        </div>
-
-        <div class="grid-2-col">
-          <div class="card">
-            <h3 class="card-title" style="margin-bottom: 0.6rem;">
-              <i data-lucide="sparkles"></i>
-              <span>Decompose a New Goal</span>
-            </h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
-              Type a goal (e.g. <em>"Learn Python & Data Science"</em> or <em>"Prepare for Bar Exam"</em>) and Zenith will break it into milestones.
-            </p>
-
-            <form id="new-goal-form">
-              <div class="form-group">
-                <label class="form-label">What is your core goal?</label>
-                <input type="text" name="goalPrompt" class="form-input" placeholder="e.g. Master Full-Stack Web Development" required>
-              </div>
-              <div class="form-group">
-                <label class="form-label">Category</label>
-                <select name="goalCategory" class="form-select">
-                  <option value="study">Academic / Career Skill</option>
-                  <option value="wellness">Health & Physical Habit</option>
-                  <option value="screen">Digital Balance</option>
-                </select>
-              </div>
-              <button type="submit" class="btn btn-primary" style="width: 100%;">
-                <i data-lucide="wand-2"></i> Synthesize Milestones & Tasks
-              </button>
-            </form>
-          </div>
-
-          <div>
-            <h3 style="font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">
-              🎯 Active Goal Roadmaps
-            </h3>
-            <div id="goals-tree-wrapper">
-              <!-- Dynamically populated -->
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================
-           TAB 3: TASKS & HABITS BIFURCATED
-           ========================================== -->
-      <section id="tab-tasks-habits" class="tab-panel">
-        <div class="page-hero">
-          <div>
-            <h2>Tasks & Recurring Habits</h2>
-            <p>Strict distinction between one-off deliverables and daily momentum habit loops with 7-day consistency heatmaps.</p>
-          </div>
-        </div>
-
-        <div class="grid-2-col">
-          <div>
-            <div class="card" style="margin-bottom: 1.2rem;">
-              <h3 class="card-title" style="margin-bottom: 0.8rem;">
-                <i data-lucide="check-square"></i>
-                <span>Add One-Off Task</span>
-              </h3>
-              <form id="tasks-create-form" style="display: flex; flex-direction: column; gap: 0.8rem;">
-                <input type="text" name="taskTitle" class="form-input" placeholder="e.g. Finish Chapter 4 Python Assignment" required>
-                <div style="display: flex; gap: 0.5rem;">
-                  <select name="taskPriority" class="form-select" style="flex: 1;">
-                    <option value="high">🔥 High Priority</option>
-                    <option value="medium" selected>⚡ Medium Priority</option>
-                    <option value="low">🌱 Low Priority</option>
-                  </select>
-                  <input type="number" name="taskEstimate" class="form-input" placeholder="Est. Mins" value="45" style="width: 110px;" required>
-                </div>
-                <button type="submit" class="btn btn-primary">
-                  <i data-lucide="plus"></i> Add Actionable Task
-                </button>
-              </form>
-            </div>
-
-            <h4 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
-              📋 Priority Tasks Queue
-            </h4>
-            <div id="task-list-view">
-              <!-- Dynamically rendered -->
-            </div>
-          </div>
-
-          <div>
-            <div class="card" style="margin-bottom: 1.2rem;">
-              <h3 class="card-title" style="margin-bottom: 0.8rem;">
-                <i data-lucide="repeat"></i>
-                <span>Start Recurring Habit</span>
-              </h3>
-              <form id="habits-create-form" style="display: flex; flex-direction: column; gap: 0.8rem;">
-                <input type="text" name="habitTitle" class="form-input" placeholder="e.g. Study Python every single day (60m)" required>
-                <select name="habitCategory" class="form-select">
-                  <option value="study">Deep Study</option>
-                  <option value="wellness" selected>Wellness & Hydration</option>
-                  <option value="screen">Screen Detox</option>
-                </select>
-                <button type="submit" class="btn btn-emerald">
-                  <i data-lucide="plus"></i> Create Habit Loop
-                </button>
-              </form>
-            </div>
-
-            <h4 style="font-size: 1rem; color: var(--text-secondary); margin-bottom: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em;">
-              🔥 Habit Momentum & Consistency Heatmaps
-            </h4>
-            <div id="habits-grid-view" style="display: flex; flex-direction: column; gap: 0.85rem;">
-              <!-- Dynamically rendered -->
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================
-           TAB 4: FOCUS & DEEP WORK
-           ========================================== -->
-      <section id="tab-study" class="tab-panel">
-        <div class="page-hero">
-          <div>
-            <h2>Focus & Deep Work Command</h2>
-            <p>Task-linked focus sessions with dual Pomodoro and Stopwatch modes, live tracking, and schedule overrun detection.</p>
-          </div>
-        </div>
-
-        <div class="dashboard-grid">
+          <!-- XP Levels & Badges -->
           <div class="card">
             <div class="card-header">
               <h3 class="card-title">
-                <i data-lucide="timer"></i>
-                <span>Deep Flow Engine</span>
+                <i data-lucide="award" style="color: #fbbf24;"></i>
+                <span>Badges & Level Progression</span>
               </h3>
-              <div style="display: flex; gap: 0.5rem; align-items: center;">
-                <select id="focus-timer-type-selector" class="form-select" style="font-size: 0.8rem; padding: 0.35rem 0.6rem;">
-                  <option value="pomodoro" selected>Pomodoro Countdown</option>
-                  <option value="stopwatch">Stopwatch Count-Up</option>
-                </select>
-                <select id="focus-task-select" class="form-select" style="font-size: 0.8rem; padding: 0.35rem 0.6rem; min-width: 170px;">
-                  <!-- Filled dynamically -->
-                </select>
-              </div>
             </div>
-
-            <div class="timer-wrapper">
-              <div class="timer-circle-container">
-                <svg class="timer-svg" viewBox="0 0 260 260">
-                  <defs>
-                    <linearGradient id="timerGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                      <stop offset="0%" stop-color="#6366f1" />
-                      <stop offset="100%" stop-color="#a855f7" />
-                    </linearGradient>
-                  </defs>
-                  <circle class="timer-circle-bg" cx="130" cy="130" r="120" />
-                  <circle id="timer-progress-ring" class="timer-circle-progress" cx="130" cy="130" r="120" />
-                </svg>
-                <div class="timer-display">
-                  <span id="timer-time-display" class="timer-time">60:00</span>
-                  <span id="timer-phase-display" class="timer-phase">Flowing on Task</span>
-                </div>
-              </div>
-
-              <div class="timer-controls">
-                <button id="timer-start-btn" class="btn btn-primary" style="padding: 0.75rem 1.8rem; font-size: 1rem;">
-                  <i data-lucide="play"></i> Start Deep Flow
-                </button>
-                <button id="timer-reset-btn" class="btn btn-secondary">
-                  <i data-lucide="rotate-ccw"></i> Reset
-                </button>
-                <button id="btn-pip-popout" class="btn btn-secondary" title="Pop Out Floating Mini-Timer Widget">
-                  <i data-lucide="external-link"></i> Floating Mini-Timer
-                </button>
-              </div>
-
-              <!-- Live Overrun Divergence Alert Banner -->
-              <div id="overrun-divergence-banner" class="reality-alert-card" style="display: none; margin-top: 1.25rem; text-align: left;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
-                  <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">⏱️ Focus Overrun Detected</span>
-                </div>
-                <p id="overrun-banner-text" style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">
-                  Task has exceeded its planned timebox.
-                </p>
-                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-                  <button id="btn-overrun-rebalance-accept" class="btn btn-emerald" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">
-                    ⚡ Rebalance Evening Schedule
-                  </button>
-                  <button id="btn-overrun-rebalance-dismiss" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.75rem;">
-                    Dismiss
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div style="display: flex; flex-direction: column; gap: 1.5rem;">
-            <!-- Comprehensive Focus Audio Hub Card -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i data-lucide="headphones" style="color: var(--accent-study-light);"></i>
-                  <span>Focus Sound Workstation</span>
-                </h3>
-                <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Multi-Source Audio</span>
-              </div>
-
-              <!-- Audio Sub-Navigation Tabs -->
-              <div class="audio-subtabs">
-                <button class="audio-subtab-btn active" data-subtab="synth">
-                  <i data-lucide="sparkles" style="width: 14px;"></i> Procedural Synth
-                </button>
-                <button class="audio-subtab-btn" data-subtab="custom">
-                  <i data-lucide="folder-music" style="width: 14px;"></i> My Music (MP3)
-                </button>
-                <button class="audio-subtab-btn" data-subtab="embed">
-                  <i data-lucide="radio" style="width: 14px;"></i> Spotify & YouTube
-                </button>
-              </div>
-
-              <!-- SUBPANEL 1: PROCEDURAL SYNTH -->
-              <div id="audio-panel-synth" class="audio-subpanel active">
-                <div class="soundscape-grid">
-                  <div class="sound-card" data-sound="rain">
-                    <i data-lucide="cloud-rain" class="sound-icon"></i>
-                    <span class="sound-label">Rain Shower</span>
-                  </div>
-                  <div class="sound-card" data-sound="binaural">
-                    <i data-lucide="waves" class="sound-icon"></i>
-                    <span class="sound-label">10Hz Alpha</span>
-                  </div>
-                  <div class="sound-card" data-sound="ocean">
-                    <i data-lucide="wind" class="sound-icon"></i>
-                    <span class="sound-label">Ocean Tide</span>
-                  </div>
-                  <div class="sound-card" data-sound="drone">
-                    <i data-lucide="radio" class="sound-icon"></i>
-                    <span class="sound-label">Zen Harmonics</span>
-                  </div>
-                  <div class="sound-card" data-sound="campfire">
-                    <i data-lucide="flame" class="sound-icon"></i>
-                    <span class="sound-label">Campfire</span>
-                  </div>
-                  <div class="sound-card" data-sound="forest">
-                    <i data-lucide="trees" class="sound-icon"></i>
-                    <span class="sound-label">Forest Breeze</span>
-                  </div>
-                  <div class="sound-card" data-sound="gamma">
-                    <i data-lucide="zap" class="sound-icon"></i>
-                    <span class="sound-label">40Hz Gamma</span>
-                  </div>
-                  <div class="sound-card" data-sound="white">
-                    <i data-lucide="sparkles" class="sound-icon"></i>
-                    <span class="sound-label">Cosmic White</span>
-                  </div>
-                </div>
-
-                <!-- Synth Controls -->
-                <div style="margin-top: 1.25rem; display: flex; flex-direction: column; gap: 0.9rem;">
-                  <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--text-secondary);">
-                    <span style="display: flex; align-items: center; gap: 0.4rem;">
-                      <i data-lucide="volume-2" style="width: 15px; color: var(--accent-study-light);"></i> Synth Ambient Volume
-                    </span>
-                    <span id="ambient-vol-label" style="font-weight: 600;">50%</span>
-                  </div>
-                  <input id="sound-volume-slider" type="range" min="0" max="1" step="0.05" value="0.5" style="width: 100%; accent-color: var(--accent-study);">
-
-                  <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
-                    <span style="display: flex; align-items: center; gap: 0.4rem;">
-                      <i data-lucide="bell" style="width: 15px; color: var(--accent-study-light);"></i> UI Sound Effects (SFX)
-                    </span>
-                    <button id="btn-toggle-sfx" class="btn btn-secondary" style="padding: 0.2rem 0.6rem; font-size: 0.75rem;">
-                      <i data-lucide="volume-2" style="width: 13px;"></i> SFX On
-                    </button>
-                  </div>
-
-                  <!-- Sleep Timer -->
-                  <div style="display: flex; align-items: center; justify-content: space-between; font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.2rem;">
-                    <span style="display: flex; align-items: center; gap: 0.4rem;">
-                      <i data-lucide="moon" style="width: 15px; color: var(--accent-study-light);"></i> Sleep Timer:
-                    </span>
-                    <div class="sleep-timer-group">
-                      <button class="sleep-pill active" data-mins="0">Off</button>
-                      <button class="sleep-pill" data-mins="15">15m</button>
-                      <button class="sleep-pill" data-mins="30">30m</button>
-                      <button class="sleep-pill" data-mins="45">45m</button>
-                      <button class="sleep-pill" data-mins="60">60m</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <!-- SUBPANEL 2: LOCAL MP3 / AUDIO UPLOAD -->
-              <div id="audio-panel-custom" class="audio-subpanel">
-                <input type="file" id="custom-audio-file-input" accept="audio/*" style="display: none;">
-                
-                <div id="custom-audio-dropzone" class="custom-audio-dropzone">
-                  <i data-lucide="upload-cloud"></i>
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+              <div style="padding: 0.85rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                  <div style="font-size: 1.6rem;">🛡️</div>
                   <div>
-                    <strong style="font-size: 0.95rem; color: var(--text-primary);">Click to Select Audio File</strong>
-                    <p style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 0.2rem;">Supports MP3, WAV, FLAC, AAC, OGG • 100% Local & Private</p>
-                  </div>
-                </div>
-
-                <div id="custom-audio-player-controls" class="custom-audio-player" style="display: none;">
-                  <div class="custom-player-track-info">
-                    <div class="custom-player-track-icon">
-                      <i data-lucide="music"></i>
-                    </div>
-                    <div style="flex: 1; overflow: hidden;">
-                      <div id="custom-track-title" style="font-size: 0.92rem; font-weight: 600; color: var(--text-primary); text-overflow: ellipsis; white-space: nowrap; overflow: hidden;">Track.mp3</div>
-                      <div id="custom-track-meta" style="font-size: 0.76rem; color: var(--text-muted); margin-top: 0.15rem;">Audio Track</div>
-                    </div>
-                    <button id="btn-custom-audio-loop" class="btn btn-secondary active" style="padding: 0.35rem 0.55rem; font-size: 0.75rem;" title="Repeat Track: ON">
-                      <i data-lucide="repeat" style="width: 14px; height: 14px;"></i>
-                    </button>
-                    <button class="btn btn-secondary" onclick="document.getElementById('custom-audio-file-input').click()" style="padding: 0.35rem 0.55rem; font-size: 0.75rem;" title="Change File">
-                      <i data-lucide="folder-open" style="width: 14px; height: 14px;"></i>
-                    </button>
-                  </div>
-
-                  <!-- Scrub Bar -->
-                  <div style="display: flex; flex-direction: column; gap: 0.35rem;">
-                    <input id="custom-audio-seek" type="range" min="0" max="100" value="0" class="custom-audio-seek-slider">
-                    <div style="display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted);">
-                      <span id="custom-audio-time">00:00 / 00:00</span>
-                      <span style="color: var(--accent-study-light);">Dual Mixing Enabled 🎧</span>
-                    </div>
-                  </div>
-
-                  <div class="custom-player-controls-row">
-                    <button id="btn-custom-audio-play" class="btn btn-primary" style="border-radius: var(--radius-full); width: 40px; height: 40px; padding: 0;">
-                      <i data-lucide="play" style="width: 18px; height: 18px;"></i>
-                    </button>
-
-                    <div style="flex: 1; display: flex; align-items: center; gap: 0.6rem; margin-left: 0.5rem;">
-                      <i data-lucide="volume-2" style="width: 15px; color: var(--text-muted);"></i>
-                      <input id="custom-audio-vol-slider" type="range" min="0" max="1" step="0.05" value="0.7" style="flex: 1; accent-color: var(--accent-study);">
-                      <span id="custom-audio-vol-label" style="font-size: 0.78rem; font-weight: 600; min-width: 32px;">70%</span>
-                    </div>
-                  </div>
-
-                  <div style="font-size: 0.78rem; color: var(--text-secondary); background: rgba(99, 102, 241, 0.08); padding: 0.6rem; border-radius: var(--radius-sm); border: 1px solid rgba(99, 102, 241, 0.2);">
-                    💡 <strong>Pro-Tip:</strong> You can play your custom music and also switch to the <em>Procedural Synth</em> tab to layer background rain or 10Hz alpha waves on top!
+                    <strong style="font-size: 0.92rem; color: #fff;">Grace Shield Master</strong>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary);">Protected a habit streak during an emergency overrun.</p>
                   </div>
                 </div>
               </div>
-
-              <!-- SUBPANEL 3: SPOTIFY & YOUTUBE STREAM EMBED -->
-              <div id="audio-panel-embed" class="audio-subpanel">
-                <form id="focus-embed-form" style="display: flex; gap: 0.5rem; margin-bottom: 0.75rem;">
-                  <input id="focus-embed-url-input" type="text" class="form-input" placeholder="Paste Spotify or YouTube link (e.g. playlist / video)..." style="flex: 1; font-size: 0.84rem;">
-                  <button type="submit" class="btn btn-primary" style="padding: 0.5rem 1rem; font-size: 0.82rem;">
-                    <i data-lucide="play"></i> Load
-                  </button>
-                </form>
-
-                <!-- Quick Presets -->
-                <div style="font-size: 0.76rem; color: var(--text-muted); margin-bottom: 0.4rem;">Quick Focus Presets:</div>
-                <div class="embed-preset-chips">
-                  <button class="embed-preset-btn" data-embed-url="https://open.spotify.com/playlist/0vvXsWCC9xrXsKd4FyS8kM">
-                    <i data-lucide="music"></i> Lofi Beats (Spotify)
-                  </button>
-                  <button class="embed-preset-btn" data-embed-url="https://open.spotify.com/playlist/37i9dQZF1DX8Uebhn9wzrS">
-                    <i data-lucide="headphones"></i> Deep Focus (Spotify)
-                  </button>
-                  <button class="embed-preset-btn" data-embed-url="https://www.youtube.com/watch?v=jfKfPfyJRdk">
-                    <i data-lucide="video"></i> Lofi Girl 24/7 (YouTube)
-                  </button>
-                </div>
-
-                <div id="focus-embed-container" style="margin-top: 1rem;">
-                  <div style="padding: 2rem 1rem; text-align: center; background: rgba(0,0,0,0.2); border-radius: 12px; border: 1px dashed var(--border-subtle); color: var(--text-secondary); font-size: 0.84rem;">
-                    Select a preset above or paste your favorite Spotify / YouTube link.
+              <div style="padding: 0.85rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                  <div style="font-size: 1.6rem;">⚡</div>
+                  <div>
+                    <strong style="font-size: 0.92rem; color: #fff;">Deep Flow Champion</strong>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary);">Completed 4 consecutive 50m study blocks without distraction.</p>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <!-- Desktop & Background Notifications Card -->
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">
-                  <i data-lucide="bell-ring" style="color: var(--accent-study-light);"></i>
-                  <span>Desktop & Push Notifications</span>
-                </h3>
-                <div id="notif-permission-status"></div>
-              </div>
-
-              <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-                Receive real-time system alerts for timers, hydration, and eye breaks even when this tab is in the background.
-              </p>
-
-              <div style="display: flex; gap: 0.6rem; margin-bottom: 1.2rem; flex-wrap: wrap;">
-                <button id="btn-enable-notifications" class="btn btn-primary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">
-                  <i data-lucide="shield-alert"></i> Enable Browser Notifications
-                </button>
-                <button id="btn-test-notification" class="btn btn-secondary" style="font-size: 0.82rem; padding: 0.5rem 1rem;">
-                  <i data-lucide="send"></i> Send Test Notification
-                </button>
-              </div>
-
-              <div class="notif-pref-list">
-                <label class="notif-pref-item">
-                  <span>⏱️ Focus Block & Break Completion</span>
-                  <input type="checkbox" id="notif-pref-timer" checked style="accent-color: var(--accent-study); cursor: pointer;">
-                </label>
-                <label class="notif-pref-item">
-                  <span>👀 20-20-20 Eye Relief Alerts</span>
-                  <input type="checkbox" id="notif-pref-eye" checked style="accent-color: var(--accent-study); cursor: pointer;">
-                </label>
-                <label class="notif-pref-item">
-                  <span>🧘 Posture Check Prompts</span>
-                  <input type="checkbox" id="notif-pref-posture" checked style="accent-color: var(--accent-study); cursor: pointer;">
-                </label>
-                <label class="notif-pref-item">
-                  <span>💧 Hourly Hydration Nudges</span>
-                  <input type="checkbox" id="notif-pref-water" checked style="accent-color: var(--accent-study); cursor: pointer;">
-                </label>
-                <label class="notif-pref-item">
-                  <span>🔊 Play Audio Soundscapes with Alerts</span>
-                  <input type="checkbox" id="notif-pref-sound" checked style="accent-color: var(--accent-study); cursor: pointer;">
-                </label>
+              <div style="padding: 0.85rem; background: rgba(0,0,0,0.25); border-radius: var(--radius-md); border: 1px solid var(--border-subtle);">
+                <div style="display: flex; align-items: center; gap: 0.8rem;">
+                  <div style="font-size: 1.6rem;">🧘</div>
+                  <div>
+                    <strong style="font-size: 0.92rem; color: #fff;">Circadian Architect</strong>
+                    <p style="font-size: 0.78rem; color: var(--text-secondary);">Maintained 7 days of 10:30 PM bedtime consistency.</p>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -1091,382 +1296,168 @@
       </section>
 
       <!-- ==========================================
-           TAB 5: NUTRITION & FUEL
-           ========================================== -->
-      <section id="tab-diet" class="tab-panel">
-        <div class="page-hero">
-          <div>
-            <h2>Diet & Nutritional Brain Fuel</h2>
-            <p>Clean, whole-food nutrition tailored to fuel cognitive clarity, steady stamina, and restorative sleep.</p>
-          </div>
-        </div>
-
-        <div id="diet-meal-cards-wrapper" class="meal-grid" style="margin-bottom: 1.8rem;">
-          <!-- Dynamically populated -->
-        </div>
-
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i data-lucide="apple" style="color: var(--accent-diet-light);"></i>
-              <span>Instant Clean Snack Generator</span>
-            </h3>
-            <button id="btn-random-snack" class="btn btn-emerald">
-              <i data-lucide="sparkles"></i> Generate 2-Min Brain Snack
-            </button>
-          </div>
-          <div id="quick-snack-result"></div>
-        </div>
-      </section>
-
-      <!-- ==========================================
-           TAB 6: SCREEN & EYE COMFORT
-           ========================================== -->
-      <section id="tab-screen" class="tab-panel">
-        <div class="page-hero">
-          <div>
-            <h2>Screen & Eye Comfort Guardian</h2>
-            <p>20-20-20 eye strain alarms, posture reminders, and digital sunset wind-down.</p>
-          </div>
-        </div>
-
-        <div class="dashboard-grid">
-          <div class="card screen-meter-card">
-            <div class="card-header">
-              <h3 class="card-title">
-                <i data-lucide="eye" style="color: var(--accent-screen-light);"></i>
-                <span>20-20-20 Eye Relief</span>
-              </h3>
-            </div>
-            <div style="text-align: center; padding: 1.5rem 0;">
-              <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted);">Next Eye Rest In</span>
-              <div id="eye-timer-display" style="font-family: var(--font-mono); font-size: 3rem; font-weight: 800; color: var(--accent-screen-light);">
-                20:00
-              </div>
-              <button id="take-screen-break-btn" class="btn btn-amber" style="margin-top: 1rem;">
-                <i data-lucide="check"></i> Log Screen Break Taken
-              </button>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3 class="card-title" style="margin-bottom: 0.5rem;">
-              <i data-lucide="accessibility" style="color: var(--accent-movement-light);"></i>
-              <span>Posture Check</span>
-            </h3>
-            <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-              Shoulders back, feet flat, neck relaxed.
-            </p>
-            <button id="posture-check-btn" class="btn btn-secondary">
-              <i data-lucide="bell"></i> Trigger Posture Reminder
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <!-- ==========================================
-           TAB 7: OLDER-ADULT MODE (ACCESSIBILITY HUB)
+           TAB 8: ACCESSIBILITY & CARE MODE
            ========================================== -->
       <section id="tab-elderly" class="tab-panel">
         <div class="page-hero">
           <div>
-            <h2>Older-Adult Care & Daily Routine Hub</h2>
-            <p>Simplified, large-format interface for prescribed medicine schedules and appointment reminders (non-medical scheduling).</p>
+            <h2>Accessibility & Care Mode</h2>
+            <p>Simplified, high-contrast, large-font interface with routine schedule reminders and appointments (strictly non-medical).</p>
           </div>
+          <button onclick="ElderlyModeController.toggleAccessibilityMode()" class="btn btn-primary">
+            <i data-lucide="zoom-in"></i> Toggle High-Contrast View
+          </button>
         </div>
 
-        <div class="grid-2-col" style="margin-bottom: 1.8rem;">
+        <div class="grid-2-col">
           <div class="card">
-            <h3 class="card-title">
-              <i data-lucide="pill"></i>
-              <span>Add Prescribed Medicine Schedule</span>
-            </h3>
-            <form id="elderly-med-form" style="display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1rem;">
-              <input type="text" name="medName" class="form-input" placeholder="e.g. Blood Pressure Pill (as prescribed by doctor)" required>
-              <input type="text" name="medTime" class="form-input" placeholder="e.g. 08:00 AM (After Breakfast)" required>
-              <input type="text" name="medInstructions" class="form-input" placeholder="e.g. Take with 1 glass warm water" required>
-              <button type="submit" class="btn btn-primary">
-                <i data-lucide="plus"></i> Add Routine Reminder
-              </button>
-            </form>
+            <div class="card-header">
+              <h3 class="card-title">
+                <i data-lucide="pill"></i>
+                <span>Daily Routine & Medicine Schedule</span>
+              </h3>
+            </div>
+            <div id="elderly-med-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <!-- Dynamic items -->
+            </div>
           </div>
 
           <div class="card">
-            <h3 class="card-title">
-              <i data-lucide="heart"></i>
-              <span>Daily Wellness Care Checklist</span>
-            </h3>
-            <ul class="meal-items-list" style="margin-top: 1rem; gap: 0.8rem;">
-              <li>☀️ 15-min gentle morning balcony sunlight</li>
-              <li>💧 Drink 6-8 glasses of room-temperature water</li>
-              <li>🚶 20-min gentle mobility walk in the evening</li>
-              <li>📞 Keep emergency contacts easily accessible</li>
-            </ul>
-          </div>
-        </div>
-
-        <h3 style="font-size: 1.3rem; margin-bottom: 1rem; color: var(--text-primary);">
-          ⏰ Scheduled Medicine Routines (Today)
-        </h3>
-        <div id="elderly-med-list" class="medicine-grid">
-          <!-- Dynamically populated -->
-        </div>
-
-        <h3 style="font-size: 1.3rem; margin-top: 2rem; margin-bottom: 1rem; color: var(--text-primary);">
-          📅 Upcoming Health Appointments
-        </h3>
-        <div id="elderly-apt-list">
-          <!-- Dynamically populated -->
-        </div>
-      </section>
-
-      <!-- ==========================================
-           TAB 8: ZENITH BEHAVIORAL DIGITAL TWIN
-           ========================================== -->
-      <section id="tab-digital-twin" class="tab-panel">
-        <div class="page-hero">
-          <div>
-            <h2>Zenith Behavioral Digital Twin</h2>
-            <p>An empirical psychological and operational model of your rhythms, focus stamina, habit resilience, and recovery behavior. Never fabricated.</p>
-          </div>
-        </div>
-
-        <!-- Twin Maturity & Status Hero Card -->
-        <div class="card" style="margin-bottom: 1.8rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(168, 85, 247, 0.05)); border-color: var(--border-highlight);">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 1rem;">
-            <div>
-              <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.4rem;">
-                <span id="twin-maturity-level" class="rank-badge-pill">Maturity Lvl 3</span>
-                <span id="twin-maturity-title" style="font-weight: 700; color: #fff; font-size: 1.1rem;">Calibrated Behavioral Twin</span>
-              </div>
-              <div style="font-size: 0.85rem; color: var(--text-secondary);">
-                Active Cognitive Archetype: <strong id="twin-archetype-display" style="color: var(--accent-study-light);">Deep Sprint Architect</strong>
-              </div>
+            <div class="card-header">
+              <h3 class="card-title">
+                <i data-lucide="calendar-check"></i>
+                <span>Upcoming Appointments</span>
+              </h3>
             </div>
-
-            <div style="display: flex; gap: 0.5rem; align-items: center;">
-              <button id="btn-twin-sim-observation" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.45rem 0.85rem;">
-                <i data-lucide="brain"></i> Ingest Observation
-              </button>
-              <button id="btn-twin-reset" class="btn btn-secondary" style="font-size: 0.78rem; padding: 0.45rem 0.75rem; color: #f87171;" title="Reset Digital Twin Memory">
-                <i data-lucide="rotate-ccw"></i>
-              </button>
+            <div id="elderly-apt-list" style="display: flex; flex-direction: column; gap: 0.6rem;">
+              <!-- Dynamic appointments -->
             </div>
-          </div>
-
-          <!-- Calibration Progress -->
-          <div style="margin-top: 1.25rem;">
-            <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-bottom: 0.4rem;">
-              <span id="twin-total-observations" style="color: var(--text-secondary);">46 Observations Logged</span>
-              <span id="twin-calibration-pct" style="font-weight: 700; color: var(--accent-diet-light);">74% Calibrated</span>
-            </div>
-            <div class="progress-bar-bg" style="height: 7px;">
-              <div id="twin-calibration-bar" class="progress-bar-fill" style="width: 74%; background: var(--grad-zenith);"></div>
-            </div>
-          </div>
-        </div>
-
-        <!-- 8 Dimensional Behavioral Matrix Header -->
-        <div class="card-header" style="margin-bottom: 1rem;">
-          <h3 class="card-title">
-            <i data-lucide="network" style="color: var(--accent-study-light);"></i>
-            <span>8-Dimensional Learned Behavioral Matrix</span>
-          </h3>
-          <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Confidence Calibration</span>
-        </div>
-
-        <div id="twin-dimensions-matrix" class="twin-dimensions-grid" style="margin-bottom: 2rem;">
-          <!-- Dynamically populated 8 behavioral dimension cards -->
-        </div>
-
-        <!-- Recommendation Transparency Inspector Card -->
-        <div class="card">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i data-lucide="shield-check" style="color: var(--accent-diet-light);"></i>
-              <span>Recommendation Attribution & Reasoning Inspector</span>
-            </h3>
-            <span class="badge" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">100% Explainable AI</span>
-          </div>
-
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
-            Zenith never makes black-box assumptions. Every schedule adjustment, timer prompt, and habit recommendation is attributed to explicit user preference, historical observation, current schedule context, or first-principles circadian science.
-          </p>
-
-          <div id="twin-recommendations-inspector">
-            <!-- Dynamically populated recommendation inspection items -->
           </div>
         </div>
       </section>
 
       <!-- ==========================================
-           TAB 9: ZENITH MEMORY REPLAY ENGINE
+           TAB 9: DEVICE SYNC & DATA PORTABILITY
            ========================================== -->
-      <section id="tab-memory-replay" class="tab-panel">
+      <section id="tab-sync" class="tab-panel">
         <div class="page-hero">
           <div>
-            <h2>Zenith Memory Replay Engine</h2>
-            <p>Replay previous days as a living experiential story of deep focus, reality divergence, AI trade-offs, and restorative habits.</p>
+            <h2>Device Sync & Data Portability</h2>
+            <p>Zero-server QR Code sync, full JSON backup/restore, and iCalendar export.</p>
           </div>
         </div>
 
-        <!-- Replay Playback & Controller Card -->
-        <div class="replay-controller-card">
-          <div class="replay-tabs-bar">
-            <button class="replay-day-tab active" data-day="today">
-              <i data-lucide="clock"></i> Today (Live)
-            </button>
-            <button class="replay-day-tab" data-day="yesterday">
-              <i data-lucide="calendar"></i> Yesterday
+        <div class="grid-2-col">
+          <div class="card" style="text-align: center;">
+            <h3 class="card-title" style="justify-content: center; margin-bottom: 1rem;">
+              <i data-lucide="qr-code"></i>
+              <span>1-Click Mobile QR Sync</span>
+            </h3>
+            <div id="qr-sync-canvas-container" style="display: flex; justify-content: center; margin-bottom: 1rem;">
+              <img id="qr-sync-img" src="" alt="FlowOS QR Code" style="max-width: 220px; border-radius: var(--radius-md); border: 2px solid var(--border-glow);">
+            </div>
+            <p style="font-size: 0.82rem; color: var(--text-secondary); margin-bottom: 1rem;">
+              Scan with your phone's camera to open your synchronized FlowOS day plan without creating an account.
+            </p>
+            <button onclick="FlowOSQrSyncEngine?.generateQRCode()" class="btn btn-primary" style="font-size: 0.82rem;">
+              <i data-lucide="refresh-cw"></i> Refresh QR Code
             </button>
           </div>
 
-          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; margin-bottom: 1rem;">
-            <div style="display: flex; align-items: center; gap: 0.8rem;">
-              <button id="btn-replay-play" class="btn btn-primary" style="padding: 0.65rem 1.4rem; font-size: 0.95rem;">
-                <i data-lucide="play"></i> Replay My Day
-              </button>
-              <div style="display: flex; gap: 0.3rem;">
-                <button class="replay-speed-pill active" data-speed="1">1x</button>
-                <button class="replay-speed-pill" data-speed="2">2x</button>
-                <button class="replay-speed-pill" data-speed="4">4x</button>
-              </div>
-            </div>
-
-            <div id="replay-day-title" style="font-family: var(--font-mono); font-size: 0.88rem; color: var(--accent-study-light); font-weight: 700;">
-              Today — Monday, Aug 10, 2026
-            </div>
-          </div>
-
-          <!-- Chronological Scrub Bar -->
-          <div style="display: flex; align-items: center; gap: 0.8rem;">
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">07:00 AM</span>
-            <input id="replay-scrub-slider" type="range" min="0" max="5" value="0" style="flex: 1; accent-color: var(--accent-study-light); cursor: pointer;">
-            <span style="font-size: 0.75rem; color: var(--text-muted); font-family: var(--font-mono);">11:00 PM</span>
-          </div>
-        </div>
-
-        <!-- AI Daily Narrative Synthesis Card -->
-        <div class="card" style="margin-bottom: 1.8rem; background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(52, 211, 153, 0.05)); border-color: var(--border-highlight);">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i>
-              <span>AI Daily Synthesis & Narrative Summary</span>
+          <div class="card">
+            <h3 class="card-title" style="margin-bottom: 1rem;">
+              <i data-lucide="database"></i>
+              <span>Offline Data & Portability</span>
             </h3>
-            <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Holistic Day Recap</span>
-          </div>
-
-          <p id="replay-ai-narrative" style="font-size: 0.92rem; color: var(--text-primary); line-height: 1.6; margin-bottom: 1.25rem;">
-            Loading day memory synthesis...
-          </p>
-
-          <div class="grid-2-col" style="gap: 0.9rem;">
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
-              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #34d399;">🏆 Primary Victory</span>
-              <p id="replay-ai-win" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
-              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #fbbf24;">⏱️ Friction / Overrun</span>
-              <p id="replay-ai-friction" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
-              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #c084fc;">🧠 AI Adaptation Taken</span>
-              <p id="replay-ai-adaptation" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
-            </div>
-            <div style="background: rgba(255,255,255,0.02); border: 1px solid var(--border-subtle); padding: 0.85rem; border-radius: var(--radius-md);">
-              <span style="font-size: 0.72rem; text-transform: uppercase; font-weight: 800; color: #38bdf8;">🎯 Trajectory for Tomorrow</span>
-              <p id="replay-ai-tomorrow" style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.25rem;">-</p>
+            <div style="display: flex; flex-direction: column; gap: 0.8rem;">
+              <button id="btn-export-json-2" onclick="CalendarExporter.exportJSONBackup(window.appState.getState())" class="btn btn-secondary">
+                <i data-lucide="download"></i> Download Full JSON Backup
+              </button>
+              <button id="btn-export-ics-2" onclick="CalendarExporter.exportToICS(window.appState.getState().todaySchedule)" class="btn btn-secondary">
+                <i data-lucide="calendar"></i> Export to Google / Apple Calendar (.ics)
+              </button>
+              <label class="btn btn-secondary" style="cursor: pointer;">
+                <i data-lucide="upload"></i> Restore State from JSON File
+                <input type="file" onchange="CalendarExporter.importJSONBackup(this.files[0], () => window.showToast?.('State restored!'))" accept=".json" style="display: none;">
+              </label>
             </div>
           </div>
-        </div>
-
-        <!-- Chronological Living Memory Moments Header -->
-        <div class="card-header" style="margin-bottom: 1rem;">
-          <h3 class="card-title">
-            <i data-lucide="film" style="color: #f472b6;"></i>
-            <span>Living Chronological Memory Moments</span>
-          </h3>
-          <span class="badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6;">Interactive Scrub</span>
-        </div>
-
-        <div id="replay-timeline-list" class="memory-timeline-container">
-          <!-- Dynamically populated memory moment cards -->
         </div>
       </section>
 
       <!-- ==========================================
-           TAB 10: INTELLIGENCE & ANALYTICS
+           TAB 10: SHOWCASE & ARCHETYPES
            ========================================== -->
-      <section id="tab-analytics" class="tab-panel">
-        <div class="page-hero">
-          <div>
-            <h2>Intelligence & Self-Understanding Matrix</h2>
-            <p>Diagnose time leaks, habit resilience, goal velocity, and planned vs. actual execution patterns.</p>
+      <section id="tab-welcome" class="tab-panel">
+        <div class="welcome-hero-container">
+          <div style="display: flex; align-items: center; justify-content: center; gap: 0.6rem; margin-bottom: 1rem;">
+            <span class="badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light); border: 1px solid var(--accent-study);">
+              ⚡ FLOWOS OPERATING SYSTEM
+            </span>
           </div>
-        </div>
-
-        <div class="grid-2-col" style="margin-bottom: 1.8rem;">
-          <div class="card">
-            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Planning Realism Score</span>
-            <div id="analytics-realism-score" style="font-family: var(--font-mono); font-size: 3rem; font-weight: 800; color: var(--accent-diet-light); margin: 0.4rem 0;">
-              85%
-            </div>
-            <p id="analytics-realism-text" style="font-size: 0.85rem; color: var(--text-secondary);">
-              Analyzing task and schedule fidelity...
-            </p>
-          </div>
-
-          <div class="card">
-            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Goal Velocity</span>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-study-light); margin: 0.4rem 0;">
-              Milestone Throughput
-            </div>
-            <p id="analytics-velocity-text" style="font-size: 0.85rem; color: var(--text-secondary);">
-              Calculating milestone completion rates...
-            </p>
-          </div>
-
-          <div class="card">
-            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Where Am I Losing Time?</span>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-screen-light); margin: 0.4rem 0;">
-              Focus Overrun Audit
-            </div>
-            <p id="analytics-time-leak-text" style="font-size: 0.85rem; color: var(--text-secondary);">
-              Loading focus variance history...
-            </p>
-          </div>
-
-          <div class="card">
-            <span style="font-size: 0.8rem; text-transform: uppercase; color: var(--text-muted); letter-spacing: 0.05em;">Strongest Anchor Habit</span>
-            <div style="font-size: 1.4rem; font-weight: 700; color: var(--accent-study-light); margin: 0.4rem 0;">
-              Consistency Engine
-            </div>
-            <p id="analytics-habit-text" style="font-size: 0.85rem; color: var(--text-secondary);">
-              Calculating habit streak momentum...
-            </p>
-          </div>
-        </div>
-
-        <!-- 365-Day Consistency Heatmap Card -->
-        <div class="card" style="margin-bottom: 1.8rem;">
-          <div class="card-header">
-            <h3 class="card-title">
-              <i data-lucide="calendar" style="color: var(--accent-diet-light);"></i>
-              <span>365-Day Habit & Focus Consistency Matrix</span>
-            </h3>
-            <span class="badge" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">52-Week Year Grid</span>
-          </div>
-
-          <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
-            Visualizing your daily habit momentum, focus hours, and vitality health scores across the past 365 days. Hover over any cell to inspect past logs.
+          <h1 class="welcome-title">Master Your Day with Calm Adaptive Intelligence</h1>
+          <p class="welcome-subtitle">
+            FlowOS bridges long-term goals, actionable tasks, focus soundscapes, and real-time schedule recalibration when reality diverges.
           </p>
 
-          <div id="year-heatmap-container">
-            <!-- Dynamically generated 52-week SVG grid -->
+          <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+            <button id="btn-welcome-launch" class="btn btn-primary" style="padding: 0.8rem 2.2rem; font-size: 1rem;">
+              <i data-lucide="play"></i> Launch Command Center
+            </button>
+            <button class="btn btn-secondary btn-pwa-install" style="display: none;">
+              <i data-lucide="download"></i> Install App
+            </button>
+          </div>
+        </div>
+
+        <!-- 4 Archetype Cards for 1-Click Calibration -->
+        <div style="font-size: 0.9rem; font-weight: 700; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.08em; text-align: center; margin: 2rem 0 1rem;">
+          Select Your Operator Archetype for 1-Click Calibration:
+        </div>
+
+        <div class="grid-2-col" style="gap: 1.2rem;">
+          <div class="card archetype-select-card" data-archetype="student" style="cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span class="badge" style="background: rgba(99, 102, 241, 0.2); color: var(--accent-study-light);">🎓 Student</span>
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 0.4rem;">Academic & Exam Sprint</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">50m study blocks, 10Hz Alpha Waves, active recall practice.</p>
+              </div>
+              <i data-lucide="chevron-right" style="color: var(--text-muted);"></i>
+            </div>
           </div>
 
-          <div id="heatmap-stats-summary" style="display: flex; gap: 1rem; margin-top: 1.25rem; flex-wrap: wrap;">
-            <!-- Stats cards -->
+          <div class="card archetype-select-card" data-archetype="engineer" style="cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span class="badge" style="background: rgba(16, 185, 129, 0.2); color: var(--accent-diet-light);">💻 Engineer</span>
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 0.4rem;">Software & Deep Architecture</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">60m flow blocks, Gamma audio, 20-20-20 screen relief.</p>
+              </div>
+              <i data-lucide="chevron-right" style="color: var(--text-muted);"></i>
+            </div>
+          </div>
+
+          <div class="card archetype-select-card" data-archetype="executive" style="cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">⚡ Executive</span>
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 0.4rem;">Founder & Leader</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">45m priority execution blocks, obstacle solver, weekly analytics.</p>
+              </div>
+              <i data-lucide="chevron-right" style="color: var(--text-muted);"></i>
+            </div>
+          </div>
+
+          <div class="card archetype-select-card" data-archetype="wellness" style="cursor: pointer;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <div>
+                <span class="badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">🧘 Wellness</span>
+                <h3 style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 0.4rem;">Holistic Longevity & Balance</h3>
+                <p style="font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.2rem;">8 glasses hydration, habit streaks, circadian digital sunset.</p>
+              </div>
+              <i data-lucide="chevron-right" style="color: var(--text-muted);"></i>
+            </div>
           </div>
         </div>
       </section>
@@ -1474,279 +1465,251 @@
   </div>
 
   <!-- ==========================================
-       WHAT-IF SCENARIO SIMULATOR MODAL
+       MODALS, DRAWERS & FLOATING HUD
        ========================================== -->
-  <div id="simulator-modal" class="modal-overlay">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
-        <h3 style="font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="git-branch" style="color: var(--accent-study-light);"></i>
-          <span>What-If Scenario Simulator</span>
+
+  <!-- Fullscreen Zen Focus Room with Live Audio Visualizer -->
+  <div id="fullscreen-focus-room" class="focus-room-overlay">
+    <div style="position: absolute; top: 2rem; right: 2rem; z-index: 100;">
+      <button id="btn-exit-focus-room" class="btn btn-secondary">
+        <i data-lucide="minimize"></i> Exit Fullscreen
+      </button>
+    </div>
+
+    <div style="max-width: 800px; width: 100%; text-align: center; margin: auto;">
+      <div style="font-size: 0.9rem; color: var(--accent-study-light); text-transform: uppercase; font-weight: 700; letter-spacing: 0.1em; margin-bottom: 0.5rem;">
+        FLOWOS DEEP FOCUS ROOM
+      </div>
+      <h2 id="zen-task-title-display" style="font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem;">
+        Master Python & Binary Tree Traversal
+      </h2>
+
+      <!-- Live Web Audio Visualizer Canvas -->
+      <div style="margin: 1.5rem 0;">
+        <canvas id="focus-visualizer-canvas" style="width: 100%; height: 120px; border-radius: var(--radius-md); background: rgba(0,0,0,0.3); border: 1px solid var(--border-subtle);"></canvas>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem;">
+        <button onclick="window.focusEngine?.toggle()" class="btn btn-primary" style="padding: 0.85rem 2.5rem; font-size: 1.1rem;">
+          <i data-lucide="play"></i> Toggle Flow
+        </button>
+        <button onclick="window.focusEngine?.addMinutes(10)" class="btn btn-secondary">
+          +10m
+        </button>
+        <button onclick="window.focusEngine?.completeFocusTask()" class="btn btn-secondary">
+          <i data-lucide="check"></i> Complete
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Voice Assistant / Command Modal -->
+  <div id="voice-assistant-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i data-lucide="mic" style="color: var(--accent-study-light);"></i>
+          <span>Voice & Natural Language Command</span>
         </h3>
-        <button id="btn-close-simulator" class="btn-icon" title="Close">
+        <button id="btn-close-voice-modal" class="btn-icon">
           <i data-lucide="x"></i>
         </button>
       </div>
 
-      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
-        Simulate hypothetical schedule allocations in a sandbox without altering your live day until approved.
-      </p>
+      <div style="text-align: center; padding: 1.5rem 0;">
+        <div id="voice-mic-indicator" class="voice-mic-active" style="width: 80px; height: 80px; border-radius: 50%; background: var(--grad-zenith); display: flex; align-items: center; justify-content: center; margin: 0 auto 1.2rem; box-shadow: var(--shadow-glow); color: #fff; cursor: pointer;">
+          <i data-lucide="mic" style="width: 36px; height: 36px;"></i>
+        </div>
+        <div id="voice-transcript-text" style="font-size: 1.1rem; color: var(--text-primary); font-weight: 600; min-height: 48px; padding: 0 1rem;">
+          Click the microphone or type below...
+        </div>
+      </div>
 
-      <form id="simulator-form">
+      <form id="voice-text-fallback-form" style="display: flex; gap: 0.6rem; margin-bottom: 1rem;">
+        <input type="text" id="voice-text-fallback-input" class="form-input" placeholder="e.g. Start 45 minutes of Python or Log 2 glasses of water" required>
+        <button type="submit" class="btn btn-primary">
+          <i data-lucide="send"></i>
+        </button>
+      </form>
+
+      <div style="font-size: 0.75rem; color: var(--text-muted);">
+        <strong>Try saying:</strong> "Start 50 minutes of studying", "Log 2 glasses of water", "My task took 45 minutes longer", "Rebalance evening schedule", or "I need a break".
+      </div>
+    </div>
+  </div>
+
+  <!-- QR Sync Modal -->
+  <div id="qr-sync-modal" class="modal-backdrop">
+    <div class="modal-card" style="text-align: center;">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i data-lucide="qr-code"></i>
+          <span>Sync to Mobile Phone</span>
+        </h3>
+        <button id="btn-close-qr-modal" class="btn-icon">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+      <div style="display: flex; justify-content: center; margin: 1.5rem 0;">
+        <img id="modal-qr-sync-img" src="" alt="Sync QR Code" style="max-width: 220px; border-radius: var(--radius-md); border: 2px solid var(--border-glow);">
+      </div>
+      <p style="font-size: 0.85rem; color: var(--text-secondary); margin-bottom: 1rem;">
+        Point your phone camera at this QR code to load your active day plan, mission, and focus timers immediately.
+      </p>
+      <button id="btn-qr-modal-close-action" class="btn btn-primary" style="width: 100%;">
+        Done
+      </button>
+    </div>
+  </div>
+
+  <!-- AI Routine Generator Modal -->
+  <div id="ai-generator-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i data-lucide="sparkles"></i>
+          <span>AI Day-Forge Generator</span>
+        </h3>
+        <button id="btn-close-generator" class="btn-icon">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="schedule-generator-form">
         <div class="form-group">
-          <label class="form-label">Select Scenario Hypothesis</label>
-          <select name="scenarioType" class="form-select">
-            <option value="spend-extra-hours-coding" selected>What if I spend 2 extra hours coding on my project tonight?</option>
-            <option value="take-afternoon-off">What if I take the entire afternoon off (Recovery Mode)?</option>
+          <label class="form-label">Archetype Blueprint</label>
+          <select name="archetype" class="form-select">
+            <option value="student">Academic Scholar & Student (6h study, 10Hz alpha)</option>
+            <option value="developer">Software Engineer & Desk Flow (6h focus, 20-20-20)</option>
+            <option value="professional">Working Professional (4h focused sprints)</option>
+            <option value="examprep">Intensive Exam Sprint (8h deep mastery)</option>
+            <option value="elderly">Care & Gentle Vitality (Paced mobility & reminders)</option>
           </select>
         </div>
 
-        <div class="form-group">
-          <label class="form-label">Duration (Minutes)</label>
-          <input type="number" name="scenarioDuration" class="form-input" value="120" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%;">
-          <i data-lucide="play"></i> Run Sandbox Simulation
-        </button>
-      </form>
-
-      <div id="simulation-comparison-box"></div>
-    </div>
-  </div>
-
-  <!-- ==========================================
-       EVENING DEBRIEF & REFLECTION MODAL
-       ========================================== -->
-  <div id="evening-debrief-modal" class="modal-overlay">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
-        <h3 style="font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="moon" style="color: var(--accent-rest-light);"></i>
-          <span>Zenith Evening Reflection Ritual</span>
-        </h3>
-        <button id="btn-close-debrief" class="btn-icon" title="Close">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-
-      <form id="evening-debrief-form">
-        <div class="form-group">
-          <label class="form-label">🏆 What was your biggest win today?</label>
-          <input type="text" name="debriefWin" class="form-input" placeholder="e.g. Mastered binary search and stayed hydrated" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">⏳ What stole your time or caused friction?</label>
-          <input type="text" name="debriefLeak" class="form-input" placeholder="e.g. Got distracted on YouTube for 30m after lunch" required>
-        </div>
-
-        <div class="form-group">
-          <label class="form-label">🔥 What is your #1 priority for tomorrow morning?</label>
-          <input type="text" name="tomorrowPriority" class="form-input" placeholder="e.g. Build FastAPI authentication endpoint" required>
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; margin-top: 0.5rem;">
-          <i data-lucide="sparkles"></i> Lock In Reflection & Earn +50 XP
-        </button>
-      </form>
-    </div>
-  </div>
-
-  <!-- ==========================================
-       AI SCHEDULE SYNTHESIZER MODAL WIZARD
-       ========================================== -->
-  <div id="generator-modal" class="modal-overlay">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
-        <h3 style="font-size: 1.3rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i>
-          <span>AI Schedule Synthesizer</span>
-        </h3>
-        <button id="btn-close-generator" class="btn-icon" title="Close">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-
-      <form id="routine-generator-form">
-        <div class="form-group">
-          <label class="form-label">Select Your Lifestyle Archetype</label>
-          <div class="radio-pill-group">
-            <div class="radio-pill-item">
-              <input type="radio" name="archetype" id="arch-student" value="student" checked>
-              <label for="arch-student" class="radio-pill-label">🎓 Academic Student</label>
-            </div>
-            <div class="radio-pill-item">
-              <input type="radio" name="archetype" id="arch-desk" value="professional">
-              <label for="arch-desk" class="radio-pill-label">💼 Employee / Professional</label>
-            </div>
-            <div class="radio-pill-item">
-              <input type="radio" name="archetype" id="arch-dev" value="developer">
-              <label for="arch-dev" class="radio-pill-label">💻 Developer / Desk Worker</label>
-            </div>
-            <div class="radio-pill-item">
-              <input type="radio" name="archetype" id="arch-exam" value="examprep">
-              <label for="arch-exam" class="radio-pill-label">⚡ Intense Exam Sprint</label>
-            </div>
-            <div class="radio-pill-item">
-              <input type="radio" name="archetype" id="arch-elderly" value="elderly">
-              <label for="arch-elderly" class="radio-pill-label">👵 Older Adult & Gentle Routine</label>
-            </div>
-          </div>
-        </div>
-
-        <div class="grid-2-col">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
           <div class="form-group">
-            <label class="form-label">Wake Up Time</label>
+            <label class="form-label">Wake-up Time</label>
             <input type="time" name="wakeTime" class="form-input" value="07:00" required>
           </div>
           <div class="form-group">
-            <label class="form-label">Target Bedtime</label>
+            <label class="form-label">Bedtime Target</label>
             <input type="time" name="bedTime" class="form-input" value="23:00" required>
           </div>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Daily Deep Focus Target (Hours)</label>
-          <select name="studyHours" class="form-select">
-            <option value="2">2 Hours (Gentle / Elderly)</option>
-            <option value="4">4 Hours (Light & Steady)</option>
-            <option value="6" selected>6 Hours (Balanced High-Performance)</option>
-            <option value="8">8 Hours (Intensive Mastery)</option>
-          </select>
+          <label class="form-label">Target Study / Focus Hours</label>
+          <input type="number" name="studyHours" class="form-input" min="1" max="14" value="6" required>
         </div>
 
         <div class="form-group">
-          <label class="form-label">Nutritional Strategy</label>
+          <label class="form-label">Nutrition & Brain-Fuel Preset</label>
           <select name="dietGoal" class="form-select">
-            <option value="clean-energy" selected>Sustained Cognitive Energy (Omega-3 & Low-GI)</option>
-            <option value="high-protein">High-Protein & Active Strength</option>
-            <option value="plant-powered">100% Plant-Powered Vitality</option>
+            <option value="clean-energy">Sustained Mental Focus & Low-Glycemic Complex Carbs</option>
+            <option value="high-protein">High Protein & Physical Performance</option>
+            <option value="plant-powered">100% Plant-Powered Vitality & Antioxidants</option>
           </select>
         </div>
 
-        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 0.9rem; margin-top: 1rem; font-size: 1rem;">
-          <i data-lucide="wand-2"></i> Synthesize & Apply Custom Day Plan
+        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">
+          <i data-lucide="wand-2"></i> Synthesize Optimized Schedule
         </button>
       </form>
     </div>
   </div>
 
-  <!-- ==========================================
-       AI OBSTACLE SOLVER MODAL
-       ========================================== -->
-  <div id="obstacle-modal" class="modal-overlay">
-    <div class="modal-box">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.2rem;">
-        <h3 style="font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="help-circle" style="color: var(--accent-study-light);"></i>
+  <!-- What-If Scenario Simulator Modal -->
+  <div id="simulator-modal" class="modal-backdrop">
+    <div class="modal-card" style="max-width: 680px;">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i data-lucide="git-branch" style="color: var(--accent-study-light);"></i>
+          <span>What-If Scenario Sandbox Simulator</span>
+        </h3>
+        <button id="btn-close-simulator" class="btn-icon">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="simulator-form" style="display: grid; grid-template-columns: 2fr 1fr auto; gap: 0.8rem; margin-bottom: 1rem;">
+        <select name="scenarioType" class="form-select">
+          <option value="spend-extra-hours-coding">Spend extra hours coding</option>
+          <option value="unexpected-meeting">Unexpected meeting added</option>
+          <option value="take-evening-off">Take evening off to recharge</option>
+          <option value="late-morning-start">Late morning start (+2h)</option>
+        </select>
+        <input type="number" name="scenarioDuration" class="form-input" value="120" min="15" max="360" placeholder="Duration (min)">
+        <button type="submit" class="btn btn-primary">
+          Simulate
+        </button>
+      </form>
+
+      <div id="simulation-comparison-box">
+        <!-- Live Sandbox Comparison -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Obstacle Deconstructor Modal -->
+  <div id="obstacle-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i data-lucide="zap" style="color: #fbbf24;"></i>
           <span>AI Obstacle Deconstructor</span>
         </h3>
-        <button id="btn-close-obstacle" class="btn-icon" title="Close">
+        <button id="btn-close-obstacle-modal" class="btn-icon">
           <i data-lucide="x"></i>
         </button>
       </div>
 
-      <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1rem;">
-        Explain what is blocking you (e.g. <em>"I keep getting a 401 error and feeling overwhelmed"</em> or <em>"I don't know where to start reading chapter 5"</em>).
-      </p>
-
-      <form id="obstacle-form">
-        <textarea id="obstacle-desc-input" name="obstacleDesc" class="form-textarea" rows="3" placeholder="Describe the obstacle in plain words..." required></textarea>
-        <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.8rem;">
-          <i data-lucide="sparkles"></i> Deconstruct Into Immediate 10-Min Action
-        </button>
-      </form>
-
-      <div id="obstacle-result-box"></div>
-    </div>
-  </div>
-
-  <!-- Voice Assistant Modal -->
-  <div id="voice-assistant-modal" class="modal-overlay">
-    <div class="modal-box" style="text-align: center; max-width: 440px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="mic" style="color: var(--accent-study-light);"></i>
-          <span>Zenith Voice Assistant</span>
-        </h3>
-        <button id="btn-close-voice-modal" class="btn-icon" title="Close">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-
-      <div id="voice-pulse-ring" class="voice-pulse-circle">
-        <button id="voice-modal-mic-btn" style="background: none; border: none; cursor: pointer;">
-          <i id="voice-modal-mic-icon" data-lucide="mic" style="width: 40px; height: 40px; color: var(--accent-study-light);"></i>
-        </button>
-      </div>
-
-      <div id="voice-transcript-text" style="font-size: 1.1rem; font-weight: 600; color: #fff; min-height: 48px; margin-bottom: 0.6rem;">
-        "Listening..."
-      </div>
-
-      <p id="voice-status-text" style="font-size: 0.84rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
-        Say: <em>"Log 2 glasses of water"</em>, <em>"Start 25m focus"</em>, or <em>"Mark workout done"</em>
-      </p>
-
-      <div style="display: flex; justify-content: center; gap: 0.4rem; flex-wrap: wrap;">
-        <span class="badge" style="font-size: 0.72rem; background: rgba(255,255,255,0.06);">💧 "Log water"</span>
-        <span class="badge" style="font-size: 0.72rem; background: rgba(255,255,255,0.06);">⏱️ "Start timer"</span>
-        <span class="badge" style="font-size: 0.72rem; background: rgba(255,255,255,0.06);">🎯 "Mark done"</span>
-        <span class="badge" style="font-size: 0.72rem; background: rgba(255,255,255,0.06);">🌧️ "Play rain"</span>
-      </div>
-    </div>
-  </div>
-
-  <!-- QR Instant Mobile Sync Modal -->
-  <div id="qr-sync-modal" class="modal-overlay">
-    <div class="modal-box" style="text-align: center; max-width: 460px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
-        <h3 style="font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
-          <i data-lucide="qr-code" style="color: var(--accent-study-light);"></i>
-          <span>Instant Phone Sync</span>
-        </h3>
-        <button id="btn-close-qr-sync" class="btn-icon" title="Close">
-          <i data-lucide="x"></i>
-        </button>
-      </div>
-
-      <p style="font-size: 0.86rem; color: var(--text-secondary); margin-bottom: 1.2rem;">
-        Scan this QR code with your phone camera to instantly open Zenith AI on mobile with all your habits, streaks, and progress synced!
-      </p>
-
-      <div id="qr-canvas-container" style="margin-bottom: 1.2rem;">
-        <!-- Dynamic QR image rendered here -->
-      </div>
-
-      <div style="display: flex; gap: 0.5rem; margin-bottom: 1.2rem;">
-        <input id="qr-sync-url-input" type="text" class="form-input" readonly style="font-size: 0.78rem; flex: 1;">
-        <button id="btn-copy-sync-link" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.5rem 0.8rem;">
-          <i data-lucide="copy"></i> Copy
-        </button>
-      </div>
-
-      <form id="qr-import-form" style="border-top: 1px solid var(--border-subtle); padding-top: 1rem; text-align: left;">
-        <label style="font-size: 0.78rem; color: var(--text-muted);">Have a sync code from another device?</label>
-        <div style="display: flex; gap: 0.5rem; margin-top: 0.3rem;">
-          <input id="qr-import-payload-input" type="text" class="form-input" placeholder="Paste sync link or code..." style="font-size: 0.8rem; flex: 1;">
-          <button type="submit" class="btn btn-primary" style="font-size: 0.8rem; padding: 0.5rem 0.9rem;">
-            Import
-          </button>
+      <form id="obstacle-deconstruct-form">
+        <div class="form-group">
+          <label class="form-label">What is blocking you or causing friction?</label>
+          <textarea name="obstacleText" class="form-input" rows="3" placeholder="e.g. I have a bug in my async code and feel overwhelmed, or I don't know where to start..." required></textarea>
         </div>
+        <button type="submit" class="btn btn-primary" style="width: 100%;">
+          <i data-lucide="sparkles"></i> Deconstruct into 10-Min Micro-Action
+        </button>
+      </form>
+
+      <div id="obstacle-solution-box" style="margin-top: 1rem;">
+        <!-- Deconstructed Solution -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Evening Debrief Modal -->
+  <div id="evening-debrief-modal" class="modal-backdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 class="modal-title">
+          <i data-lucide="moon" style="color: var(--accent-rest-light);"></i>
+          <span>Evening Debrief & Reflection</span>
+        </h3>
+        <button id="btn-close-debrief-modal" class="btn-icon">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
+
+      <form id="modal-evening-debrief-form" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div>
+          <label class="form-label">What was your biggest win today?</label>
+          <input type="text" class="form-input" placeholder="e.g. Mastered binary tree depth traversal" required>
+        </div>
+        <div>
+          <label class="form-label">Tomorrow's #1 Anchor Mission:</label>
+          <input type="text" class="form-input" placeholder="e.g. Build User Auth REST Endpoint" required>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <i data-lucide="check"></i> Lock In Day & Start Wind-Down
+        </button>
       </form>
     </div>
   </div>
 
-  <!-- Floating AI Copilot HUD Widget & Expandable Drawer -->
-  <div id="copilot-hud-pill" class="copilot-floating-pill" title="Toggle Zenith AI Copilot">
-    <span class="copilot-status-dot"></span>
-    <span style="font-size: 0.82rem; font-weight: 700; color: #fff;">Zenith Copilot</span>
-    <span id="copilot-hud-status" style="font-size: 0.72rem; color: var(--text-muted);">Observing Flow</span>
-    <span id="copilot-hud-badge" class="badge" style="background: #fbbf24; color: #000; font-size: 0.65rem; font-weight: 800; padding: 0.1rem 0.35rem; display: none;">1</span>
-  </div>
-
-  <!-- Expandable Copilot Glass Drawer -->
+  <!-- Autonomous Copilot Drawer Panel -->
   <div id="copilot-drawer" class="copilot-drawer-panel">
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 0.8rem;">
       <div style="display: flex; align-items: center; gap: 0.5rem;">
@@ -1754,8 +1717,8 @@
           <i data-lucide="bot" style="width: 16px; height: 16px;"></i>
         </div>
         <div>
-          <h4 style="font-size: 0.95rem; font-weight: 800; color: #fff;">Autonomous AI Copilot</h4>
-          <span style="font-size: 0.7rem; color: var(--accent-study-light);">Context-Aware Executive Assistant</span>
+          <h4 style="font-size: 0.95rem; font-weight: 800; color: #fff;">Contextual Copilot</h4>
+          <span style="font-size: 0.7rem; color: var(--accent-study-light);">FlowOS Adaptive Assistant</span>
         </div>
       </div>
       <button id="btn-close-copilot-drawer" class="btn-icon" title="Close Drawer">
@@ -1767,39 +1730,18 @@
     <div id="copilot-intervention-body">
       <!-- Dynamically populated -->
     </div>
-
-    <!-- Copilot Diagnostic Simulator & Stats Bar -->
-    <div style="margin-top: 1.25rem; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 0.9rem;">
-      <div style="display: flex; justify-content: space-between; font-size: 0.72rem; color: var(--text-muted); margin-bottom: 0.75rem;">
-        <span id="copilot-stat-interventions">11 Decisions Applied</span>
-        <span id="copilot-stat-saved" style="color: #34d399;">4.5h Bedtime Protected</span>
-      </div>
-
-      <div style="font-size: 0.72rem; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 0.4rem;">
-        Test Diagnostic Triggers:
-      </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.4rem;">
-        <button id="btn-sim-copilot-overrun" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
-          ⏱️ Overrun (+30m)
-        </button>
-        <button id="btn-sim-copilot-impossible" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
-          ⚠️ Impossible Day
-        </button>
-        <button id="btn-sim-copilot-inactivity" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
-          💤 Idle Block
-        </button>
-        <button id="btn-sim-copilot-failure" class="btn btn-secondary" style="font-size: 0.72rem; padding: 0.35rem;">
-          🔄 Task Friction
-        </button>
-      </div>
-    </div>
   </div>
 
-  <!-- Application Logic Scripts -->
+  <!-- Toast Notification Container -->
+  <div id="toast-container" class="toast-container"></div>
+
+  <!-- ==========================================
+       APPLICATION LOGIC & MODULAR SCRIPTS
+       ========================================== -->
   <script src="js/state.js"></script>
   <script src="js/ai-engine.js"></script>
   <script src="js/reality-events.js"></script>
-  <script src="js/ask-zenith.js"></script>
+  <script src="js/ask-flowos.js"></script>
   <script src="js/scenario-simulator.js"></script>
   <script src="js/personal-learning.js"></script>
   <script src="js/goal-intelligence.js"></script>

@@ -1,9 +1,9 @@
 /**
- * ZENITH AI - RPG QUESTS & WEEKLY BOSS BATTLE ENGINE
- * Transforms habit consistency and focus sessions into an engaging RPG battle.
+ * FLOWOS - MOTIVATION, QUESTS & BOSS BATTLE ENGINE (V2.0)
+ * Optional motivation layer turning habit consistency and focus into RPG milestones.
  */
 
-class ZenithQuestsEngine {
+class FlowOSQuestsEngine {
   constructor() {
     this.bosses = [
       { id: 'b1', name: 'The Procrastination Golem', title: 'Slumbering Overlord of Delay', maxHp: 2000, level: 12, rewardXp: 500, badge: '🛡️ Golem Slayer' },
@@ -31,7 +31,7 @@ class ZenithQuestsEngine {
         ...s.activeBossQuest,
         currentHp: newHp
       },
-      vitalityXP: isDefeated ? s.vitalityXP + boss.rewardXp : s.vitalityXP + Math.round(amount / 5)
+      vitalityXP: isDefeated ? (s.vitalityXP || 0) + boss.rewardXp : (s.vitalityXP || 0) + Math.round(amount / 5)
     }));
 
     this.spawnDamageFloater(amount, sourceLabel);
@@ -58,11 +58,10 @@ class ZenithQuestsEngine {
   }
 
   onBossDefeated(boss) {
-    if (window.audioZenith) window.audioZenith.playFanfare();
+    if (window.audioFlowOS) window.audioFlowOS.playFanfare();
     window.showToast?.(`🏆 BOSS DEFEATED! You vanquished "${boss.bossName}"! (+${boss.rewardXp} XP, Unlocked "${boss.rewardBadge}")`);
 
     setTimeout(() => {
-      // Spawn next boss
       const nextBoss = this.bosses[1];
       window.appState.update(s => ({
         ...s,
@@ -135,4 +134,6 @@ class ZenithQuestsEngine {
   }
 }
 
-window.questsEngine = new ZenithQuestsEngine();
+window.FlowOSQuestsEngine = FlowOSQuestsEngine;
+window.ZenithQuestsEngine = FlowOSQuestsEngine;
+window.questsEngine = new FlowOSQuestsEngine();

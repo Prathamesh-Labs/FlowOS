@@ -1,11 +1,14 @@
 /**
- * ZENITH AI - DAILY READINESS & ENERGY INDEX ENGINE
- * Calculates circadian cognitive capacity and provides fatigue-aware schedule adaptation.
+ * FLOWOS - DAILY READINESS & PLANNING SIGNAL ENGINE (V2.0)
+ * Uses self-reported inputs (sleep quality, perceived energy, physical soreness)
+ * as an optional planning signal to adapt flexible focus block sizes.
+ * (Non-medical planning aid, not a clinical measurement).
  */
 
-class ZenithReadinessEngine {
+class FlowOSReadinessEngine {
   constructor() {
-    this.storageKey = 'zenith_readiness_history';
+    this.storageKey = 'flowos_readiness_history';
+    this.previousFocusSeconds = null;
   }
 
   init() {
@@ -33,20 +36,20 @@ class ZenithReadinessEngine {
 
     let status = 'Peak Flow State';
     let blockMins = 50;
-    let recommendation = 'Cognitive readiness is peak. Ideal for deep complex problem solving and 50m study blocks.';
+    let recommendation = 'Self-reported readiness is high. Ideal for 50-minute deep work blocks.';
 
     if (clampedScore < 45) {
-      status = 'Exhaustion & Fatigue Warning';
+      status = 'Low Energy Signal';
       blockMins = 15;
-      recommendation = 'High nervous system strain detected. Prioritize 15m micro-sprints, hydration, and an early bedtime.';
+      recommendation = 'Energy is reported low. FlowOS recommends 15m micro-sprints and protecting bedtime.';
     } else if (clampedScore < 65) {
-      status = 'Moderate Stamina';
+      status = 'Moderate Energy';
       blockMins = 25;
-      recommendation = 'Energy is average. Stick to standard 25m Pomodoros with 5m eye relief breaks.';
+      recommendation = 'Standard 25m Pomodoros with 5m recovery breaks recommended.';
     } else if (clampedScore < 85) {
       status = 'Steady Momentum';
       blockMins = 35;
-      recommendation = 'Solid cognitive foundation. Great for 35m productive execution.';
+      recommendation = 'Solid energy foundation. Well suited for 35m execution blocks.';
     }
 
     return {
@@ -110,7 +113,7 @@ class ZenithReadinessEngine {
           }
         }));
 
-        if (window.audioZenith) window.audioZenith.playChime();
+        if (window.audioFlowOS) window.audioFlowOS.playChime();
         window.showToast?.(`⚡ Daily Readiness Saved: ${result.score}% (${result.status})`);
       });
     }
@@ -126,6 +129,8 @@ class ZenithReadinessEngine {
     const state = window.appState.getState();
     const readiness = state.readiness || { score: 85, recommendedBlockMins: 50 };
 
+    this.previousFocusSeconds = state.activeFocus?.plannedSeconds || 3600;
+
     // Update active focus timer planned duration
     window.appState.update(s => ({
       ...s,
@@ -140,8 +145,22 @@ class ZenithReadinessEngine {
       window.focusEngine.render();
     }
 
-    window.showToast?.(`🎯 Schedule adapted: Focus blocks tuned to ${readiness.recommendedBlockMins}m based on your ${readiness.score}% readiness.`);
-    if (window.audioZenith) window.audioZenith.playFanfare();
+    window.showToast?.(`🎯 Schedule adapted: Focus blocks tuned to ${readiness.recommendedBlockMins}m based on your self-reported readiness. <button onclick="window.readinessEngine.undoAdaptation()" style="margin-left:8px; background:rgba(255,255,255,0.2); border:none; color:#fff; padding:2px 8px; border-radius:4px; cursor:pointer;">Undo</button>`);
+    if (window.audioFlowOS) window.audioFlowOS.playFanfare();
+  }
+
+  undoAdaptation() {
+    if (this.previousFocusSeconds) {
+      window.appState.update(s => ({
+        ...s,
+        activeFocus: {
+          ...s.activeFocus,
+          plannedSeconds: this.previousFocusSeconds
+        }
+      }));
+      if (window.focusEngine) window.focusEngine.render();
+      window.showToast?.('Restored previous focus block size.');
+    }
   }
 
   render() {
@@ -161,4 +180,6 @@ class ZenithReadinessEngine {
   }
 }
 
-window.readinessEngine = new ZenithReadinessEngine();
+window.FlowOSReadinessEngine = FlowOSReadinessEngine;
+window.ZenithReadinessEngine = FlowOSReadinessEngine;
+window.readinessEngine = new FlowOSReadinessEngine();

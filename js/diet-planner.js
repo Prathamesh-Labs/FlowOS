@@ -1,102 +1,87 @@
 /**
- * ZENITH AI - DIET & NUTRITIONAL BRAIN-FUEL PLANNER
- * Curates clean, energizing meals and smart brain snacks synchronized with study/focus routines.
+ * FLOWOS - NUTRITION & FUEL PLANNER (V2.0)
+ * Curates clean, energizing meals and smart brain snacks synchronized with daily focus routines.
  */
 
 const DIET_PRESETS = {
   'clean-energy': {
     title: 'Sustained Mental Focus & Clean Energy',
-    description: 'Low-glycemic complex carbs, high antioxidant berries, omega-3s, and steady cognitive energy.',
+    description: 'Low-glycemic complex carbs, high antioxidant berries, omega-3s, and steady energy.',
     breakfast: {
-      name: 'Brain-Fuel Rolled Oats & Chia Power Bowl',
-      ingredients: ['1/2 cup rolled oats', '1 tbsp chia seeds', 'Handful of fresh blueberries', '1 tbsp crushed walnuts', 'Drizzle of pure raw honey', 'Almond or oat milk'],
-      benefits: 'Omega-3 fatty acids for neuron signaling and sustained fiber energy without mid-morning crashes.'
+      name: 'Rolled Oats & Chia Power Bowl',
+      ingredients: ['1/2 cup rolled oats', '1 tbsp chia seeds', 'Handful of fresh berries', '1 tbsp crushed walnuts', 'Drizzle of honey', 'Almond or oat milk'],
+      benefits: 'Healthy fats and complex fiber for sustained morning energy without crashes.'
     },
     lunch: {
       name: 'Rainbow Quinoa Bowl with Lean Protein',
       ingredients: ['Tri-color quinoa', 'Steamed broccoli & baby spinach', 'Grilled paneer, tofu, or chicken breast', 'Sliced avocado & tahini lemon dressing'],
-      benefits: 'Complete amino acid profile + lutein and healthy fats to support brain executive function.'
+      benefits: 'Complete amino acid profile + healthy fats to support afternoon focus.'
     },
     snacks: [
-      { name: 'Walnut & 85% Dark Chocolate Nibbles', desc: 'Flavonoids and magnesium for sharp recall.' },
-      { name: 'Sliced Apple with Pure Almond Butter', desc: 'Natural fructose and healthy fats for clean focus boost.' },
+      { name: 'Walnut & Dark Chocolate Nibbles', desc: 'Flavonoids and magnesium for clean focus.' },
+      { name: 'Sliced Apple with Pure Almond Butter', desc: 'Natural fructose and healthy fats for an afternoon boost.' },
       { name: 'Chilled Coconut Water with Chia', desc: 'Natural electrolytes for cellular hydration.' }
     ],
     dinner: {
       name: 'Warm Lentil & Roasted Vegetable Medley',
       ingredients: ['Warm red/green lentils soup', 'Roasted sweet potatoes, bell peppers, zucchini', 'Olive oil & fresh rosemary'],
-      benefits: 'Gentle digestion promoting serotonin and melatonin synthesis for restorative deep sleep.'
+      benefits: 'Gentle digestion supporting restful evening recovery.'
     }
   },
   'high-protein': {
     title: 'High Protein & Active Performance',
-    description: 'Fuel for muscle recovery, physical stamina, and sharp dopamine synthesis for deep work.',
+    description: 'Fuel for muscle recovery, physical stamina, and sharp focus for deep work.',
     breakfast: {
-      name: 'Triple-Egg Scramble with Avocado & Sprouted Toast',
-      ingredients: ['3 organic pasture-raised eggs (or 150g firm tofu)', 'Baby spinach & cherry tomatoes', '1 slice sourdough or sprouted grain toast', '1/2 sliced ripe avocado'],
-      benefits: 'Choline for memory synthesis and 24g clean protein.'
+      name: 'Egg Scramble with Avocado & Sprouted Toast',
+      ingredients: ['3 eggs (or 150g firm tofu)', 'Baby spinach & cherry tomatoes', '1 slice sourdough or sprouted grain toast', '1/2 sliced ripe avocado'],
+      benefits: 'Choline and 24g clean protein for morning energy.'
     },
     lunch: {
       name: 'Mediterranean Salmon / Herb Tempeh Salad',
-      ingredients: ['Wild-caught salmon or grilled tempeh', 'Mixed dark greens, cucumber, olives', 'Extra virgin olive oil and pumpkin seeds'],
-      benefits: 'Rich in EPA/DHA to combat brain fatigue and protect cellular membranes.'
+      ingredients: ['Salmon or grilled tempeh', 'Mixed dark greens, cucumber, olives', 'Extra virgin olive oil and pumpkin seeds'],
+      benefits: 'Rich in healthy fats to combat fatigue.'
     },
     snacks: [
-      { name: 'Greek Yogurt with Pumpkin Seeds', desc: 'Probiotics + zinc for immunity and focus.' },
-      { name: 'Boiled Egg & Sea Salt Edamame', desc: 'Quick 12g protein snack to destroy afternoon cravings.' },
-      { name: 'Matcha Green Tea with Collagen/Pea Protein', desc: 'L-Theanine plus caffeine for smooth, jitter-free flow.' }
+      { name: 'Greek Yogurt with Pumpkin Seeds', desc: 'Protein + zinc for sustained satiety.' },
+      { name: 'Boiled Egg & Sea Salt Edamame', desc: 'Quick clean protein snack.' },
+      { name: 'Matcha Green Tea', desc: 'L-Theanine plus natural caffeine for calm flow.' }
     ],
     dinner: {
       name: 'Turkey/Lentil Stuffed Bell Peppers & Greens',
       ingredients: ['Lean turkey mince or seasoned lentils', 'Baked bell peppers', 'Steamed asparagus with garlic'],
-      benefits: 'Tryptophan-rich protein that helps transition the body to evening rest.'
+      benefits: 'Balanced meal promoting restorative evening rest.'
     }
   },
   'plant-powered': {
     title: '100% Plant-Powered Vitality',
     description: 'Phytonutrient-dense, fiber-rich whole foods for cellular repair and mental clarity.',
     breakfast: {
-      name: 'Green Goddess Smoothie & Seed Crunch Toast',
+      name: 'Green Smoothie & Seed Crunch Toast',
       ingredients: ['1 cup baby spinach & kale', '1 frozen banana', '1 tbsp hemp seeds & flaxseeds', 'Matcha powder & coconut water'],
-      benefits: 'Instant bioavailable chlorophyll and vitamins for morning alertness.'
+      benefits: 'Rich in bioavailable micronutrients and antioxidants.'
     },
     lunch: {
-      name: 'Chickpea Shakshuka & Ancient Grains',
-      ingredients: ['Slow-simmered chickpeas in cumin tomato stew', 'Farro or brown basmati rice', 'Fresh cilantro & toasted pine nuts'],
-      benefits: 'Slow-burn carbohydrates to power long study and coding sessions.'
+      name: 'Warm Chickpea Buddha Bowl with Turmeric Dressing',
+      ingredients: ['1.5 cups roasted chickpeas', 'Brown rice or cauliflower rice', 'Roasted beets, edamame, and cucumber slices', 'Turmeric ginger tahini dressing'],
+      benefits: 'Complex carbohydrates and anti-inflammatory spices.'
     },
     snacks: [
-      { name: 'Roasted Spiced Chickpeas', desc: 'Crunchy savory fiber snack.' },
-      { name: 'Guacamole with Carrot & Cucumber Sticks', desc: 'Carotenoids and healthy fats.' },
-      { name: 'Herbal Peppermint Tea', desc: 'Aromatherapy focus and digestive calm.' }
+      { name: 'Raw Almonds & Dried Figs', desc: 'Trace minerals and natural focus energy.' },
+      { name: 'Hummus with Carrot & Cucumber Sticks', desc: 'Crunchy fiber snack.' },
+      { name: 'Golden Milk Turmeric Tea', desc: 'Warm soothing evening beverage.' }
     ],
     dinner: {
-      name: 'Creamy Butternut Squash & Tofu Curry',
-      ingredients: ['Roasted butternut squash', 'Light coconut milk & turmeric ginger broth', 'Pan-seared cubes of firm tofu', 'Steamed bok choy'],
-      benefits: 'Potent anti-inflammatory curcumin to soothe systemic fatigue.'
+      name: 'Creamy Coconut Butternut Squash Soup & Sourdough',
+      ingredients: ['Velvety butternut squash & ginger soup', 'Coconut milk swirl & roasted pepitas', 'Toasted artisan sourdough bread slice'],
+      benefits: 'Comforting, high-potassium dinner supporting relaxation.'
     }
   }
 };
 
-const SNACK_GENERATOR_DATABASE = [
-  { name: 'Raw Walnuts + Dark Chocolate (85%)', prep: '1 min', benefit: 'Direct DHA support & blood flow to brain' },
-  { name: 'Sliced Green Apple + Peanut Butter', prep: '2 min', benefit: 'Stable glycogen release without insulin crash' },
-  { name: 'Greek Yogurt + Blueberries + Honey', prep: '2 min', benefit: 'Potent anthocyanins for active memory' },
-  { name: 'Steamed Edamame with Sea Salt', prep: '4 min', benefit: 'Plant protein & amino acids for dopamine' },
-  { name: 'Celery & Carrot Sticks + Garlic Hummus', prep: '2 min', benefit: 'Hydrating crunchy fiber for mid-day slump' },
-  { name: 'Warm Golden Turmeric Milk with Black Pepper', prep: '3 min', benefit: 'Soothes nervous system before sleep' },
-  { name: 'Handful of Pumpkin Seeds + Dried Cranberries', prep: '1 min', benefit: 'High zinc & magnesium for calmness' }
-];
-
-class DietPlanner {
-  static getPlan(goalKey) {
-    return DIET_PRESETS[goalKey] || DIET_PRESETS['clean-energy'];
-  }
-
-  static getRandomSnack() {
-    const idx = Math.floor(Math.random() * SNACK_GENERATOR_DATABASE.length);
-    return SNACK_GENERATOR_DATABASE[idx];
+class DietPlannerController {
+  static getPreset(key) {
+    return DIET_PRESETS[key] || DIET_PRESETS['clean-energy'];
   }
 }
 
-window.DietPlanner = DietPlanner;
+window.DietPlannerController = DietPlannerController;

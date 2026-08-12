@@ -1,6 +1,6 @@
 /**
- * ZENITH AI - SCREEN TIME & DIGITAL DETOX GUARDIAN
- * Enforces 20-20-20 eye relief, posture checks, and digital sunset routines.
+ * FLOWOS - SCREEN & EYE COMFORT GUARDIAN (V2.0)
+ * Enforces 20-20-20 eye relief, posture checks, and digital wind-down routines.
  */
 
 class ScreenGuardianController {
@@ -49,7 +49,7 @@ class ScreenGuardianController {
       if (this.eyeCountdownSeconds % 60 === 0) {
         window.appState.update(s => ({
           ...s,
-          screenTimeMinutes: s.screenTimeMinutes + 1
+          screenTimeMinutes: (s.screenTimeMinutes || 0) + 1
         }));
       }
     }, 1000);
@@ -66,7 +66,7 @@ class ScreenGuardianController {
     if (window.notificationEngine) {
       window.notificationEngine.notifyEyeBreak();
     } else {
-      if (window.audioZenith) window.audioZenith.playAlert();
+      if (window.audioFlowOS) window.audioFlowOS.playAlert();
       window.showToast?.('👀 20-20-20 Eye Rule: Look at an object 20 feet away for 20 seconds!');
     }
   }
@@ -75,7 +75,7 @@ class ScreenGuardianController {
     if (window.notificationEngine) {
       window.notificationEngine.notifyPostureCheck();
     } else {
-      if (window.audioZenith) window.audioZenith.playAlert();
+      if (window.audioFlowOS) window.audioFlowOS.playAlert();
       window.showToast?.('🧘 Posture Check: Roll shoulders back, chin parallel, feet flat on floor.');
     }
   }
@@ -83,7 +83,7 @@ class ScreenGuardianController {
   logScreenBreak() {
     window.appState.update(s => ({
       ...s,
-      screenBreaksTaken: s.screenBreaksTaken + 1
+      screenBreaksTaken: (s.screenBreaksTaken || 0) + 1
     }));
     this.eyeCountdownSeconds = this.initialEyeSeconds;
     this.renderEyeTimer();
@@ -91,4 +91,5 @@ class ScreenGuardianController {
   }
 }
 
+window.ScreenGuardianController = ScreenGuardianController;
 window.screenGuardian = new ScreenGuardianController();

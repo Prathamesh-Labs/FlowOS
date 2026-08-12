@@ -1,10 +1,10 @@
 /**
- * ZENITH AI - AUTONOMOUS COPILOT ENGINE (V1.0)
- * Proactively monitors meaningful behavioral events (overruns, impossible schedules, inactivity, friction).
+ * FLOWOS - AUTONOMOUS COPILOT ENGINE (V2.0)
+ * Proactively monitors meaningful behavioral events (overruns, tight schedules, friction).
  * Delivers calm, high-signal 1-click interventions without chatty interruption.
  */
 
-class ZenithCopilotEngine {
+class FlowOSCopilotEngine {
   constructor() {
     this.checkInterval = null;
     this.isDrawerOpen = false;
@@ -247,7 +247,7 @@ class ZenithCopilotEngine {
           'shield-check'
         );
       }
-      if (window.audioZenith) window.audioZenith.playChime();
+      if (window.audioFlowOS) window.audioFlowOS.playChime();
       window.showToast?.('⚡ Evening schedule compressed. Bedtime protected!');
     } else if (actionKey === 'defer_low_priority') {
       window.appState.update(s => {
@@ -272,8 +272,8 @@ class ZenithCopilotEngine {
           }
         };
       });
-      if (window.audioZenith) window.audioZenith.playChime();
-      window.showToast?.('✂️ 2 low-priority tasks deferred to tomorrow morning peak flow!');
+      if (window.audioFlowOS) window.audioFlowOS.playChime();
+      window.showToast?.('✂️ 2 secondary tasks deferred to tomorrow morning flow!');
     } else if (actionKey === 'open_deconstructor') {
       window.appState.update(s => ({
         ...s,
@@ -357,7 +357,7 @@ class ZenithCopilotEngine {
             </div>
             <h4 style="font-size: 1rem; font-weight: 700; color: #fff;">All Systems Flowing Smoothly</h4>
             <p style="font-size: 0.82rem; margin-top: 0.3rem; color: var(--text-secondary);">
-              Zenith Copilot is actively monitoring focus stamina, schedule buffers, and circadian alignment in the background.
+              FlowOS Copilot is monitoring focus stamina, schedule buffers, and bedtime alignment in the background.
             </p>
           </div>
         `;
@@ -378,4 +378,6 @@ class ZenithCopilotEngine {
   }
 }
 
-window.copilotEngine = new ZenithCopilotEngine();
+window.FlowOSCopilotEngine = FlowOSCopilotEngine;
+window.ZenithCopilotEngine = FlowOSCopilotEngine;
+window.copilotEngine = new FlowOSCopilotEngine();

@@ -1,10 +1,10 @@
 /**
- * ZENITH AI - RETENTION & IMMERSIVE EXPERIENCE ENGINE
- * Powers the Morning AI Cockpit Briefing, Fullscreen Zen Focus Room with Live Audio Visualizer,
- * Evening Reflection Ritual, XP Leveling Gamification, and Confetti Engine.
+ * FLOWOS - IMMERSIVE EXPERIENCE & REFLECTION ENGINE (V2.0)
+ * Powers the Morning Briefing, Fullscreen Focus Room with Live Audio Visualizer,
+ * Evening Reflection Ritual, Motivation XP / Level Progression, and Confetti.
  */
 
-class ZenithExperienceEngine {
+class FlowOSExperienceEngine {
   constructor() {
     this.audioVisualizerRunning = false;
     this.animFrameId = null;
@@ -45,7 +45,7 @@ class ZenithExperienceEngine {
     const state = window.appState.getState();
     const tasksCount = state.tasks.filter(t => !t.completed).length;
     const wakeTime = state.profile.wakeTime || '07:00';
-    const text = `Good day Operator. Your Zenith Operating System is online. You have ${tasksCount} high priority tasks lined up, a ${state.profile.targetStudyHours} hour focus target, and an active vitality score of ${state.vitalityScore} percent. Let's make today count.`;
+    const text = `Good day Operator. Your FlowOS Operating System is online. You have ${tasksCount} high priority tasks lined up, a ${state.profile.targetStudyHours} hour focus target, and an active Day Balance of ${state.dayBalanceScore || state.vitalityScore || 82} percent. Let's make today count.`;
 
     if ('speechSynthesis' in window) {
       window.speechSynthesis.cancel();
@@ -53,9 +53,9 @@ class ZenithExperienceEngine {
       utterance.rate = 1.0;
       utterance.pitch = 1.05;
       window.speechSynthesis.speak(utterance);
-      window.showToast?.('🎙️ Zenith AI Morning Voice Briefing Playing...');
+      window.showToast?.('🎙️ FlowOS Morning Voice Briefing Playing...');
     } else {
-      if (window.audioZenith) window.audioZenith.playChime();
+      if (window.audioFlowOS) window.audioFlowOS.playChime();
       window.showToast?.('🎙️ Morning Briefing Initialized!');
     }
   }
@@ -294,4 +294,7 @@ class ZenithExperienceEngine {
   }
 }
 
-window.zenithExperience = new ZenithExperienceEngine();
+window.FlowOSExperienceEngine = FlowOSExperienceEngine;
+window.ZenithExperienceEngine = FlowOSExperienceEngine;
+window.flowosExperience = new FlowOSExperienceEngine();
+window.zenithExperience = window.flowosExperience;

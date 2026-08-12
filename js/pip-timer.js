@@ -1,9 +1,10 @@
 /**
- * ZENITH AI - ALWAYS-ON-TOP PICTURE-IN-PICTURE FOCUS WIDGET
+ * FLOWOS - ALWAYS-ON-TOP PICTURE-IN-PICTURE FOCUS WIDGET (V2.0)
  * Renders a persistent floating mini-timer window over other desktop applications.
+ * Uses Document Picture-in-Picture where supported, with canvas stream fallback.
  */
 
-class ZenithPipTimerController {
+class FlowOSPipTimerController {
   constructor() {
     this.pipWindow = null;
     this.canvas = null;
@@ -54,7 +55,7 @@ class ZenithPipTimerController {
         });
 
         this.updateButtonState(true);
-        window.showToast?.('🪟 Floating Mini-Timer Activated!');
+        window.showToast?.('🪟 Floating Focus Timer Activated!');
         return;
       } catch (e) {
         console.warn('Document PIP failed, falling back to Canvas stream:', e);
@@ -71,7 +72,7 @@ class ZenithPipTimerController {
     this.pipWindow.document.body.innerHTML = `
       <div style="background: #090d16; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; padding: 1.2rem; height: 100vh; box-sizing: border-box; display: flex; flex-direction: column; justify-content: space-between; border-radius: 12px;">
         <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 0.5rem;">
-          <span style="font-size: 0.8rem; font-weight: 700; color: #818cf8; letter-spacing: 0.05em;">ZENITH FOCUS</span>
+          <span style="font-size: 0.8rem; font-weight: 700; color: #818cf8; letter-spacing: 0.05em;">FLOWOS FOCUS</span>
           <span id="pip-water-badge" style="font-size: 0.75rem; background: rgba(16,185,129,0.2); color: #34d399; padding: 0.2rem 0.5rem; border-radius: 12px;">💧 Hydrated</span>
         </div>
 
@@ -109,9 +110,9 @@ class ZenithPipTimerController {
       waterBtn.addEventListener('click', () => {
         window.appState.update(s => ({
           ...s,
-          waterGlasses: Math.min(s.waterGoal, s.waterGlasses + 1)
+          waterGlasses: Math.min(s.waterGoal || 8, (s.waterGlasses || 0) + 1)
         }));
-        if (window.audioZenith) window.audioZenith.playWaterDrop();
+        if (window.audioFlowOS) window.audioFlowOS.playWaterDrop();
       });
     }
 
@@ -130,9 +131,9 @@ class ZenithPipTimerController {
     const mainTimeEl = document.getElementById('timer-time-display');
 
     if (timeEl && mainTimeEl) timeEl.textContent = mainTimeEl.textContent;
-    if (taskEl) taskEl.textContent = state.activeFocus.taskTitle || 'Open Focus Flow';
-    if (playBtn) playBtn.textContent = state.activeFocus.isRunning ? 'Pause' : 'Start';
-    if (waterBadge) waterBadge.textContent = `💧 ${state.waterGlasses}/${state.waterGoal}`;
+    if (taskEl) taskEl.textContent = state.activeFocus?.taskTitle || 'Open Focus Flow';
+    if (playBtn) playBtn.textContent = state.activeFocus?.isRunning ? 'Pause' : 'Start';
+    if (waterBadge) waterBadge.textContent = `💧 ${state.waterGlasses || 0}/${state.waterGoal || 8}`;
   }
 
   openCanvasStreamPip() {
@@ -155,7 +156,7 @@ class ZenithPipTimerController {
         .then(() => {
           this.startCanvasRenderLoop();
           this.updateButtonState(true);
-          window.showToast?.('🪟 Canvas PiP Mini-Timer Activated!');
+          window.showToast?.('🪟 Canvas PiP Focus Timer Activated!');
         })
         .catch(e => {
           console.warn('Canvas PiP failed:', e);
@@ -174,7 +175,7 @@ class ZenithPipTimerController {
       if (!this.ctx) return;
       const state = window.appState.getState();
       const mainTime = document.getElementById('timer-time-display')?.textContent || '25:00';
-      const taskTitle = state.activeFocus.taskTitle || 'Deep Focus Session';
+      const taskTitle = state.activeFocus?.taskTitle || 'Deep Focus Session';
 
       // Background
       this.ctx.fillStyle = '#090d16';
@@ -183,7 +184,7 @@ class ZenithPipTimerController {
       // Header
       this.ctx.fillStyle = '#818cf8';
       this.ctx.font = 'bold 16px sans-serif';
-      this.ctx.fillText('ZENITH FOCUS OS', 24, 36);
+      this.ctx.fillText('FLOWOS FOCUS', 24, 36);
 
       // Task Title
       this.ctx.fillStyle = '#94a3b8';
@@ -195,13 +196,13 @@ class ZenithPipTimerController {
       this.ctx.font = 'bold 56px monospace';
       this.ctx.fillText(mainTime, 24, 140);
 
-      // Sub-stats (Hydration & Habits)
+      // Sub-stats (Hydration & Day Balance)
       this.ctx.fillStyle = '#34d399';
       this.ctx.font = 'bold 15px sans-serif';
-      this.ctx.fillText(`💧 ${state.waterGlasses}/${state.waterGoal} Glasses`, 24, 195);
+      this.ctx.fillText(`💧 ${state.waterGlasses || 0}/${state.waterGoal || 8} Glasses`, 24, 195);
 
       this.ctx.fillStyle = '#f59e0b';
-      this.ctx.fillText(`🔥 Score: ${state.vitalityScore}%`, 200, 195);
+      this.ctx.fillText(`⚡ Day Balance: ${state.dayBalanceScore || state.vitalityScore || 82}%`, 180, 195);
 
       this.animFrameId = requestAnimationFrame(render);
     };
@@ -239,4 +240,6 @@ class ZenithPipTimerController {
   }
 }
 
-window.pipTimerController = new ZenithPipTimerController();
+window.FlowOSPipTimerController = FlowOSPipTimerController;
+window.ZenithPipTimerController = FlowOSPipTimerController;
+window.pipTimerController = new FlowOSPipTimerController();

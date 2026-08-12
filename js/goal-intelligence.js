@@ -1,7 +1,7 @@
 /**
- * ZENITH AI - GOAL INTELLIGENCE & OBSTACLE SOLVER ENGINE
+ * FLOWOS - GOAL INTELLIGENCE & OBSTACLE SOLVER ENGINE (V2.0)
  * Powers the Goal -> Milestones -> Tasks -> Daily Schedule pipeline
- * and provides intelligent obstacle deconstruction when users are stuck.
+ * and provides obstacle deconstruction when users encounter friction.
  */
 
 const GOAL_TEMPLATES = {
@@ -60,7 +60,7 @@ class GoalIntelligenceEngine {
     const clean = promptText.trim();
     const id = 'g_' + Date.now();
 
-    // Intelligent heuristic breakdown
+    // Heuristic milestone & task breakdown
     const milestones = [
       { id: `${id}_m1`, title: `Foundation & Core Fundamentals of ${clean}`, completed: false },
       { id: `${id}_m2`, title: `Structured Practical Application & Practice`, completed: false },
@@ -71,21 +71,21 @@ class GoalIntelligenceEngine {
     const tasks = [
       {
         id: 't_' + Date.now() + '_1',
-        title: `Research & set up study roadmap for: ${clean}`,
+        title: `Research & set up roadmap for: ${clean}`,
         goalId: id,
         priority: 'high',
         estimatedMinutes: 45,
         actualMinutes: 0,
         completed: false,
         subtasks: [
-          { id: 'st_1', title: 'Gather top 2 resources/books', done: false },
-          { id: 'st_2', title: 'Block daily 60m focus slot', done: false }
+          { id: 'st_1', title: 'Gather top 2 resources/references', done: false },
+          { id: 'st_2', title: 'Block daily focus slots', done: false }
         ],
         dueDate: 'Today'
       },
       {
         id: 't_' + Date.now() + '_2',
-        title: `Complete initial 60m foundational session on ${clean}`,
+        title: `Complete initial foundational session on ${clean}`,
         goalId: id,
         priority: 'high',
         estimatedMinutes: 60,
@@ -112,7 +112,7 @@ class GoalIntelligenceEngine {
    * AI Obstacle Solver: When the user says "I'm stuck and don't know what to do next"
    */
   static deconstructObstacle(obstacleDescription, activeGoalTitle = 'Current Goal') {
-    const desc = obstacleDescription.toLowerCase();
+    const desc = (obstacleDescription || '').toLowerCase();
 
     let immediateMicroStep = '';
     let recoveryStrategy = '';
@@ -124,15 +124,15 @@ class GoalIntelligenceEngine {
       estimatedMinutes = 15;
     } else if (desc.includes('overwhelm') || desc.includes('too much') || desc.includes('dont know where') || desc.includes('lost')) {
       immediateMicroStep = 'Write down the single smallest 5-minute piece on paper. Ignore everything else for now.';
-      recoveryStrategy = 'Shrink scope to a single micro-deliverable to restore executive momentum.';
+      recoveryStrategy = 'Shrink scope to a single micro-deliverable to restore momentum.';
       estimatedMinutes = 10;
     } else if (desc.includes('bored') || desc.includes('procrastinat') || desc.includes('distract') || desc.includes('lazy')) {
       immediateMicroStep = 'Put phone in another room, set timer to 10 minutes, and do just one sentence/one problem.';
       recoveryStrategy = 'Use the "Rule of 10 Minutes" — tell yourself you can stop after 10 mins if you want.';
       estimatedMinutes = 10;
     } else if (desc.includes('concept') || desc.includes('understand') || desc.includes('hard') || desc.includes('theory')) {
-      immediateMicroStep = 'Explain the concept aloud in plain 5-year-old terms (Feynman Technique) or sketch a diagram.';
-      recoveryStrategy = 'Visual mind-mapping converts abstract symbols into intuitive mental models.';
+      immediateMicroStep = 'Explain the concept aloud in plain terms (Feynman Technique) or sketch a diagram.';
+      recoveryStrategy = 'Visual mapping converts abstract concepts into intuitive mental models.';
       estimatedMinutes = 20;
     } else {
       immediateMicroStep = `Break "${obstacleDescription}" into a 15-minute micro-exploration action.`;

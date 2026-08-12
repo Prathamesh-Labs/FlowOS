@@ -1,9 +1,9 @@
 /**
- * ZENITH AI - ONBOARDING & PWA INSTALLATION ENGINE (V1.0)
+ * FLOWOS - ONBOARDING & PWA INSTALLATION ENGINE (V2.0)
  * Manages 1-click personal archetypes and native desktop/mobile app installation.
  */
 
-class ZenithOnboardingEngine {
+class FlowOSOnboardingEngine {
   constructor() {
     this.deferredPrompt = null;
     this.archetypes = {
@@ -15,9 +15,9 @@ class ZenithOnboardingEngine {
         soundscape: 'alpha',
         timerBlock: 50,
         tasks: [
-          { id: 't_s1', title: 'Solve 3 Tree Traversal LeetCode Problems', priority: 'high', estimatedMinutes: 60, completed: false },
+          { id: 't_s1', title: 'Solve 3 Tree Traversal Problems', priority: 'high', estimatedMinutes: 60, completed: false },
           { id: 't_s2', title: 'Review Python Async & Concurrency Notes', priority: 'medium', estimatedMinutes: 45, completed: false },
-          { id: 't_s3', title: 'Active Recall Flashcard Session (30 cards)', priority: 'low', estimatedMinutes: 20, completed: false }
+          { id: 't_s3', title: 'Active Recall Practice (30 concepts)', priority: 'low', estimatedMinutes: 20, completed: false }
         ]
       },
       engineer: {
@@ -42,7 +42,7 @@ class ZenithOnboardingEngine {
         timerBlock: 45,
         tasks: [
           { id: 't_x1', title: 'Synthesize Q3 Strategic OKRs with AI Deconstructor', priority: 'high', estimatedMinutes: 45, completed: false },
-          { id: 't_x2', title: 'High-Leverage Team Execution Unblocking', priority: 'high', estimatedMinutes: 30, completed: false },
+          { id: 't_x2', title: 'High-Leverage Execution Planning', priority: 'high', estimatedMinutes: 30, completed: false },
           { id: 't_x3', title: 'Audit Weekly Focus Realism & Time Leaks', priority: 'medium', estimatedMinutes: 25, completed: false }
         ]
       },
@@ -54,9 +54,9 @@ class ZenithOnboardingEngine {
         soundscape: 'rain',
         timerBlock: 25,
         tasks: [
-          { id: 't_w1', title: '15-min Morning Natural Balcony Photons & 500ml Water', priority: 'high', estimatedMinutes: 15, completed: true },
+          { id: 't_w1', title: '15-min Morning Natural Balcony Daylight & 500ml Water', priority: 'high', estimatedMinutes: 15, completed: true },
           { id: 't_w2', title: 'Midday Posture Ergonomics & 20-20-20 Eye Rest', priority: 'medium', estimatedMinutes: 15, completed: false },
-          { id: 't_w3', title: 'Full Body Mobility Stretch & Magnesium Sunset Routine', priority: 'high', estimatedMinutes: 25, completed: false }
+          { id: 't_w3', title: 'Full Body Mobility Stretch & Wind-down Routine', priority: 'high', estimatedMinutes: 25, completed: false }
         ]
       }
     };
@@ -99,7 +99,7 @@ class ZenithOnboardingEngine {
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-          .then((reg) => console.log('✅ Zenith Service Worker registered successfully:', reg.scope))
+          .then((reg) => console.log('✅ FlowOS Service Worker registered successfully:', reg.scope))
           .catch((err) => console.log('Service Worker registration note:', err));
       });
     }
@@ -116,7 +116,7 @@ class ZenithOnboardingEngine {
 
     window.addEventListener('appinstalled', () => {
       this.deferredPrompt = null;
-      window.showToast?.('🎉 Zenith AI installed successfully as a standalone app!');
+      window.showToast?.('🎉 FlowOS installed successfully as a standalone app!');
       const installBtns = document.querySelectorAll('.btn-pwa-install');
       installBtns.forEach(btn => {
         btn.style.display = 'none';
@@ -129,12 +129,12 @@ class ZenithOnboardingEngine {
       this.deferredPrompt.prompt();
       this.deferredPrompt.userChoice.then((choiceResult) => {
         if (choiceResult.outcome === 'accepted') {
-          console.log('User accepted the Zenith PWA install prompt');
+          console.log('User accepted the FlowOS PWA install prompt');
         }
         this.deferredPrompt = null;
       });
     } else {
-      window.showToast?.('📲 To install: Click (⋮) or Share in your browser and select "Add to Home screen" or "Install Zenith AI"');
+      window.showToast?.('📲 To install: Click (⋮) or Share in your browser and select "Add to Home screen" or "Install FlowOS"');
     }
   }
 
@@ -158,11 +158,11 @@ class ZenithOnboardingEngine {
     }));
 
     // Start soundscape preset
-    if (window.audioZenith && arch.soundscape) {
-      window.audioZenith.startSoundscape(arch.soundscape);
+    if (window.audioFlowOS && arch.soundscape) {
+      window.audioFlowOS.playSound(arch.soundscape);
     }
 
-    if (window.audioZenith) window.audioZenith.playFanfare();
+    if (window.audioFlowOS) window.audioFlowOS.playFanfare();
     window.showToast?.(`✨ Loaded ${arch.badge}! Schedule and tasks calibrated.`);
 
     // Switch to Command Center
@@ -177,4 +177,6 @@ class ZenithOnboardingEngine {
   }
 }
 
-window.onboardingEngine = new ZenithOnboardingEngine();
+window.FlowOSOnboardingEngine = FlowOSOnboardingEngine;
+window.ZenithOnboardingEngine = FlowOSOnboardingEngine;
+window.onboardingEngine = new FlowOSOnboardingEngine();

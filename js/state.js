@@ -1,10 +1,11 @@
 /**
- * ZENITH AI - MASTER UNIFIED STATE STORE (V3)
+ * FLOWOS - MASTER UNIFIED STATE STORE (V4)
  * Coordinates Goals, Tasks, Habits, Focus Sessions, Reality Events,
- * What-If Simulations, Learned Estimation History, and Mission Status.
+ * What-If Simulations, Personal Flow Profile History, and Mission Status.
  */
 
-const STORAGE_KEY = 'zenith_master_os_state_v3';
+const STORAGE_KEY = 'flowos_master_os_state_v4';
+const LEGACY_STORAGE_KEY = 'zenith_master_os_state_v3';
 
 const INITIAL_STATE = {
   activeArchetype: 'developer',
@@ -20,7 +21,7 @@ const INITIAL_STATE = {
   },
 
   profile: {
-    name: 'Zenith Operator',
+    name: 'FlowOS Operator',
     wakeTime: '07:00',
     bedTime: '23:00',
     targetStudyHours: 6,
@@ -423,10 +424,10 @@ const INITIAL_STATE = {
     ]
   },
 
-  // 13. ZENITH BEHAVIORAL DIGITAL TWIN (Empirical Cognitive Model)
-  digitalTwin: {
+  // 13. PERSONAL FLOW PROFILE (Empirical Behavioral & Planning Patterns)
+  personalFlowProfile: {
     maturityLevel: 3,
-    maturityTitle: 'Calibrated Behavioral Twin',
+    maturityTitle: 'Calibrated Flow Profile',
     totalObservations: 46,
     calibrationPercent: 74,
     archetype: 'Deep Sprint Architect',
@@ -514,7 +515,7 @@ const INITIAL_STATE = {
         dateTitle: 'Today — Monday, Aug 10, 2026',
         isLive: true,
         aiSummary: {
-          narrative: 'A high-impact execution day anchored by early sunlight and a powerful morning coding sprint. When the Python auth module overran by +45m, Zenith autonomously compressed evening review to safeguard your 10:30 PM bedtime while maintaining 100% habit streak integrity.',
+          narrative: 'A high-impact execution day anchored by early sunlight and a powerful morning coding sprint. When the Python auth module overran by +45m, FlowOS recommended compressing evening review to safeguard your 10:30 PM bedtime while maintaining 100% habit streak integrity.',
           primaryWin: 'Unbroken habit streak maintained & 150m deep focus logged.',
           frictionPoint: 'Debugging session variance exceeded initial budget by +45m.',
           adaptationTaken: 'Compressed evening review buffer from 60m to 15m to protect workout & circadian sleep window.',
@@ -554,10 +555,10 @@ const INITIAL_STATE = {
           {
             id: 'mem_4',
             time: '10:45 AM',
-            title: 'AI Decision: Autonomous Schedule Rebalance',
+            title: 'AI Recommendation: Schedule Rebalance Applied',
             type: 'ai-decision',
             icon: 'sparkles',
-            description: 'Zenith detected the 45m schedule compression. Recommended Option 1: Compressed low-priority evening review to protect 6:00 PM gym session.',
+            description: 'FlowOS detected the 45m schedule compression. Recommended Option 1: Compressed low-priority evening review to protect 6:00 PM gym session.',
             metrics: 'Flexible Buffer Consumed: 45m',
             badge: 'Bedtime Protected'
           },
@@ -664,15 +665,28 @@ class StateManager {
 
   loadState() {
     try {
-      const stored = localStorage.getItem(STORAGE_KEY);
+      let stored = localStorage.getItem(STORAGE_KEY);
+      if (!stored) {
+        // Auto-migration from legacy Zenith state
+        stored = localStorage.getItem(LEGACY_STORAGE_KEY) || localStorage.getItem('zenith_master_os_state_v2');
+      }
       if (stored) {
         const parsed = JSON.parse(stored);
-        return { ...INITIAL_STATE, ...parsed };
+        const merged = { ...INITIAL_STATE, ...parsed };
+        if (!merged.personalFlowProfile && merged.digitalTwin) {
+          merged.personalFlowProfile = merged.digitalTwin;
+        }
+        if (!merged.digitalTwin && merged.personalFlowProfile) {
+          merged.digitalTwin = merged.personalFlowProfile;
+        }
+        return merged;
       }
     } catch (e) {
       console.warn('Could not load stored state:', e);
     }
-    return JSON.parse(JSON.stringify(INITIAL_STATE));
+    const fresh = JSON.parse(JSON.stringify(INITIAL_STATE));
+    fresh.digitalTwin = fresh.personalFlowProfile;
+    return fresh;
   }
 
   saveState() {
@@ -692,6 +706,12 @@ class StateManager {
       this.state = updater(this.state);
     } else {
       this.state = { ...this.state, ...updater };
+    }
+    // Sync digitalTwin and personalFlowProfile
+    if (this.state.personalFlowProfile && !this.state.digitalTwin) {
+      this.state.digitalTwin = this.state.personalFlowProfile;
+    } else if (this.state.digitalTwin && !this.state.personalFlowProfile) {
+      this.state.personalFlowProfile = this.state.digitalTwin;
     }
     this.calculateVitality();
     this.saveState();
@@ -718,7 +738,9 @@ class StateManager {
       screenBreakRatio * 15
     );
 
-    this.state.vitalityScore = Math.max(10, Math.min(100, score));
+    const finalScore = Math.max(10, Math.min(100, score));
+    this.state.dayBalanceScore = finalScore;
+    this.state.vitalityScore = finalScore; // backward compatibility
   }
 
   subscribe(listener) {

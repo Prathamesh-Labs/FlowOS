@@ -1,7 +1,7 @@
 /**
- * ZENITH AI - FOCUS & DEEP WORK ENGINE (V2)
- * Features dual Pomodoro Countdown + Continuous Stopwatch mode,
- * task-linked planned vs actual tracking, and proactive overrun rebalancing.
+ * FLOWOS - FOCUS & DEEP WORK ENGINE (V2.0)
+ * Dual Pomodoro Countdown + Continuous Stopwatch mode,
+ * task-linked planned vs actual tracking, and overrun adaptation (+10m, complete, rebalance).
  */
 
 class FocusEngineController {
@@ -66,11 +66,55 @@ class FocusEngineController {
         if (banner) banner.style.display = 'none';
       });
     }
+
+    // Add +10 Min button handler
+    const add10Btn = document.getElementById('btn-focus-add-10m');
+    if (add10Btn) {
+      add10Btn.addEventListener('click', () => {
+        this.addMinutes(10);
+      });
+    }
+
+    // Mark complete button handler
+    const completeBtn = document.getElementById('btn-focus-complete-task');
+    if (completeBtn) {
+      completeBtn.addEventListener('click', () => {
+        this.completeFocusTask();
+      });
+    }
+  }
+
+  addMinutes(mins) {
+    window.appState.update(s => ({
+      ...s,
+      activeFocus: {
+        ...s.activeFocus,
+        plannedSeconds: (s.activeFocus?.plannedSeconds || 1500) + (mins * 60),
+        isOverrun: false
+      }
+    }));
+    const banner = document.getElementById('overrun-divergence-banner');
+    if (banner) banner.style.display = 'none';
+    if (window.audioFlowOS) window.audioFlowOS.playChime();
+    window.showToast?.(`⏱️ Added +${mins} minutes to planned focus time.`);
+    this.render();
+  }
+
+  completeFocusTask() {
+    const state = window.appState.getState();
+    const taskId = state.activeFocus?.taskId;
+    if (taskId) {
+      window.TasksHabitsManager?.toggleTask(taskId);
+    }
+    this.pause();
+    if (window.audioFlowOS) window.audioFlowOS.playFanfare();
+    if (window.zenithExperience?.triggerConfetti) window.zenithExperience.triggerConfetti();
+    window.showToast?.('🎉 Focus task completed!');
   }
 
   selectTask(taskId) {
     const state = window.appState.getState();
-    const task = state.tasks.find(t => t.id === taskId);
+    const task = (state.tasks || []).find(t => t.id === taskId);
     if (!task) return;
 
     const plannedSeconds = (task.estimatedMinutes || 45) * 60;
@@ -92,7 +136,7 @@ class FocusEngineController {
 
   toggle() {
     const state = window.appState.getState();
-    if (state.activeFocus.isRunning) {
+    if (state.activeFocus?.isRunning) {
       this.pause();
     } else {
       this.start();
@@ -102,7 +146,7 @@ class FocusEngineController {
   start() {
     window.appState.update(s => ({
       ...s,
-      activeFocus: { ...s.activeFocus, isRunning: true }
+      activeFocus: { ...(s.activeFocus || {}), isRunning: true }
     }));
 
     if (this.interval) clearInterval(this.interval);
@@ -118,7 +162,7 @@ class FocusEngineController {
     clearInterval(this.interval);
     window.appState.update(s => ({
       ...s,
-      activeFocus: { ...s.activeFocus, isRunning: false }
+      activeFocus: { ...(s.activeFocus || {}), isRunning: false }
     }));
     this.render();
   }
@@ -128,7 +172,7 @@ class FocusEngineController {
     window.appState.update(s => ({
       ...s,
       activeFocus: {
-        ...s.activeFocus,
+        ...(s.activeFocus || {}),
         elapsedSeconds: 0,
         isOverrun: false
       }
@@ -138,7 +182,7 @@ class FocusEngineController {
 
   tick() {
     const state = window.appState.getState();
-    const active = state.activeFocus;
+    const active = state.activeFocus || { plannedSeconds: 1500, elapsedSeconds: 0 };
     const nextElapsed = active.elapsedSeconds + 1;
     const isOverrun = nextElapsed > active.plannedSeconds;
 
@@ -151,7 +195,7 @@ class FocusEngineController {
     const triggerPrompt = isOverrun && overrunMinutes >= 5 && !active.overrunPromptActive;
 
     // Increment actual minutes on the linked task
-    const updatedTasks = state.tasks.map(t => {
+    const updatedTasks = (state.tasks || []).map(t => {
       if (t.id === active.taskId && addedStudyMin > 0) {
         return { ...t, actualMinutes: (t.actualMinutes || 0) + addedStudyMin };
       }
@@ -161,12 +205,12 @@ class FocusEngineController {
     window.appState.update(s => ({
       ...s,
       tasks: updatedTasks,
-      studyMinutesCompleted: s.studyMinutesCompleted + addedStudyMin,
+      studyMinutesCompleted: (s.studyMinutesCompleted || 0) + addedStudyMin,
       activeFocus: {
         ...s.activeFocus,
         elapsedSeconds: nextElapsed,
         isOverrun,
-        overrunPromptActive: triggerPrompt ? true : s.activeFocus.overrunPromptActive
+        overrunPromptActive: triggerPrompt ? true : s.activeFocus?.overrunPromptActive
       }
     }));
 
@@ -178,65 +222,65 @@ class FocusEngineController {
   }
 
   triggerOverrunAlert(overrunMinutes) {
-    if (window.audioZenith) window.audioZenith.playChime();
+    if (window.audioFlowOS) window.audioFlowOS.playChime();
 
     const banner = document.getElementById('overrun-divergence-banner');
     const textEl = document.getElementById('overrun-banner-text');
 
     const state = window.appState.getState();
-    const plannedMin = Math.floor(state.activeFocus.plannedSeconds / 60);
-    const actualMin = Math.floor(state.activeFocus.elapsedSeconds / 60);
+    const plannedMin = Math.floor((state.activeFocus?.plannedSeconds || 0) / 60);
+    const actualMin = Math.floor((state.activeFocus?.elapsedSeconds || 0) / 60);
 
     if (textEl) {
       textEl.innerHTML = `
-        <strong>⚡ Reality Divergence Detected:</strong> You planned <strong>${plannedMin}m</strong> on <em>"${state.activeFocus.taskTitle}"</em>, but have worked <strong>${actualMin}m</strong> (+${overrunMinutes}m overrun). Your evening schedule has been compressed.
+        <strong>⚡ Reality Divergence Detected:</strong> You planned <strong>${plannedMin}m</strong> on <em>"${state.activeFocus?.taskTitle || 'Task'}"</em>, but have worked <strong>${actualMin}m</strong> (+${overrunMinutes}m overrun). FlowOS can rebalance your remaining day in 1 click.
       `;
     }
 
     if (banner) banner.style.display = 'flex';
-    window.showToast?.('⚠️ Focus overrun detected. Proactive schedule rebalancing available.');
+    window.showToast?.('⚠️ Focus overrun detected. Rebalancing available.');
   }
 
   executeOverrunRebalance() {
     const state = window.appState.getState();
-    const overrunMinutes = Math.max(15, Math.floor((state.activeFocus.elapsedSeconds - state.activeFocus.plannedSeconds) / 60));
+    const overrunMinutes = Math.max(15, Math.floor(((state.activeFocus?.elapsedSeconds || 0) - (state.activeFocus?.plannedSeconds || 0)) / 60));
 
-    const rebalanced = window.AIScheduleEngine.rebalanceAfterOverrun(state.todaySchedule, overrunMinutes);
+    const rebalanced = window.AIScheduleEngine?.rebalanceAfterOverrun 
+      ? window.AIScheduleEngine.rebalanceAfterOverrun(state.todaySchedule, overrunMinutes)
+      : state.todaySchedule;
 
     const historyEntry = {
       date: new Date().toISOString().split('T')[0],
-      taskId: state.activeFocus.taskId,
-      taskTitle: state.activeFocus.taskTitle,
-      plannedMinutes: Math.floor(state.activeFocus.plannedSeconds / 60),
-      actualMinutes: Math.floor(state.activeFocus.elapsedSeconds / 60),
+      taskId: state.activeFocus?.taskId,
+      taskTitle: state.activeFocus?.taskTitle,
+      plannedMinutes: Math.floor((state.activeFocus?.plannedSeconds || 0) / 60),
+      actualMinutes: Math.floor((state.activeFocus?.elapsedSeconds || 0) / 60),
       overrunMinutes
     };
 
     window.appState.update(s => ({
       ...s,
       todaySchedule: rebalanced,
-      focusHistory: [historyEntry, ...s.focusHistory]
+      focusHistory: [historyEntry, ...(s.focusHistory || [])]
     }));
 
     const banner = document.getElementById('overrun-divergence-banner');
     if (banner) banner.style.display = 'none';
 
-    window.showToast?.('✨ Evening schedule intelligently rebalanced to preserve bedtime & wellness!');
+    window.showToast?.('✨ Schedule intelligently rebalanced to preserve bedtime & recovery!');
   }
 
   render() {
     const state = window.appState.getState();
-    const active = state.activeFocus;
+    const active = state.activeFocus || { plannedSeconds: 1500, elapsedSeconds: 0, isRunning: false, taskTitle: 'Focus Block' };
 
     let displaySeconds = 0;
     let isOverrun = false;
 
     if (this.mode === 'stopwatch') {
-      // Continuous Count-up Mode
       displaySeconds = active.elapsedSeconds;
       isOverrun = active.elapsedSeconds > active.plannedSeconds;
     } else {
-      // Pomodoro Count-down Mode
       const rem = active.plannedSeconds - active.elapsedSeconds;
       isOverrun = rem < 0;
       displaySeconds = Math.abs(rem);
@@ -253,7 +297,7 @@ class FocusEngineController {
 
     if (this.phaseDisplay) {
       const modeLabel = this.mode === 'stopwatch' ? 'Stopwatch Flow' : 'Pomodoro Countdown';
-      this.phaseDisplay.textContent = `${modeLabel}: ${active.taskTitle}`;
+      this.phaseDisplay.textContent = `${modeLabel}: ${active.taskTitle || 'Deep Focus'}`;
     }
 
     if (this.startBtn) {
@@ -271,4 +315,5 @@ class FocusEngineController {
   }
 }
 
+window.FocusEngineController = FocusEngineController;
 window.focusEngine = new FocusEngineController();

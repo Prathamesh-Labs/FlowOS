@@ -1,6 +1,6 @@
 /**
- * ZENITH AI - OLDER-ADULT & ACCESSIBILITY EXPERIENCE
- * Simplified, high-contrast, large-font interface with scheduled medicine reminders,
+ * FLOWOS - ACCESSIBILITY & CARE MODE (V2.0)
+ * High-contrast, large-font interface with routine schedule reminders,
  * appointment logs, gentle hydration, and mobility prompts (strictly non-medical).
  */
 
@@ -16,7 +16,7 @@ class ElderlyModeController {
     }));
 
     document.body.classList.toggle('accessibility-mode-active', nextMode);
-    window.showToast?.(nextMode ? '👵 Older-Adult Accessible Mode Enabled' : 'Standard Interface Enabled');
+    window.showToast?.(nextMode ? '👓 Accessibility & Care Mode Enabled' : 'Standard Interface Enabled');
   }
 
   static toggleMedicineTaken(medId) {
@@ -24,7 +24,7 @@ class ElderlyModeController {
       const updated = (s.medicineReminders || []).map(med => {
         if (med.id === medId) {
           const next = !med.takenToday;
-          if (next && window.audioZenith) window.audioZenith.playChime();
+          if (next && window.audioFlowOS) window.audioFlowOS.playChime();
           return { ...med, takenToday: next };
         }
         return med;

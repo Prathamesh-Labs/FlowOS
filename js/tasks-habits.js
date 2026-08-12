@@ -1,6 +1,6 @@
 /**
- * ZENITH AI - TASKS & HABITS BIFURCATED MANAGEMENT SYSTEM (V2)
- * Features 7-day visual consistency heatmaps, streak recovery, subtasks, and priority queues.
+ * FLOWOS - TASKS & HABITS BIFURCATED MANAGEMENT SYSTEM (V2.0)
+ * Features 7-day visual consistency indicators, streak recovery, subtasks, and priority queues.
  */
 
 class TasksHabitsManager {
@@ -22,7 +22,7 @@ class TasksHabitsManager {
 
     window.appState.update(s => ({
       ...s,
-      tasks: [newTask, ...s.tasks]
+      tasks: [newTask, ...(s.tasks || [])]
     }));
 
     return newTask;
@@ -30,11 +30,11 @@ class TasksHabitsManager {
 
   static toggleTask(taskId) {
     window.appState.update(s => {
-      const updatedTasks = s.tasks.map(task => {
+      const updatedTasks = (s.tasks || []).map(task => {
         if (task.id === taskId) {
           const next = !task.completed;
-          if (next && window.audioZenith) {
-            window.audioZenith.playChime();
+          if (next && window.audioFlowOS) {
+            window.audioFlowOS.playChime();
           }
           return { ...task, completed: next };
         }
@@ -47,14 +47,14 @@ class TasksHabitsManager {
   static deleteTask(taskId) {
     window.appState.update(s => ({
       ...s,
-      tasks: s.tasks.filter(t => t.id !== taskId)
+      tasks: (s.tasks || []).filter(t => t.id !== taskId)
     }));
   }
 
   static addSubtask(taskId, subtaskTitle) {
     window.appState.update(s => ({
       ...s,
-      tasks: s.tasks.map(t => {
+      tasks: (s.tasks || []).map(t => {
         if (t.id === taskId) {
           const newSub = { id: 'st_' + Date.now(), title: subtaskTitle.trim(), done: false };
           return { ...t, subtasks: [...(t.subtasks || []), newSub] };
@@ -67,7 +67,7 @@ class TasksHabitsManager {
   static toggleSubtask(taskId, subtaskId) {
     window.appState.update(s => ({
       ...s,
-      tasks: s.tasks.map(t => {
+      tasks: (s.tasks || []).map(t => {
         if (t.id === taskId) {
           const updatedSub = (t.subtasks || []).map(st => st.id === subtaskId ? { ...st, done: !st.done } : st);
           return { ...t, subtasks: updatedSub };
@@ -78,8 +78,18 @@ class TasksHabitsManager {
   }
 
   /* ==========================================================================
-     RECURRING HABIT LOOPS & 7-DAY HEATMAPS
+     RECURRING HABIT LOOPS & 7-DAY CONSISTENCY
      ========================================================================== */
+  static getPast7Days() {
+    const days = [];
+    for (let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      days.push(d.toISOString().split('T')[0]);
+    }
+    return days;
+  }
+
   static addHabit(habitData) {
     const newHabit = {
       id: 'h_' + Date.now(),
@@ -96,7 +106,7 @@ class TasksHabitsManager {
 
     window.appState.update(s => ({
       ...s,
-      habits: [...s.habits, newHabit]
+      habits: [...(s.habits || []), newHabit]
     }));
 
     return newHabit;
@@ -106,7 +116,7 @@ class TasksHabitsManager {
     const todayStr = new Date().toISOString().split('T')[0];
 
     window.appState.update(s => {
-      const updatedHabits = s.habits.map(habit => {
+      const updatedHabits = (s.habits || []).map(habit => {
         if (habit.id === habitId) {
           const wasCompleted = habit.completedToday;
           const nextCompleted = !wasCompleted;
@@ -119,9 +129,9 @@ class TasksHabitsManager {
               newHistory.push(todayStr);
             }
             if (newStreak === 7 || newStreak === 14 || newStreak === 21) {
-              if (window.audioZenith) window.audioZenith.playFanfare();
+              if (window.audioFlowOS) window.audioFlowOS.playFanfare();
             } else {
-              if (window.audioZenith) window.audioZenith.playChime();
+              if (window.audioFlowOS) window.audioFlowOS.playChime();
             }
             window.questsEngine?.dealDamage(50, 'Habit Strike');
           } else {
@@ -138,9 +148,9 @@ class TasksHabitsManager {
 
           return {
             ...habit,
-            completedToday: nextCompleted,
             streak: newStreak,
             bestStreak: newBest,
+            completedToday: nextCompleted,
             badge,
             history: newHistory
           };
@@ -152,36 +162,32 @@ class TasksHabitsManager {
     });
   }
 
-  static applyGraceRecovery(habitId) {
-    window.appState.update(s => {
-      const updatedHabits = s.habits.map(habit => {
-        if (habit.id === habitId) {
-          if (habit.graceDaysLeft > 0) {
-            return {
-              ...habit,
-              graceDaysLeft: habit.graceDaysLeft - 1,
-              completedToday: true,
-              streak: habit.streak + 1
-            };
-          }
-        }
-        return habit;
-      });
-      return { ...s, habits: updatedHabits };
-    });
+  static deleteHabit(habitId) {
+    window.appState.update(s => ({
+      ...s,
+      habits: (s.habits || []).filter(h => h.id !== habitId)
+    }));
   }
 
-  /**
-   * Generates the past 7 days date strings for the heatmap
-   */
-  static getPast7Days() {
-    const dates = [];
-    for (let i = 6; i >= 0; i--) {
-      const d = new Date();
-      d.setDate(d.getDate() - i);
-      dates.push(d.toISOString().split('T')[0]);
-    }
-    return dates;
+  static recoverStreakWithGrace(habitId) {
+    window.appState.update(s => ({
+      ...s,
+      habits: (s.habits || []).map(h => {
+        if (h.id === habitId && (h.graceDaysLeft || 0) > 0) {
+          if (window.audioFlowOS) window.audioFlowOS.playChime();
+          return {
+            ...h,
+            graceDaysLeft: h.graceDaysLeft - 1,
+            streak: h.streak + 1
+          };
+        }
+        return h;
+      })
+    }));
+  }
+
+  static applyGraceRecovery(habitId) {
+    return this.recoverStreakWithGrace(habitId);
   }
 }
 
