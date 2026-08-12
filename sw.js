@@ -2,7 +2,7 @@
  * FLOWOS - SERVICE WORKER (OFFLINE CACHING & FAST PWA LOADS)
  */
 
-const CACHE_NAME = 'flowos-v1.0';
+const CACHE_NAME = 'flowos-v2.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

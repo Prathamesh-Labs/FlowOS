@@ -22,10 +22,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
   <!-- Stylesheets -->
-  <link rel="stylesheet" href="css/design-tokens.css">
-  <link rel="stylesheet" href="css/layout.css">
-  <link rel="stylesheet" href="css/components.css">
-  <link rel="stylesheet" href="css/accessibility.css">
+  <link rel="stylesheet" href="css/design-tokens.css?v=3.0">
+  <link rel="stylesheet" href="css/layout.css?v=3.0">
+  <link rel="stylesheet" href="css/components.css?v=3.0">
+  <link rel="stylesheet" href="css/accessibility.css?v=3.0">
 </head>
 <body>
   <!-- Ambient Atmospheric Glows -->
@@ -156,16 +156,16 @@
           <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">
             <i data-lucide="sun"></i>
           </button>
-          <div class="header-dropdown-wrap">
-            <button id="btn-header-more-tools" class="btn-icon" title="More Tools & Settings" onclick="document.getElementById('header-tools-menu').classList.toggle('open')">
+          <div class="header-dropdown-wrap" style="position: relative;">
+            <button id="btn-header-more-tools" class="btn-icon" title="More Tools & Settings" style="background: rgba(255,255,255,0.06); color: #f8fafc; border: 1px solid rgba(255,255,255,0.12);" onclick="const m = document.getElementById('header-tools-menu'); m.style.display = (m.style.display === 'flex' ? 'none' : 'flex');">
               <i data-lucide="more-vertical"></i>
             </button>
-            <div id="header-tools-menu" class="header-dropdown-menu">
-              <button class="dropdown-item" id="btn-header-voice-mic" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="mic"></i> Voice Assistant (Alt+V)</button>
-              <button class="dropdown-item" id="btn-open-qr-sync" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="qr-code"></i> Mobile QR Sync</button>
-              <button class="dropdown-item" id="toggle-accessibility-mode" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="accessibility"></i> Care & Large Font Mode</button>
-              <button class="dropdown-item" id="btn-open-generator" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="calendar-plus"></i> Forge Routine</button>
-              <button class="dropdown-item btn-pwa-install" id="btn-header-pwa-install" style="display: none;" onclick="document.getElementById('header-tools-menu').classList.remove('open')"><i data-lucide="download"></i> Install Native App</button>
+            <div id="header-tools-menu" class="header-dropdown-menu" style="display: none; position: absolute; top: 100%; right: 0; margin-top: 0.6rem; background: #0f1424; border: 1px solid rgba(255,255,255,0.15); border-radius: 16px; padding: 0.6rem; min-width: 230px; box-shadow: 0 16px 40px rgba(0,0,0,0.8); z-index: 9999; flex-direction: column; gap: 0.35rem;">
+              <button class="dropdown-item" id="btn-header-voice-mic" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.95rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #f8fafc; font-size: 0.85rem; cursor: pointer; text-align: left; width: 100%;" onclick="document.getElementById('header-tools-menu').style.display = 'none';"><i data-lucide="mic" style="color: #818cf8; width: 16px; height: 16px;"></i> Voice Assistant (Alt+V)</button>
+              <button class="dropdown-item" id="btn-open-qr-sync" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.95rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #f8fafc; font-size: 0.85rem; cursor: pointer; text-align: left; width: 100%;" onclick="document.getElementById('header-tools-menu').style.display = 'none';"><i data-lucide="qr-code" style="color: #818cf8; width: 16px; height: 16px;"></i> Mobile QR Sync</button>
+              <button class="dropdown-item" id="toggle-accessibility-mode" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.95rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #f8fafc; font-size: 0.85rem; cursor: pointer; text-align: left; width: 100%;" onclick="document.getElementById('header-tools-menu').style.display = 'none';"><i data-lucide="accessibility" style="color: #818cf8; width: 16px; height: 16px;"></i> Care & Large Font Mode</button>
+              <button class="dropdown-item" id="btn-open-generator" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.65rem 0.95rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #f8fafc; font-size: 0.85rem; cursor: pointer; text-align: left; width: 100%;" onclick="document.getElementById('header-tools-menu').style.display = 'none';"><i data-lucide="calendar-plus" style="color: #818cf8; width: 16px; height: 16px;"></i> Forge Routine</button>
+              <button class="dropdown-item btn-pwa-install" id="btn-header-pwa-install" style="display: none; align-items: center; gap: 0.75rem; padding: 0.65rem 0.95rem; border-radius: 10px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.06); color: #f8fafc; font-size: 0.85rem; cursor: pointer; text-align: left; width: 100%;" onclick="document.getElementById('header-tools-menu').style.display = 'none';"><i data-lucide="download" style="color: #818cf8; width: 16px; height: 16px;"></i> Install Native App</button>
             </div>
           </div>
         </div>
@@ -1514,7 +1514,7 @@
        ========================================== -->
 
   <!-- Fullscreen Zen Focus Room with Live Audio Visualizer -->
-  <div id="fullscreen-focus-room" class="focus-room-overlay">
+  <div id="fullscreen-focus-room" class="focus-room-overlay" style="display: none;">
     <div style="position: absolute; top: 2rem; right: 2rem; z-index: 100;">
       <button id="btn-exit-focus-room" class="btn btn-secondary">
         <i data-lucide="minimize"></i> Exit Fullscreen
@@ -1549,7 +1549,7 @@
   </div>
 
   <!-- Voice Assistant / Command Modal -->
-  <div id="voice-assistant-modal" class="modal-backdrop">
+  <div id="voice-assistant-modal" class="modal-backdrop" style="display: none;">
     <div class="modal-card">
       <div class="modal-header">
         <h3 class="modal-title">
@@ -1584,7 +1584,7 @@
   </div>
 
   <!-- QR Sync Modal -->
-  <div id="qr-sync-modal" class="modal-backdrop">
+  <div id="qr-sync-modal" class="modal-backdrop" style="display: none;">
     <div class="modal-card" style="text-align: center;">
       <div class="modal-header">
         <h3 class="modal-title">
@@ -1608,7 +1608,7 @@
   </div>
 
   <!-- AI Routine Generator Modal -->
-  <div id="ai-generator-modal" class="modal-backdrop">
+  <div id="ai-generator-modal" class="modal-backdrop" style="display: none;">
     <div class="modal-card">
       <div class="modal-header">
         <h3 class="modal-title">
@@ -1665,7 +1665,7 @@
   </div>
 
   <!-- What-If Scenario Simulator Modal -->
-  <div id="simulator-modal" class="modal-backdrop">
+  <div id="simulator-modal" class="modal-backdrop" style="display: none;">
     <div class="modal-card" style="max-width: 680px;">
       <div class="modal-header">
         <h3 class="modal-title">
@@ -1697,7 +1697,7 @@
   </div>
 
   <!-- Obstacle Deconstructor Modal -->
-  <div id="obstacle-modal" class="modal-backdrop">
+  <div id="obstacle-modal" class="modal-backdrop" style="display: none;">
     <div class="modal-card">
       <div class="modal-header">
         <h3 class="modal-title">
@@ -1726,7 +1726,7 @@
   </div>
 
   <!-- Evening Debrief Modal -->
-  <div id="evening-debrief-modal" class="modal-backdrop">
+  <div id="evening-debrief-modal" class="modal-backdrop" style="display: none;">
     <div class="modal-card">
       <div class="modal-header">
         <h3 class="modal-title">
