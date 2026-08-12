@@ -219,9 +219,12 @@
             <div id="command-next-action-text" style="font-size: 1.05rem; font-weight: 700; color: var(--text-primary); margin-top: 0.4rem;">
               Debug User Auth Flow in Web App (Est. 60m • Priority: HIGH)
             </div>
-            <div style="display: flex; gap: 0.6rem; margin-top: 0.8rem;">
+            <div style="display: flex; gap: 0.6rem; margin-top: 0.8rem; flex-wrap: wrap;">
               <button onclick="document.querySelector('[data-tab=study]').click();" class="btn btn-emerald" style="padding: 0.4rem 0.9rem; font-size: 0.82rem;">
                 <i data-lucide="play"></i> Start 60m Sprint
+              </button>
+              <button onclick="document.querySelector('[data-tab=tasks-habits]').click();" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">
+                <i data-lucide="plus"></i> Add New Task
               </button>
               <button onclick="openObstacleSolver('Debug User Auth Flow');" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.82rem;">
                 <i data-lucide="help-circle"></i> Deconstruct Blocker
