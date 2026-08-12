@@ -23,6 +23,7 @@ function initMasterApp() {
   window.digitalTwinEngine?.init();
   window.memoryReplayEngine?.init();
   window.copilotEngine?.init();
+  window.onboardingEngine?.init();
 
   // 2. Live Clock & Browser Awareness
   startLiveClock();

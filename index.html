@@ -14,6 +14,12 @@
   <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
 
+  <!-- PWA Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0f121e">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
   <!-- Stylesheets -->
   <link rel="stylesheet" href="css/design-tokens.css">
   <link rel="stylesheet" href="css/layout.css">
@@ -53,6 +59,11 @@
       </div>
 
       <nav class="nav-menu">
+        <a href="#welcome" class="nav-item" data-tab="welcome">
+          <i data-lucide="sparkles"></i>
+          <span>Home & Showcase</span>
+          <span class="nav-badge" style="background: var(--grad-zenith);">Showcase</span>
+        </a>
         <a href="#today" class="nav-item active" data-tab="today">
           <i data-lucide="compass"></i>
           <span>Command Center</span>
@@ -152,11 +163,214 @@
             <i data-lucide="sparkles"></i>
             <span>AI Forge Routine</span>
           </button>
+          <button id="btn-header-pwa-install" class="btn btn-emerald btn-pwa-install" style="display: none; padding: 0.5rem 0.9rem; font-size: 0.82rem;" title="Install Native App on Desktop/Mobile">
+            <i data-lucide="download"></i>
+            <span>Install App</span>
+          </button>
           <button id="theme-toggle-btn" class="btn-icon" title="Toggle Theme">
             <i data-lucide="sun"></i>
           </button>
         </div>
       </header>
+
+      <!-- ==========================================
+           TAB 0: LANDING & SHOWCASE HOMEPAGE
+           ========================================== -->
+      <section id="tab-welcome" class="tab-panel">
+        <!-- Hero Section -->
+        <div class="landing-hero-container">
+          <div style="display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(99, 102, 241, 0.15); border: 1px solid rgba(99, 102, 241, 0.35); padding: 0.35rem 0.9rem; border-radius: var(--radius-full); margin-bottom: 1.5rem;">
+            <span class="pulse-dot"></span>
+            <span style="font-size: 0.78rem; font-weight: 700; color: var(--accent-study-light); letter-spacing: 0.05em; text-transform: uppercase;">
+              ✨ The World's First Adaptive Day & Goal Operating System
+            </span>
+          </div>
+
+          <h1 class="landing-hero-title">
+            Execute with Total Clarity.<br>Adapt When Reality Changes.
+          </h1>
+
+          <p class="landing-hero-subtitle">
+            Zenith AI orchestrates your daily focus blocks, protects your circadian bedtime, learns your behavioral cognitive stamina, and rebalances your timeline autonomously when plans go off-track.
+          </p>
+
+          <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+            <button id="btn-welcome-launch" class="btn btn-primary" style="padding: 0.85rem 2.2rem; font-size: 1.05rem;">
+              <i data-lucide="rocket"></i> Enter Command Center
+            </button>
+            <button class="btn btn-secondary btn-pwa-install" style="display: none; padding: 0.85rem 1.8rem; font-size: 1.05rem;">
+              <i data-lucide="download"></i> Install Native App
+            </button>
+          </div>
+        </div>
+
+        <!-- 1-Click Fast-Track Archetype Selector -->
+        <div style="margin-bottom: 1rem;">
+          <div class="card-header" style="margin-bottom: 0.8rem;">
+            <h3 class="card-title">
+              <i data-lucide="zap" style="color: var(--accent-study-light);"></i>
+              <span>Choose Your Execution Archetype (1-Click Calibration)</span>
+            </h3>
+            <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">Instant Personalization</span>
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-secondary); margin-bottom: 1.4rem;">
+            Select your primary profile to pre-calibrate your daily mission, optimal study block durations, focus tasks, and procedural soundscapes.
+          </p>
+        </div>
+
+        <div class="archetypes-grid">
+          <!-- Student -->
+          <div class="archetype-select-card" data-archetype="student">
+            <div>
+              <div class="archetype-icon-wrapper" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">
+                🎓
+              </div>
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Academic & Exam Sprint</h4>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
+                Optimized for students and learners. 50-minute intense study blocks, 10Hz Alpha waves, and algorithmic problem tracking.
+              </p>
+            </div>
+            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+              <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">50m Blocks • Alpha Audio</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
+            </div>
+          </div>
+
+          <!-- Software Engineer -->
+          <div class="archetype-select-card" data-archetype="engineer">
+            <div>
+              <div class="archetype-icon-wrapper" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">
+                💻
+              </div>
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Software Engineer & Flow</h4>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
+                Engineered for developers. 60-minute deep architecture blocks, debugging overrun protection, and 40Hz Gamma flow state audio.
+              </p>
+            </div>
+            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+              <span class="badge" style="background: rgba(56, 189, 248, 0.15); color: #38bdf8;">60m Blocks • Gamma Audio</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
+            </div>
+          </div>
+
+          <!-- Executive / Founder -->
+          <div class="archetype-select-card" data-archetype="executive">
+            <div>
+              <div class="archetype-icon-wrapper" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
+                ⚡
+              </div>
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Founder & Executive</h4>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
+                High-leverage milestone throughput, AI obstacle deconstruction, and autonomous bedtime defense for peak cognitive recovery.
+              </p>
+            </div>
+            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+              <span class="badge" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">45m Blocks • Zen Harmonics</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
+            </div>
+          </div>
+
+          <!-- Wellness & Longevity -->
+          <div class="archetype-select-card" data-archetype="wellness">
+            <div>
+              <div class="archetype-icon-wrapper" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">
+                🧘
+              </div>
+              <h4 style="font-size: 1.1rem; font-weight: 800; color: #fff;">Longevity & Habit Master</h4>
+              <p style="font-size: 0.82rem; color: var(--text-secondary); margin-top: 0.4rem; line-height: 1.5;">
+                8-glass hydration pacing, 20-20-20 screen guardian, posture checks, and unbreakable 365-day habit streaks.
+              </p>
+            </div>
+            <div style="margin-top: 1.25rem; display: flex; justify-content: space-between; align-items: center;">
+              <span class="badge" style="background: rgba(52, 211, 153, 0.15); color: #34d399;">25m Pomodoro • Rain Audio</span>
+              <span style="font-size: 0.8rem; font-weight: 700; color: #fff;">Select →</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 Core Innovations Bento Grid -->
+        <div class="card-header" style="margin-bottom: 1rem;">
+          <h3 class="card-title">
+            <i data-lucide="layers" style="color: var(--accent-study-light);"></i>
+            <span>6 Revolutionary Operating Systems Inside Zenith</span>
+          </h3>
+          <span class="badge" style="background: rgba(99, 102, 241, 0.15); color: var(--accent-study-light);">All-In-One Architecture</span>
+        </div>
+
+        <div class="bento-showcase-grid">
+          <div class="bento-card">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(99, 102, 241, 0.15); display: flex; align-items: center; justify-content: center; color: var(--accent-study-light);">
+                <i data-lucide="cpu"></i>
+              </div>
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Behavioral Digital Twin</h4>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              Models your empirical work hours, cognitive stamina curves, and task estimation bias with honest confidence ratings.
+            </p>
+          </div>
+
+          <div class="bento-card">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(236, 72, 153, 0.15); display: flex; align-items: center; justify-content: center; color: #f472b6;">
+                <i data-lucide="film"></i>
+              </div>
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Living Memory Replay</h4>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              Replay previous days as a living experiential story from morning sunlight to night debrief with an interactive scrubber.
+            </p>
+          </div>
+
+          <div class="bento-card">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(245, 158, 11, 0.15); display: flex; align-items: center; justify-content: center; color: #fbbf24;">
+                <i data-lucide="bot"></i>
+              </div>
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Autonomous AI Copilot</h4>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              Executive assistant monitoring impossible schedules and overruns with calm, 1-click solutions.
+            </p>
+          </div>
+
+          <div class="bento-card">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(56, 189, 248, 0.15); display: flex; align-items: center; justify-content: center; color: #38bdf8;">
+                <i data-lucide="external-link"></i>
+              </div>
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Floating Picture-in-Picture</h4>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              Always-on-top mini-timer widget that stays above VS Code, PDFs, or browser tabs with live controls.
+            </p>
+          </div>
+
+          <div class="bento-card">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(239, 68, 68, 0.15); display: flex; align-items: center; justify-content: center; color: #f87171;">
+                <i data-lucide="swords"></i>
+              </div>
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Weekly RPG Boss Quests</h4>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              Every completed focus block deals -150 DMG to the Procrastination Golem with animated damage floaters.
+            </p>
+          </div>
+
+          <div class="bento-card">
+            <div style="display: flex; align-items: center; gap: 0.6rem; margin-bottom: 0.6rem;">
+              <div style="width: 32px; height: 32px; border-radius: var(--radius-sm); background: rgba(52, 211, 153, 0.15); display: flex; align-items: center; justify-content: center; color: #34d399;">
+                <i data-lucide="qr-code"></i>
+              </div>
+              <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Zero-Server Instant QR Sync</h4>
+            </div>
+            <p style="font-size: 0.84rem; color: var(--text-secondary); line-height: 1.5;">
+              Scan on-screen QR code with your phone to instantly sync all streaks, habits, and tasks with zero accounts.
+            </p>
+          </div>
+        </div>
+      </section>
 
       <!-- ==========================================
            TAB 1: COMMAND CENTER (HOME)
@@ -1606,6 +1820,7 @@
   <script src="js/digital-twin.js"></script>
   <script src="js/memory-replay.js"></script>
   <script src="js/copilot-engine.js"></script>
+  <script src="js/onboarding-engine.js"></script>
   <script src="js/calendar-export.js"></script>
   <script src="js/experience-engine.js"></script>
   <script src="js/app.js"></script>
