@@ -621,6 +621,24 @@
                   <i data-lucide="external-link"></i> Floating Mini-Timer
                 </button>
               </div>
+
+              <!-- Live Overrun Divergence Alert Banner -->
+              <div id="overrun-divergence-banner" class="reality-alert-card" style="display: none; margin-top: 1.25rem; text-align: left;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.4rem;">
+                  <span class="badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">⏱️ Focus Overrun Detected</span>
+                </div>
+                <p id="overrun-banner-text" style="font-size: 0.85rem; color: #fff; margin-bottom: 0.75rem;">
+                  Task has exceeded its planned timebox.
+                </p>
+                <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                  <button id="btn-overrun-rebalance-accept" class="btn btn-emerald" style="font-size: 0.8rem; padding: 0.4rem 0.85rem;">
+                    ⚡ Rebalance Evening Schedule
+                  </button>
+                  <button id="btn-overrun-rebalance-dismiss" class="btn btn-secondary" style="font-size: 0.8rem; padding: 0.4rem 0.75rem;">
+                    Dismiss
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
 

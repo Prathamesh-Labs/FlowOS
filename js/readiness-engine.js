@@ -126,11 +126,18 @@ class ZenithReadinessEngine {
     const state = window.appState.getState();
     const readiness = state.readiness || { score: 85, recommendedBlockMins: 50 };
 
-    // Update study timer duration to recommended block mins
-    const focusSelect = document.getElementById('focus-duration-select');
-    if (focusSelect) {
-      focusSelect.value = readiness.recommendedBlockMins.toString();
-      focusSelect.dispatchEvent(new Event('change'));
+    // Update active focus timer planned duration
+    window.appState.update(s => ({
+      ...s,
+      activeFocus: {
+        ...s.activeFocus,
+        plannedSeconds: readiness.recommendedBlockMins * 60,
+        elapsedSeconds: 0
+      }
+    }));
+
+    if (window.focusEngine) {
+      window.focusEngine.render();
     }
 
     window.showToast?.(`🎯 Schedule adapted: Focus blocks tuned to ${readiness.recommendedBlockMins}m based on your ${readiness.score}% readiness.`);
