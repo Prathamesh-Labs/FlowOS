@@ -1192,4 +1192,18 @@ document.addEventListener('click', (e) => {
   if (menu && btn && !menu.contains(e.target) && !btn.contains(e.target)) {
     menu.classList.remove('open');
   }
+  if (e.target.classList && e.target.classList.contains('modal-backdrop')) {
+    e.target.classList.remove('open');
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    document.querySelectorAll('.modal-backdrop.open').forEach(m => m.classList.remove('open'));
+    document.querySelectorAll('.header-dropdown-menu.open').forEach(m => m.classList.remove('open'));
+    const zenRoom = document.getElementById('fullscreen-focus-room');
+    if (zenRoom && zenRoom.classList.contains('active')) {
+      zenRoom.classList.remove('active');
+    }
+  }
 });

@@ -15,9 +15,13 @@ class FlowOSPipTimerController {
   }
 
   init() {
-    const popOutBtn = document.getElementById('btn-pip-popout');
+    const popOutBtn = document.getElementById('btn-pip-popout') || document.getElementById('btn-open-pip-timer');
     if (popOutBtn) {
       popOutBtn.addEventListener('click', () => this.togglePip());
+    }
+    const openPipBtn = document.getElementById('btn-open-pip-timer');
+    if (openPipBtn && openPipBtn !== popOutBtn) {
+      openPipBtn.addEventListener('click', () => this.togglePip());
     }
   }
 
