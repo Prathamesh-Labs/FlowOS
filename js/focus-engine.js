@@ -297,7 +297,12 @@ class FocusEngineController {
 
     if (this.phaseDisplay) {
       const modeLabel = this.mode === 'stopwatch' ? 'Stopwatch Flow' : 'Pomodoro Countdown';
-      this.phaseDisplay.textContent = `${modeLabel}: ${active.taskTitle || 'Deep Focus'}`;
+      const modeLabelEl = document.getElementById('timer-mode-label');
+      if (modeLabelEl) {
+        modeLabelEl.textContent = modeLabel.toUpperCase();
+      }
+      this.phaseDisplay.textContent = active.taskTitle || 'Deep Focus';
+      this.phaseDisplay.title = active.taskTitle || 'Deep Focus';
     }
 
     if (this.startBtn) {
