@@ -4,10 +4,10 @@
  * What-If Simulations, Personal Flow Profile History, and Mission Status.
  */
 
-const STORAGE_KEY = 'flowos_master_os_state_v4';
-const LEGACY_STORAGE_KEY = 'zenith_master_os_state_v3';
+const STORAGE_KEY = 'flowos_master_os_state_v5';
+const LEGACY_STORAGE_KEY = 'flowos_master_os_state_v4';
 
-const INITIAL_STATE = {
+const DEMO_PRESET_STATE = {
   activeArchetype: 'developer',
   accessibilityMode: false,
 
@@ -657,6 +657,164 @@ const INITIAL_STATE = {
   }
 };
 
+const CLEAN_INITIAL_STATE = {
+  activeArchetype: 'developer',
+  accessibilityMode: false,
+
+  // 1. CURRENT MISSION (Clean Prompt for new user)
+  currentMission: {
+    title: 'Define Your #1 Daily Mission',
+    goalId: '',
+    taskId: '',
+    targetCompletion: 'Today',
+    status: 'in-progress'
+  },
+
+  profile: {
+    name: 'FlowOS Operator',
+    wakeTime: '07:00',
+    bedTime: '23:00',
+    targetStudyHours: 4,
+    screenLimitHours: 6,
+    dietGoal: 'clean-energy'
+  },
+
+  // 2. ACTIVE REALITY ALERT (Clean = none)
+  activeRealityAlert: {
+    active: false,
+    eventType: '',
+    title: '',
+    whatChanged: '',
+    impactSummary: '',
+    flexibleTimeAvailable: 120,
+    estimatedRemainingWork: 0,
+    options: [],
+    recommendedOptionId: '',
+    recommendationReason: ''
+  },
+
+  // 3. GOALS (Clean = empty)
+  goals: [],
+
+  // 4. TASKS (Clean = empty)
+  tasks: [],
+
+  // 5. HABITS (Clean = empty)
+  habits: [],
+
+  // 6. DEFAULT SCHEDULE (Ready for user to customize)
+  todaySchedule: [
+    {
+      id: 'sch_clean_1',
+      timeStart: '07:00',
+      timeEnd: '08:00',
+      category: 'movement',
+      title: 'Morning Routine & Hydration',
+      desc: 'Wake up, hydrate, and prepare for the day ahead.',
+      completed: false,
+      isFixed: true
+    },
+    {
+      id: 'sch_clean_2',
+      timeStart: '09:00',
+      timeEnd: '12:00',
+      category: 'study',
+      title: 'Deep Focus Block: Priority Mission',
+      desc: 'Dedicated uninterrupted focus on your primary goal.',
+      completed: false,
+      isFixed: false
+    },
+    {
+      id: 'sch_clean_3',
+      timeStart: '12:30',
+      timeEnd: '13:30',
+      category: 'diet',
+      title: 'Lunch & Screen Break',
+      desc: 'Nutritious meal and rest away from devices.',
+      completed: false,
+      isFixed: true
+    },
+    {
+      id: 'sch_clean_4',
+      timeStart: '14:00',
+      timeEnd: '17:00',
+      category: 'study',
+      title: 'Afternoon Execution & Projects',
+      desc: 'Secondary tasks, follow-ups, and learning.',
+      completed: false,
+      isFixed: false
+    },
+    {
+      id: 'sch_clean_5',
+      timeStart: '18:00',
+      timeEnd: '19:00',
+      category: 'movement',
+      title: 'Physical Mobility / Evening Walk',
+      desc: 'Active movement and relaxation.',
+      completed: false,
+      isFixed: false
+    },
+    {
+      id: 'sch_clean_6',
+      timeStart: '21:30',
+      timeEnd: '23:00',
+      category: 'rest',
+      title: 'Evening Reflection & Wind-Down',
+      desc: 'Review today, plan tomorrow, and prepare for sleep.',
+      completed: false,
+      isFixed: true
+    }
+  ],
+
+  waterGlasses: 0,
+  waterGoal: 8,
+  studyMinutesCompleted: 0,
+  screenBreaksTaken: 0,
+  eyeBreaksCount: 0,
+  dayBalanceScore: 100,
+  vitalityScore: 100,
+  vitalityXP: 0,
+
+  userLevel: 1,
+  userXP: 0,
+  nextLevelXP: 100,
+
+  readinessCheck: {
+    sleepHours: 7.5,
+    sleepQuality: 4,
+    physicalFatigue: 2,
+    mentalEnergy: 4,
+    score: 85,
+    lastChecked: null
+  },
+
+  focusHistory: [],
+  learnedReality: [],
+  scenarioSimulations: [],
+
+  activeFocus: {
+    isRunning: false,
+    taskId: null,
+    taskTitle: 'Deep Focus',
+    plannedSeconds: 25 * 60,
+    elapsedSeconds: 0,
+    isOverrun: false,
+    overrunPromptActive: false
+  },
+
+  personalFlowProfile: {
+    optimalFocusBlockMinutes: 50,
+    circadianPeakHour: 10,
+    typicalOverrunMinutes: 0,
+    bestEnergyDay: 'Wednesday',
+    frictionProneCategory: 'Context Switching',
+    adaptabilityRatio: 0.95,
+    lastCalibrationDate: new Date().toISOString().split('T')[0]
+  }
+};
+
+const INITIAL_STATE = CLEAN_INITIAL_STATE;
+
 class StateManager {
   constructor() {
     this.listeners = [];
@@ -665,14 +823,10 @@ class StateManager {
 
   loadState() {
     try {
-      let stored = localStorage.getItem(STORAGE_KEY);
-      if (!stored) {
-        // Auto-migration from legacy Zenith state
-        stored = localStorage.getItem(LEGACY_STORAGE_KEY) || localStorage.getItem('zenith_master_os_state_v2');
-      }
+      const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
         const parsed = JSON.parse(stored);
-        const merged = { ...INITIAL_STATE, ...parsed };
+        const merged = { ...CLEAN_INITIAL_STATE, ...parsed };
         if (!merged.personalFlowProfile && merged.digitalTwin) {
           merged.personalFlowProfile = merged.digitalTwin;
         }
@@ -684,7 +838,7 @@ class StateManager {
     } catch (e) {
       console.warn('Could not load stored state:', e);
     }
-    const fresh = JSON.parse(JSON.stringify(INITIAL_STATE));
+    const fresh = JSON.parse(JSON.stringify(CLEAN_INITIAL_STATE));
     fresh.digitalTwin = fresh.personalFlowProfile;
     return fresh;
   }
@@ -718,6 +872,17 @@ class StateManager {
     this.notify();
   }
 
+  subscribe(listener) {
+    this.listeners.push(listener);
+    return () => {
+      this.listeners = this.listeners.filter(l => l !== listener);
+    };
+  }
+
+  notify() {
+    this.listeners.forEach(fn => fn(this.state));
+  }
+
   calculateVitality() {
     const totalBlocks = this.state.todaySchedule.length || 1;
     const completedBlocks = this.state.todaySchedule.filter(b => b.completed).length;
@@ -744,30 +909,15 @@ class StateManager {
   }
 
   resetCleanState() {
-    this.state = {
-      ...INITIAL_STATE,
-      currentMission: {
-        title: 'Define Your #1 Daily Mission',
-        targetCompletion: 'Today at 08:00 PM',
-        status: 'in-progress'
-      },
-      goals: [],
-      tasks: [],
-      habits: [],
-      focusHistory: [],
-      learnedReality: [],
-      waterGlasses: 0,
-      studyMinutesCompleted: 0,
-      activeRealityAlert: { active: false }
-    };
+    this.state = JSON.parse(JSON.stringify(CLEAN_INITIAL_STATE));
     this.calculateVitality();
     this.saveState();
     this.notify();
-    window.showToast?.('🧹 Reset to clean first-user state.');
+    window.showToast?.('🧹 Clean first-user state activated.');
   }
 
   loadDemoData() {
-    this.state = JSON.parse(JSON.stringify(INITIAL_STATE));
+    this.state = JSON.parse(JSON.stringify(DEMO_PRESET_STATE));
     this.calculateVitality();
     this.saveState();
     this.notify();
