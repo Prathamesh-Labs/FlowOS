@@ -1,9 +1,9 @@
 /**
- * ZENITH AI - MEMORY REPLAY & EXPERIENTIAL TIMELINE ENGINE (V1.0)
- * Replays past days as a living story of focus, reality divergence, AI rebalancing, and recovery.
+ * FLOWOS - DAY REPLAY & EXPERIENTIAL TIMELINE ENGINE (V2.0)
+ * Replays past days as a living story of focus, reality divergence, adaptive rebalancing, and recovery.
  */
 
-class ZenithMemoryReplayEngine {
+class FlowOSMemoryReplayEngine {
   constructor() {
     this.isPlaying = false;
     this.playbackTimer = null;
@@ -23,8 +23,13 @@ class ZenithMemoryReplayEngine {
       playBtn.addEventListener('click', () => this.togglePlay());
     }
 
+    const pauseBtn = document.getElementById('btn-replay-pause');
+    if (pauseBtn) {
+      pauseBtn.addEventListener('click', () => this.pause());
+    }
+
     // 2. Playback Speed Pills
-    const speedPills = document.querySelectorAll('.replay-speed-pill');
+    const speedPills = document.querySelectorAll('.btn-replay-speed, .replay-speed-pill');
     speedPills.forEach(pill => {
       pill.addEventListener('click', () => {
         speedPills.forEach(p => p.classList.remove('active'));
@@ -58,21 +63,6 @@ class ZenithMemoryReplayEngine {
     }
   }
 
-  switchDay(dayKey) {
-    this.pause();
-    this.currentMomentIndex = 0;
-
-    window.appState.update(s => ({
-      ...s,
-      dailyMemories: {
-        ...s.dailyMemories,
-        activeDayKey: dayKey
-      }
-    }));
-
-    this.render();
-  }
-
   togglePlay() {
     if (this.isPlaying) {
       this.pause();
@@ -82,206 +72,169 @@ class ZenithMemoryReplayEngine {
   }
 
   play() {
-    const state = window.appState.getState();
-    const dayKey = state.dailyMemories.activeDayKey || 'today';
-    const dayData = state.dailyMemories.days[dayKey];
-    if (!dayData || !dayData.moments || dayData.moments.length === 0) return;
+    const dayData = this.getActiveDayData();
+    if (!dayData.moments || dayData.moments.length === 0) return;
 
     this.isPlaying = true;
-    this.updatePlayBtn(true);
-
-    if (this.currentMomentIndex >= dayData.moments.length - 1) {
-      this.currentMomentIndex = 0;
+    const playBtn = document.getElementById('btn-replay-play');
+    if (playBtn) {
+      playBtn.innerHTML = `<i data-lucide="pause"></i> Pause Replay`;
     }
 
-    const intervalMs = Math.round(2500 / this.playbackSpeed);
+    const stepInterval = Math.max(500, 2500 / this.playbackSpeed);
 
     if (this.playbackTimer) clearInterval(this.playbackTimer);
-    
-    // Highlight initial step
-    this.highlightActiveMoment();
-
     this.playbackTimer = setInterval(() => {
       if (this.currentMomentIndex < dayData.moments.length - 1) {
         this.currentMomentIndex++;
-        this.highlightActiveMoment();
+        this.renderPlaybackFrame();
       } else {
         this.pause();
-        window.showToast?.('🎬 Day Replay Complete!');
-        if (window.audioZenith) window.audioZenith.playFanfare();
+        this.currentMomentIndex = 0;
+        if (window.audioFlowOS) window.audioFlowOS.playFanfare();
+        window.showToast?.('🎬 Day Replay playback complete!');
       }
-    }, intervalMs);
+    }, stepInterval);
+
+    if (window.lucide) lucide.createIcons();
   }
 
   pause() {
     this.isPlaying = false;
-    if (this.playbackTimer) {
-      clearInterval(this.playbackTimer);
-      this.playbackTimer = null;
+    if (this.playbackTimer) clearInterval(this.playbackTimer);
+    const playBtn = document.getElementById('btn-replay-play');
+    if (playBtn) {
+      playBtn.innerHTML = `<i data-lucide="play"></i> Play Replay`;
     }
-    this.updatePlayBtn(false);
+    if (window.lucide) lucide.createIcons();
   }
 
   seekTo(index) {
-    this.currentMomentIndex = index;
-    this.highlightActiveMoment();
+    const dayData = this.getActiveDayData();
+    if (!dayData.moments) return;
+    this.currentMomentIndex = Math.max(0, Math.min(index, dayData.moments.length - 1));
+    this.renderPlaybackFrame();
   }
 
-  updatePlayBtn(isPlaying) {
-    const btn = document.getElementById('btn-replay-play');
-    if (btn) {
-      btn.innerHTML = isPlaying 
-        ? '<i data-lucide="pause"></i> Pause Replay'
-        : '<i data-lucide="play"></i> Replay My Day';
-      if (window.lucide) lucide.createIcons();
+  switchDay(dayKey) {
+    this.pause();
+    this.currentMomentIndex = 0;
+    this.render();
+    window.showToast?.(`📅 Switched Day Replay to: ${dayKey.toUpperCase()}`);
+  }
+
+  renderPlaybackFrame() {
+    const dayData = this.getActiveDayData();
+    const activeMoment = dayData.moments ? dayData.moments[this.currentMomentIndex] : null;
+
+    const timeLabel = document.getElementById('replay-current-time-label');
+    if (timeLabel && activeMoment) {
+      timeLabel.textContent = `Time: ${activeMoment.time}`;
     }
-  }
-
-  highlightActiveMoment() {
-    const state = window.appState.getState();
-    const dayKey = state.dailyMemories.activeDayKey || 'today';
-    const dayData = state.dailyMemories.days[dayKey];
-    if (!dayData || !dayData.moments) return;
-
-    const cards = document.querySelectorAll('.memory-moment-card');
-    cards.forEach((card, idx) => {
-      const isActive = idx === this.currentMomentIndex;
-      card.classList.toggle('active-replay-step', isActive);
-      if (isActive) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-      }
-    });
 
     const scrubber = document.getElementById('replay-scrub-slider');
     if (scrubber) {
       scrubber.value = this.currentMomentIndex;
-      scrubber.max = Math.max(0, dayData.moments.length - 1);
     }
 
-    const activeMoment = dayData.moments[this.currentMomentIndex];
-    if (activeMoment && window.audioZenith) {
-      if (activeMoment.type === 'focus' || activeMoment.type === 'genesis') {
-        window.audioZenith.playClick();
-      } else if (activeMoment.type === 'overrun' || activeMoment.type === 'reality') {
-        window.audioZenith.playAlert();
-      } else if (activeMoment.type === 'ai-decision' || activeMoment.type === 'habit') {
-        window.audioZenith.playChime();
+    const cards = document.querySelectorAll('.memory-moment-card');
+    cards.forEach((c, idx) => {
+      c.classList.toggle('active-replay-step', idx === this.currentMomentIndex);
+      if (idx === this.currentMomentIndex) {
+        c.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      }
+    });
+
+    if (activeMoment && window.audioFlowOS) {
+      if (activeMoment.type === 'overrun') {
+        window.audioFlowOS.playAlert();
+      } else if (activeMoment.type === 'habit' || activeMoment.type === 'completion') {
+        window.audioFlowOS.playChime();
       }
     }
   }
 
-  /**
-   * Capture a new meaningful event into today's living memory
-   */
-  addMemoryMoment(type, title, description, metrics, badge, icon = 'sparkles') {
-    const now = new Date();
-    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-
-    const newMoment = {
-      id: `mem_${Date.now()}`,
-      time: timeStr,
-      title,
-      type,
-      icon,
-      description,
-      metrics: metrics || 'Logged live',
-      badge: badge || 'Momentum'
+  getActiveDayData() {
+    const state = window.appState.getState();
+    const activeDayKey = document.querySelector('.replay-day-tab.active')?.dataset.day || 'today';
+    return state.memoryReplayDays ? (state.memoryReplayDays[activeDayKey] || state.memoryReplayDays.today) : {
+      date: new Date().toISOString().split('T')[0],
+      dayName: 'Today',
+      stats: { totalFocusMinutes: 240, flowRatio: 92, habitsCompleted: 4, adaptationsTriggered: 1 },
+      aiSummary: { narrative: 'Solid high-focus day.', headline: 'High Focus Balance', adaptationTaken: 'Schedule rebalanced', tomorrowFocus: 'Continue momentum' },
+      moments: []
     };
-
-    window.appState.update(s => {
-      const dm = s.dailyMemories || {};
-      const days = dm.days || {};
-      const today = days.today || { moments: [] };
-
-      const updatedToday = {
-        ...today,
-        moments: [...today.moments, newMoment]
-      };
-
-      return {
-        ...s,
-        dailyMemories: {
-          ...dm,
-          days: {
-            ...days,
-            today: updatedToday
-          }
-        }
-      };
-    });
-
-    this.render();
   }
 
   render() {
-    const state = window.appState.getState();
-    const dm = state.dailyMemories;
-    if (!dm || !dm.days) return;
-
-    const dayKey = dm.activeDayKey || 'today';
-    const dayData = dm.days[dayKey];
+    const dayData = this.getActiveDayData();
     if (!dayData) return;
 
-    // 1. Date Header
-    const dateTitleEl = document.getElementById('replay-day-title');
-    if (dateTitleEl) dateTitleEl.textContent = dayData.dateTitle;
+    // Render Stats
+    const focusEl = document.getElementById('replay-stat-focus');
+    const flowEl = document.getElementById('replay-stat-flow');
+    const habitsEl = document.getElementById('replay-stat-habits');
+    const adaptsEl = document.getElementById('replay-stat-adapts');
 
-    // 2. AI Narrative Summary Box
-    const narrativeEl = document.getElementById('replay-ai-narrative');
-    const winEl = document.getElementById('replay-ai-win');
-    const frictionEl = document.getElementById('replay-ai-friction');
-    const adaptEl = document.getElementById('replay-ai-adaptation');
-    const tomorrowEl = document.getElementById('replay-ai-tomorrow');
+    if (focusEl && dayData.stats) focusEl.textContent = `${Math.floor(dayData.stats.totalFocusMinutes / 60)}h ${dayData.stats.totalFocusMinutes % 60}m`;
+    if (flowEl && dayData.stats) flowEl.textContent = `${dayData.stats.flowRatio}%`;
+    if (habitsEl && dayData.stats) habitsEl.textContent = `${dayData.stats.habitsCompleted}/4`;
+    if (adaptsEl && dayData.stats) adaptsEl.textContent = `${dayData.stats.adaptationsTriggered} Recalibrated`;
 
+    // Render Summary
     if (dayData.aiSummary) {
-      if (narrativeEl) narrativeEl.textContent = dayData.aiSummary.narrative;
-      if (winEl) winEl.textContent = dayData.aiSummary.primaryWin;
-      if (frictionEl) frictionEl.textContent = dayData.aiSummary.frictionPoint;
+      const headlineEl = document.getElementById('replay-summary-headline');
+      const narrativeEl = document.getElementById('replay-summary-narrative');
+      const adaptEl = document.getElementById('replay-summary-adaptation');
+      const tomorrowEl = document.getElementById('replay-summary-tomorrow');
+
+      if (headlineEl) headlineEl.textContent = dayData.aiSummary.headline;
+      if (narrativeEl) narrativeEl.textContent = `"${dayData.aiSummary.narrative}"`;
       if (adaptEl) adaptEl.textContent = dayData.aiSummary.adaptationTaken;
       if (tomorrowEl) tomorrowEl.textContent = dayData.aiSummary.tomorrowFocus;
     }
 
-    // 3. Render Memory Moments Timeline
-    const timelineContainer = document.getElementById('replay-timeline-list');
+    // Render Moments Timeline
+    const timelineContainer = document.getElementById('memory-replay-moments-list') || document.getElementById('replay-timeline-list');
     if (timelineContainer && dayData.moments) {
-      timelineContainer.innerHTML = dayData.moments.map((m, idx) => {
-        let typeBadgeClass = 'badge-blue';
-        if (m.type === 'overrun' || m.type === 'reality') typeBadgeClass = 'badge-amber';
-        else if (m.type === 'ai-decision') typeBadgeClass = 'badge-purple';
-        else if (m.type === 'habit' || m.type === 'genesis') typeBadgeClass = 'badge-emerald';
+      if (dayData.moments.length === 0) {
+        timelineContainer.innerHTML = `
+          <div class="empty-state-box">
+            <p>Not enough history yet for this date.</p>
+          </div>
+        `;
+      } else {
+        timelineContainer.innerHTML = dayData.moments.map((m, idx) => {
+          let typeBadgeClass = 'badge-blue';
+          if (m.type === 'overrun' || m.type === 'reality') typeBadgeClass = 'badge-amber';
+          else if (m.type === 'ai-decision') typeBadgeClass = 'badge-purple';
+          else if (m.type === 'habit' || m.type === 'genesis') typeBadgeClass = 'badge-emerald';
 
-        return `
-          <div class="memory-moment-card ${idx === this.currentMomentIndex ? 'active-replay-step' : ''}" 
-               data-index="${idx}"
-               onclick="window.memoryReplayEngine.seekTo(${idx})">
-            <div class="memory-time-marker">
-              <span class="memory-time-str">${m.time}</span>
-              <div class="memory-timeline-dot"></div>
-            </div>
-
-            <div class="memory-moment-body">
-              <div class="memory-moment-header">
+          return `
+            <div class="card memory-moment-card ${idx === this.currentMomentIndex ? 'active-replay-step' : ''}" 
+                 data-index="${idx}"
+                 onclick="window.memoryReplayEngine.seekTo(${idx})"
+                 style="padding: 0.9rem 1.1rem; cursor: pointer;">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                 <div style="display: flex; align-items: center; gap: 0.6rem;">
-                  <div class="memory-icon-box">
-                    <i data-lucide="${m.icon || 'sparkles'}"></i>
-                  </div>
-                  <h4 style="font-size: 1rem; font-weight: 700; color: #fff;">${m.title}</h4>
+                  <span style="font-family: var(--font-mono); font-size: 0.78rem; color: var(--accent-study-light); font-weight: 700;">${m.time}</span>
+                  <h4 style="font-size: 0.95rem; font-weight: 700; color: #fff;">${m.title}</h4>
                 </div>
-                <span class="badge ${typeBadgeClass}">${m.badge}</span>
+                <span class="badge ${typeBadgeClass}" style="font-size: 0.7rem;">${m.badge}</span>
               </div>
 
-              <p style="font-size: 0.85rem; color: var(--text-secondary); line-height: 1.45; margin: 0.6rem 0;">
+              <p style="font-size: 0.82rem; color: var(--text-secondary); line-height: 1.4; margin: 0.4rem 0;">
                 ${m.description}
               </p>
 
-              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.75rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.45rem;">
-                <span style="font-family: var(--font-mono); color: var(--accent-study-light);">📊 ${m.metrics}</span>
-                <span style="font-size: 0.7rem;">Click to Jump</span>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.72rem; color: var(--text-muted); border-top: 1px solid rgba(255,255,255,0.06); padding-top: 0.35rem;">
+                <span style="font-family: var(--font-mono); color: var(--accent-diet-light);">📊 ${m.metrics}</span>
+                <span style="font-size: 0.68rem;">Click to Scrub</span>
               </div>
             </div>
-          </div>
-        `;
-      }).join('');
+          `;
+        }).join('');
+      }
     }
 
     // Update scrubber bounds
@@ -294,4 +247,6 @@ class ZenithMemoryReplayEngine {
   }
 }
 
-window.memoryReplayEngine = new ZenithMemoryReplayEngine();
+window.FlowOSMemoryReplayEngine = FlowOSMemoryReplayEngine;
+window.ZenithMemoryReplayEngine = FlowOSMemoryReplayEngine;
+window.memoryReplayEngine = new FlowOSMemoryReplayEngine();

@@ -1,5 +1,5 @@
 /**
- * ZENITH AI - INTELLIGENT ROUTINE & SCHEDULE SYNTHESIS ENGINE (V2)
+ * FLOWOS - INTELLIGENT ROUTINE & SCHEDULE SYNTHESIS ENGINE (V2.0)
  * Synthesizes dynamic 24h schedules pulling directly from active Goals, Tasks & Habits,
  * and executes smart Overrun Schedule Rebalancing.
  */

@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ZENITH AI - UI COMPONENTS & COMMAND CENTER STYLES (V3)
+   FLOWOS - UI COMPONENTS & COMMAND CENTER STYLES (V4)
    ========================================================================== */
 
 /* Glass Cards */
@@ -998,7 +998,7 @@
 }
 
 /* ==========================================================================
-   ZENITH BEHAVIORAL DIGITAL TWIN (V1)
+   FLOWOS BEHAVIORAL PERSONAL FLOW PROFILE (V2)
    ========================================================================== */
 .twin-dimensions-grid {
   display: grid;
@@ -1132,7 +1132,7 @@
 }
 
 /* ==========================================================================
-   ZENITH MEMORY REPLAY & EXPERIENTIAL TIMELINE (V1)
+   FLOWOS DAY REPLAY & EXPERIENTIAL TIMELINE (V2)
    ========================================================================== */
 .replay-controller-card {
   background: linear-gradient(135deg, rgba(99, 102, 241, 0.08), rgba(236, 72, 153, 0.05));
@@ -1295,7 +1295,7 @@
 }
 
 /* ==========================================================================
-   ZENITH AUTONOMOUS AI COPILOT HUD & DRAWER (V1)
+   FLOWOS CONTEXTUAL COPILOT HUD & DRAWER (V2)
    ========================================================================== */
 .copilot-floating-pill {
   position: fixed;
@@ -1399,7 +1399,7 @@
 }
 
 /* ==========================================================================
-   ZENITH LANDING SHOWCASE & ARCHETYPE SELECTOR (V1)
+   FLOWOS LANDING SHOWCASE & ARCHETYPE SELECTOR (V2)
    ========================================================================== */
 .landing-hero-container {
   padding: 3rem 2rem 2.5rem 2rem;

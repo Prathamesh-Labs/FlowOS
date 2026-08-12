@@ -119,7 +119,7 @@ class FlowOSCopilotEngine {
         severity: 'high',
         title: '⚠️ Mathematically Impossible Schedule',
         message: `You have ${pendingTasks.length} tasks requiring ~${Math.round(totalRemainingMinutes/60)}h ${totalRemainingMinutes%60}m, but only ~${Math.round(availableMins/60)}h ${availableMins%60}m remain before your 11:00 PM bedtime. Schedule is oversubscribed by +${excess}m.`,
-        question: 'How would you like Zenith Copilot to calibrate your evening to protect your sleep hygiene?',
+        question: 'How would you like FlowOS Copilot to calibrate your evening to protect your sleep hygiene?',
         options: [
           { id: 'defer_lowest', label: '✂️ Defer 2 Lowest-Priority Tasks', action: 'defer_low_priority', style: 'btn-emerald' },
           { id: 'compress_all', label: '⚡ Compress All Blocks by 25%', action: 'compress_all_blocks', style: 'btn-secondary' },
@@ -143,7 +143,7 @@ class FlowOSCopilotEngine {
       }
     }));
 
-    if (window.audioZenith) window.audioZenith.playAlert();
+    if (window.audioFlowOS) window.audioFlowOS.playAlert();
     this.render();
 
     // Subtle unobtrusive notification
@@ -157,7 +157,7 @@ class FlowOSCopilotEngine {
         type: 'overrun',
         severity: 'moderate',
         title: '⏱️ Focus Block Overrun (+30m Variance)',
-        message: 'Your current coding sprint on "Auth Module" has run 30m longer than estimated. Digital Twin confirms coding tasks often have a +45% variance.',
+        message: 'Your current coding sprint on "Auth Module" has run 30m longer than estimated. Personal Flow Profile confirms coding tasks often have a +45% variance.',
         question: 'Should we auto-compress tonight\'s 45m review buffer so your 6:00 PM workout and 10:30 PM bedtime stay intact?',
         options: [
           { id: 'compress_review', label: '⚡ Rebalance & Protect Bedtime', action: 'compress_evening', style: 'btn-emerald' },
@@ -172,7 +172,7 @@ class FlowOSCopilotEngine {
         severity: 'high',
         title: '⚠️ Impossible Evening Schedule Detected',
         message: 'Calculated 4.5 hours of pending tasks, but only 3 hours remain before target sleep (11:00 PM).',
-        question: 'Would you like Zenith to defer the 2 lowest priority tasks to tomorrow morning\'s peak flow block?',
+        question: 'Would you like FlowOS to defer the 2 lowest priority tasks to tomorrow morning\'s peak flow block?',
         options: [
           { id: 'defer_lowest', label: '✂️ Defer 2 Low-Priority Tasks', action: 'defer_low_priority', style: 'btn-emerald' },
           { id: 'compress_all', label: '⚡ Compress All Tasks (-25%)', action: 'compress_all_blocks', style: 'btn-secondary' },

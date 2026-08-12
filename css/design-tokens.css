@@ -52,8 +52,9 @@
   --accent-rest-glow: rgba(168, 85, 247, 0.35);
   --accent-rest-light: #c084fc;
 
-  /* Brand / Zenith Primary Gradient */
-  --grad-zenith: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  /* Brand / FlowOS Primary Gradient */
+  --grad-flowos: linear-gradient(135deg, #6366f1 0%, #a855f7 50%, #ec4899 100%);
+  --grad-zenith: var(--grad-flowos);
   --grad-emerald: linear-gradient(135deg, #10b981 0%, #06b6d4 100%);
   --grad-amber: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
   --grad-dark-card: linear-gradient(145deg, rgba(26, 35, 60, 0.75), rgba(13, 19, 36, 0.75));

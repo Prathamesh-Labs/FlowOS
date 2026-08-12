@@ -103,7 +103,7 @@ class FlowOSExperienceEngine {
       if (!this.audioVisualizerRunning) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-      const isSoundPlaying = !!window.audioZenith?.currentMode;
+      const isSoundPlaying = !!window.audioFlowOS?.currentMode;
       const amplitude = isSoundPlaying ? 35 : 12;
       const frequency = isSoundPlaying ? 0.04 : 0.02;
 
@@ -171,7 +171,7 @@ class FlowOSExperienceEngine {
 
         modal.classList.remove('open');
         form.reset();
-        window.showToast?.('🎉 Evening reflection completed! +50 Zenith XP awarded & tomorrow primed.');
+        window.showToast?.('🎉 Evening reflection completed! +50 FlowOS XP awarded & tomorrow primed.');
       });
     }
   }
@@ -216,10 +216,10 @@ class FlowOSExperienceEngine {
     const levelTitles = [
       'Novice Flow',
       'Momentum Builder',
-      'Circadian Knight',
+      'Circadian Operator',
       'Deep Work Master',
       'Unstoppable Architect',
-      'Zenith Grandmaster'
+      'FlowOS Grandmaster'
     ];
     const title = levelTitles[Math.min(level - 1, levelTitles.length - 1)];
 

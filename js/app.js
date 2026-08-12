@@ -1154,3 +1154,18 @@ function showToast(msg) {
 }
 
 window.showToast = showToast;
+
+window.toggleDemoCleanMode = function() {
+  const state = window.appState.getState();
+  const hasGoals = state.goals && state.goals.length > 0;
+  const label = document.getElementById('label-demo-mode');
+
+  if (hasGoals) {
+    window.appState.resetCleanState();
+    if (label) label.textContent = 'Clean State';
+  } else {
+    window.appState.loadDemoData();
+    if (label) label.textContent = 'Demo Mode';
+  }
+  if (window.lucide) lucide.createIcons();
+};

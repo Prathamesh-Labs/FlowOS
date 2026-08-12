@@ -743,15 +743,35 @@ class StateManager {
     this.state.vitalityScore = finalScore; // backward compatibility
   }
 
-  subscribe(listener) {
-    this.listeners.push(listener);
-    return () => {
-      this.listeners = this.listeners.filter(l => l !== listener);
+  resetCleanState() {
+    this.state = {
+      ...INITIAL_STATE,
+      currentMission: {
+        title: 'Define Your #1 Daily Mission',
+        targetCompletion: 'Today at 08:00 PM',
+        status: 'in-progress'
+      },
+      goals: [],
+      tasks: [],
+      habits: [],
+      focusHistory: [],
+      learnedReality: [],
+      waterGlasses: 0,
+      studyMinutesCompleted: 0,
+      activeRealityAlert: { active: false }
     };
+    this.calculateVitality();
+    this.saveState();
+    this.notify();
+    window.showToast?.('🧹 Reset to clean first-user state.');
   }
 
-  notify() {
-    this.listeners.forEach(fn => fn(this.state));
+  loadDemoData() {
+    this.state = JSON.parse(JSON.stringify(INITIAL_STATE));
+    this.calculateVitality();
+    this.saveState();
+    this.notify();
+    window.showToast?.('✨ Interactive Demo mode activated with sample day data.');
   }
 }
 

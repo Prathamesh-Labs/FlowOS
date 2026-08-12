@@ -145,6 +145,10 @@
         </div>
 
         <div class="header-actions">
+          <button id="btn-toggle-demo-mode" class="btn btn-secondary" title="Switch between Interactive Demo and Clean First-User State" onclick="window.toggleDemoCleanMode()">
+            <i data-lucide="sparkles" style="color: var(--accent-study-light);"></i>
+            <span id="label-demo-mode">Demo Mode</span>
+          </button>
           <button id="btn-header-voice-mic" class="btn btn-secondary" title="Voice Assistant & Command Prompt (Alt+V)">
             <i data-lucide="mic" style="color: var(--accent-study-light);"></i>
             <span>Voice / Command</span>
@@ -162,8 +166,8 @@
             <span>Care Mode</span>
           </button>
           <button id="btn-open-generator" class="btn btn-primary">
-            <i data-lucide="sparkles"></i>
-            <span>AI Forge Routine</span>
+            <i data-lucide="calendar-plus"></i>
+            <span>Forge Routine</span>
           </button>
           <button id="btn-header-pwa-install" class="btn btn-emerald btn-pwa-install" style="display: none; padding: 0.45rem 0.85rem; font-size: 0.8rem;" title="Install Native App on Desktop/Mobile">
             <i data-lucide="download"></i>
