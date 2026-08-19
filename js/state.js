@@ -881,6 +881,11 @@ class StateManager {
 
   notify() {
     this.listeners.forEach(fn => fn(this.state));
+    
+    // Auto-sync state modifications to the cloud database if user is connected
+    if (this.state.currentUser && window.AuthSyncManager?.syncStateToCloud) {
+      window.AuthSyncManager.syncStateToCloud(this.state);
+    }
   }
 
   calculateVitality() {

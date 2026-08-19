@@ -105,6 +105,14 @@ class FocusEngineController {
     const taskId = state.activeFocus?.taskId;
     if (taskId) {
       window.TasksHabitsManager?.toggleTask(taskId);
+
+      // Record completed session to the Personal Reality Learning Engine
+      const task = (state.tasks || []).find(t => t.id === taskId);
+      if (task) {
+        const plannedMin = Math.round((state.activeFocus?.plannedSeconds || 1500) / 60);
+        const actualMin = Math.round((state.activeFocus?.elapsedSeconds || 0) / 60) || plannedMin;
+        window.PersonalRealityLearningEngine?.recordSession(task.category || 'general', task.title, plannedMin, actualMin);
+      }
     }
     this.pause();
     if (window.audioFlowOS) window.audioFlowOS.playFanfare();
@@ -293,6 +301,22 @@ class FocusEngineController {
     if (this.timeDisplay) {
       this.timeDisplay.textContent = formatted;
       this.timeDisplay.style.color = isOverrun ? 'var(--accent-screen-light)' : 'var(--text-primary)';
+    }
+
+    // Update Dashboard Mini Circular Timer if present
+    const dashTimeEl = document.getElementById('dashboard-timer-display');
+    const dashCircleEl = document.getElementById('dashboard-timer-circle-fill');
+    
+    if (dashTimeEl) {
+      dashTimeEl.textContent = formatted;
+      dashTimeEl.style.color = isOverrun ? 'var(--accent-screen-light)' : 'var(--text-primary)';
+    }
+
+    if (dashCircleEl) {
+      const circ = 251.2; // 2 * Math.PI * 40
+      const progress = isOverrun ? 1 : (active.elapsedSeconds / (active.plannedSeconds || 1));
+      const offset = circ * (1 - Math.min(1, progress));
+      dashCircleEl.style.strokeDashoffset = offset;
     }
 
     if (this.phaseDisplay) {

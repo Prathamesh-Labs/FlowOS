@@ -25,6 +25,7 @@ function initMasterApp() {
   window.copilotEngine?.init();
   window.onboardingEngine?.init();
   window.flowosExperience?.init();
+  window.AuthSyncManager?.init();
 
   // 2. Live Clock & Activity Awareness
   startLiveClock();
@@ -42,11 +43,11 @@ function initMasterApp() {
   setupTasksAndHabitsInteractions();
   setupDietInteractions();
   setupSoundscapeInteractions();
-  setupOlderAdultInteractions();
   setupPortabilityInteractions();
   setupObstacleModal();
   setupGeneratorModal();
   setupThemeToggle();
+  setupAuthInteractions();
 
   // 5. Subscribe to Reactive State Store
   window.appState.subscribe(renderAllState);
@@ -1090,13 +1091,58 @@ function setupThemeToggle() {
    GLOBAL REACTIVE RENDERER
    ========================================================================== */
 function renderAllState(state) {
-  const score = state.dayBalanceScore || state.vitalityScore || 85;
+  // 1. Calculate dashboard breakdown sub-scores
+  const totalBlocks = state.todaySchedule ? state.todaySchedule.length : 1;
+  const completedBlocks = state.todaySchedule ? state.todaySchedule.filter(b => b.completed).length : 0;
+  const execScore = Math.round((completedBlocks / (totalBlocks || 1)) * 100);
 
+  const completedHabits = state.habits ? state.habits.filter(h => h.completedToday).length : 0;
+  const totalHabits = state.habits ? state.habits.length : 1;
+  const habitsScore = Math.round((completedHabits / (totalHabits || 1)) * 100);
+
+  const waterRatio = Math.min((state.waterGlasses || 0) / (state.waterGoal || 8), 1);
+  const screenBreakRatio = Math.min((state.screenBreaksTaken || 0) / 5, 1);
+  const recoveryScore = Math.round((waterRatio * 50 + screenBreakRatio * 50) * 100) / 100;
+
+  // 2. Average sub-scores for consolidated Day Balance score
+  const score = Math.round((execScore + habitsScore + recoveryScore) / 3);
+
+  // 3. Render readouts
   const vitalityScoreEls = document.querySelectorAll('.vitality-score-val, .day-balance-score-val');
   vitalityScoreEls.forEach(el => el.textContent = `${score}%`);
 
   const vitalityBars = document.querySelectorAll('.vitality-progress-bar');
   vitalityBars.forEach(el => el.style.width = `${score}%`);
+
+  const valExecution = document.getElementById('val-execution-score');
+  const valHabits = document.getElementById('val-habits-score');
+  const valRecovery = document.getElementById('val-recovery-score');
+
+  if (valExecution) valExecution.textContent = `${execScore}%`;
+  if (valHabits) valHabits.textContent = `${habitsScore}%`;
+  if (valRecovery) valRecovery.textContent = `${Math.round(recoveryScore)}%`;
+
+  // 4. Update Concentric Telemetry progress rings
+  const ringExec = document.getElementById('ring-execution');
+  if (ringExec) {
+    const circ = 276.46; // 2 * Math.PI * 44
+    const offset = circ * (1 - Math.min(1, execScore / 100));
+    ringExec.style.strokeDashoffset = offset;
+  }
+
+  const ringHab = document.getElementById('ring-habits');
+  if (ringHab) {
+    const circ = 213.63; // 2 * Math.PI * 34
+    const offset = circ * (1 - Math.min(1, habitsScore / 100));
+    ringHab.style.strokeDashoffset = offset;
+  }
+
+  const ringRec = document.getElementById('ring-recovery');
+  if (ringRec) {
+    const circ = 150.8; // 2 * Math.PI * 24
+    const offset = circ * (1 - Math.min(1, recoveryScore / 100));
+    ringRec.style.strokeDashoffset = offset;
+  }
 
   const waterContainer = document.getElementById('water-glasses-container');
   if (waterContainer) {
@@ -1117,12 +1163,31 @@ function renderAllState(state) {
   renderTimeline(state.todaySchedule);
   renderGoals(state.goals);
   renderTasksAndHabits(state);
-  renderOlderAdultMode(state);
   renderAnalytics(state);
   window.personalFlowProfileEngine?.render();
   window.memoryReplayEngine?.render();
   window.copilotEngine?.render();
   window.questsEngine?.render();
+
+  // Render Auth and Sync status
+  const loggedOutPanel = document.getElementById('sync-logged-out-state');
+  const loggedInPanel = document.getElementById('sync-logged-in-state');
+  const userEmailText = document.getElementById('user-display-email');
+  const userAvatarInitial = document.getElementById('user-avatar-initial');
+
+  if (loggedOutPanel && loggedInPanel) {
+    if (state.currentUser) {
+      loggedOutPanel.style.display = 'none';
+      loggedInPanel.style.display = 'block';
+      if (userEmailText) userEmailText.textContent = state.currentUser.email;
+      if (userAvatarInitial) {
+        userAvatarInitial.textContent = state.currentUser.email.charAt(0).toUpperCase();
+      }
+    } else {
+      loggedOutPanel.style.display = 'block';
+      loggedInPanel.style.display = 'none';
+    }
+  }
 
   if (window.lucide) lucide.createIcons();
 }
@@ -1207,3 +1272,76 @@ document.addEventListener('keydown', (e) => {
     }
   }
 });
+
+/* ==========================================================================
+   AUTHENTICATION & SYNC HANDLERS
+   ========================================================================== */
+function setupAuthInteractions() {
+  const form = document.getElementById('auth-form');
+  const toggleBtn = document.getElementById('btn-toggle-auth-mode');
+  const emailInput = document.getElementById('auth-email');
+  const passwordInput = document.getElementById('auth-password');
+  const submitBtn = document.getElementById('btn-submit-auth');
+  const titleText = document.getElementById('auth-panel-title');
+
+  if (!form) return;
+
+  let authMode = 'login'; // 'login' | 'signup'
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (authMode === 'login') {
+        authMode = 'signup';
+        if (titleText) titleText.textContent = 'Create Cloud Sync Account';
+        toggleBtn.textContent = 'Already have an account? Sign In';
+        if (submitBtn) submitBtn.textContent = 'Sign Up';
+      } else {
+        authMode = 'login';
+        if (titleText) titleText.textContent = 'Sign In to Cloud Sync';
+        toggleBtn.textContent = "Don't have an account? Sign Up";
+        if (submitBtn) submitBtn.textContent = 'Sign In';
+      }
+    });
+  }
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const email = emailInput.value.trim();
+    const password = passwordInput.value;
+
+    if (!email || !password) return;
+
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = authMode === 'login' ? 'Signing In...' : 'Signing Up...';
+    }
+
+    // Set status indicator to syncing
+    const pulseDot = document.getElementById('sync-indicator-dot');
+    if (pulseDot) {
+      pulseDot.className = 'sync-pulse-dot syncing';
+    }
+
+    try {
+      if (authMode === 'login') {
+        await window.AuthSyncManager.login(email, password);
+        window.showToast?.('🔑 Connected! Welcome to FlowOS Cloud Sync.');
+      } else {
+        await window.AuthSyncManager.signup(email, password);
+        window.showToast?.('🎉 Account created & baseline synchronized!');
+      }
+      form.reset();
+    } catch (err) {
+      if (pulseDot) {
+        pulseDot.className = 'sync-pulse-dot';
+      }
+      window.showToast?.(`❌ Error: ${err.message}`);
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = authMode === 'login' ? 'Sign In' : 'Sign Up';
+      }
+    }
+  });
+}
